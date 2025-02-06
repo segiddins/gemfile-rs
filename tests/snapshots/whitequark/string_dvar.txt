@@ -1,0 +1,172 @@
+Program {
+    source: "",
+    header: Header {
+        prism_major: 1,
+        prism_minor: 3,
+        prism_patch: 0,
+        only_semantics_serialized: false,
+        encoding_name: "UTF-8",
+        start_line: 1,
+        newline_offsets: [
+            0,
+            15,
+        ],
+        comments: [],
+        magic_comments: [],
+        end_keyword: None,
+        errors: [],
+        warnings: [
+            Warning {
+                type: 318,
+                message: "possibly useless use of a literal in void context",
+                location: Location { start: 0, length: 14 },
+                level: 1,
+            },
+        ],
+        content_pool_offset: 171,
+        content_pool_size: 3,
+    },
+    root: NodeRef(10),
+    nodes: [
+        Node {
+            identifier: 2,
+            location: Location { start: 2, length: 2 },
+            flags: 0,
+            node_kind: InstanceVariableReadNode(
+                InstanceVariableReadNode {
+                    name: ConstantRef(1),
+                },
+            ),
+        },
+        Node {
+            identifier: 3,
+            location: Location { start: 1, length: 3 },
+            flags: 0,
+            node_kind: EmbeddedVariableNode(
+                EmbeddedVariableNode {
+                    operator_loc: Location { start: 1, length: 1 },
+                    variable: NodeRef(0),
+                },
+            ),
+        },
+        Node {
+            identifier: 4,
+            location: Location { start: 4, length: 1 },
+            flags: 18,
+            node_kind: StringNode(
+                StringNode {
+                    opening_loc: None,
+                    content_loc: Location { start: 4, length: 1 },
+                    closing_loc: None,
+                    unescaped: "",
+                },
+            ),
+        },
+        Node {
+            identifier: 5,
+            location: Location { start: 6, length: 3 },
+            flags: 0,
+            node_kind: ClassVariableReadNode(
+                ClassVariableReadNode {
+                    name: ConstantRef(2),
+                },
+            ),
+        },
+        Node {
+            identifier: 6,
+            location: Location { start: 5, length: 4 },
+            flags: 0,
+            node_kind: EmbeddedVariableNode(
+                EmbeddedVariableNode {
+                    operator_loc: Location { start: 5, length: 1 },
+                    variable: NodeRef(3),
+                },
+            ),
+        },
+        Node {
+            identifier: 7,
+            location: Location { start: 9, length: 1 },
+            flags: 18,
+            node_kind: StringNode(
+                StringNode {
+                    opening_loc: None,
+                    content_loc: Location { start: 9, length: 1 },
+                    closing_loc: None,
+                    unescaped: "",
+                },
+            ),
+        },
+        Node {
+            identifier: 8,
+            location: Location { start: 11, length: 2 },
+            flags: 0,
+            node_kind: GlobalVariableReadNode(
+                GlobalVariableReadNode {
+                    name: ConstantRef(3),
+                },
+            ),
+        },
+        Node {
+            identifier: 9,
+            location: Location { start: 10, length: 3 },
+            flags: 0,
+            node_kind: EmbeddedVariableNode(
+                EmbeddedVariableNode {
+                    operator_loc: Location { start: 10, length: 1 },
+                    variable: NodeRef(6),
+                },
+            ),
+        },
+        Node {
+            identifier: 10,
+            location: Location { start: 0, length: 14 },
+            flags: 1,
+            node_kind: InterpolatedStringNode(
+                InterpolatedStringNode {
+                    opening_loc: Some(
+                        Location { start: 0, length: 1 },
+                    ),
+                    parts: [
+                        NodeRef(1),
+                        NodeRef(2),
+                        NodeRef(4),
+                        NodeRef(5),
+                        NodeRef(7),
+                    ],
+                    closing_loc: Some(
+                        Location { start: 13, length: 1 },
+                    ),
+                },
+            ),
+        },
+        Node {
+            identifier: 1,
+            location: Location { start: 0, length: 14 },
+            flags: 0,
+            node_kind: StatementsNode(
+                StatementsNode {
+                    body: [
+                        NodeRef(8),
+                    ],
+                },
+            ),
+        },
+        Node {
+            identifier: 11,
+            location: Location { start: 0, length: 14 },
+            flags: 0,
+            node_kind: ProgramNode(
+                ProgramNode {
+                    locals: [],
+                    statements: NodeRef(9),
+                },
+            ),
+        },
+    ],
+    constants: [
+        Owned(2, 2),
+        Owned(6, 3),
+        Owned(11, 2),
+    ],
+    content_pool: [],
+}

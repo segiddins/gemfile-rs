@@ -1,0 +1,191 @@
+Program {
+    source: "",
+    header: Header {
+        prism_major: 1,
+        prism_minor: 3,
+        prism_patch: 0,
+        only_semantics_serialized: false,
+        encoding_name: "UTF-8",
+        start_line: 1,
+        newline_offsets: [
+            0,
+            4,
+            5,
+            8,
+            9,
+            11,
+            13,
+            15,
+            17,
+            18,
+            28,
+            29,
+            41,
+            42,
+        ],
+        comments: [],
+        magic_comments: [],
+        end_keyword: None,
+        errors: [],
+        warnings: [
+            Warning {
+                type: 318,
+                message: "possibly useless use of nil in void context",
+                location: Location { start: 0, length: 3 },
+                level: 1,
+            },
+        ],
+        content_pool_offset: 177,
+        content_pool_size: 0,
+    },
+    root: NodeRef(10),
+    nodes: [
+        Node {
+            identifier: 2,
+            location: Location { start: 0, length: 3 },
+            flags: 3,
+            node_kind: NilNode(
+                NilNode(
+                    (),
+                ),
+            ),
+        },
+        Node {
+            identifier: 3,
+            location: Location { start: 5, length: 2 },
+            flags: 1,
+            node_kind: ParenthesesNode(
+                ParenthesesNode {
+                    body: None,
+                    opening_loc: Location { start: 5, length: 1 },
+                    closing_loc: Location { start: 6, length: 1 },
+                },
+            ),
+        },
+        Node {
+            identifier: 4,
+            location: Location { start: 9, length: 7 },
+            flags: 1,
+            node_kind: ParenthesesNode(
+                ParenthesesNode {
+                    body: None,
+                    opening_loc: Location { start: 9, length: 1 },
+                    closing_loc: Location { start: 15, length: 1 },
+                },
+            ),
+        },
+        Node {
+            identifier: 6,
+            location: Location { start: 24, length: 1 },
+            flags: 11,
+            node_kind: IntegerNode(
+                IntegerNode {
+                    value: Integer {
+                        is_negative: false,
+                        words: [
+                            1,
+                        ],
+                    },
+                },
+            ),
+        },
+        Node {
+            identifier: 5,
+            location: Location { start: 24, length: 1 },
+            flags: 0,
+            node_kind: StatementsNode(
+                StatementsNode {
+                    body: [
+                        NodeRef(3),
+                    ],
+                },
+            ),
+        },
+        Node {
+            identifier: 7,
+            location: Location { start: 18, length: 9 },
+            flags: 1,
+            node_kind: PostExecutionNode(
+                PostExecutionNode {
+                    statements: Some(
+                        NodeRef(4),
+                    ),
+                    keyword_loc: Location { start: 18, length: 3 },
+                    opening_loc: Location { start: 22, length: 1 },
+                    closing_loc: Location { start: 26, length: 1 },
+                },
+            ),
+        },
+        Node {
+            identifier: 9,
+            location: Location { start: 37, length: 1 },
+            flags: 11,
+            node_kind: IntegerNode(
+                IntegerNode {
+                    value: Integer {
+                        is_negative: false,
+                        words: [
+                            1,
+                        ],
+                    },
+                },
+            ),
+        },
+        Node {
+            identifier: 8,
+            location: Location { start: 37, length: 1 },
+            flags: 0,
+            node_kind: StatementsNode(
+                StatementsNode {
+                    body: [
+                        NodeRef(6),
+                    ],
+                },
+            ),
+        },
+        Node {
+            identifier: 10,
+            location: Location { start: 29, length: 11 },
+            flags: 1,
+            node_kind: PreExecutionNode(
+                PreExecutionNode {
+                    statements: Some(
+                        NodeRef(7),
+                    ),
+                    keyword_loc: Location { start: 29, length: 5 },
+                    opening_loc: Location { start: 35, length: 1 },
+                    closing_loc: Location { start: 39, length: 1 },
+                },
+            ),
+        },
+        Node {
+            identifier: 1,
+            location: Location { start: 0, length: 40 },
+            flags: 0,
+            node_kind: StatementsNode(
+                StatementsNode {
+                    body: [
+                        NodeRef(0),
+                        NodeRef(1),
+                        NodeRef(2),
+                        NodeRef(5),
+                        NodeRef(8),
+                    ],
+                },
+            ),
+        },
+        Node {
+            identifier: 11,
+            location: Location { start: 0, length: 40 },
+            flags: 0,
+            node_kind: ProgramNode(
+                ProgramNode {
+                    locals: [],
+                    statements: NodeRef(9),
+                },
+            ),
+        },
+    ],
+    constants: [],
+    content_pool: [],
+}

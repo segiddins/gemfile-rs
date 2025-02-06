@@ -1,0 +1,121 @@
+Program {
+    source: "",
+    header: Header {
+        prism_major: 1,
+        prism_minor: 3,
+        prism_patch: 0,
+        only_semantics_serialized: false,
+        encoding_name: "UTF-8",
+        start_line: 1,
+        newline_offsets: [
+            0,
+            6,
+            10,
+            15,
+            20,
+        ],
+        comments: [],
+        magic_comments: [],
+        end_keyword: None,
+        errors: [],
+        warnings: [
+            Warning {
+                type: 318,
+                message: "possibly useless use of false in void context",
+                location: Location { start: 0, length: 5 },
+                level: 1,
+            },
+            Warning {
+                type: 318,
+                message: "possibly useless use of nil in void context",
+                location: Location { start: 6, length: 3 },
+                level: 1,
+            },
+            Warning {
+                type: 318,
+                message: "possibly useless use of self in void context",
+                location: Location { start: 10, length: 4 },
+                level: 1,
+            },
+            Warning {
+                type: 318,
+                message: "possibly useless use of true in void context",
+                location: Location { start: 15, length: 4 },
+                level: 1,
+            },
+        ],
+        content_pool_offset: 264,
+        content_pool_size: 0,
+    },
+    root: NodeRef(5),
+    nodes: [
+        Node {
+            identifier: 2,
+            location: Location { start: 0, length: 5 },
+            flags: 3,
+            node_kind: FalseNode(
+                FalseNode(
+                    (),
+                ),
+            ),
+        },
+        Node {
+            identifier: 3,
+            location: Location { start: 6, length: 3 },
+            flags: 3,
+            node_kind: NilNode(
+                NilNode(
+                    (),
+                ),
+            ),
+        },
+        Node {
+            identifier: 4,
+            location: Location { start: 10, length: 4 },
+            flags: 1,
+            node_kind: SelfNode(
+                SelfNode(
+                    (),
+                ),
+            ),
+        },
+        Node {
+            identifier: 5,
+            location: Location { start: 15, length: 4 },
+            flags: 3,
+            node_kind: TrueNode(
+                TrueNode(
+                    (),
+                ),
+            ),
+        },
+        Node {
+            identifier: 1,
+            location: Location { start: 0, length: 19 },
+            flags: 0,
+            node_kind: StatementsNode(
+                StatementsNode {
+                    body: [
+                        NodeRef(0),
+                        NodeRef(1),
+                        NodeRef(2),
+                        NodeRef(3),
+                    ],
+                },
+            ),
+        },
+        Node {
+            identifier: 6,
+            location: Location { start: 0, length: 19 },
+            flags: 0,
+            node_kind: ProgramNode(
+                ProgramNode {
+                    locals: [],
+                    statements: NodeRef(4),
+                },
+            ),
+        },
+    ],
+    constants: [],
+    content_pool: [],
+}

@@ -1,0 +1,1355 @@
+Program {
+    source: "",
+    header: Header {
+        prism_major: 1,
+        prism_minor: 3,
+        prism_patch: 0,
+        only_semantics_serialized: false,
+        encoding_name: "UTF-8",
+        start_line: 1,
+        newline_offsets: [
+            0,
+            22,
+            23,
+            29,
+            36,
+            40,
+            41,
+            47,
+            54,
+            59,
+            66,
+            70,
+            71,
+            82,
+            83,
+            99,
+            100,
+            130,
+            131,
+            172,
+            173,
+            211,
+            215,
+            219,
+            220,
+            246,
+            247,
+            267,
+        ],
+        comments: [],
+        magic_comments: [],
+        end_keyword: None,
+        errors: [],
+        warnings: [],
+        content_pool_offset: 968,
+        content_pool_size: 9,
+    },
+    root: NodeRef(82),
+    nodes: [
+        Node {
+            identifier: 3,
+            location: Location { start: 4, length: 1 },
+            flags: 0,
+            node_kind: RequiredParameterNode(
+                RequiredParameterNode {
+                    name: ConstantRef(1),
+                },
+            ),
+        },
+        Node {
+            identifier: 2,
+            location: Location { start: 4, length: 1 },
+            flags: 0,
+            node_kind: ParametersNode(
+                ParametersNode {
+                    requireds: [
+                        NodeRef(0),
+                    ],
+                    optionals: [],
+                    rest: None,
+                    posts: [],
+                    keywords: [],
+                    keyword_rest: None,
+                    block: None,
+                },
+            ),
+        },
+        Node {
+            identifier: 5,
+            location: Location { start: 7, length: 1 },
+            flags: 0,
+            node_kind: BlockLocalVariableNode(
+                BlockLocalVariableNode {
+                    name: ConstantRef(2),
+                },
+            ),
+        },
+        Node {
+            identifier: 6,
+            location: Location { start: 10, length: 1 },
+            flags: 0,
+            node_kind: BlockLocalVariableNode(
+                BlockLocalVariableNode {
+                    name: ConstantRef(3),
+                },
+            ),
+        },
+        Node {
+            identifier: 7,
+            location: Location { start: 13, length: 1 },
+            flags: 0,
+            node_kind: BlockLocalVariableNode(
+                BlockLocalVariableNode {
+                    name: ConstantRef(4),
+                },
+            ),
+        },
+        Node {
+            identifier: 4,
+            location: Location { start: 3, length: 12 },
+            flags: 0,
+            node_kind: BlockParametersNode(
+                BlockParametersNode {
+                    parameters: Some(
+                        NodeRef(1),
+                    ),
+                    locals: [
+                        NodeRef(2),
+                        NodeRef(3),
+                        NodeRef(4),
+                    ],
+                    opening_loc: Some(
+                        Location { start: 3, length: 1 },
+                    ),
+                    closing_loc: Some(
+                        Location { start: 14, length: 1 },
+                    ),
+                },
+            ),
+        },
+        Node {
+            identifier: 9,
+            location: Location { start: 18, length: 1 },
+            flags: 1,
+            node_kind: LocalVariableReadNode(
+                LocalVariableReadNode {
+                    name: ConstantRef(2),
+                    depth: 0,
+                },
+            ),
+        },
+        Node {
+            identifier: 8,
+            location: Location { start: 18, length: 1 },
+            flags: 0,
+            node_kind: StatementsNode(
+                StatementsNode {
+                    body: [
+                        NodeRef(6),
+                    ],
+                },
+            ),
+        },
+        Node {
+            identifier: 10,
+            location: Location { start: 0, length: 21 },
+            flags: 1,
+            node_kind: LambdaNode(
+                LambdaNode {
+                    locals: [
+                        ConstantRef(1),
+                        ConstantRef(2),
+                        ConstantRef(3),
+                        ConstantRef(4),
+                    ],
+                    operator_loc: Location { start: 0, length: 2 },
+                    opening_loc: Location { start: 16, length: 1 },
+                    closing_loc: Location { start: 20, length: 1 },
+                    parameters: Some(
+                        NodeRef(5),
+                    ),
+                    body: Some(
+                        NodeRef(7),
+                    ),
+                },
+            ),
+        },
+        Node {
+            identifier: 12,
+            location: Location { start: 29, length: 10 },
+            flags: 0,
+            node_kind: EnsureNode(
+                EnsureNode {
+                    ensure_keyword_loc: Location { start: 29, length: 6 },
+                    statements: None,
+                    end_keyword_loc: Location { start: 36, length: 3 },
+                },
+            ),
+        },
+        Node {
+            identifier: 11,
+            location: Location { start: 26, length: 13 },
+            flags: 0,
+            node_kind: BeginNode(
+                BeginNode {
+                    begin_keyword_loc: None,
+                    statements: None,
+                    rescue_clause: None,
+                    else_clause: None,
+                    ensure_clause: Some(
+                        NodeRef(9),
+                    ),
+                    end_keyword_loc: Some(
+                        Location { start: 36, length: 3 },
+                    ),
+                },
+            ),
+        },
+        Node {
+            identifier: 13,
+            location: Location { start: 23, length: 16 },
+            flags: 1,
+            node_kind: LambdaNode(
+                LambdaNode {
+                    locals: [],
+                    operator_loc: Location { start: 23, length: 2 },
+                    opening_loc: Location { start: 26, length: 2 },
+                    closing_loc: Location { start: 36, length: 3 },
+                    parameters: None,
+                    body: Some(
+                        NodeRef(10),
+                    ),
+                },
+            ),
+        },
+        Node {
+            identifier: 15,
+            location: Location { start: 47, length: 6 },
+            flags: 0,
+            node_kind: RescueNode(
+                RescueNode {
+                    keyword_loc: Location { start: 47, length: 6 },
+                    exceptions: [],
+                    operator_loc: None,
+                    reference: None,
+                    then_keyword_loc: None,
+                    statements: None,
+                    subsequent: None,
+                },
+            ),
+        },
+        Node {
+            identifier: 16,
+            location: Location { start: 54, length: 11 },
+            flags: 0,
+            node_kind: ElseNode(
+                ElseNode {
+                    else_keyword_loc: Location { start: 54, length: 4 },
+                    statements: None,
+                    end_keyword_loc: Some(
+                        Location { start: 59, length: 6 },
+                    ),
+                },
+            ),
+        },
+        Node {
+            identifier: 17,
+            location: Location { start: 59, length: 10 },
+            flags: 0,
+            node_kind: EnsureNode(
+                EnsureNode {
+                    ensure_keyword_loc: Location { start: 59, length: 6 },
+                    statements: None,
+                    end_keyword_loc: Location { start: 66, length: 3 },
+                },
+            ),
+        },
+        Node {
+            identifier: 14,
+            location: Location { start: 44, length: 25 },
+            flags: 0,
+            node_kind: BeginNode(
+                BeginNode {
+                    begin_keyword_loc: None,
+                    statements: None,
+                    rescue_clause: Some(
+                        NodeRef(12),
+                    ),
+                    else_clause: Some(
+                        NodeRef(13),
+                    ),
+                    ensure_clause: Some(
+                        NodeRef(14),
+                    ),
+                    end_keyword_loc: Some(
+                        Location { start: 66, length: 3 },
+                    ),
+                },
+            ),
+        },
+        Node {
+            identifier: 18,
+            location: Location { start: 41, length: 28 },
+            flags: 1,
+            node_kind: LambdaNode(
+                LambdaNode {
+                    locals: [],
+                    operator_loc: Location { start: 41, length: 2 },
+                    opening_loc: Location { start: 44, length: 2 },
+                    closing_loc: Location { start: 66, length: 3 },
+                    parameters: None,
+                    body: Some(
+                        NodeRef(15),
+                    ),
+                },
+            ),
+        },
+        Node {
+            identifier: 20,
+            location: Location { start: 76, length: 3 },
+            flags: 41,
+            node_kind: CallNode(
+                CallNode {
+                    receiver: None,
+                    call_operator_loc: None,
+                    name: ConstantRef(5),
+                    message_loc: Some(
+                        Location { start: 76, length: 3 },
+                    ),
+                    opening_loc: None,
+                    arguments: None,
+                    closing_loc: None,
+                    block: None,
+                },
+            ),
+        },
+        Node {
+            identifier: 19,
+            location: Location { start: 76, length: 3 },
+            flags: 0,
+            node_kind: StatementsNode(
+                StatementsNode {
+                    body: [
+                        NodeRef(17),
+                    ],
+                },
+            ),
+        },
+        Node {
+            identifier: 21,
+            location: Location { start: 71, length: 10 },
+            flags: 1,
+            node_kind: LambdaNode(
+                LambdaNode {
+                    locals: [],
+                    operator_loc: Location { start: 71, length: 2 },
+                    opening_loc: Location { start: 74, length: 1 },
+                    closing_loc: Location { start: 80, length: 1 },
+                    parameters: None,
+                    body: Some(
+                        NodeRef(18),
+                    ),
+                },
+            ),
+        },
+        Node {
+            identifier: 23,
+            location: Location { start: 90, length: 3 },
+            flags: 41,
+            node_kind: CallNode(
+                CallNode {
+                    receiver: None,
+                    call_operator_loc: None,
+                    name: ConstantRef(5),
+                    message_loc: Some(
+                        Location { start: 90, length: 3 },
+                    ),
+                    opening_loc: None,
+                    arguments: None,
+                    closing_loc: None,
+                    block: None,
+                },
+            ),
+        },
+        Node {
+            identifier: 22,
+            location: Location { start: 90, length: 3 },
+            flags: 0,
+            node_kind: StatementsNode(
+                StatementsNode {
+                    body: [
+                        NodeRef(20),
+                    ],
+                },
+            ),
+        },
+        Node {
+            identifier: 24,
+            location: Location { start: 83, length: 15 },
+            flags: 1,
+            node_kind: LambdaNode(
+                LambdaNode {
+                    locals: [],
+                    operator_loc: Location { start: 83, length: 2 },
+                    opening_loc: Location { start: 86, length: 2 },
+                    closing_loc: Location { start: 95, length: 3 },
+                    parameters: None,
+                    body: Some(
+                        NodeRef(21),
+                    ),
+                },
+            ),
+        },
+        Node {
+            identifier: 26,
+            location: Location { start: 103, length: 1 },
+            flags: 0,
+            node_kind: RequiredParameterNode(
+                RequiredParameterNode {
+                    name: ConstantRef(1),
+                },
+            ),
+        },
+        Node {
+            identifier: 27,
+            location: Location { start: 110, length: 1 },
+            flags: 10,
+            node_kind: IntegerNode(
+                IntegerNode {
+                    value: Integer {
+                        is_negative: false,
+                        words: [
+                            1,
+                        ],
+                    },
+                },
+            ),
+        },
+        Node {
+            identifier: 28,
+            location: Location { start: 106, length: 5 },
+            flags: 0,
+            node_kind: OptionalParameterNode(
+                OptionalParameterNode {
+                    name: ConstantRef(2),
+                    name_loc: Location { start: 106, length: 1 },
+                    operator_loc: Location { start: 108, length: 1 },
+                    value: NodeRef(24),
+                },
+            ),
+        },
+        Node {
+            identifier: 29,
+            location: Location { start: 113, length: 2 },
+            flags: 0,
+            node_kind: RequiredKeywordParameterNode(
+                RequiredKeywordParameterNode {
+                    name: ConstantRef(3),
+                    name_loc: Location { start: 113, length: 2 },
+                },
+            ),
+        },
+        Node {
+            identifier: 30,
+            location: Location { start: 117, length: 2 },
+            flags: 0,
+            node_kind: RequiredKeywordParameterNode(
+                RequiredKeywordParameterNode {
+                    name: ConstantRef(4),
+                    name_loc: Location { start: 117, length: 2 },
+                },
+            ),
+        },
+        Node {
+            identifier: 31,
+            location: Location { start: 121, length: 2 },
+            flags: 0,
+            node_kind: BlockParameterNode(
+                BlockParameterNode {
+                    name: Some(
+                        ConstantRef(6),
+                    ),
+                    name_loc: Some(
+                        Location { start: 122, length: 1 },
+                    ),
+                    operator_loc: Location { start: 121, length: 1 },
+                },
+            ),
+        },
+        Node {
+            identifier: 25,
+            location: Location { start: 103, length: 20 },
+            flags: 0,
+            node_kind: ParametersNode(
+                ParametersNode {
+                    requireds: [
+                        NodeRef(23),
+                    ],
+                    optionals: [
+                        NodeRef(25),
+                    ],
+                    rest: None,
+                    posts: [],
+                    keywords: [
+                        NodeRef(26),
+                        NodeRef(27),
+                    ],
+                    keyword_rest: None,
+                    block: Some(
+                        NodeRef(28),
+                    ),
+                },
+            ),
+        },
+        Node {
+            identifier: 32,
+            location: Location { start: 103, length: 20 },
+            flags: 0,
+            node_kind: BlockParametersNode(
+                BlockParametersNode {
+                    parameters: Some(
+                        NodeRef(29),
+                    ),
+                    locals: [],
+                    opening_loc: None,
+                    closing_loc: None,
+                },
+            ),
+        },
+        Node {
+            identifier: 34,
+            location: Location { start: 126, length: 1 },
+            flags: 1,
+            node_kind: LocalVariableReadNode(
+                LocalVariableReadNode {
+                    name: ConstantRef(1),
+                    depth: 0,
+                },
+            ),
+        },
+        Node {
+            identifier: 33,
+            location: Location { start: 126, length: 1 },
+            flags: 0,
+            node_kind: StatementsNode(
+                StatementsNode {
+                    body: [
+                        NodeRef(31),
+                    ],
+                },
+            ),
+        },
+        Node {
+            identifier: 35,
+            location: Location { start: 100, length: 29 },
+            flags: 1,
+            node_kind: LambdaNode(
+                LambdaNode {
+                    locals: [
+                        ConstantRef(1),
+                        ConstantRef(2),
+                        ConstantRef(3),
+                        ConstantRef(4),
+                        ConstantRef(6),
+                    ],
+                    operator_loc: Location { start: 100, length: 2 },
+                    opening_loc: Location { start: 124, length: 1 },
+                    closing_loc: Location { start: 128, length: 1 },
+                    parameters: Some(
+                        NodeRef(30),
+                    ),
+                    body: Some(
+                        NodeRef(32),
+                    ),
+                },
+            ),
+        },
+        Node {
+            identifier: 37,
+            location: Location { start: 135, length: 1 },
+            flags: 0,
+            node_kind: RequiredParameterNode(
+                RequiredParameterNode {
+                    name: ConstantRef(1),
+                },
+            ),
+        },
+        Node {
+            identifier: 38,
+            location: Location { start: 142, length: 1 },
+            flags: 10,
+            node_kind: IntegerNode(
+                IntegerNode {
+                    value: Integer {
+                        is_negative: false,
+                        words: [
+                            1,
+                        ],
+                    },
+                },
+            ),
+        },
+        Node {
+            identifier: 39,
+            location: Location { start: 138, length: 5 },
+            flags: 0,
+            node_kind: OptionalParameterNode(
+                OptionalParameterNode {
+                    name: ConstantRef(2),
+                    name_loc: Location { start: 138, length: 1 },
+                    operator_loc: Location { start: 140, length: 1 },
+                    value: NodeRef(35),
+                },
+            ),
+        },
+        Node {
+            identifier: 40,
+            location: Location { start: 145, length: 2 },
+            flags: 0,
+            node_kind: RestParameterNode(
+                RestParameterNode {
+                    name: Some(
+                        ConstantRef(3),
+                    ),
+                    name_loc: Some(
+                        Location { start: 146, length: 1 },
+                    ),
+                    operator_loc: Location { start: 145, length: 1 },
+                },
+            ),
+        },
+        Node {
+            identifier: 41,
+            location: Location { start: 149, length: 2 },
+            flags: 0,
+            node_kind: RequiredKeywordParameterNode(
+                RequiredKeywordParameterNode {
+                    name: ConstantRef(4),
+                    name_loc: Location { start: 149, length: 2 },
+                },
+            ),
+        },
+        Node {
+            identifier: 42,
+            location: Location { start: 153, length: 2 },
+            flags: 0,
+            node_kind: RequiredKeywordParameterNode(
+                RequiredKeywordParameterNode {
+                    name: ConstantRef(6),
+                    name_loc: Location { start: 153, length: 2 },
+                },
+            ),
+        },
+        Node {
+            identifier: 43,
+            location: Location { start: 157, length: 3 },
+            flags: 0,
+            node_kind: KeywordRestParameterNode(
+                KeywordRestParameterNode {
+                    name: Some(
+                        ConstantRef(7),
+                    ),
+                    name_loc: Some(
+                        Location { start: 159, length: 1 },
+                    ),
+                    operator_loc: Location { start: 157, length: 2 },
+                },
+            ),
+        },
+        Node {
+            identifier: 44,
+            location: Location { start: 162, length: 2 },
+            flags: 0,
+            node_kind: BlockParameterNode(
+                BlockParameterNode {
+                    name: Some(
+                        ConstantRef(8),
+                    ),
+                    name_loc: Some(
+                        Location { start: 163, length: 1 },
+                    ),
+                    operator_loc: Location { start: 162, length: 1 },
+                },
+            ),
+        },
+        Node {
+            identifier: 36,
+            location: Location { start: 135, length: 29 },
+            flags: 0,
+            node_kind: ParametersNode(
+                ParametersNode {
+                    requireds: [
+                        NodeRef(34),
+                    ],
+                    optionals: [
+                        NodeRef(36),
+                    ],
+                    rest: Some(
+                        NodeRef(37),
+                    ),
+                    posts: [],
+                    keywords: [
+                        NodeRef(38),
+                        NodeRef(39),
+                    ],
+                    keyword_rest: Some(
+                        NodeRef(40),
+                    ),
+                    block: Some(
+                        NodeRef(41),
+                    ),
+                },
+            ),
+        },
+        Node {
+            identifier: 45,
+            location: Location { start: 134, length: 31 },
+            flags: 0,
+            node_kind: BlockParametersNode(
+                BlockParametersNode {
+                    parameters: Some(
+                        NodeRef(42),
+                    ),
+                    locals: [],
+                    opening_loc: Some(
+                        Location { start: 134, length: 1 },
+                    ),
+                    closing_loc: Some(
+                        Location { start: 164, length: 1 },
+                    ),
+                },
+            ),
+        },
+        Node {
+            identifier: 47,
+            location: Location { start: 168, length: 1 },
+            flags: 1,
+            node_kind: LocalVariableReadNode(
+                LocalVariableReadNode {
+                    name: ConstantRef(1),
+                    depth: 0,
+                },
+            ),
+        },
+        Node {
+            identifier: 46,
+            location: Location { start: 168, length: 1 },
+            flags: 0,
+            node_kind: StatementsNode(
+                StatementsNode {
+                    body: [
+                        NodeRef(44),
+                    ],
+                },
+            ),
+        },
+        Node {
+            identifier: 48,
+            location: Location { start: 131, length: 40 },
+            flags: 1,
+            node_kind: LambdaNode(
+                LambdaNode {
+                    locals: [
+                        ConstantRef(1),
+                        ConstantRef(2),
+                        ConstantRef(3),
+                        ConstantRef(4),
+                        ConstantRef(6),
+                        ConstantRef(7),
+                        ConstantRef(8),
+                    ],
+                    operator_loc: Location { start: 131, length: 2 },
+                    opening_loc: Location { start: 166, length: 1 },
+                    closing_loc: Location { start: 170, length: 1 },
+                    parameters: Some(
+                        NodeRef(43),
+                    ),
+                    body: Some(
+                        NodeRef(45),
+                    ),
+                },
+            ),
+        },
+        Node {
+            identifier: 50,
+            location: Location { start: 177, length: 1 },
+            flags: 0,
+            node_kind: RequiredParameterNode(
+                RequiredParameterNode {
+                    name: ConstantRef(1),
+                },
+            ),
+        },
+        Node {
+            identifier: 51,
+            location: Location { start: 184, length: 1 },
+            flags: 10,
+            node_kind: IntegerNode(
+                IntegerNode {
+                    value: Integer {
+                        is_negative: false,
+                        words: [
+                            1,
+                        ],
+                    },
+                },
+            ),
+        },
+        Node {
+            identifier: 52,
+            location: Location { start: 180, length: 5 },
+            flags: 0,
+            node_kind: OptionalParameterNode(
+                OptionalParameterNode {
+                    name: ConstantRef(2),
+                    name_loc: Location { start: 180, length: 1 },
+                    operator_loc: Location { start: 182, length: 1 },
+                    value: NodeRef(48),
+                },
+            ),
+        },
+        Node {
+            identifier: 53,
+            location: Location { start: 187, length: 2 },
+            flags: 0,
+            node_kind: RestParameterNode(
+                RestParameterNode {
+                    name: Some(
+                        ConstantRef(3),
+                    ),
+                    name_loc: Some(
+                        Location { start: 188, length: 1 },
+                    ),
+                    operator_loc: Location { start: 187, length: 1 },
+                },
+            ),
+        },
+        Node {
+            identifier: 54,
+            location: Location { start: 191, length: 2 },
+            flags: 0,
+            node_kind: RequiredKeywordParameterNode(
+                RequiredKeywordParameterNode {
+                    name: ConstantRef(4),
+                    name_loc: Location { start: 191, length: 2 },
+                },
+            ),
+        },
+        Node {
+            identifier: 55,
+            location: Location { start: 195, length: 2 },
+            flags: 0,
+            node_kind: RequiredKeywordParameterNode(
+                RequiredKeywordParameterNode {
+                    name: ConstantRef(6),
+                    name_loc: Location { start: 195, length: 2 },
+                },
+            ),
+        },
+        Node {
+            identifier: 56,
+            location: Location { start: 199, length: 3 },
+            flags: 0,
+            node_kind: KeywordRestParameterNode(
+                KeywordRestParameterNode {
+                    name: Some(
+                        ConstantRef(7),
+                    ),
+                    name_loc: Some(
+                        Location { start: 201, length: 1 },
+                    ),
+                    operator_loc: Location { start: 199, length: 2 },
+                },
+            ),
+        },
+        Node {
+            identifier: 57,
+            location: Location { start: 204, length: 2 },
+            flags: 0,
+            node_kind: BlockParameterNode(
+                BlockParameterNode {
+                    name: Some(
+                        ConstantRef(8),
+                    ),
+                    name_loc: Some(
+                        Location { start: 205, length: 1 },
+                    ),
+                    operator_loc: Location { start: 204, length: 1 },
+                },
+            ),
+        },
+        Node {
+            identifier: 49,
+            location: Location { start: 177, length: 29 },
+            flags: 0,
+            node_kind: ParametersNode(
+                ParametersNode {
+                    requireds: [
+                        NodeRef(47),
+                    ],
+                    optionals: [
+                        NodeRef(49),
+                    ],
+                    rest: Some(
+                        NodeRef(50),
+                    ),
+                    posts: [],
+                    keywords: [
+                        NodeRef(51),
+                        NodeRef(52),
+                    ],
+                    keyword_rest: Some(
+                        NodeRef(53),
+                    ),
+                    block: Some(
+                        NodeRef(54),
+                    ),
+                },
+            ),
+        },
+        Node {
+            identifier: 58,
+            location: Location { start: 176, length: 31 },
+            flags: 0,
+            node_kind: BlockParametersNode(
+                BlockParametersNode {
+                    parameters: Some(
+                        NodeRef(55),
+                    ),
+                    locals: [],
+                    opening_loc: Some(
+                        Location { start: 176, length: 1 },
+                    ),
+                    closing_loc: Some(
+                        Location { start: 206, length: 1 },
+                    ),
+                },
+            ),
+        },
+        Node {
+            identifier: 60,
+            location: Location { start: 213, length: 1 },
+            flags: 1,
+            node_kind: LocalVariableReadNode(
+                LocalVariableReadNode {
+                    name: ConstantRef(1),
+                    depth: 0,
+                },
+            ),
+        },
+        Node {
+            identifier: 59,
+            location: Location { start: 213, length: 1 },
+            flags: 0,
+            node_kind: StatementsNode(
+                StatementsNode {
+                    body: [
+                        NodeRef(57),
+                    ],
+                },
+            ),
+        },
+        Node {
+            identifier: 61,
+            location: Location { start: 173, length: 45 },
+            flags: 1,
+            node_kind: LambdaNode(
+                LambdaNode {
+                    locals: [
+                        ConstantRef(1),
+                        ConstantRef(2),
+                        ConstantRef(3),
+                        ConstantRef(4),
+                        ConstantRef(6),
+                        ConstantRef(7),
+                        ConstantRef(8),
+                    ],
+                    operator_loc: Location { start: 173, length: 2 },
+                    opening_loc: Location { start: 208, length: 2 },
+                    closing_loc: Location { start: 215, length: 3 },
+                    parameters: Some(
+                        NodeRef(56),
+                    ),
+                    body: Some(
+                        NodeRef(58),
+                    ),
+                },
+            ),
+        },
+        Node {
+            identifier: 63,
+            location: Location { start: 224, length: 1 },
+            flags: 0,
+            node_kind: RequiredParameterNode(
+                RequiredParameterNode {
+                    name: ConstantRef(1),
+                },
+            ),
+        },
+        Node {
+            identifier: 62,
+            location: Location { start: 224, length: 1 },
+            flags: 0,
+            node_kind: ParametersNode(
+                ParametersNode {
+                    requireds: [
+                        NodeRef(60),
+                    ],
+                    optionals: [],
+                    rest: None,
+                    posts: [],
+                    keywords: [],
+                    keyword_rest: None,
+                    block: None,
+                },
+            ),
+        },
+        Node {
+            identifier: 64,
+            location: Location { start: 223, length: 3 },
+            flags: 0,
+            node_kind: BlockParametersNode(
+                BlockParametersNode {
+                    parameters: Some(
+                        NodeRef(61),
+                    ),
+                    locals: [],
+                    opening_loc: Some(
+                        Location { start: 223, length: 1 },
+                    ),
+                    closing_loc: Some(
+                        Location { start: 225, length: 1 },
+                    ),
+                },
+            ),
+        },
+        Node {
+            identifier: 67,
+            location: Location { start: 232, length: 1 },
+            flags: 0,
+            node_kind: RequiredParameterNode(
+                RequiredParameterNode {
+                    name: ConstantRef(2),
+                },
+            ),
+        },
+        Node {
+            identifier: 66,
+            location: Location { start: 232, length: 1 },
+            flags: 0,
+            node_kind: ParametersNode(
+                ParametersNode {
+                    requireds: [
+                        NodeRef(63),
+                    ],
+                    optionals: [],
+                    rest: None,
+                    posts: [],
+                    keywords: [],
+                    keyword_rest: None,
+                    block: None,
+                },
+            ),
+        },
+        Node {
+            identifier: 68,
+            location: Location { start: 232, length: 1 },
+            flags: 0,
+            node_kind: BlockParametersNode(
+                BlockParametersNode {
+                    parameters: Some(
+                        NodeRef(64),
+                    ),
+                    locals: [],
+                    opening_loc: None,
+                    closing_loc: None,
+                },
+            ),
+        },
+        Node {
+            identifier: 70,
+            location: Location { start: 236, length: 1 },
+            flags: 0,
+            node_kind: LocalVariableReadNode(
+                LocalVariableReadNode {
+                    name: ConstantRef(1),
+                    depth: 1,
+                },
+            ),
+        },
+        Node {
+            identifier: 71,
+            location: Location { start: 240, length: 1 },
+            flags: 0,
+            node_kind: LocalVariableReadNode(
+                LocalVariableReadNode {
+                    name: ConstantRef(2),
+                    depth: 0,
+                },
+            ),
+        },
+        Node {
+            identifier: 73,
+            location: Location { start: 240, length: 1 },
+            flags: 0,
+            node_kind: ArgumentsNode(
+                ArgumentsNode {
+                    arguments: [
+                        NodeRef(67),
+                    ],
+                },
+            ),
+        },
+        Node {
+            identifier: 72,
+            location: Location { start: 236, length: 5 },
+            flags: 1,
+            node_kind: CallNode(
+                CallNode {
+                    receiver: Some(
+                        NodeRef(66),
+                    ),
+                    call_operator_loc: None,
+                    name: ConstantRef(9),
+                    message_loc: Some(
+                        Location { start: 238, length: 1 },
+                    ),
+                    opening_loc: None,
+                    arguments: Some(
+                        NodeRef(68),
+                    ),
+                    closing_loc: None,
+                    block: None,
+                },
+            ),
+        },
+        Node {
+            identifier: 69,
+            location: Location { start: 236, length: 5 },
+            flags: 0,
+            node_kind: StatementsNode(
+                StatementsNode {
+                    body: [
+                        NodeRef(69),
+                    ],
+                },
+            ),
+        },
+        Node {
+            identifier: 74,
+            location: Location { start: 229, length: 14 },
+            flags: 1,
+            node_kind: LambdaNode(
+                LambdaNode {
+                    locals: [
+                        ConstantRef(2),
+                    ],
+                    operator_loc: Location { start: 229, length: 2 },
+                    opening_loc: Location { start: 234, length: 1 },
+                    closing_loc: Location { start: 242, length: 1 },
+                    parameters: Some(
+                        NodeRef(65),
+                    ),
+                    body: Some(
+                        NodeRef(70),
+                    ),
+                },
+            ),
+        },
+        Node {
+            identifier: 65,
+            location: Location { start: 229, length: 14 },
+            flags: 0,
+            node_kind: StatementsNode(
+                StatementsNode {
+                    body: [
+                        NodeRef(71),
+                    ],
+                },
+            ),
+        },
+        Node {
+            identifier: 75,
+            location: Location { start: 220, length: 25 },
+            flags: 1,
+            node_kind: LambdaNode(
+                LambdaNode {
+                    locals: [
+                        ConstantRef(1),
+                    ],
+                    operator_loc: Location { start: 220, length: 2 },
+                    opening_loc: Location { start: 227, length: 1 },
+                    closing_loc: Location { start: 244, length: 1 },
+                    parameters: Some(
+                        NodeRef(62),
+                    ),
+                    body: Some(
+                        NodeRef(72),
+                    ),
+                },
+            ),
+        },
+        Node {
+            identifier: 78,
+            location: Location { start: 252, length: 1 },
+            flags: 0,
+            node_kind: RequiredParameterNode(
+                RequiredParameterNode {
+                    name: ConstantRef(1),
+                },
+            ),
+        },
+        Node {
+            identifier: 79,
+            location: Location { start: 255, length: 1 },
+            flags: 0,
+            node_kind: RequiredParameterNode(
+                RequiredParameterNode {
+                    name: ConstantRef(2),
+                },
+            ),
+        },
+        Node {
+            identifier: 77,
+            location: Location { start: 251, length: 6 },
+            flags: 0,
+            node_kind: MultiTargetNode(
+                MultiTargetNode {
+                    lefts: [
+                        NodeRef(74),
+                        NodeRef(75),
+                    ],
+                    rest: None,
+                    rights: [],
+                    lparen_loc: Some(
+                        Location { start: 251, length: 1 },
+                    ),
+                    rparen_loc: Some(
+                        Location { start: 256, length: 1 },
+                    ),
+                },
+            ),
+        },
+        Node {
+            identifier: 80,
+            location: Location { start: 259, length: 2 },
+            flags: 0,
+            node_kind: RestParameterNode(
+                RestParameterNode {
+                    name: Some(
+                        ConstantRef(3),
+                    ),
+                    name_loc: Some(
+                        Location { start: 260, length: 1 },
+                    ),
+                    operator_loc: Location { start: 259, length: 1 },
+                },
+            ),
+        },
+        Node {
+            identifier: 76,
+            location: Location { start: 251, length: 10 },
+            flags: 0,
+            node_kind: ParametersNode(
+                ParametersNode {
+                    requireds: [
+                        NodeRef(76),
+                    ],
+                    optionals: [],
+                    rest: Some(
+                        NodeRef(77),
+                    ),
+                    posts: [],
+                    keywords: [],
+                    keyword_rest: None,
+                    block: None,
+                },
+            ),
+        },
+        Node {
+            identifier: 81,
+            location: Location { start: 250, length: 12 },
+            flags: 0,
+            node_kind: BlockParametersNode(
+                BlockParametersNode {
+                    parameters: Some(
+                        NodeRef(78),
+                    ),
+                    locals: [],
+                    opening_loc: Some(
+                        Location { start: 250, length: 1 },
+                    ),
+                    closing_loc: Some(
+                        Location { start: 261, length: 1 },
+                    ),
+                },
+            ),
+        },
+        Node {
+            identifier: 82,
+            location: Location { start: 247, length: 19 },
+            flags: 1,
+            node_kind: LambdaNode(
+                LambdaNode {
+                    locals: [
+                        ConstantRef(1),
+                        ConstantRef(2),
+                        ConstantRef(3),
+                    ],
+                    operator_loc: Location { start: 247, length: 2 },
+                    opening_loc: Location { start: 263, length: 1 },
+                    closing_loc: Location { start: 265, length: 1 },
+                    parameters: Some(
+                        NodeRef(79),
+                    ),
+                    body: None,
+                },
+            ),
+        },
+        Node {
+            identifier: 1,
+            location: Location { start: 0, length: 266 },
+            flags: 0,
+            node_kind: StatementsNode(
+                StatementsNode {
+                    body: [
+                        NodeRef(8),
+                        NodeRef(11),
+                        NodeRef(16),
+                        NodeRef(19),
+                        NodeRef(22),
+                        NodeRef(33),
+                        NodeRef(46),
+                        NodeRef(59),
+                        NodeRef(73),
+                        NodeRef(80),
+                    ],
+                },
+            ),
+        },
+        Node {
+            identifier: 83,
+            location: Location { start: 0, length: 266 },
+            flags: 0,
+            node_kind: ProgramNode(
+                ProgramNode {
+                    locals: [],
+                    statements: NodeRef(81),
+                },
+            ),
+        },
+    ],
+    constants: [
+        Owned(4, 1),
+        Owned(7, 1),
+        Owned(10, 1),
+        Owned(13, 1),
+        Owned(76, 3),
+        Owned(122, 1),
+        Owned(159, 1),
+        Owned(163, 1),
+        Owned(238, 1),
+    ],
+    content_pool: [],
+}

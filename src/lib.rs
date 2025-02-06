@@ -4,7 +4,7 @@ use ruby_prism;
 use ruby_prism::Visit;
 
 mod evaluator;
-mod prism_ast;
+pub mod prism_ast;
 
 #[derive(Default, Debug)]
 pub struct Gemfile {

@@ -1,0 +1,170 @@
+Program {
+    source: "",
+    header: Header {
+        prism_major: 1,
+        prism_minor: 3,
+        prism_patch: 0,
+        only_semantics_serialized: false,
+        encoding_name: "UTF-8",
+        start_line: 1,
+        newline_offsets: [
+            0,
+            34,
+        ],
+        comments: [],
+        magic_comments: [],
+        end_keyword: None,
+        errors: [],
+        warnings: [],
+        content_pool_offset: 111,
+        content_pool_size: 1,
+    },
+    root: NodeRef(9),
+    nodes: [
+        Node {
+            identifier: 2,
+            location: Location { start: 5, length: 3 },
+            flags: 40,
+            node_kind: CallNode(
+                CallNode {
+                    receiver: None,
+                    call_operator_loc: None,
+                    name: ConstantRef(1),
+                    message_loc: Some(
+                        Location { start: 5, length: 3 },
+                    ),
+                    opening_loc: None,
+                    arguments: None,
+                    closing_loc: None,
+                    block: None,
+                },
+            ),
+        },
+        Node {
+            identifier: 4,
+            location: Location { start: 13, length: 1 },
+            flags: 10,
+            node_kind: IntegerNode(
+                IntegerNode {
+                    value: Integer {
+                        is_negative: false,
+                        words: [
+                            1,
+                        ],
+                    },
+                },
+            ),
+        },
+        Node {
+            identifier: 5,
+            location: Location { start: 17, length: 1 },
+            flags: 10,
+            node_kind: IntegerNode(
+                IntegerNode {
+                    value: Integer {
+                        is_negative: false,
+                        words: [
+                            2,
+                        ],
+                    },
+                },
+            ),
+        },
+        Node {
+            identifier: 6,
+            location: Location { start: 13, length: 5 },
+            flags: 0,
+            node_kind: AlternationPatternNode(
+                AlternationPatternNode {
+                    left: NodeRef(1),
+                    right: NodeRef(2),
+                    operator_loc: Location { start: 15, length: 1 },
+                },
+            ),
+        },
+        Node {
+            identifier: 8,
+            location: Location { start: 24, length: 4 },
+            flags: 3,
+            node_kind: TrueNode(
+                TrueNode(
+                    (),
+                ),
+            ),
+        },
+        Node {
+            identifier: 7,
+            location: Location { start: 24, length: 4 },
+            flags: 0,
+            node_kind: StatementsNode(
+                StatementsNode {
+                    body: [
+                        NodeRef(4),
+                    ],
+                },
+            ),
+        },
+        Node {
+            identifier: 9,
+            location: Location { start: 10, length: 18 },
+            flags: 0,
+            node_kind: InNode(
+                InNode {
+                    pattern: NodeRef(3),
+                    statements: Some(
+                        NodeRef(5),
+                    ),
+                    in_loc: Location { start: 10, length: 2 },
+                    then_loc: Some(
+                        Location { start: 19, length: 4 },
+                    ),
+                },
+            ),
+        },
+        Node {
+            identifier: 3,
+            location: Location { start: 0, length: 33 },
+            flags: 1,
+            node_kind: CaseMatchNode(
+                CaseMatchNode {
+                    predicate: Some(
+                        NodeRef(0),
+                    ),
+                    conditions: [
+                        NodeRef(6),
+                    ],
+                    else_clause: None,
+                    case_keyword_loc: Location { start: 0, length: 4 },
+                    end_keyword_loc: Location { start: 30, length: 3 },
+                },
+            ),
+        },
+        Node {
+            identifier: 1,
+            location: Location { start: 0, length: 33 },
+            flags: 0,
+            node_kind: StatementsNode(
+                StatementsNode {
+                    body: [
+                        NodeRef(7),
+                    ],
+                },
+            ),
+        },
+        Node {
+            identifier: 10,
+            location: Location { start: 0, length: 33 },
+            flags: 0,
+            node_kind: ProgramNode(
+                ProgramNode {
+                    locals: [],
+                    statements: NodeRef(8),
+                },
+            ),
+        },
+    ],
+    constants: [
+        Owned(5, 3),
+    ],
+    content_pool: [],
+}

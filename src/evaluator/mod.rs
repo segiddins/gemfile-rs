@@ -65,7 +65,28 @@ mod tests {
                             dependencies: [],
                         },
                     ),
-                    [],
+                    [
+                        Diagnostic {
+                            level: Warning,
+                            message: "Method call found",
+                            location: Some(
+                                Location {
+                                    start: 13,
+                                    end: 42,
+                                },
+                            ),
+                        },
+                        Diagnostic {
+                            level: Warning,
+                            message: "Method call found",
+                            location: Some(
+                                Location {
+                                    start: 55,
+                                    end: 75,
+                                },
+                            ),
+                        },
+                    ],
                 )
             "#]],
         )

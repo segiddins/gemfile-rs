@@ -1,0 +1,143 @@
+Program {
+    source: "",
+    header: Header {
+        prism_major: 1,
+        prism_minor: 3,
+        prism_patch: 0,
+        only_semantics_serialized: false,
+        encoding_name: "UTF-8",
+        start_line: 1,
+        newline_offsets: [
+            0,
+            18,
+        ],
+        comments: [],
+        magic_comments: [],
+        end_keyword: None,
+        errors: [],
+        warnings: [],
+        content_pool_offset: 105,
+        content_pool_size: 3,
+    },
+    root: NodeRef(6),
+    nodes: [
+        Node {
+            identifier: 3,
+            location: Location { start: 6, length: 1 },
+            flags: 0,
+            node_kind: RequiredParameterNode(
+                RequiredParameterNode {
+                    name: ConstantRef(1),
+                },
+            ),
+        },
+        Node {
+            identifier: 4,
+            location: Location { start: 11, length: 1 },
+            flags: 10,
+            node_kind: IntegerNode(
+                IntegerNode {
+                    value: Integer {
+                        is_negative: false,
+                        words: [
+                            1,
+                        ],
+                    },
+                },
+            ),
+        },
+        Node {
+            identifier: 5,
+            location: Location { start: 9, length: 3 },
+            flags: 0,
+            node_kind: OptionalKeywordParameterNode(
+                OptionalKeywordParameterNode {
+                    name: ConstantRef(2),
+                    name_loc: Location { start: 9, length: 2 },
+                    value: NodeRef(1),
+                },
+            ),
+        },
+        Node {
+            identifier: 2,
+            location: Location { start: 6, length: 6 },
+            flags: 0,
+            node_kind: ParametersNode(
+                ParametersNode {
+                    requireds: [
+                        NodeRef(0),
+                    ],
+                    optionals: [],
+                    rest: None,
+                    posts: [],
+                    keywords: [
+                        NodeRef(2),
+                    ],
+                    keyword_rest: None,
+                    block: None,
+                },
+            ),
+        },
+        Node {
+            identifier: 6,
+            location: Location { start: 0, length: 17 },
+            flags: 1,
+            node_kind: DefNode(
+                DefNode {
+                    name: ConstantRef(3),
+                    name_loc: Location { start: 4, length: 1 },
+                    receiver: None,
+                    parameters: Some(
+                        NodeRef(3),
+                    ),
+                    body: None,
+                    locals: [
+                        ConstantRef(1),
+                        ConstantRef(2),
+                    ],
+                    def_keyword_loc: Location { start: 0, length: 3 },
+                    operator_loc: None,
+                    lparen_loc: Some(
+                        Location { start: 5, length: 1 },
+                    ),
+                    rparen_loc: Some(
+                        Location { start: 12, length: 1 },
+                    ),
+                    equal_loc: None,
+                    end_keyword_loc: Some(
+                        Location { start: 14, length: 3 },
+                    ),
+                },
+            ),
+        },
+        Node {
+            identifier: 1,
+            location: Location { start: 0, length: 17 },
+            flags: 0,
+            node_kind: StatementsNode(
+                StatementsNode {
+                    body: [
+                        NodeRef(4),
+                    ],
+                },
+            ),
+        },
+        Node {
+            identifier: 7,
+            location: Location { start: 0, length: 17 },
+            flags: 0,
+            node_kind: ProgramNode(
+                ProgramNode {
+                    locals: [],
+                    statements: NodeRef(5),
+                },
+            ),
+        },
+    ],
+    constants: [
+        Owned(6, 1),
+        Owned(9, 1),
+        Owned(4, 1),
+    ],
+    content_pool: [],
+}

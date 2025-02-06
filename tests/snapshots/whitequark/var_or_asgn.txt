@@ -1,0 +1,83 @@
+Program {
+    source: "",
+    header: Header {
+        prism_major: 1,
+        prism_minor: 3,
+        prism_patch: 0,
+        only_semantics_serialized: false,
+        encoding_name: "UTF-8",
+        start_line: 1,
+        newline_offsets: [
+            0,
+            8,
+        ],
+        comments: [],
+        magic_comments: [],
+        end_keyword: None,
+        errors: [],
+        warnings: [],
+        content_pool_offset: 61,
+        content_pool_size: 1,
+    },
+    root: NodeRef(3),
+    nodes: [
+        Node {
+            identifier: 3,
+            location: Location { start: 6, length: 1 },
+            flags: 10,
+            node_kind: IntegerNode(
+                IntegerNode {
+                    value: Integer {
+                        is_negative: false,
+                        words: [
+                            1,
+                        ],
+                    },
+                },
+            ),
+        },
+        Node {
+            identifier: 4,
+            location: Location { start: 0, length: 7 },
+            flags: 1,
+            node_kind: LocalVariableOrWriteNode(
+                LocalVariableOrWriteNode {
+                    name_loc: Location { start: 0, length: 1 },
+                    operator_loc: Location { start: 2, length: 3 },
+                    value: NodeRef(0),
+                    name: ConstantRef(1),
+                    depth: 0,
+                },
+            ),
+        },
+        Node {
+            identifier: 1,
+            location: Location { start: 0, length: 7 },
+            flags: 0,
+            node_kind: StatementsNode(
+                StatementsNode {
+                    body: [
+                        NodeRef(1),
+                    ],
+                },
+            ),
+        },
+        Node {
+            identifier: 5,
+            location: Location { start: 0, length: 7 },
+            flags: 0,
+            node_kind: ProgramNode(
+                ProgramNode {
+                    locals: [
+                        ConstantRef(1),
+                    ],
+                    statements: NodeRef(2),
+                },
+            ),
+        },
+    ],
+    constants: [
+        Owned(0, 1),
+    ],
+    content_pool: [],
+}

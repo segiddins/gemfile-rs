@@ -1,0 +1,135 @@
+Program {
+    source: "",
+    header: Header {
+        prism_major: 1,
+        prism_minor: 3,
+        prism_patch: 0,
+        only_semantics_serialized: false,
+        encoding_name: "UTF-8",
+        start_line: 1,
+        newline_offsets: [
+            0,
+            23,
+            48,
+            57,
+            75,
+            76,
+        ],
+        comments: [],
+        magic_comments: [],
+        end_keyword: None,
+        errors: [],
+        warnings: [],
+        content_pool_offset: 100,
+        content_pool_size: 2,
+    },
+    root: NodeRef(6),
+    nodes: [
+        Node {
+            identifier: 3,
+            location: Location { start: 15, length: 7 },
+            flags: 0,
+            node_kind: StringNode(
+                StringNode {
+                    opening_loc: Some(
+                        Location { start: 15, length: 7 },
+                    ),
+                    content_loc: Location { start: 23, length: 25 },
+                    closing_loc: Some(
+                        Location { start: 48, length: 9 },
+                    ),
+                    unescaped: "",
+                },
+            ),
+        },
+        Node {
+            identifier: 4,
+            location: Location { start: 6, length: 16 },
+            flags: 1,
+            node_kind: LocalVariableWriteNode(
+                LocalVariableWriteNode {
+                    name: ConstantRef(1),
+                    depth: 0,
+                    name_loc: Location { start: 6, length: 6 },
+                    value: NodeRef(0),
+                    operator_loc: Location { start: 13, length: 1 },
+                },
+            ),
+        },
+        Node {
+            identifier: 6,
+            location: Location { start: 68, length: 6 },
+            flags: 0,
+            node_kind: LocalVariableReadNode(
+                LocalVariableReadNode {
+                    name: ConstantRef(1),
+                    depth: 0,
+                },
+            ),
+        },
+        Node {
+            identifier: 7,
+            location: Location { start: 68, length: 6 },
+            flags: 0,
+            node_kind: ArgumentsNode(
+                ArgumentsNode {
+                    arguments: [
+                        NodeRef(2),
+                    ],
+                },
+            ),
+        },
+        Node {
+            identifier: 5,
+            location: Location { start: 63, length: 11 },
+            flags: 33,
+            node_kind: CallNode(
+                CallNode {
+                    receiver: None,
+                    call_operator_loc: None,
+                    name: ConstantRef(2),
+                    message_loc: Some(
+                        Location { start: 63, length: 4 },
+                    ),
+                    opening_loc: None,
+                    arguments: Some(
+                        NodeRef(3),
+                    ),
+                    closing_loc: None,
+                    block: None,
+                },
+            ),
+        },
+        Node {
+            identifier: 1,
+            location: Location { start: 6, length: 68 },
+            flags: 0,
+            node_kind: StatementsNode(
+                StatementsNode {
+                    body: [
+                        NodeRef(1),
+                        NodeRef(4),
+                    ],
+                },
+            ),
+        },
+        Node {
+            identifier: 8,
+            location: Location { start: 6, length: 68 },
+            flags: 0,
+            node_kind: ProgramNode(
+                ProgramNode {
+                    locals: [
+                        ConstantRef(1),
+                    ],
+                    statements: NodeRef(5),
+                },
+            ),
+        },
+    ],
+    constants: [
+        Owned(6, 6),
+        Owned(63, 4),
+    ],
+    content_pool: [],
+}

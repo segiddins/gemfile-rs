@@ -1,0 +1,128 @@
+Program {
+    source: "",
+    header: Header {
+        prism_major: 1,
+        prism_minor: 3,
+        prism_patch: 0,
+        only_semantics_serialized: false,
+        encoding_name: "UTF-8",
+        start_line: 1,
+        newline_offsets: [
+            0,
+            18,
+            19,
+            40,
+        ],
+        comments: [],
+        magic_comments: [],
+        end_keyword: None,
+        errors: [],
+        warnings: [],
+        content_pool_offset: 94,
+        content_pool_size: 2,
+    },
+    root: NodeRef(6),
+    nodes: [
+        Node {
+            identifier: 2,
+            location: Location { start: 7, length: 5 },
+            flags: 0,
+            node_kind: ConstantPathNode(
+                ConstantPathNode {
+                    parent: None,
+                    name: Some(
+                        ConstantRef(1),
+                    ),
+                    delimiter_loc: Location { start: 7, length: 2 },
+                    name_loc: Location { start: 9, length: 3 },
+                },
+            ),
+        },
+        Node {
+            identifier: 3,
+            location: Location { start: 0, length: 17 },
+            flags: 1,
+            node_kind: ModuleNode(
+                ModuleNode {
+                    locals: [],
+                    module_keyword_loc: Location { start: 0, length: 6 },
+                    constant_path: NodeRef(0),
+                    body: None,
+                    end_keyword_loc: Location { start: 14, length: 3 },
+                    name: ConstantRef(1),
+                },
+            ),
+        },
+        Node {
+            identifier: 4,
+            location: Location { start: 26, length: 3 },
+            flags: 0,
+            node_kind: ConstantReadNode(
+                ConstantReadNode {
+                    name: ConstantRef(2),
+                },
+            ),
+        },
+        Node {
+            identifier: 5,
+            location: Location { start: 26, length: 8 },
+            flags: 0,
+            node_kind: ConstantPathNode(
+                ConstantPathNode {
+                    parent: Some(
+                        NodeRef(2),
+                    ),
+                    name: Some(
+                        ConstantRef(1),
+                    ),
+                    delimiter_loc: Location { start: 29, length: 2 },
+                    name_loc: Location { start: 31, length: 3 },
+                },
+            ),
+        },
+        Node {
+            identifier: 6,
+            location: Location { start: 19, length: 20 },
+            flags: 1,
+            node_kind: ModuleNode(
+                ModuleNode {
+                    locals: [],
+                    module_keyword_loc: Location { start: 19, length: 6 },
+                    constant_path: NodeRef(3),
+                    body: None,
+                    end_keyword_loc: Location { start: 36, length: 3 },
+                    name: ConstantRef(1),
+                },
+            ),
+        },
+        Node {
+            identifier: 1,
+            location: Location { start: 0, length: 39 },
+            flags: 0,
+            node_kind: StatementsNode(
+                StatementsNode {
+                    body: [
+                        NodeRef(1),
+                        NodeRef(4),
+                    ],
+                },
+            ),
+        },
+        Node {
+            identifier: 7,
+            location: Location { start: 0, length: 39 },
+            flags: 0,
+            node_kind: ProgramNode(
+                ProgramNode {
+                    locals: [],
+                    statements: NodeRef(5),
+                },
+            ),
+        },
+    ],
+    constants: [
+        Owned(9, 3),
+        Owned(26, 3),
+    ],
+    content_pool: [],
+}

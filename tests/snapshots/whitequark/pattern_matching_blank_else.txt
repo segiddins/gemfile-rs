@@ -1,0 +1,156 @@
+Program {
+    source: "",
+    header: Header {
+        prism_major: 1,
+        prism_minor: 3,
+        prism_patch: 0,
+        only_semantics_serialized: false,
+        encoding_name: "UTF-8",
+        start_line: 1,
+        newline_offsets: [
+            0,
+            27,
+        ],
+        comments: [],
+        magic_comments: [],
+        end_keyword: None,
+        errors: [],
+        warnings: [],
+        content_pool_offset: 100,
+        content_pool_size: 0,
+    },
+    root: NodeRef(8),
+    nodes: [
+        Node {
+            identifier: 2,
+            location: Location { start: 5, length: 1 },
+            flags: 10,
+            node_kind: IntegerNode(
+                IntegerNode {
+                    value: Integer {
+                        is_negative: false,
+                        words: [
+                            1,
+                        ],
+                    },
+                },
+            ),
+        },
+        Node {
+            identifier: 4,
+            location: Location { start: 11, length: 1 },
+            flags: 10,
+            node_kind: IntegerNode(
+                IntegerNode {
+                    value: Integer {
+                        is_negative: false,
+                        words: [
+                            2,
+                        ],
+                    },
+                },
+            ),
+        },
+        Node {
+            identifier: 6,
+            location: Location { start: 14, length: 1 },
+            flags: 11,
+            node_kind: IntegerNode(
+                IntegerNode {
+                    value: Integer {
+                        is_negative: false,
+                        words: [
+                            3,
+                        ],
+                    },
+                },
+            ),
+        },
+        Node {
+            identifier: 5,
+            location: Location { start: 14, length: 1 },
+            flags: 0,
+            node_kind: StatementsNode(
+                StatementsNode {
+                    body: [
+                        NodeRef(2),
+                    ],
+                },
+            ),
+        },
+        Node {
+            identifier: 7,
+            location: Location { start: 8, length: 7 },
+            flags: 0,
+            node_kind: InNode(
+                InNode {
+                    pattern: NodeRef(1),
+                    statements: Some(
+                        NodeRef(3),
+                    ),
+                    in_loc: Location { start: 8, length: 2 },
+                    then_loc: None,
+                },
+            ),
+        },
+        Node {
+            identifier: 8,
+            location: Location { start: 17, length: 9 },
+            flags: 0,
+            node_kind: ElseNode(
+                ElseNode {
+                    else_keyword_loc: Location { start: 17, length: 4 },
+                    statements: None,
+                    end_keyword_loc: Some(
+                        Location { start: 23, length: 3 },
+                    ),
+                },
+            ),
+        },
+        Node {
+            identifier: 3,
+            location: Location { start: 0, length: 26 },
+            flags: 1,
+            node_kind: CaseMatchNode(
+                CaseMatchNode {
+                    predicate: Some(
+                        NodeRef(0),
+                    ),
+                    conditions: [
+                        NodeRef(4),
+                    ],
+                    else_clause: Some(
+                        NodeRef(5),
+                    ),
+                    case_keyword_loc: Location { start: 0, length: 4 },
+                    end_keyword_loc: Location { start: 23, length: 3 },
+                },
+            ),
+        },
+        Node {
+            identifier: 1,
+            location: Location { start: 0, length: 26 },
+            flags: 0,
+            node_kind: StatementsNode(
+                StatementsNode {
+                    body: [
+                        NodeRef(6),
+                    ],
+                },
+            ),
+        },
+        Node {
+            identifier: 9,
+            location: Location { start: 0, length: 26 },
+            flags: 0,
+            node_kind: ProgramNode(
+                ProgramNode {
+                    locals: [],
+                    statements: NodeRef(7),
+                },
+            ),
+        },
+    ],
+    constants: [],
+    content_pool: [],
+}

@@ -1,0 +1,143 @@
+Program {
+    source: "",
+    header: Header {
+        prism_major: 1,
+        prism_minor: 3,
+        prism_patch: 0,
+        only_semantics_serialized: false,
+        encoding_name: "UTF-8",
+        start_line: 1,
+        newline_offsets: [
+            0,
+            18,
+        ],
+        comments: [],
+        magic_comments: [],
+        end_keyword: None,
+        errors: [],
+        warnings: [],
+        content_pool_offset: 102,
+        content_pool_size: 1,
+    },
+    root: NodeRef(7),
+    nodes: [
+        Node {
+            identifier: 3,
+            location: Location { start: 2, length: 4 },
+            flags: 18,
+            node_kind: SymbolNode(
+                SymbolNode {
+                    opening_loc: None,
+                    value_loc: Some(
+                        Location { start: 2, length: 3 },
+                    ),
+                    closing_loc: Some(
+                        Location { start: 5, length: 1 },
+                    ),
+                    unescaped: "",
+                },
+            ),
+        },
+        Node {
+            identifier: 4,
+            location: Location { start: 7, length: 1 },
+            flags: 10,
+            node_kind: IntegerNode(
+                IntegerNode {
+                    value: Integer {
+                        is_negative: false,
+                        words: [
+                            2,
+                        ],
+                    },
+                },
+            ),
+        },
+        Node {
+            identifier: 5,
+            location: Location { start: 2, length: 6 },
+            flags: 2,
+            node_kind: AssocNode(
+                AssocNode {
+                    key: NodeRef(0),
+                    value: NodeRef(1),
+                    operator_loc: None,
+                },
+            ),
+        },
+        Node {
+            identifier: 6,
+            location: Location { start: 12, length: 3 },
+            flags: 40,
+            node_kind: CallNode(
+                CallNode {
+                    receiver: None,
+                    call_operator_loc: None,
+                    name: ConstantRef(1),
+                    message_loc: Some(
+                        Location { start: 12, length: 3 },
+                    ),
+                    opening_loc: None,
+                    arguments: None,
+                    closing_loc: None,
+                    block: None,
+                },
+            ),
+        },
+        Node {
+            identifier: 7,
+            location: Location { start: 10, length: 5 },
+            flags: 0,
+            node_kind: AssocSplatNode(
+                AssocSplatNode {
+                    value: Some(
+                        NodeRef(3),
+                    ),
+                    operator_loc: Location { start: 10, length: 2 },
+                },
+            ),
+        },
+        Node {
+            identifier: 2,
+            location: Location { start: 0, length: 17 },
+            flags: 1,
+            node_kind: HashNode(
+                HashNode {
+                    opening_loc: Location { start: 0, length: 1 },
+                    elements: [
+                        NodeRef(2),
+                        NodeRef(4),
+                    ],
+                    closing_loc: Location { start: 16, length: 1 },
+                },
+            ),
+        },
+        Node {
+            identifier: 1,
+            location: Location { start: 0, length: 17 },
+            flags: 0,
+            node_kind: StatementsNode(
+                StatementsNode {
+                    body: [
+                        NodeRef(5),
+                    ],
+                },
+            ),
+        },
+        Node {
+            identifier: 8,
+            location: Location { start: 0, length: 17 },
+            flags: 0,
+            node_kind: ProgramNode(
+                ProgramNode {
+                    locals: [],
+                    statements: NodeRef(6),
+                },
+            ),
+        },
+    ],
+    constants: [
+        Owned(12, 3),
+    ],
+    content_pool: [],
+}

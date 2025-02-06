@@ -1,0 +1,79 @@
+Program {
+    source: "",
+    header: Header {
+        prism_major: 1,
+        prism_minor: 3,
+        prism_patch: 0,
+        only_semantics_serialized: false,
+        encoding_name: "UTF-8",
+        start_line: 1,
+        newline_offsets: [
+            0,
+            7,
+            10,
+            14,
+            18,
+            23,
+            24,
+        ],
+        comments: [],
+        magic_comments: [],
+        end_keyword: None,
+        errors: [],
+        warnings: [
+            Warning {
+                type: 318,
+                message: "possibly useless use of a literal in void context",
+                location: Location { start: 0, length: 5 },
+                level: 1,
+            },
+        ],
+        content_pool_offset: 123,
+        content_pool_size: 0,
+    },
+    root: NodeRef(2),
+    nodes: [
+        Node {
+            identifier: 2,
+            location: Location { start: 0, length: 5 },
+            flags: 1,
+            node_kind: StringNode(
+                StringNode {
+                    opening_loc: Some(
+                        Location { start: 0, length: 5 },
+                    ),
+                    content_loc: Location { start: 7, length: 11 },
+                    closing_loc: Some(
+                        Location { start: 18, length: 5 },
+                    ),
+                    unescaped: "\r\n\r\r\n\r\n",
+                },
+            ),
+        },
+        Node {
+            identifier: 1,
+            location: Location { start: 0, length: 5 },
+            flags: 0,
+            node_kind: StatementsNode(
+                StatementsNode {
+                    body: [
+                        NodeRef(0),
+                    ],
+                },
+            ),
+        },
+        Node {
+            identifier: 3,
+            location: Location { start: 0, length: 5 },
+            flags: 0,
+            node_kind: ProgramNode(
+                ProgramNode {
+                    locals: [],
+                    statements: NodeRef(1),
+                },
+            ),
+        },
+    ],
+    constants: [],
+    content_pool: [],
+}

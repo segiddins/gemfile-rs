@@ -1,0 +1,145 @@
+Program {
+    source: "",
+    header: Header {
+        prism_major: 1,
+        prism_minor: 3,
+        prism_patch: 0,
+        only_semantics_serialized: false,
+        encoding_name: "UTF-8",
+        start_line: 1,
+        newline_offsets: [
+            0,
+            12,
+        ],
+        comments: [],
+        magic_comments: [],
+        end_keyword: None,
+        errors: [],
+        warnings: [],
+        content_pool_offset: 98,
+        content_pool_size: 6,
+    },
+    root: NodeRef(6),
+    nodes: [
+        Node {
+            identifier: 2,
+            location: Location { start: 0, length: 1 },
+            flags: 0,
+            node_kind: ConstantReadNode(
+                ConstantReadNode {
+                    name: ConstantRef(1),
+                },
+            ),
+        },
+        Node {
+            identifier: 5,
+            location: Location { start: 10, length: 1 },
+            flags: 40,
+            node_kind: CallNode(
+                CallNode {
+                    receiver: None,
+                    call_operator_loc: None,
+                    name: ConstantRef(5),
+                    message_loc: Some(
+                        Location { start: 10, length: 1 },
+                    ),
+                    opening_loc: None,
+                    arguments: None,
+                    closing_loc: None,
+                    block: None,
+                },
+            ),
+        },
+        Node {
+            identifier: 6,
+            location: Location { start: 10, length: 1 },
+            flags: 0,
+            node_kind: ArgumentsNode(
+                ArgumentsNode {
+                    arguments: [
+                        NodeRef(1),
+                    ],
+                },
+            ),
+        },
+        Node {
+            identifier: 4,
+            location: Location { start: 8, length: 3 },
+            flags: 32,
+            node_kind: CallNode(
+                CallNode {
+                    receiver: None,
+                    call_operator_loc: None,
+                    name: ConstantRef(3),
+                    message_loc: Some(
+                        Location { start: 8, length: 1 },
+                    ),
+                    opening_loc: None,
+                    arguments: Some(
+                        NodeRef(2),
+                    ),
+                    closing_loc: None,
+                    block: None,
+                },
+            ),
+        },
+        Node {
+            identifier: 7,
+            location: Location { start: 0, length: 11 },
+            flags: 1,
+            node_kind: CallOperatorWriteNode(
+                CallOperatorWriteNode {
+                    receiver: Some(
+                        NodeRef(0),
+                    ),
+                    call_operator_loc: Some(
+                        Location { start: 1, length: 2 },
+                    ),
+                    message_loc: Some(
+                        Location { start: 3, length: 1 },
+                    ),
+                    read_name: ConstantRef(2),
+                    write_name: ConstantRef(4),
+                    binary_operator: ConstantRef(6),
+                    binary_operator_loc: Location { start: 5, length: 2 },
+                    value: NodeRef(3),
+                },
+            ),
+        },
+        Node {
+            identifier: 1,
+            location: Location { start: 0, length: 11 },
+            flags: 0,
+            node_kind: StatementsNode(
+                StatementsNode {
+                    body: [
+                        NodeRef(4),
+                    ],
+                },
+            ),
+        },
+        Node {
+            identifier: 8,
+            location: Location { start: 0, length: 11 },
+            flags: 0,
+            node_kind: ProgramNode(
+                ProgramNode {
+                    locals: [],
+                    statements: NodeRef(5),
+                },
+            ),
+        },
+    ],
+    constants: [
+        Owned(0, 1),
+        Owned(3, 1),
+        Owned(8, 1),
+        Shared(0, 2),
+        Owned(10, 1),
+        Owned(5, 1),
+    ],
+    content_pool: [
+        98,
+        61,
+    ],
+}

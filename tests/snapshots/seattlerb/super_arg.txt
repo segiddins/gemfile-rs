@@ -1,0 +1,93 @@
+Program {
+    source: "",
+    header: Header {
+        prism_major: 1,
+        prism_minor: 3,
+        prism_patch: 0,
+        only_semantics_serialized: false,
+        encoding_name: "UTF-8",
+        start_line: 1,
+        newline_offsets: [
+            0,
+            9,
+        ],
+        comments: [],
+        magic_comments: [],
+        end_keyword: None,
+        errors: [],
+        warnings: [],
+        content_pool_offset: 65,
+        content_pool_size: 0,
+    },
+    root: NodeRef(4),
+    nodes: [
+        Node {
+            identifier: 2,
+            location: Location { start: 6, length: 2 },
+            flags: 10,
+            node_kind: IntegerNode(
+                IntegerNode {
+                    value: Integer {
+                        is_negative: false,
+                        words: [
+                            42,
+                        ],
+                    },
+                },
+            ),
+        },
+        Node {
+            identifier: 3,
+            location: Location { start: 6, length: 2 },
+            flags: 0,
+            node_kind: ArgumentsNode(
+                ArgumentsNode {
+                    arguments: [
+                        NodeRef(0),
+                    ],
+                },
+            ),
+        },
+        Node {
+            identifier: 4,
+            location: Location { start: 0, length: 8 },
+            flags: 1,
+            node_kind: SuperNode(
+                SuperNode {
+                    keyword_loc: Location { start: 0, length: 5 },
+                    lparen_loc: None,
+                    arguments: Some(
+                        NodeRef(1),
+                    ),
+                    rparen_loc: None,
+                    block: None,
+                },
+            ),
+        },
+        Node {
+            identifier: 1,
+            location: Location { start: 0, length: 8 },
+            flags: 0,
+            node_kind: StatementsNode(
+                StatementsNode {
+                    body: [
+                        NodeRef(2),
+                    ],
+                },
+            ),
+        },
+        Node {
+            identifier: 5,
+            location: Location { start: 0, length: 8 },
+            flags: 0,
+            node_kind: ProgramNode(
+                ProgramNode {
+                    locals: [],
+                    statements: NodeRef(3),
+                },
+            ),
+        },
+    ],
+    constants: [],
+    content_pool: [],
+}

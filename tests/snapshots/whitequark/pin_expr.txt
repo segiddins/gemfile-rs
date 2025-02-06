@@ -1,0 +1,777 @@
+Program {
+    source: "",
+    header: Header {
+        prism_major: 1,
+        prism_minor: 3,
+        prism_patch: 0,
+        only_semantics_serialized: false,
+        encoding_name: "UTF-8",
+        start_line: 1,
+        newline_offsets: [
+            0,
+            40,
+            41,
+            75,
+            76,
+            93,
+            100,
+            101,
+            134,
+            135,
+            176,
+            177,
+            199,
+            200,
+            242,
+        ],
+        comments: [],
+        magic_comments: [],
+        end_keyword: None,
+        errors: [],
+        warnings: [],
+        content_pool_offset: 565,
+        content_pool_size: 5,
+    },
+    root: NodeRef(48),
+    nodes: [
+        Node {
+            identifier: 2,
+            location: Location { start: 5, length: 3 },
+            flags: 40,
+            node_kind: CallNode(
+                CallNode {
+                    receiver: None,
+                    call_operator_loc: None,
+                    name: ConstantRef(1),
+                    message_loc: Some(
+                        Location { start: 5, length: 3 },
+                    ),
+                    opening_loc: None,
+                    arguments: None,
+                    closing_loc: None,
+                    block: None,
+                },
+            ),
+        },
+        Node {
+            identifier: 4,
+            location: Location { start: 14, length: 20 },
+            flags: 0,
+            node_kind: GlobalVariableReadNode(
+                GlobalVariableReadNode {
+                    name: ConstantRef(2),
+                },
+            ),
+        },
+        Node {
+            identifier: 5,
+            location: Location { start: 13, length: 21 },
+            flags: 0,
+            node_kind: PinnedVariableNode(
+                PinnedVariableNode {
+                    variable: NodeRef(1),
+                    operator_loc: Location { start: 13, length: 1 },
+                },
+            ),
+        },
+        Node {
+            identifier: 6,
+            location: Location { start: 10, length: 24 },
+            flags: 0,
+            node_kind: InNode(
+                InNode {
+                    pattern: NodeRef(2),
+                    statements: None,
+                    in_loc: Location { start: 10, length: 2 },
+                    then_loc: None,
+                },
+            ),
+        },
+        Node {
+            identifier: 3,
+            location: Location { start: 0, length: 39 },
+            flags: 1,
+            node_kind: CaseMatchNode(
+                CaseMatchNode {
+                    predicate: Some(
+                        NodeRef(0),
+                    ),
+                    conditions: [
+                        NodeRef(3),
+                    ],
+                    else_clause: None,
+                    case_keyword_loc: Location { start: 0, length: 4 },
+                    end_keyword_loc: Location { start: 36, length: 3 },
+                },
+            ),
+        },
+        Node {
+            identifier: 7,
+            location: Location { start: 46, length: 3 },
+            flags: 40,
+            node_kind: CallNode(
+                CallNode {
+                    receiver: None,
+                    call_operator_loc: None,
+                    name: ConstantRef(1),
+                    message_loc: Some(
+                        Location { start: 46, length: 3 },
+                    ),
+                    opening_loc: None,
+                    arguments: None,
+                    closing_loc: None,
+                    block: None,
+                },
+            ),
+        },
+        Node {
+            identifier: 9,
+            location: Location { start: 56, length: 1 },
+            flags: 10,
+            node_kind: IntegerNode(
+                IntegerNode {
+                    value: Integer {
+                        is_negative: false,
+                        words: [
+                            0,
+                        ],
+                    },
+                },
+            ),
+        },
+        Node {
+            identifier: 10,
+            location: Location { start: 58, length: 1 },
+            flags: 10,
+            node_kind: IntegerNode(
+                IntegerNode {
+                    value: Integer {
+                        is_negative: false,
+                        words: [
+                            0,
+                        ],
+                    },
+                },
+            ),
+        },
+        Node {
+            identifier: 12,
+            location: Location { start: 58, length: 1 },
+            flags: 0,
+            node_kind: ArgumentsNode(
+                ArgumentsNode {
+                    arguments: [
+                        NodeRef(7),
+                    ],
+                },
+            ),
+        },
+        Node {
+            identifier: 11,
+            location: Location { start: 56, length: 3 },
+            flags: 0,
+            node_kind: CallNode(
+                CallNode {
+                    receiver: Some(
+                        NodeRef(6),
+                    ),
+                    call_operator_loc: None,
+                    name: ConstantRef(3),
+                    message_loc: Some(
+                        Location { start: 57, length: 1 },
+                    ),
+                    opening_loc: None,
+                    arguments: Some(
+                        NodeRef(8),
+                    ),
+                    closing_loc: None,
+                    block: None,
+                },
+            ),
+        },
+        Node {
+            identifier: 13,
+            location: Location { start: 54, length: 6 },
+            flags: 0,
+            node_kind: PinnedExpressionNode(
+                PinnedExpressionNode {
+                    expression: NodeRef(9),
+                    operator_loc: Location { start: 54, length: 1 },
+                    lparen_loc: Location { start: 55, length: 1 },
+                    rparen_loc: Location { start: 59, length: 1 },
+                },
+            ),
+        },
+        Node {
+            identifier: 15,
+            location: Location { start: 66, length: 3 },
+            flags: 3,
+            node_kind: NilNode(
+                NilNode(
+                    (),
+                ),
+            ),
+        },
+        Node {
+            identifier: 14,
+            location: Location { start: 66, length: 3 },
+            flags: 0,
+            node_kind: StatementsNode(
+                StatementsNode {
+                    body: [
+                        NodeRef(11),
+                    ],
+                },
+            ),
+        },
+        Node {
+            identifier: 16,
+            location: Location { start: 51, length: 18 },
+            flags: 0,
+            node_kind: InNode(
+                InNode {
+                    pattern: NodeRef(10),
+                    statements: Some(
+                        NodeRef(12),
+                    ),
+                    in_loc: Location { start: 51, length: 2 },
+                    then_loc: Some(
+                        Location { start: 61, length: 4 },
+                    ),
+                },
+            ),
+        },
+        Node {
+            identifier: 8,
+            location: Location { start: 41, length: 33 },
+            flags: 1,
+            node_kind: CaseMatchNode(
+                CaseMatchNode {
+                    predicate: Some(
+                        NodeRef(5),
+                    ),
+                    conditions: [
+                        NodeRef(13),
+                    ],
+                    else_clause: None,
+                    case_keyword_loc: Location { start: 41, length: 4 },
+                    end_keyword_loc: Location { start: 71, length: 3 },
+                },
+            ),
+        },
+        Node {
+            identifier: 17,
+            location: Location { start: 81, length: 3 },
+            flags: 40,
+            node_kind: CallNode(
+                CallNode {
+                    receiver: None,
+                    call_operator_loc: None,
+                    name: ConstantRef(1),
+                    message_loc: Some(
+                        Location { start: 81, length: 3 },
+                    ),
+                    opening_loc: None,
+                    arguments: None,
+                    closing_loc: None,
+                    block: None,
+                },
+            ),
+        },
+        Node {
+            identifier: 19,
+            location: Location { start: 91, length: 1 },
+            flags: 10,
+            node_kind: IntegerNode(
+                IntegerNode {
+                    value: Integer {
+                        is_negative: false,
+                        words: [
+                            1,
+                        ],
+                    },
+                },
+            ),
+        },
+        Node {
+            identifier: 20,
+            location: Location { start: 89, length: 5 },
+            flags: 0,
+            node_kind: PinnedExpressionNode(
+                PinnedExpressionNode {
+                    expression: NodeRef(16),
+                    operator_loc: Location { start: 89, length: 1 },
+                    lparen_loc: Location { start: 90, length: 1 },
+                    rparen_loc: Location { start: 93, length: 1 },
+                },
+            ),
+        },
+        Node {
+            identifier: 21,
+            location: Location { start: 86, length: 8 },
+            flags: 0,
+            node_kind: InNode(
+                InNode {
+                    pattern: NodeRef(17),
+                    statements: None,
+                    in_loc: Location { start: 86, length: 2 },
+                    then_loc: None,
+                },
+            ),
+        },
+        Node {
+            identifier: 18,
+            location: Location { start: 76, length: 23 },
+            flags: 1,
+            node_kind: CaseMatchNode(
+                CaseMatchNode {
+                    predicate: Some(
+                        NodeRef(15),
+                    ),
+                    conditions: [
+                        NodeRef(18),
+                    ],
+                    else_clause: None,
+                    case_keyword_loc: Location { start: 76, length: 4 },
+                    end_keyword_loc: Location { start: 96, length: 3 },
+                },
+            ),
+        },
+        Node {
+            identifier: 22,
+            location: Location { start: 106, length: 3 },
+            flags: 40,
+            node_kind: CallNode(
+                CallNode {
+                    receiver: None,
+                    call_operator_loc: None,
+                    name: ConstantRef(1),
+                    message_loc: Some(
+                        Location { start: 106, length: 3 },
+                    ),
+                    opening_loc: None,
+                    arguments: None,
+                    closing_loc: None,
+                    block: None,
+                },
+            ),
+        },
+        Node {
+            identifier: 24,
+            location: Location { start: 116, length: 2 },
+            flags: 10,
+            node_kind: IntegerNode(
+                IntegerNode {
+                    value: Integer {
+                        is_negative: false,
+                        words: [
+                            42,
+                        ],
+                    },
+                },
+            ),
+        },
+        Node {
+            identifier: 25,
+            location: Location { start: 114, length: 5 },
+            flags: 0,
+            node_kind: PinnedExpressionNode(
+                PinnedExpressionNode {
+                    expression: NodeRef(21),
+                    operator_loc: Location { start: 114, length: 1 },
+                    lparen_loc: Location { start: 115, length: 1 },
+                    rparen_loc: Location { start: 118, length: 1 },
+                },
+            ),
+        },
+        Node {
+            identifier: 27,
+            location: Location { start: 125, length: 3 },
+            flags: 3,
+            node_kind: NilNode(
+                NilNode(
+                    (),
+                ),
+            ),
+        },
+        Node {
+            identifier: 26,
+            location: Location { start: 125, length: 3 },
+            flags: 0,
+            node_kind: StatementsNode(
+                StatementsNode {
+                    body: [
+                        NodeRef(23),
+                    ],
+                },
+            ),
+        },
+        Node {
+            identifier: 28,
+            location: Location { start: 111, length: 17 },
+            flags: 0,
+            node_kind: InNode(
+                InNode {
+                    pattern: NodeRef(22),
+                    statements: Some(
+                        NodeRef(24),
+                    ),
+                    in_loc: Location { start: 111, length: 2 },
+                    then_loc: Some(
+                        Location { start: 120, length: 4 },
+                    ),
+                },
+            ),
+        },
+        Node {
+            identifier: 23,
+            location: Location { start: 101, length: 32 },
+            flags: 1,
+            node_kind: CaseMatchNode(
+                CaseMatchNode {
+                    predicate: Some(
+                        NodeRef(20),
+                    ),
+                    conditions: [
+                        NodeRef(25),
+                    ],
+                    else_clause: None,
+                    case_keyword_loc: Location { start: 101, length: 4 },
+                    end_keyword_loc: Location { start: 130, length: 3 },
+                },
+            ),
+        },
+        Node {
+            identifier: 29,
+            location: Location { start: 140, length: 3 },
+            flags: 40,
+            node_kind: CallNode(
+                CallNode {
+                    receiver: None,
+                    call_operator_loc: None,
+                    name: ConstantRef(1),
+                    message_loc: Some(
+                        Location { start: 140, length: 3 },
+                    ),
+                    opening_loc: None,
+                    arguments: None,
+                    closing_loc: None,
+                    block: None,
+                },
+            ),
+        },
+        Node {
+            identifier: 31,
+            location: Location { start: 149, length: 21 },
+            flags: 0,
+            node_kind: ClassVariableReadNode(
+                ClassVariableReadNode {
+                    name: ConstantRef(4),
+                },
+            ),
+        },
+        Node {
+            identifier: 32,
+            location: Location { start: 148, length: 22 },
+            flags: 0,
+            node_kind: PinnedVariableNode(
+                PinnedVariableNode {
+                    variable: NodeRef(28),
+                    operator_loc: Location { start: 148, length: 1 },
+                },
+            ),
+        },
+        Node {
+            identifier: 33,
+            location: Location { start: 145, length: 25 },
+            flags: 0,
+            node_kind: InNode(
+                InNode {
+                    pattern: NodeRef(29),
+                    statements: None,
+                    in_loc: Location { start: 145, length: 2 },
+                    then_loc: None,
+                },
+            ),
+        },
+        Node {
+            identifier: 30,
+            location: Location { start: 135, length: 40 },
+            flags: 1,
+            node_kind: CaseMatchNode(
+                CaseMatchNode {
+                    predicate: Some(
+                        NodeRef(27),
+                    ),
+                    conditions: [
+                        NodeRef(30),
+                    ],
+                    else_clause: None,
+                    case_keyword_loc: Location { start: 135, length: 4 },
+                    end_keyword_loc: Location { start: 172, length: 3 },
+                },
+            ),
+        },
+        Node {
+            identifier: 34,
+            location: Location { start: 182, length: 3 },
+            flags: 40,
+            node_kind: CallNode(
+                CallNode {
+                    receiver: None,
+                    call_operator_loc: None,
+                    name: ConstantRef(1),
+                    message_loc: Some(
+                        Location { start: 182, length: 3 },
+                    ),
+                    opening_loc: None,
+                    arguments: None,
+                    closing_loc: None,
+                    block: None,
+                },
+            ),
+        },
+        Node {
+            identifier: 36,
+            location: Location { start: 191, length: 2 },
+            flags: 0,
+            node_kind: InstanceVariableReadNode(
+                InstanceVariableReadNode {
+                    name: ConstantRef(5),
+                },
+            ),
+        },
+        Node {
+            identifier: 37,
+            location: Location { start: 190, length: 3 },
+            flags: 0,
+            node_kind: PinnedVariableNode(
+                PinnedVariableNode {
+                    variable: NodeRef(33),
+                    operator_loc: Location { start: 190, length: 1 },
+                },
+            ),
+        },
+        Node {
+            identifier: 38,
+            location: Location { start: 187, length: 6 },
+            flags: 0,
+            node_kind: InNode(
+                InNode {
+                    pattern: NodeRef(34),
+                    statements: None,
+                    in_loc: Location { start: 187, length: 2 },
+                    then_loc: None,
+                },
+            ),
+        },
+        Node {
+            identifier: 35,
+            location: Location { start: 177, length: 21 },
+            flags: 1,
+            node_kind: CaseMatchNode(
+                CaseMatchNode {
+                    predicate: Some(
+                        NodeRef(32),
+                    ),
+                    conditions: [
+                        NodeRef(35),
+                    ],
+                    else_clause: None,
+                    case_keyword_loc: Location { start: 177, length: 4 },
+                    end_keyword_loc: Location { start: 195, length: 3 },
+                },
+            ),
+        },
+        Node {
+            identifier: 39,
+            location: Location { start: 205, length: 3 },
+            flags: 40,
+            node_kind: CallNode(
+                CallNode {
+                    receiver: None,
+                    call_operator_loc: None,
+                    name: ConstantRef(1),
+                    message_loc: Some(
+                        Location { start: 205, length: 3 },
+                    ),
+                    opening_loc: None,
+                    arguments: None,
+                    closing_loc: None,
+                    block: None,
+                },
+            ),
+        },
+        Node {
+            identifier: 41,
+            location: Location { start: 215, length: 4 },
+            flags: 18,
+            node_kind: SymbolNode(
+                SymbolNode {
+                    opening_loc: None,
+                    value_loc: Some(
+                        Location { start: 215, length: 3 },
+                    ),
+                    closing_loc: Some(
+                        Location { start: 218, length: 1 },
+                    ),
+                    unescaped: "",
+                },
+            ),
+        },
+        Node {
+            identifier: 42,
+            location: Location { start: 222, length: 2 },
+            flags: 10,
+            node_kind: IntegerNode(
+                IntegerNode {
+                    value: Integer {
+                        is_negative: false,
+                        words: [
+                            42,
+                        ],
+                    },
+                },
+            ),
+        },
+        Node {
+            identifier: 43,
+            location: Location { start: 220, length: 5 },
+            flags: 0,
+            node_kind: PinnedExpressionNode(
+                PinnedExpressionNode {
+                    expression: NodeRef(39),
+                    operator_loc: Location { start: 220, length: 1 },
+                    lparen_loc: Location { start: 221, length: 1 },
+                    rparen_loc: Location { start: 224, length: 1 },
+                },
+            ),
+        },
+        Node {
+            identifier: 44,
+            location: Location { start: 215, length: 10 },
+            flags: 0,
+            node_kind: AssocNode(
+                AssocNode {
+                    key: NodeRef(38),
+                    value: NodeRef(40),
+                    operator_loc: None,
+                },
+            ),
+        },
+        Node {
+            identifier: 45,
+            location: Location { start: 213, length: 14 },
+            flags: 0,
+            node_kind: HashPatternNode(
+                HashPatternNode {
+                    constant: None,
+                    elements: [
+                        NodeRef(41),
+                    ],
+                    rest: None,
+                    opening_loc: Some(
+                        Location { start: 213, length: 1 },
+                    ),
+                    closing_loc: Some(
+                        Location { start: 226, length: 1 },
+                    ),
+                },
+            ),
+        },
+        Node {
+            identifier: 47,
+            location: Location { start: 233, length: 3 },
+            flags: 3,
+            node_kind: NilNode(
+                NilNode(
+                    (),
+                ),
+            ),
+        },
+        Node {
+            identifier: 46,
+            location: Location { start: 233, length: 3 },
+            flags: 0,
+            node_kind: StatementsNode(
+                StatementsNode {
+                    body: [
+                        NodeRef(43),
+                    ],
+                },
+            ),
+        },
+        Node {
+            identifier: 48,
+            location: Location { start: 210, length: 26 },
+            flags: 0,
+            node_kind: InNode(
+                InNode {
+                    pattern: NodeRef(42),
+                    statements: Some(
+                        NodeRef(44),
+                    ),
+                    in_loc: Location { start: 210, length: 2 },
+                    then_loc: Some(
+                        Location { start: 228, length: 4 },
+                    ),
+                },
+            ),
+        },
+        Node {
+            identifier: 40,
+            location: Location { start: 200, length: 41 },
+            flags: 1,
+            node_kind: CaseMatchNode(
+                CaseMatchNode {
+                    predicate: Some(
+                        NodeRef(37),
+                    ),
+                    conditions: [
+                        NodeRef(45),
+                    ],
+                    else_clause: None,
+                    case_keyword_loc: Location { start: 200, length: 4 },
+                    end_keyword_loc: Location { start: 238, length: 3 },
+                },
+            ),
+        },
+        Node {
+            identifier: 1,
+            location: Location { start: 0, length: 241 },
+            flags: 0,
+            node_kind: StatementsNode(
+                StatementsNode {
+                    body: [
+                        NodeRef(4),
+                        NodeRef(14),
+                        NodeRef(19),
+                        NodeRef(26),
+                        NodeRef(31),
+                        NodeRef(36),
+                        NodeRef(46),
+                    ],
+                },
+            ),
+        },
+        Node {
+            identifier: 49,
+            location: Location { start: 0, length: 241 },
+            flags: 0,
+            node_kind: ProgramNode(
+                ProgramNode {
+                    locals: [],
+                    statements: NodeRef(47),
+                },
+            ),
+        },
+    ],
+    constants: [
+        Owned(5, 3),
+        Owned(14, 20),
+        Owned(57, 1),
+        Owned(149, 21),
+        Owned(191, 2),
+    ],
+    content_pool: [],
+}

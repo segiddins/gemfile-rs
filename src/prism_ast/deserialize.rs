@@ -1,10 +1,9 @@
-use std::ascii;
-use std::io::Read;
+use std::fmt::Debug;
 
 use ruby_prism;
 
 #[derive(Debug)]
-struct Program {
+pub struct Program {
     source: String,
     header: Header,
     root: NodeRef,
@@ -15,11 +14,43 @@ struct Program {
 
 #[derive(Debug, Clone)]
 pub struct Node {
-    pub(super) kind: u8,
+    // pub(super) kind: u8,
     pub(super) identifier: u32,
     pub(super) location: Location,
     pub(super) flags: u32,
     pub(super) node_kind: super::generated::NodeKind,
+}
+
+pub(super) struct LocationSnapshot<'a> {
+    pub program: &'a Program,
+    pub location: &'a Location,
+}
+
+impl Debug for LocationSnapshot<'_> {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let start_line_idx = self
+            .program
+            .header
+            .newline_offsets
+            .iter()
+            .position(|&offset| offset > self.location.start)
+            .expect("start line index");
+        let end_line_idx = self.program.header.newline_offsets[(start_line_idx as usize)..]
+            .iter()
+            .position(|&offset| offset > self.location.start + self.location.length)
+            .expect("end_line_idx")
+            + start_line_idx;
+
+        write!(
+            f,
+            "({},{})-({},{})",
+            start_line_idx,
+            self.location.start - self.program.header.newline_offsets[start_line_idx - 1 as usize],
+            end_line_idx,
+            self.location.start + self.location.length
+                - self.program.header.newline_offsets[end_line_idx - 1 as usize]
+        )
+    }
 }
 
 impl Program {
@@ -36,6 +67,24 @@ impl Program {
             .parse_next(&mut stream)
             .map_err(|error| anyhow::anyhow!("failed to parse program: {:#}", error))
     }
+
+    pub fn node(&self, node_ref: &NodeRef) -> &Node {
+        &self.nodes[node_ref.0 as usize]
+    }
+
+    pub fn root(&self) -> &Node {
+        self.node(&self.root)
+    }
+
+    pub fn snapshot(&self) -> String {
+        format!(
+            "{:?}",
+            super::generated::NodeSnapshot {
+                program: self,
+                node: self.root
+            }
+        )
+    }
 }
 
 use winnow::binary::length_repeat;
@@ -46,29 +95,40 @@ use winnow::combinator::empty;
 use winnow::combinator::eof;
 use winnow::combinator::fail;
 use winnow::combinator::repeat;
-use winnow::combinator::repeat_till;
 use winnow::combinator::seq;
-use winnow::combinator::todo;
+use winnow::combinator::trace;
 use winnow::token::take_until;
 use winnow::Bytes;
 use winnow::ModalResult;
 use winnow::Parser;
 
-use crate::evaluator::parse;
 use crate::prism_ast::generated::parse_node;
 
 pub(super) type Stream<'i> = winnow::Stateful<winnow::Partial<&'i Bytes>, State>;
 
 #[derive(Debug)]
-struct Comment {}
+struct Comment {
+    r#type: u8,
+    location: Location,
+}
 
 #[derive(Debug)]
 struct MagicComment {}
 
-#[derive(Debug, Clone)]
+#[derive(Clone)]
 pub struct Location {
     start: u32,
     length: u32,
+}
+
+impl Debug for Location {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(
+            f,
+            "Location {{ start: {}, length: {} }}",
+            self.start, self.length,
+        )
+    }
 }
 
 #[derive(Debug)]
@@ -80,7 +140,10 @@ struct Error {
 }
 
 #[derive(Debug, Clone)]
-pub struct Integer {}
+pub struct Integer {
+    is_negative: bool,
+    words: Vec<u32>,
+}
 
 #[derive(Debug)]
 struct Warning {
@@ -90,11 +153,23 @@ struct Warning {
     level: u8,
 }
 
-#[derive(Debug, Clone)]
+#[derive(Clone, Copy)]
 pub struct NodeRef(u32);
 
-#[derive(Debug, Clone)]
+impl Debug for NodeRef {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "NodeRef({})", self.0)
+    }
+}
+
+#[derive(Clone)]
 pub struct ConstantRef(u32);
+
+impl Debug for ConstantRef {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "ConstantRef({})", self.0)
+    }
+}
 
 #[derive(Debug)]
 struct Header {
@@ -131,31 +206,46 @@ pub(super) fn parse_string_field(input: &mut Stream) -> ModalResult<String> {
 }
 
 // A variable-length unsigned integer with the value fitting in `uint32_t` using between 1 and 5 bytes, using the [LEB128](https://en.wikipedia.org/wiki/LEB128) encoding.
-pub(super) fn parse_varuint(input: &mut Stream) -> ModalResult<u32> {
-    let mut result: u32 = 0;
-    let mut shift: u32 = 0;
-    loop {
-        let byte = winnow::binary::u8.parse_next(input)?;
-        result |= ((byte & 0b0111_1111) as u32) << shift;
-        if byte < 0b1000_0000 {
-            break;
+pub(super) fn parse_varuint(i: &mut Stream) -> ModalResult<u32> {
+    trace("parse_varuint", move |input: &mut _| {
+        let mut result: u32 = 0;
+        let mut shift: u32 = 0;
+        loop {
+            let byte = winnow::binary::u8.parse_next(input)?;
+            result |= ((byte & 0b0111_1111) as u32) << shift;
+            if byte < 0b1000_0000 {
+                break;
+            }
+            shift += 7;
         }
-        shift += 7;
-    }
 
-    Ok(result)
+        Ok(result)
+    })
+    .parse_next(i)
 }
 
-#[derive(Debug, Clone)]
+#[derive(Clone)]
 pub enum Constant {
     Owned(u32, u32),
     Shared(u32, u32),
 }
 
+impl Debug for Constant {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Constant::Owned(offset, length) => {
+                write!(f, "Owned({}, {})", offset, length)
+            }
+            Constant::Shared(offset, length) => {
+                write!(f, "Shared({}, {})", offset, length)
+            }
+        }
+    }
+}
+
 #[derive(Debug, Clone, Default)]
 pub struct State {
     nodes: Vec<Node>,
-    constants: Vec<Constant>,
 }
 
 impl State {
@@ -189,7 +279,12 @@ pub(super) fn parse_optional_node(input: &mut Stream) -> ModalResult<Option<Node
 }
 
 pub(super) fn parse_integer(input: &mut Stream) -> ModalResult<Integer> {
-    todo.parse_next(input)
+    seq![Integer {
+        is_negative: parse_bool,
+        words: length_repeat(parse_varuint, parse_varuint),
+    }]
+    .context(winnow::error::StrContext::Label("integer"))
+    .parse_next(input)
 }
 
 pub(super) fn parse_constant(input: &mut Stream) -> ModalResult<ConstantRef> {
@@ -208,11 +303,23 @@ pub(super) fn parse_bool(input: &mut Stream) -> ModalResult<bool> {
     winnow::binary::u8.map(|value| value == 1).parse_next(input)
 }
 
-pub(super) fn parse_comment(input: &mut Stream) -> ModalResult<Comment> {
-    todo!()
+fn parse_comment(input: &mut Stream) -> ModalResult<Comment> {
+    seq![Comment {
+        r#type: u8,
+        location: parse_location,
+    }]
+    .parse_next(input)
+}
+
+fn parse_magic_comment(input: &mut Stream) -> ModalResult<MagicComment> {
+    seq![MagicComment {
+        _: parse_location,
+        _: parse_location,
+    }]
+    .parse_next(input)
 }
 pub(super) fn parse_double(input: &mut Stream) -> ModalResult<f64> {
-    todo!()
+    winnow::binary::f64(winnow::binary::Endianness::Native).parse_next(input)
 }
 
 // pub(super) fn parse_option<Input, Output, Error, ParseNext>(
@@ -239,7 +346,13 @@ fn parse_content(input: &mut Stream) -> ModalResult<Constant> {
         u32(winnow::binary::Endianness::Native),
         u32(winnow::binary::Endianness::Native),
     )
-        .map(|(offset, length)| Constant::Owned(offset, length))
+        .map(|(offset, length)| {
+            if offset & (1 << 31) == 0 {
+                Constant::Owned(offset, length)
+            } else {
+                Constant::Shared(offset & (1 >> 31), length)
+            }
+        })
         .parse_next(input)
 }
 
@@ -264,7 +377,7 @@ fn parse_header(input: &mut Stream) -> ModalResult<Header> {
         start_line: parse_varsint,
         newline_offsets: length_repeat(parse_varuint, parse_varuint),
         comments: length_repeat(parse_varuint, parse_comment),
-        magic_comments: length_repeat(parse_varuint, todo),
+        magic_comments: length_repeat(parse_varuint, parse_magic_comment),
         end_keyword: parse_optional_location,
         errors: length_repeat(parse_varuint, parse_error),
         warnings: length_repeat(parse_varuint, parse_error.map(|e| Warning {
@@ -315,9 +428,9 @@ pub(super) fn parse_location(input: &mut Stream) -> ModalResult<Location> {
 
 pub(super) fn parse_optional_location(input: &mut Stream) -> ModalResult<Option<Location>> {
     winnow::combinator::dispatch!( winnow::token::any;
-      0 => empty.value(None),
+      0u8 => empty.value(None),
       1 => parse_location.map(Some),
-      _ => fail,
+      x => fail.context(winnow::error::StrContext::Expected(winnow::error::StrContextValue::CharLiteral(x as char))),
     )
     .parse_next(input)
 }
@@ -401,17 +514,11 @@ fn test_parse_empty() {
                     content_pool_offset: 40,
                     content_pool_size: 0,
                 },
-                root: NodeRef(
-                    1,
-                ),
+                root: NodeRef(1),
                 nodes: [
                     Node {
-                        kind: 140,
                         identifier: 1,
-                        location: Location {
-                            start: 0,
-                            length: 0,
-                        },
+                        location: Location { start: 0, length: 0 },
                         flags: 0,
                         node_kind: StatementsNode(
                             StatementsNode {
@@ -420,19 +527,13 @@ fn test_parse_empty() {
                         ),
                     },
                     Node {
-                        kind: 121,
                         identifier: 2,
-                        location: Location {
-                            start: 0,
-                            length: 0,
-                        },
+                        location: Location { start: 0, length: 0 },
                         flags: 0,
                         node_kind: ProgramNode(
                             ProgramNode {
                                 locals: [],
-                                statements: NodeRef(
-                                    0,
-                                ),
+                                statements: NodeRef(0),
                             },
                         ),
                     },
@@ -488,240 +589,138 @@ gem "prism", "1.3.0"
                         Warning {
                             type: 318,
                             message: "possibly useless use of a literal in void context",
-                            location: Location {
-                                start: 24,
-                                length: 11,
-                            },
+                            location: Location { start: 24, length: 11 },
                             level: 1,
                         },
                     ],
                     content_pool_offset: 268,
                     content_pool_size: 3,
                 },
-                root: NodeRef(
-                    13,
-                ),
+                root: NodeRef(13),
                 nodes: [
                     Node {
-                        kind: 141,
                         identifier: 3,
-                        location: Location {
-                            start: 4,
-                            length: 5,
-                        },
+                        location: Location { start: 4, length: 5 },
                         flags: 0,
                         node_kind: StringNode(
                             StringNode {
                                 opening_loc: Some(
-                                    Location {
-                                        start: 4,
-                                        length: 1,
-                                    },
+                                    Location { start: 4, length: 1 },
                                 ),
-                                content_loc: Location {
-                                    start: 5,
-                                    length: 3,
-                                },
+                                content_loc: Location { start: 5, length: 3 },
                                 closing_loc: Some(
-                                    Location {
-                                        start: 8,
-                                        length: 1,
-                                    },
+                                    Location { start: 8, length: 1 },
                                 ),
                                 unescaped: "",
                             },
                         ),
                     },
                     Node {
-                        kind: 98,
                         identifier: 4,
-                        location: Location {
-                            start: 0,
-                            length: 9,
-                        },
+                        location: Location { start: 0, length: 9 },
                         flags: 1,
                         node_kind: LocalVariableWriteNode(
                             LocalVariableWriteNode {
-                                name: ConstantRef(
-                                    1,
-                                ),
+                                name: ConstantRef(1),
                                 depth: 0,
-                                name_loc: Location {
-                                    start: 0,
-                                    length: 1,
-                                },
-                                value: NodeRef(
-                                    0,
-                                ),
-                                operator_loc: Location {
-                                    start: 2,
-                                    length: 1,
-                                },
+                                name_loc: Location { start: 0, length: 1 },
+                                value: NodeRef(0),
+                                operator_loc: Location { start: 2, length: 1 },
                             },
                         ),
                     },
                     Node {
-                        kind: 141,
                         identifier: 6,
-                        location: Location {
-                            start: 14,
-                            length: 9,
-                        },
+                        location: Location { start: 14, length: 9 },
                         flags: 0,
                         node_kind: StringNode(
                             StringNode {
                                 opening_loc: Some(
-                                    Location {
-                                        start: 14,
-                                        length: 1,
-                                    },
+                                    Location { start: 14, length: 1 },
                                 ),
-                                content_loc: Location {
-                                    start: 15,
-                                    length: 7,
-                                },
+                                content_loc: Location { start: 15, length: 7 },
                                 closing_loc: Some(
-                                    Location {
-                                        start: 22,
-                                        length: 1,
-                                    },
+                                    Location { start: 22, length: 1 },
                                 ),
                                 unescaped: "\nbar\t",
                             },
                         ),
                     },
                     Node {
-                        kind: 98,
                         identifier: 7,
-                        location: Location {
-                            start: 10,
-                            length: 13,
-                        },
+                        location: Location { start: 10, length: 13 },
                         flags: 1,
                         node_kind: LocalVariableWriteNode(
                             LocalVariableWriteNode {
-                                name: ConstantRef(
-                                    1,
-                                ),
+                                name: ConstantRef(1),
                                 depth: 0,
-                                name_loc: Location {
-                                    start: 10,
-                                    length: 1,
-                                },
-                                value: NodeRef(
-                                    2,
-                                ),
-                                operator_loc: Location {
-                                    start: 12,
-                                    length: 1,
-                                },
+                                name_loc: Location { start: 10, length: 1 },
+                                value: NodeRef(2),
+                                operator_loc: Location { start: 12, length: 1 },
                             },
                         ),
                     },
                     Node {
-                        kind: 141,
                         identifier: 8,
-                        location: Location {
-                            start: 24,
-                            length: 11,
-                        },
+                        location: Location { start: 24, length: 11 },
                         flags: 5,
                         node_kind: StringNode(
                             StringNode {
                                 opening_loc: Some(
-                                    Location {
-                                        start: 24,
-                                        length: 1,
-                                    },
+                                    Location { start: 24, length: 1 },
                                 ),
-                                content_loc: Location {
-                                    start: 25,
-                                    length: 9,
-                                },
+                                content_loc: Location { start: 25, length: 9 },
                                 closing_loc: Some(
-                                    Location {
-                                        start: 34,
-                                        length: 1,
-                                    },
+                                    Location { start: 34, length: 1 },
                                 ),
                                 unescaped: "😀",
                             },
                         ),
                     },
                     Node {
-                        kind: 141,
                         identifier: 10,
-                        location: Location {
-                            start: 44,
-                            length: 22,
-                        },
+                        location: Location { start: 44, length: 22 },
                         flags: 0,
                         node_kind: StringNode(
                             StringNode {
                                 opening_loc: Some(
-                                    Location {
-                                        start: 44,
-                                        length: 1,
-                                    },
+                                    Location { start: 44, length: 1 },
                                 ),
-                                content_loc: Location {
-                                    start: 45,
-                                    length: 20,
-                                },
+                                content_loc: Location { start: 45, length: 20 },
                                 closing_loc: Some(
-                                    Location {
-                                        start: 65,
-                                        length: 1,
-                                    },
+                                    Location { start: 65, length: 1 },
                                 ),
                                 unescaped: "",
                             },
                         ),
                     },
                     Node {
-                        kind: 5,
                         identifier: 11,
-                        location: Location {
-                            start: 44,
-                            length: 22,
-                        },
+                        location: Location { start: 44, length: 22 },
                         flags: 0,
                         node_kind: ArgumentsNode(
                             ArgumentsNode {
                                 arguments: [
-                                    NodeRef(
-                                        5,
-                                    ),
+                                    NodeRef(5),
                                 ],
                             },
                         ),
                     },
                     Node {
-                        kind: 19,
                         identifier: 9,
-                        location: Location {
-                            start: 37,
-                            length: 29,
-                        },
+                        location: Location { start: 37, length: 29 },
                         flags: 33,
                         node_kind: CallNode(
                             CallNode {
                                 receiver: None,
                                 call_operator_loc: None,
-                                name: ConstantRef(
-                                    2,
-                                ),
+                                name: ConstantRef(2),
                                 message_loc: Some(
-                                    Location {
-                                        start: 37,
-                                        length: 6,
-                                    },
+                                    Location { start: 37, length: 6 },
                                 ),
                                 opening_loc: None,
                                 arguments: Some(
-                                    NodeRef(
-                                        6,
-                                    ),
+                                    NodeRef(6),
                                 ),
                                 closing_loc: None,
                                 block: None,
@@ -729,112 +728,67 @@ gem "prism", "1.3.0"
                         ),
                     },
                     Node {
-                        kind: 141,
                         identifier: 13,
-                        location: Location {
-                            start: 72,
-                            length: 7,
-                        },
+                        location: Location { start: 72, length: 7 },
                         flags: 0,
                         node_kind: StringNode(
                             StringNode {
                                 opening_loc: Some(
-                                    Location {
-                                        start: 72,
-                                        length: 1,
-                                    },
+                                    Location { start: 72, length: 1 },
                                 ),
-                                content_loc: Location {
-                                    start: 73,
-                                    length: 5,
-                                },
+                                content_loc: Location { start: 73, length: 5 },
                                 closing_loc: Some(
-                                    Location {
-                                        start: 78,
-                                        length: 1,
-                                    },
+                                    Location { start: 78, length: 1 },
                                 ),
                                 unescaped: "",
                             },
                         ),
                     },
                     Node {
-                        kind: 141,
                         identifier: 15,
-                        location: Location {
-                            start: 81,
-                            length: 7,
-                        },
+                        location: Location { start: 81, length: 7 },
                         flags: 0,
                         node_kind: StringNode(
                             StringNode {
                                 opening_loc: Some(
-                                    Location {
-                                        start: 81,
-                                        length: 1,
-                                    },
+                                    Location { start: 81, length: 1 },
                                 ),
-                                content_loc: Location {
-                                    start: 82,
-                                    length: 5,
-                                },
+                                content_loc: Location { start: 82, length: 5 },
                                 closing_loc: Some(
-                                    Location {
-                                        start: 87,
-                                        length: 1,
-                                    },
+                                    Location { start: 87, length: 1 },
                                 ),
                                 unescaped: "",
                             },
                         ),
                     },
                     Node {
-                        kind: 5,
                         identifier: 14,
-                        location: Location {
-                            start: 72,
-                            length: 16,
-                        },
+                        location: Location { start: 72, length: 16 },
                         flags: 0,
                         node_kind: ArgumentsNode(
                             ArgumentsNode {
                                 arguments: [
-                                    NodeRef(
-                                        8,
-                                    ),
-                                    NodeRef(
-                                        9,
-                                    ),
+                                    NodeRef(8),
+                                    NodeRef(9),
                                 ],
                             },
                         ),
                     },
                     Node {
-                        kind: 19,
                         identifier: 12,
-                        location: Location {
-                            start: 68,
-                            length: 20,
-                        },
+                        location: Location { start: 68, length: 20 },
                         flags: 33,
                         node_kind: CallNode(
                             CallNode {
                                 receiver: None,
                                 call_operator_loc: None,
-                                name: ConstantRef(
-                                    3,
-                                ),
+                                name: ConstantRef(3),
                                 message_loc: Some(
-                                    Location {
-                                        start: 68,
-                                        length: 3,
-                                    },
+                                    Location { start: 68, length: 3 },
                                 ),
                                 opening_loc: None,
                                 arguments: Some(
-                                    NodeRef(
-                                        10,
-                                    ),
+                                    NodeRef(10),
                                 ),
                                 closing_loc: None,
                                 block: None,
@@ -842,72 +796,1436 @@ gem "prism", "1.3.0"
                         ),
                     },
                     Node {
-                        kind: 140,
                         identifier: 1,
-                        location: Location {
-                            start: 0,
-                            length: 88,
-                        },
+                        location: Location { start: 0, length: 88 },
                         flags: 0,
                         node_kind: StatementsNode(
                             StatementsNode {
                                 body: [
-                                    NodeRef(
-                                        1,
-                                    ),
-                                    NodeRef(
-                                        3,
-                                    ),
-                                    NodeRef(
-                                        4,
-                                    ),
-                                    NodeRef(
-                                        7,
-                                    ),
-                                    NodeRef(
-                                        11,
-                                    ),
+                                    NodeRef(1),
+                                    NodeRef(3),
+                                    NodeRef(4),
+                                    NodeRef(7),
+                                    NodeRef(11),
                                 ],
                             },
                         ),
                     },
                     Node {
-                        kind: 121,
                         identifier: 16,
-                        location: Location {
-                            start: 0,
-                            length: 88,
-                        },
+                        location: Location { start: 0, length: 88 },
                         flags: 0,
                         node_kind: ProgramNode(
                             ProgramNode {
                                 locals: [
-                                    ConstantRef(
-                                        1,
-                                    ),
+                                    ConstantRef(1),
                                 ],
-                                statements: NodeRef(
-                                    12,
-                                ),
+                                statements: NodeRef(12),
                             },
                         ),
                     },
                 ],
                 constants: [
-                    Owned(
-                        0,
-                        1,
-                    ),
-                    Owned(
-                        37,
-                        6,
-                    ),
-                    Owned(
-                        68,
-                        3,
-                    ),
+                    Owned(0, 1),
+                    Owned(37, 6),
+                    Owned(68, 3),
                 ],
                 content_pool: [],
+            },
+        )
+    "#]]
+    .assert_debug_eq(&program);
+}
+
+#[test]
+fn test_parse_def() {
+    let program = Program::parse(
+        r#"def f(*); a[*]; end
+
+def f(*); a[1, *]; end
+
+def f(*); a[*] = 1; end
+
+def f(*); a[1, *] = 1; end
+
+def f(*); a[*] += 1; end
+
+def f(*); a[1, *] &&= 1; end
+
+def f(*); rescue => a[*]; end
+
+def f(*); rescue => a[1, *]; end
+"#
+        .to_string(),
+    );
+
+    expect_test::expect![[r#"
+        Ok(
+            Program {
+                source: "",
+                header: Header {
+                    prism_major: 1,
+                    prism_minor: 3,
+                    prism_patch: 0,
+                    only_semantics_serialized: false,
+                    encoding_name: "UTF-8",
+                    start_line: 1,
+                    newline_offsets: [
+                        0,
+                        20,
+                        21,
+                        44,
+                        45,
+                        69,
+                        70,
+                        97,
+                        98,
+                        123,
+                        124,
+                        153,
+                        154,
+                        184,
+                        185,
+                        218,
+                    ],
+                    comments: [],
+                    magic_comments: [],
+                    end_keyword: None,
+                    errors: [],
+                    warnings: [],
+                    content_pool_offset: 1009,
+                    content_pool_size: 5,
+                },
+                root: NodeRef(75),
+                nodes: [
+                    Node {
+                        identifier: 3,
+                        location: Location { start: 6, length: 1 },
+                        flags: 0,
+                        node_kind: RestParameterNode(
+                            RestParameterNode {
+                                name: None,
+                                name_loc: None,
+                                operator_loc: Location { start: 6, length: 1 },
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 2,
+                        location: Location { start: 6, length: 1 },
+                        flags: 0,
+                        node_kind: ParametersNode(
+                            ParametersNode {
+                                requireds: [],
+                                optionals: [],
+                                rest: Some(
+                                    NodeRef(0),
+                                ),
+                                posts: [],
+                                keywords: [],
+                                keyword_rest: None,
+                                block: None,
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 5,
+                        location: Location { start: 10, length: 1 },
+                        flags: 40,
+                        node_kind: CallNode(
+                            CallNode {
+                                receiver: None,
+                                call_operator_loc: None,
+                                name: ConstantRef(1),
+                                message_loc: Some(
+                                    Location { start: 10, length: 1 },
+                                ),
+                                opening_loc: None,
+                                arguments: None,
+                                closing_loc: None,
+                                block: None,
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 6,
+                        location: Location { start: 12, length: 1 },
+                        flags: 0,
+                        node_kind: SplatNode(
+                            SplatNode {
+                                operator_loc: Location { start: 12, length: 1 },
+                                expression: None,
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 7,
+                        location: Location { start: 12, length: 1 },
+                        flags: 32,
+                        node_kind: ArgumentsNode(
+                            ArgumentsNode {
+                                arguments: [
+                                    NodeRef(3),
+                                ],
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 8,
+                        location: Location { start: 10, length: 4 },
+                        flags: 257,
+                        node_kind: CallNode(
+                            CallNode {
+                                receiver: Some(
+                                    NodeRef(2),
+                                ),
+                                call_operator_loc: None,
+                                name: ConstantRef(2),
+                                message_loc: Some(
+                                    Location { start: 11, length: 3 },
+                                ),
+                                opening_loc: Some(
+                                    Location { start: 11, length: 1 },
+                                ),
+                                arguments: Some(
+                                    NodeRef(4),
+                                ),
+                                closing_loc: Some(
+                                    Location { start: 13, length: 1 },
+                                ),
+                                block: None,
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 4,
+                        location: Location { start: 10, length: 4 },
+                        flags: 0,
+                        node_kind: StatementsNode(
+                            StatementsNode {
+                                body: [
+                                    NodeRef(5),
+                                ],
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 9,
+                        location: Location { start: 0, length: 19 },
+                        flags: 1,
+                        node_kind: DefNode(
+                            DefNode {
+                                name: ConstantRef(3),
+                                name_loc: Location { start: 4, length: 1 },
+                                receiver: None,
+                                parameters: Some(
+                                    NodeRef(1),
+                                ),
+                                body: Some(
+                                    NodeRef(6),
+                                ),
+                                locals: [],
+                                def_keyword_loc: Location { start: 0, length: 3 },
+                                operator_loc: None,
+                                lparen_loc: Some(
+                                    Location { start: 5, length: 1 },
+                                ),
+                                rparen_loc: Some(
+                                    Location { start: 7, length: 1 },
+                                ),
+                                equal_loc: None,
+                                end_keyword_loc: Some(
+                                    Location { start: 16, length: 3 },
+                                ),
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 11,
+                        location: Location { start: 27, length: 1 },
+                        flags: 0,
+                        node_kind: RestParameterNode(
+                            RestParameterNode {
+                                name: None,
+                                name_loc: None,
+                                operator_loc: Location { start: 27, length: 1 },
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 10,
+                        location: Location { start: 27, length: 1 },
+                        flags: 0,
+                        node_kind: ParametersNode(
+                            ParametersNode {
+                                requireds: [],
+                                optionals: [],
+                                rest: Some(
+                                    NodeRef(8),
+                                ),
+                                posts: [],
+                                keywords: [],
+                                keyword_rest: None,
+                                block: None,
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 13,
+                        location: Location { start: 31, length: 1 },
+                        flags: 40,
+                        node_kind: CallNode(
+                            CallNode {
+                                receiver: None,
+                                call_operator_loc: None,
+                                name: ConstantRef(1),
+                                message_loc: Some(
+                                    Location { start: 31, length: 1 },
+                                ),
+                                opening_loc: None,
+                                arguments: None,
+                                closing_loc: None,
+                                block: None,
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 14,
+                        location: Location { start: 33, length: 1 },
+                        flags: 10,
+                        node_kind: IntegerNode(
+                            IntegerNode {
+                                value: Integer {
+                                    is_negative: false,
+                                    words: [
+                                        1,
+                                    ],
+                                },
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 16,
+                        location: Location { start: 36, length: 1 },
+                        flags: 0,
+                        node_kind: SplatNode(
+                            SplatNode {
+                                operator_loc: Location { start: 36, length: 1 },
+                                expression: None,
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 15,
+                        location: Location { start: 33, length: 4 },
+                        flags: 32,
+                        node_kind: ArgumentsNode(
+                            ArgumentsNode {
+                                arguments: [
+                                    NodeRef(11),
+                                    NodeRef(12),
+                                ],
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 17,
+                        location: Location { start: 31, length: 7 },
+                        flags: 257,
+                        node_kind: CallNode(
+                            CallNode {
+                                receiver: Some(
+                                    NodeRef(10),
+                                ),
+                                call_operator_loc: None,
+                                name: ConstantRef(2),
+                                message_loc: Some(
+                                    Location { start: 32, length: 6 },
+                                ),
+                                opening_loc: Some(
+                                    Location { start: 32, length: 1 },
+                                ),
+                                arguments: Some(
+                                    NodeRef(13),
+                                ),
+                                closing_loc: Some(
+                                    Location { start: 37, length: 1 },
+                                ),
+                                block: None,
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 12,
+                        location: Location { start: 31, length: 7 },
+                        flags: 0,
+                        node_kind: StatementsNode(
+                            StatementsNode {
+                                body: [
+                                    NodeRef(14),
+                                ],
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 18,
+                        location: Location { start: 21, length: 22 },
+                        flags: 1,
+                        node_kind: DefNode(
+                            DefNode {
+                                name: ConstantRef(3),
+                                name_loc: Location { start: 25, length: 1 },
+                                receiver: None,
+                                parameters: Some(
+                                    NodeRef(9),
+                                ),
+                                body: Some(
+                                    NodeRef(15),
+                                ),
+                                locals: [],
+                                def_keyword_loc: Location { start: 21, length: 3 },
+                                operator_loc: None,
+                                lparen_loc: Some(
+                                    Location { start: 26, length: 1 },
+                                ),
+                                rparen_loc: Some(
+                                    Location { start: 28, length: 1 },
+                                ),
+                                equal_loc: None,
+                                end_keyword_loc: Some(
+                                    Location { start: 40, length: 3 },
+                                ),
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 20,
+                        location: Location { start: 51, length: 1 },
+                        flags: 0,
+                        node_kind: RestParameterNode(
+                            RestParameterNode {
+                                name: None,
+                                name_loc: None,
+                                operator_loc: Location { start: 51, length: 1 },
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 19,
+                        location: Location { start: 51, length: 1 },
+                        flags: 0,
+                        node_kind: ParametersNode(
+                            ParametersNode {
+                                requireds: [],
+                                optionals: [],
+                                rest: Some(
+                                    NodeRef(17),
+                                ),
+                                posts: [],
+                                keywords: [],
+                                keyword_rest: None,
+                                block: None,
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 22,
+                        location: Location { start: 55, length: 1 },
+                        flags: 40,
+                        node_kind: CallNode(
+                            CallNode {
+                                receiver: None,
+                                call_operator_loc: None,
+                                name: ConstantRef(1),
+                                message_loc: Some(
+                                    Location { start: 55, length: 1 },
+                                ),
+                                opening_loc: None,
+                                arguments: None,
+                                closing_loc: None,
+                                block: None,
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 23,
+                        location: Location { start: 57, length: 1 },
+                        flags: 0,
+                        node_kind: SplatNode(
+                            SplatNode {
+                                operator_loc: Location { start: 57, length: 1 },
+                                expression: None,
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 26,
+                        location: Location { start: 62, length: 1 },
+                        flags: 10,
+                        node_kind: IntegerNode(
+                            IntegerNode {
+                                value: Integer {
+                                    is_negative: false,
+                                    words: [
+                                        1,
+                                    ],
+                                },
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 24,
+                        location: Location { start: 57, length: 6 },
+                        flags: 32,
+                        node_kind: ArgumentsNode(
+                            ArgumentsNode {
+                                arguments: [
+                                    NodeRef(20),
+                                    NodeRef(21),
+                                ],
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 25,
+                        location: Location { start: 55, length: 8 },
+                        flags: 273,
+                        node_kind: CallNode(
+                            CallNode {
+                                receiver: Some(
+                                    NodeRef(19),
+                                ),
+                                call_operator_loc: None,
+                                name: ConstantRef(4),
+                                message_loc: Some(
+                                    Location { start: 56, length: 3 },
+                                ),
+                                opening_loc: Some(
+                                    Location { start: 56, length: 1 },
+                                ),
+                                arguments: Some(
+                                    NodeRef(22),
+                                ),
+                                closing_loc: Some(
+                                    Location { start: 58, length: 1 },
+                                ),
+                                block: None,
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 21,
+                        location: Location { start: 55, length: 8 },
+                        flags: 0,
+                        node_kind: StatementsNode(
+                            StatementsNode {
+                                body: [
+                                    NodeRef(23),
+                                ],
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 27,
+                        location: Location { start: 45, length: 23 },
+                        flags: 1,
+                        node_kind: DefNode(
+                            DefNode {
+                                name: ConstantRef(3),
+                                name_loc: Location { start: 49, length: 1 },
+                                receiver: None,
+                                parameters: Some(
+                                    NodeRef(18),
+                                ),
+                                body: Some(
+                                    NodeRef(24),
+                                ),
+                                locals: [],
+                                def_keyword_loc: Location { start: 45, length: 3 },
+                                operator_loc: None,
+                                lparen_loc: Some(
+                                    Location { start: 50, length: 1 },
+                                ),
+                                rparen_loc: Some(
+                                    Location { start: 52, length: 1 },
+                                ),
+                                equal_loc: None,
+                                end_keyword_loc: Some(
+                                    Location { start: 65, length: 3 },
+                                ),
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 29,
+                        location: Location { start: 76, length: 1 },
+                        flags: 0,
+                        node_kind: RestParameterNode(
+                            RestParameterNode {
+                                name: None,
+                                name_loc: None,
+                                operator_loc: Location { start: 76, length: 1 },
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 28,
+                        location: Location { start: 76, length: 1 },
+                        flags: 0,
+                        node_kind: ParametersNode(
+                            ParametersNode {
+                                requireds: [],
+                                optionals: [],
+                                rest: Some(
+                                    NodeRef(26),
+                                ),
+                                posts: [],
+                                keywords: [],
+                                keyword_rest: None,
+                                block: None,
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 31,
+                        location: Location { start: 80, length: 1 },
+                        flags: 40,
+                        node_kind: CallNode(
+                            CallNode {
+                                receiver: None,
+                                call_operator_loc: None,
+                                name: ConstantRef(1),
+                                message_loc: Some(
+                                    Location { start: 80, length: 1 },
+                                ),
+                                opening_loc: None,
+                                arguments: None,
+                                closing_loc: None,
+                                block: None,
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 32,
+                        location: Location { start: 82, length: 1 },
+                        flags: 10,
+                        node_kind: IntegerNode(
+                            IntegerNode {
+                                value: Integer {
+                                    is_negative: false,
+                                    words: [
+                                        1,
+                                    ],
+                                },
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 34,
+                        location: Location { start: 85, length: 1 },
+                        flags: 0,
+                        node_kind: SplatNode(
+                            SplatNode {
+                                operator_loc: Location { start: 85, length: 1 },
+                                expression: None,
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 36,
+                        location: Location { start: 90, length: 1 },
+                        flags: 10,
+                        node_kind: IntegerNode(
+                            IntegerNode {
+                                value: Integer {
+                                    is_negative: false,
+                                    words: [
+                                        1,
+                                    ],
+                                },
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 33,
+                        location: Location { start: 82, length: 9 },
+                        flags: 32,
+                        node_kind: ArgumentsNode(
+                            ArgumentsNode {
+                                arguments: [
+                                    NodeRef(29),
+                                    NodeRef(30),
+                                    NodeRef(31),
+                                ],
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 35,
+                        location: Location { start: 80, length: 11 },
+                        flags: 273,
+                        node_kind: CallNode(
+                            CallNode {
+                                receiver: Some(
+                                    NodeRef(28),
+                                ),
+                                call_operator_loc: None,
+                                name: ConstantRef(4),
+                                message_loc: Some(
+                                    Location { start: 81, length: 6 },
+                                ),
+                                opening_loc: Some(
+                                    Location { start: 81, length: 1 },
+                                ),
+                                arguments: Some(
+                                    NodeRef(32),
+                                ),
+                                closing_loc: Some(
+                                    Location { start: 86, length: 1 },
+                                ),
+                                block: None,
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 30,
+                        location: Location { start: 80, length: 11 },
+                        flags: 0,
+                        node_kind: StatementsNode(
+                            StatementsNode {
+                                body: [
+                                    NodeRef(33),
+                                ],
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 37,
+                        location: Location { start: 70, length: 26 },
+                        flags: 1,
+                        node_kind: DefNode(
+                            DefNode {
+                                name: ConstantRef(3),
+                                name_loc: Location { start: 74, length: 1 },
+                                receiver: None,
+                                parameters: Some(
+                                    NodeRef(27),
+                                ),
+                                body: Some(
+                                    NodeRef(34),
+                                ),
+                                locals: [],
+                                def_keyword_loc: Location { start: 70, length: 3 },
+                                operator_loc: None,
+                                lparen_loc: Some(
+                                    Location { start: 75, length: 1 },
+                                ),
+                                rparen_loc: Some(
+                                    Location { start: 77, length: 1 },
+                                ),
+                                equal_loc: None,
+                                end_keyword_loc: Some(
+                                    Location { start: 93, length: 3 },
+                                ),
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 39,
+                        location: Location { start: 104, length: 1 },
+                        flags: 0,
+                        node_kind: RestParameterNode(
+                            RestParameterNode {
+                                name: None,
+                                name_loc: None,
+                                operator_loc: Location { start: 104, length: 1 },
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 38,
+                        location: Location { start: 104, length: 1 },
+                        flags: 0,
+                        node_kind: ParametersNode(
+                            ParametersNode {
+                                requireds: [],
+                                optionals: [],
+                                rest: Some(
+                                    NodeRef(36),
+                                ),
+                                posts: [],
+                                keywords: [],
+                                keyword_rest: None,
+                                block: None,
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 41,
+                        location: Location { start: 108, length: 1 },
+                        flags: 40,
+                        node_kind: CallNode(
+                            CallNode {
+                                receiver: None,
+                                call_operator_loc: None,
+                                name: ConstantRef(1),
+                                message_loc: Some(
+                                    Location { start: 108, length: 1 },
+                                ),
+                                opening_loc: None,
+                                arguments: None,
+                                closing_loc: None,
+                                block: None,
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 42,
+                        location: Location { start: 110, length: 1 },
+                        flags: 0,
+                        node_kind: SplatNode(
+                            SplatNode {
+                                operator_loc: Location { start: 110, length: 1 },
+                                expression: None,
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 43,
+                        location: Location { start: 110, length: 1 },
+                        flags: 32,
+                        node_kind: ArgumentsNode(
+                            ArgumentsNode {
+                                arguments: [
+                                    NodeRef(39),
+                                ],
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 45,
+                        location: Location { start: 116, length: 1 },
+                        flags: 10,
+                        node_kind: IntegerNode(
+                            IntegerNode {
+                                value: Integer {
+                                    is_negative: false,
+                                    words: [
+                                        1,
+                                    ],
+                                },
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 46,
+                        location: Location { start: 108, length: 9 },
+                        flags: 257,
+                        node_kind: IndexOperatorWriteNode(
+                            IndexOperatorWriteNode {
+                                receiver: Some(
+                                    NodeRef(38),
+                                ),
+                                call_operator_loc: None,
+                                opening_loc: Location { start: 109, length: 1 },
+                                arguments: Some(
+                                    NodeRef(40),
+                                ),
+                                closing_loc: Location { start: 111, length: 1 },
+                                block: None,
+                                binary_operator: ConstantRef(5),
+                                binary_operator_loc: Location { start: 113, length: 2 },
+                                value: NodeRef(41),
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 40,
+                        location: Location { start: 108, length: 9 },
+                        flags: 0,
+                        node_kind: StatementsNode(
+                            StatementsNode {
+                                body: [
+                                    NodeRef(42),
+                                ],
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 47,
+                        location: Location { start: 98, length: 24 },
+                        flags: 1,
+                        node_kind: DefNode(
+                            DefNode {
+                                name: ConstantRef(3),
+                                name_loc: Location { start: 102, length: 1 },
+                                receiver: None,
+                                parameters: Some(
+                                    NodeRef(37),
+                                ),
+                                body: Some(
+                                    NodeRef(43),
+                                ),
+                                locals: [],
+                                def_keyword_loc: Location { start: 98, length: 3 },
+                                operator_loc: None,
+                                lparen_loc: Some(
+                                    Location { start: 103, length: 1 },
+                                ),
+                                rparen_loc: Some(
+                                    Location { start: 105, length: 1 },
+                                ),
+                                equal_loc: None,
+                                end_keyword_loc: Some(
+                                    Location { start: 119, length: 3 },
+                                ),
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 49,
+                        location: Location { start: 130, length: 1 },
+                        flags: 0,
+                        node_kind: RestParameterNode(
+                            RestParameterNode {
+                                name: None,
+                                name_loc: None,
+                                operator_loc: Location { start: 130, length: 1 },
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 48,
+                        location: Location { start: 130, length: 1 },
+                        flags: 0,
+                        node_kind: ParametersNode(
+                            ParametersNode {
+                                requireds: [],
+                                optionals: [],
+                                rest: Some(
+                                    NodeRef(45),
+                                ),
+                                posts: [],
+                                keywords: [],
+                                keyword_rest: None,
+                                block: None,
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 51,
+                        location: Location { start: 134, length: 1 },
+                        flags: 40,
+                        node_kind: CallNode(
+                            CallNode {
+                                receiver: None,
+                                call_operator_loc: None,
+                                name: ConstantRef(1),
+                                message_loc: Some(
+                                    Location { start: 134, length: 1 },
+                                ),
+                                opening_loc: None,
+                                arguments: None,
+                                closing_loc: None,
+                                block: None,
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 52,
+                        location: Location { start: 136, length: 1 },
+                        flags: 10,
+                        node_kind: IntegerNode(
+                            IntegerNode {
+                                value: Integer {
+                                    is_negative: false,
+                                    words: [
+                                        1,
+                                    ],
+                                },
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 54,
+                        location: Location { start: 139, length: 1 },
+                        flags: 0,
+                        node_kind: SplatNode(
+                            SplatNode {
+                                operator_loc: Location { start: 139, length: 1 },
+                                expression: None,
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 53,
+                        location: Location { start: 136, length: 4 },
+                        flags: 32,
+                        node_kind: ArgumentsNode(
+                            ArgumentsNode {
+                                arguments: [
+                                    NodeRef(48),
+                                    NodeRef(49),
+                                ],
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 56,
+                        location: Location { start: 146, length: 1 },
+                        flags: 10,
+                        node_kind: IntegerNode(
+                            IntegerNode {
+                                value: Integer {
+                                    is_negative: false,
+                                    words: [
+                                        1,
+                                    ],
+                                },
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 57,
+                        location: Location { start: 134, length: 13 },
+                        flags: 257,
+                        node_kind: IndexAndWriteNode(
+                            IndexAndWriteNode {
+                                receiver: Some(
+                                    NodeRef(47),
+                                ),
+                                call_operator_loc: None,
+                                opening_loc: Location { start: 135, length: 1 },
+                                arguments: Some(
+                                    NodeRef(50),
+                                ),
+                                closing_loc: Location { start: 140, length: 1 },
+                                block: None,
+                                operator_loc: Location { start: 142, length: 3 },
+                                value: NodeRef(51),
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 50,
+                        location: Location { start: 134, length: 13 },
+                        flags: 0,
+                        node_kind: StatementsNode(
+                            StatementsNode {
+                                body: [
+                                    NodeRef(52),
+                                ],
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 58,
+                        location: Location { start: 124, length: 28 },
+                        flags: 1,
+                        node_kind: DefNode(
+                            DefNode {
+                                name: ConstantRef(3),
+                                name_loc: Location { start: 128, length: 1 },
+                                receiver: None,
+                                parameters: Some(
+                                    NodeRef(46),
+                                ),
+                                body: Some(
+                                    NodeRef(53),
+                                ),
+                                locals: [],
+                                def_keyword_loc: Location { start: 124, length: 3 },
+                                operator_loc: None,
+                                lparen_loc: Some(
+                                    Location { start: 129, length: 1 },
+                                ),
+                                rparen_loc: Some(
+                                    Location { start: 131, length: 1 },
+                                ),
+                                equal_loc: None,
+                                end_keyword_loc: Some(
+                                    Location { start: 149, length: 3 },
+                                ),
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 60,
+                        location: Location { start: 160, length: 1 },
+                        flags: 0,
+                        node_kind: RestParameterNode(
+                            RestParameterNode {
+                                name: None,
+                                name_loc: None,
+                                operator_loc: Location { start: 160, length: 1 },
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 59,
+                        location: Location { start: 160, length: 1 },
+                        flags: 0,
+                        node_kind: ParametersNode(
+                            ParametersNode {
+                                requireds: [],
+                                optionals: [],
+                                rest: Some(
+                                    NodeRef(55),
+                                ),
+                                posts: [],
+                                keywords: [],
+                                keyword_rest: None,
+                                block: None,
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 63,
+                        location: Location { start: 174, length: 1 },
+                        flags: 40,
+                        node_kind: CallNode(
+                            CallNode {
+                                receiver: None,
+                                call_operator_loc: None,
+                                name: ConstantRef(1),
+                                message_loc: Some(
+                                    Location { start: 174, length: 1 },
+                                ),
+                                opening_loc: None,
+                                arguments: None,
+                                closing_loc: None,
+                                block: None,
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 64,
+                        location: Location { start: 176, length: 1 },
+                        flags: 0,
+                        node_kind: SplatNode(
+                            SplatNode {
+                                operator_loc: Location { start: 176, length: 1 },
+                                expression: None,
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 65,
+                        location: Location { start: 176, length: 1 },
+                        flags: 32,
+                        node_kind: ArgumentsNode(
+                            ArgumentsNode {
+                                arguments: [
+                                    NodeRef(58),
+                                ],
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 67,
+                        location: Location { start: 174, length: 4 },
+                        flags: 272,
+                        node_kind: IndexTargetNode(
+                            IndexTargetNode {
+                                receiver: NodeRef(57),
+                                opening_loc: Location { start: 175, length: 1 },
+                                arguments: Some(
+                                    NodeRef(59),
+                                ),
+                                closing_loc: Location { start: 177, length: 1 },
+                                block: None,
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 62,
+                        location: Location { start: 164, length: 14 },
+                        flags: 0,
+                        node_kind: RescueNode(
+                            RescueNode {
+                                keyword_loc: Location { start: 164, length: 6 },
+                                exceptions: [],
+                                operator_loc: Some(
+                                    Location { start: 171, length: 2 },
+                                ),
+                                reference: Some(
+                                    NodeRef(60),
+                                ),
+                                then_keyword_loc: None,
+                                statements: None,
+                                subsequent: None,
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 61,
+                        location: Location { start: 154, length: 29 },
+                        flags: 0,
+                        node_kind: BeginNode(
+                            BeginNode {
+                                begin_keyword_loc: None,
+                                statements: None,
+                                rescue_clause: Some(
+                                    NodeRef(61),
+                                ),
+                                else_clause: None,
+                                ensure_clause: None,
+                                end_keyword_loc: Some(
+                                    Location { start: 180, length: 3 },
+                                ),
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 68,
+                        location: Location { start: 154, length: 29 },
+                        flags: 1,
+                        node_kind: DefNode(
+                            DefNode {
+                                name: ConstantRef(3),
+                                name_loc: Location { start: 158, length: 1 },
+                                receiver: None,
+                                parameters: Some(
+                                    NodeRef(56),
+                                ),
+                                body: Some(
+                                    NodeRef(62),
+                                ),
+                                locals: [],
+                                def_keyword_loc: Location { start: 154, length: 3 },
+                                operator_loc: None,
+                                lparen_loc: Some(
+                                    Location { start: 159, length: 1 },
+                                ),
+                                rparen_loc: Some(
+                                    Location { start: 161, length: 1 },
+                                ),
+                                equal_loc: None,
+                                end_keyword_loc: Some(
+                                    Location { start: 180, length: 3 },
+                                ),
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 70,
+                        location: Location { start: 191, length: 1 },
+                        flags: 0,
+                        node_kind: RestParameterNode(
+                            RestParameterNode {
+                                name: None,
+                                name_loc: None,
+                                operator_loc: Location { start: 191, length: 1 },
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 69,
+                        location: Location { start: 191, length: 1 },
+                        flags: 0,
+                        node_kind: ParametersNode(
+                            ParametersNode {
+                                requireds: [],
+                                optionals: [],
+                                rest: Some(
+                                    NodeRef(64),
+                                ),
+                                posts: [],
+                                keywords: [],
+                                keyword_rest: None,
+                                block: None,
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 73,
+                        location: Location { start: 205, length: 1 },
+                        flags: 40,
+                        node_kind: CallNode(
+                            CallNode {
+                                receiver: None,
+                                call_operator_loc: None,
+                                name: ConstantRef(1),
+                                message_loc: Some(
+                                    Location { start: 205, length: 1 },
+                                ),
+                                opening_loc: None,
+                                arguments: None,
+                                closing_loc: None,
+                                block: None,
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 74,
+                        location: Location { start: 207, length: 1 },
+                        flags: 10,
+                        node_kind: IntegerNode(
+                            IntegerNode {
+                                value: Integer {
+                                    is_negative: false,
+                                    words: [
+                                        1,
+                                    ],
+                                },
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 76,
+                        location: Location { start: 210, length: 1 },
+                        flags: 0,
+                        node_kind: SplatNode(
+                            SplatNode {
+                                operator_loc: Location { start: 210, length: 1 },
+                                expression: None,
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 75,
+                        location: Location { start: 207, length: 4 },
+                        flags: 32,
+                        node_kind: ArgumentsNode(
+                            ArgumentsNode {
+                                arguments: [
+                                    NodeRef(67),
+                                    NodeRef(68),
+                                ],
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 78,
+                        location: Location { start: 205, length: 7 },
+                        flags: 272,
+                        node_kind: IndexTargetNode(
+                            IndexTargetNode {
+                                receiver: NodeRef(66),
+                                opening_loc: Location { start: 206, length: 1 },
+                                arguments: Some(
+                                    NodeRef(69),
+                                ),
+                                closing_loc: Location { start: 211, length: 1 },
+                                block: None,
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 72,
+                        location: Location { start: 195, length: 17 },
+                        flags: 0,
+                        node_kind: RescueNode(
+                            RescueNode {
+                                keyword_loc: Location { start: 195, length: 6 },
+                                exceptions: [],
+                                operator_loc: Some(
+                                    Location { start: 202, length: 2 },
+                                ),
+                                reference: Some(
+                                    NodeRef(70),
+                                ),
+                                then_keyword_loc: None,
+                                statements: None,
+                                subsequent: None,
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 71,
+                        location: Location { start: 185, length: 32 },
+                        flags: 0,
+                        node_kind: BeginNode(
+                            BeginNode {
+                                begin_keyword_loc: None,
+                                statements: None,
+                                rescue_clause: Some(
+                                    NodeRef(71),
+                                ),
+                                else_clause: None,
+                                ensure_clause: None,
+                                end_keyword_loc: Some(
+                                    Location { start: 214, length: 3 },
+                                ),
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 79,
+                        location: Location { start: 185, length: 32 },
+                        flags: 1,
+                        node_kind: DefNode(
+                            DefNode {
+                                name: ConstantRef(3),
+                                name_loc: Location { start: 189, length: 1 },
+                                receiver: None,
+                                parameters: Some(
+                                    NodeRef(65),
+                                ),
+                                body: Some(
+                                    NodeRef(72),
+                                ),
+                                locals: [],
+                                def_keyword_loc: Location { start: 185, length: 3 },
+                                operator_loc: None,
+                                lparen_loc: Some(
+                                    Location { start: 190, length: 1 },
+                                ),
+                                rparen_loc: Some(
+                                    Location { start: 192, length: 1 },
+                                ),
+                                equal_loc: None,
+                                end_keyword_loc: Some(
+                                    Location { start: 214, length: 3 },
+                                ),
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 1,
+                        location: Location { start: 0, length: 217 },
+                        flags: 0,
+                        node_kind: StatementsNode(
+                            StatementsNode {
+                                body: [
+                                    NodeRef(7),
+                                    NodeRef(16),
+                                    NodeRef(25),
+                                    NodeRef(35),
+                                    NodeRef(44),
+                                    NodeRef(54),
+                                    NodeRef(63),
+                                    NodeRef(73),
+                                ],
+                            },
+                        ),
+                    },
+                    Node {
+                        identifier: 80,
+                        location: Location { start: 0, length: 217 },
+                        flags: 0,
+                        node_kind: ProgramNode(
+                            ProgramNode {
+                                locals: [],
+                                statements: NodeRef(74),
+                            },
+                        ),
+                    },
+                ],
+                constants: [
+                    Owned(10, 1),
+                    Shared(0, 2),
+                    Owned(4, 1),
+                    Shared(0, 3),
+                    Owned(113, 1),
+                ],
+                content_pool: [
+                    91,
+                    93,
+                    61,
+                    91,
+                    93,
+                ],
             },
         )
     "#]]

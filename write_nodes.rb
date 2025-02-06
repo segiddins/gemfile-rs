@@ -4,7 +4,11 @@ require "yaml"
 
 config = YAML.load_file("/Users/segiddins/Development/github.com/ruby/prism/config.yml")
 
-Node = Struct.new(:name, :fields)
+Node = Struct.new(:name, :fields) do
+  def fields?
+    fields&.any?
+  end
+end
 
 Optional = Struct.new(:type)
 Repeated = Struct.new(:type)
@@ -83,6 +87,8 @@ def parse_method(type)
   end
 end
 
+f.puts "use std::fmt::Write;"
+f.puts
 f.puts "use super::deserialize::*;"
 f.puts
 
@@ -122,9 +128,25 @@ config["nodes"].each_with_index do |node, index|
       f.puts "  pub fn iter_#{field.name}(&self, pool: ()) -> impl Iterator<Item = ConstantRef> { pool.get(self.#{field.name}).iter().map(|&id| pool.get(id)) }"
     end
   end
-  f.puts "}"
+  f.puts "pub fn into_node_kind(self) -> NodeKind { NodeKind::#{name}(self) }"
 
+  if !node.fields&.any?
+    f.puts "pub fn new() -> Self { Self(()) }"
+  else
+  f.puts "pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {"
+    f.puts "    use winnow::binary::length_repeat;"
+    f.puts "    use winnow::Parser;"
+    f.puts "    winnow::combinator::seq![#{name}{"
+    node["fields"]&.each do |field|
+      f.puts "        #{field["name"]}: #{parse_method(field["type"])}.context(winnow::error::StrContext::Label(\"#{name}.#{field['name']}\")),"
+    end
+    f.puts "    }].parse_next(input)"
+    f.puts "}"
+  end
   f.puts
+  f.puts "}"
+  f.puts
+
 end
 
 f.puts <<~RS
@@ -140,53 +162,226 @@ end
 f.puts <<~RS
 }
 
+impl NodeKind {
+    pub fn name(&self) -> &str {
+        match self {
+RS
+config["nodes"].each_with_index do |node, index|
+  name = node["name"]
+  f.puts "            NodeKind::#{name}(_) => \"#{name}\","
+end
+
+f.puts <<~RS
+        }
+    }
+}
+
 
 pub fn parse_node(
     input: &mut super::deserialize::Stream,
 ) -> winnow::ModalResult<NodeRef> {
-    use winnow::binary::{length_repeat};
     use winnow::Parser;
 
-    let (kind, identifier, location, flags) = winnow::Parser::parse_next(
+    let (kind, identifier, location) = winnow::Parser::parse_next(
         &mut winnow::combinator::seq![(
             winnow::binary::u8,
             parse_varuint,
             parse_location,
-            parse_varuint,
         )],
         input,
     )?;
 
+    if kind == 45 {
+      winnow::binary::u32(winnow::binary::Endianness::Native).parse_next(input)?;
+    }
+
+    let flags = parse_varuint.parse_next(input)?;
+
     let node_kind = match kind {
 RS
 
-config["nodes"].each_with_index do |node, index|
+  config["nodes"].each_with_index do |node, index|
   name = node["name"]
-  f.puts "    #{index+1} => NodeKind::#{name}("
-  f.puts "      #{name} {"
-  node["fields"]&.each do |field|
-    f.puts "        #{field["name"]}: #{parse_method(field["type"])}.context(winnow::error::StrContext::Label(\"#{name}.#{field['name']}\")).parse_next(input)?,"
+  if node["fields"]&.any?
+    f.puts "    #{index+1} => #{name}::parser.map(#{name}::into_node_kind).parse_next(input),"
+  else
+    f.puts "    #{index+1} => winnow::combinator::empty.value(#{name}::new().into_node_kind()).parse_next(input),"
   end
-  if !node["fields"]&.any?
-    f.puts "        0: (),"
-  end
-  f.puts "      }"
-  f.puts "    ),"
+  # f.puts "    #{index+1} => #{name} {"
+  # node["fields"]&.each do |field|
+  #   f.puts "        #{field["name"]}: #{parse_method(field["type"])}.context(winnow::error::StrContext::Label(\"#{name}.#{field['name']}\")).parse_next(input)?,"
+  # end
+  # if !node["fields"]&.any?
+  #   f.puts "        0: (),"
+  # end
+  # f.puts "      }"
+  # f.puts "    .into_node_kind(),"
 end
 
 f.puts <<~RS
-      _ => todo!("Unknown node kind: {}", kind),
-    };
+      _ => winnow::combinator::fail
+            .complete_err()
+            //.context(StrContext::Expected(StrContextValue::CharLiteral(
+            //    kind as char,
+            //)))
+            .parse_next(input),
+    }?;
     Ok(input.state.add_node(Node {
-        kind,
+        // kind,
         identifier,
         location,
         flags,
         node_kind,
     }))
 }
+
+pub(super) struct NodeSnapshot<'a> {
+    pub program: &'a Program,
+    pub node: NodeRef,
+}
+
+impl std::fmt::Debug for NodeSnapshot<'_> {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let node = self.program.node(&self.node);
+        writeln!(
+            f,
+            "@ {} (location: {:?})",
+            node.node_kind.name(),
+            LocationSnapshot {
+                program: self.program,
+                location: &node.location
+            }
+        )?;
+        if node.flags == 0 {
+          writeln!(f, "├── flags: ∅")?;
+        } else {
+          writeln!(f, "├── flags: {:?}", node.flags)?;
+        }
+
+        match &node.node_kind {
+RS
+
+def snapshot_field(f, field, prefix)
+  f.puts "            write!(f, \"#{prefix} #{field['name']}:\")?;"
+
+  case field["type"]
+  when "constant"
+    f.puts "writeln!(f);"
+  when "node"
+    f.puts "writeln!(f);"
+    f.puts "let mut pad = PadWriter::new(f, \"    \", true);"
+    f.puts "writeln!(&mut pad, \"{:?}\", NodeSnapshot { program: self.program, node: node.#{field['name']} })?;"
+    f.puts "drop(pad);"
+  when "node[]"
+    f.puts "writeln!(f, \" (length: {})\", node.#{field['name']}.len());"
+    f.puts "let mut pad = PadWriter::new(f, \"|   \", true);"
+    f.puts <<~RS
+            for node in &node.#{field['name']} {
+                writeln!(&mut pad, "├── {:?}", NodeSnapshot { program: self.program, node: *node })?;
+            }
+    RS
+    f.puts "drop(pad);"
+  when "location"
+    f.puts "writeln!(f, \"{:?}\", LocationSnapshot { program: self.program, location: &node.#{field['name']} })?;"
+  when "location?"
+    f.puts <<~RS
+    match &node.#{field['name']} {
+      Some(loc) => writeln!(f, " {:?}", LocationSnapshot { program: self.program, location: loc }),
+      None => writeln!(f, " ∅"),
+    }?;
+    RS
+  when "string"
+    f.puts "writeln!(f, \" {:?}\", node.#{field['name']})?;"
+  else
+    f.puts "writeln!(f);"
+    # raise "Implement #{field['type']}"
+  end
+end
+
+config["nodes"].each do |node|
+  f.puts "        NodeKind::#{node["name"]}(node) => {"
+
+  node["fields"]&.[](..-2)&.each do |field|
+    snapshot_field(f, field, "├──")
+  end
+  if field = node["fields"]&.last
+    snapshot_field(f, field, "└──")
+  end
+  f.puts "        },"
+end
+
+f.puts <<~RS
+        };
+
+        Ok(())
+    }
+}
+
+#[derive(derive_new::new)]
+struct PadWriter<'a, T: std::fmt::Write> {
+    writer: &'a mut T,
+    pad: &'static str,
+    at_newline: bool,
+}
+
+impl<T: std::fmt::Write> std::fmt::Write for PadWriter<'_, T>
+{
+    fn write_str(&mut self, s: &str) -> std::fmt::Result {
+      let mut buf = s;
+              loop {
+        let l = buf.find('\\n');
+        if self.at_newline {
+          self.writer.write_str(self.pad)?;
+          self.at_newline = false;
+        }
+        match l {
+          None => {
+            self.writer.write_str(buf)?;
+            break;
+          }
+          Some(l) => {
+            self.writer.write_str(&buf[..l])?;
+            self.writer.write_str("\\n")?;
+            buf = &buf[l+1..];
+            self.at_newline = true;
+            if buf.is_empty() {
+              break;
+            }
+          }
+        };
+      }
+      Ok(())
+    }
+}
 RS
 
 puts "Types:\n  #{types.sort.join("\n  ")}"
 puts "Types with kinds:\n  #{types_with_kinds.sort.join("\n  ")}"
 puts "Kinds:\n  #{kinds.map(&:to_s).sort.join("\n  ")}"
+
+f.close
+
+require "fileutils"
+
+f = File.open("tests/fixture_tests.rs", "w")
+f.puts "use gemfile_rs::prism_ast::deserialize::Program;"
+base = "/Users/segiddins/Development/github.com/ruby/prism/test/prism/fixtures"
+Dir["{**/,}*.txt", base:].sort.uniq.each do |path|
+    f.puts
+    # f.puts "#[test]"
+    f.puts "fn test_ast_#{path.gsub(/[\/.]/, "_")}() {"
+    f.puts "  let program = Program::parse(include_str!(\"#{File.join(base, path)}\").to_string()).unwrap();"
+    f.puts "  similar_asserts::assert_eq!(include_str!(\"#{File.join(File.dirname(base), "snapshots", path)}\").trim(), program.snapshot());"
+    f.puts "}"
+    f.puts "#[test]"
+    f.puts "fn test_program_#{path.gsub(/[\/.]/, "_")}() {"
+    f.puts "  let program = Program::parse(include_str!(\"#{File.join(base, path)}\").to_string()).unwrap();"
+    f.puts "  expect_test::expect_file![\"#{File.expand_path("tests/snapshots/#{path}")}\"].assert_debug_eq(&program);"
+    f.puts "}"
+
+    FileUtils.mkdir_p "tests/snapshots/#{File.dirname(path)}"
+end
+
+f.close
+
+`rustfmt src/prism_ast/generated.rs`

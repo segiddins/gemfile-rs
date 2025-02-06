@@ -1,0 +1,199 @@
+Program {
+    source: "",
+    header: Header {
+        prism_major: 1,
+        prism_minor: 3,
+        prism_patch: 0,
+        only_semantics_serialized: false,
+        encoding_name: "UTF-8",
+        start_line: 1,
+        newline_offsets: [
+            0,
+            19,
+        ],
+        comments: [],
+        magic_comments: [],
+        end_keyword: None,
+        errors: [],
+        warnings: [],
+        content_pool_offset: 131,
+        content_pool_size: 4,
+    },
+    root: NodeRef(10),
+    nodes: [
+        Node {
+            identifier: 4,
+            location: Location { start: 5, length: 1 },
+            flags: 0,
+            node_kind: RequiredParameterNode(
+                RequiredParameterNode {
+                    name: ConstantRef(2),
+                },
+            ),
+        },
+        Node {
+            identifier: 6,
+            location: Location { start: 10, length: 1 },
+            flags: 0,
+            node_kind: RequiredParameterNode(
+                RequiredParameterNode {
+                    name: ConstantRef(3),
+                },
+            ),
+        },
+        Node {
+            identifier: 7,
+            location: Location { start: 9, length: 2 },
+            flags: 0,
+            node_kind: SplatNode(
+                SplatNode {
+                    operator_loc: Location { start: 9, length: 1 },
+                    expression: Some(
+                        NodeRef(1),
+                    ),
+                },
+            ),
+        },
+        Node {
+            identifier: 8,
+            location: Location { start: 13, length: 1 },
+            flags: 0,
+            node_kind: RequiredParameterNode(
+                RequiredParameterNode {
+                    name: ConstantRef(4),
+                },
+            ),
+        },
+        Node {
+            identifier: 5,
+            location: Location { start: 8, length: 7 },
+            flags: 0,
+            node_kind: MultiTargetNode(
+                MultiTargetNode {
+                    lefts: [],
+                    rest: Some(
+                        NodeRef(2),
+                    ),
+                    rights: [
+                        NodeRef(3),
+                    ],
+                    lparen_loc: Some(
+                        Location { start: 8, length: 1 },
+                    ),
+                    rparen_loc: Some(
+                        Location { start: 14, length: 1 },
+                    ),
+                },
+            ),
+        },
+        Node {
+            identifier: 3,
+            location: Location { start: 5, length: 10 },
+            flags: 0,
+            node_kind: ParametersNode(
+                ParametersNode {
+                    requireds: [
+                        NodeRef(0),
+                        NodeRef(4),
+                    ],
+                    optionals: [],
+                    rest: None,
+                    posts: [],
+                    keywords: [],
+                    keyword_rest: None,
+                    block: None,
+                },
+            ),
+        },
+        Node {
+            identifier: 9,
+            location: Location { start: 4, length: 12 },
+            flags: 0,
+            node_kind: BlockParametersNode(
+                BlockParametersNode {
+                    parameters: Some(
+                        NodeRef(5),
+                    ),
+                    locals: [],
+                    opening_loc: Some(
+                        Location { start: 4, length: 1 },
+                    ),
+                    closing_loc: Some(
+                        Location { start: 15, length: 1 },
+                    ),
+                },
+            ),
+        },
+        Node {
+            identifier: 10,
+            location: Location { start: 2, length: 16 },
+            flags: 0,
+            node_kind: BlockNode(
+                BlockNode {
+                    locals: [
+                        ConstantRef(2),
+                        ConstantRef(3),
+                        ConstantRef(4),
+                    ],
+                    parameters: Some(
+                        NodeRef(6),
+                    ),
+                    body: None,
+                    opening_loc: Location { start: 2, length: 1 },
+                    closing_loc: Location { start: 17, length: 1 },
+                },
+            ),
+        },
+        Node {
+            identifier: 2,
+            location: Location { start: 0, length: 18 },
+            flags: 33,
+            node_kind: CallNode(
+                CallNode {
+                    receiver: None,
+                    call_operator_loc: None,
+                    name: ConstantRef(1),
+                    message_loc: Some(
+                        Location { start: 0, length: 1 },
+                    ),
+                    opening_loc: None,
+                    arguments: None,
+                    closing_loc: None,
+                    block: Some(
+                        NodeRef(7),
+                    ),
+                },
+            ),
+        },
+        Node {
+            identifier: 1,
+            location: Location { start: 0, length: 18 },
+            flags: 0,
+            node_kind: StatementsNode(
+                StatementsNode {
+                    body: [
+                        NodeRef(8),
+                    ],
+                },
+            ),
+        },
+        Node {
+            identifier: 11,
+            location: Location { start: 0, length: 18 },
+            flags: 0,
+            node_kind: ProgramNode(
+                ProgramNode {
+                    locals: [],
+                    statements: NodeRef(9),
+                },
+            ),
+        },
+    ],
+    constants: [
+        Owned(0, 1),
+        Owned(5, 1),
+        Owned(10, 1),
+        Owned(13, 1),
+    ],
+    content_pool: [],
+}

@@ -1,0 +1,103 @@
+Program {
+    source: "",
+    header: Header {
+        prism_major: 1,
+        prism_minor: 3,
+        prism_patch: 0,
+        only_semantics_serialized: false,
+        encoding_name: "UTF-8",
+        start_line: 1,
+        newline_offsets: [
+            0,
+            16,
+        ],
+        comments: [],
+        magic_comments: [],
+        end_keyword: None,
+        errors: [],
+        warnings: [],
+        content_pool_offset: 78,
+        content_pool_size: 2,
+    },
+    root: NodeRef(4),
+    nodes: [
+        Node {
+            identifier: 2,
+            location: Location { start: 0, length: 4 },
+            flags: 40,
+            node_kind: CallNode(
+                CallNode {
+                    receiver: None,
+                    call_operator_loc: None,
+                    name: ConstantRef(1),
+                    message_loc: Some(
+                        Location { start: 0, length: 4 },
+                    ),
+                    opening_loc: None,
+                    arguments: None,
+                    closing_loc: None,
+                    block: None,
+                },
+            ),
+        },
+        Node {
+            identifier: 3,
+            location: Location { start: 12, length: 3 },
+            flags: 40,
+            node_kind: CallNode(
+                CallNode {
+                    receiver: None,
+                    call_operator_loc: None,
+                    name: ConstantRef(2),
+                    message_loc: Some(
+                        Location { start: 12, length: 3 },
+                    ),
+                    opening_loc: None,
+                    arguments: None,
+                    closing_loc: None,
+                    block: None,
+                },
+            ),
+        },
+        Node {
+            identifier: 4,
+            location: Location { start: 0, length: 15 },
+            flags: 1,
+            node_kind: RescueModifierNode(
+                RescueModifierNode {
+                    expression: NodeRef(0),
+                    keyword_loc: Location { start: 5, length: 6 },
+                    rescue_expression: NodeRef(1),
+                },
+            ),
+        },
+        Node {
+            identifier: 1,
+            location: Location { start: 0, length: 15 },
+            flags: 0,
+            node_kind: StatementsNode(
+                StatementsNode {
+                    body: [
+                        NodeRef(2),
+                    ],
+                },
+            ),
+        },
+        Node {
+            identifier: 5,
+            location: Location { start: 0, length: 15 },
+            flags: 0,
+            node_kind: ProgramNode(
+                ProgramNode {
+                    locals: [],
+                    statements: NodeRef(3),
+                },
+            ),
+        },
+    ],
+    constants: [
+        Owned(0, 4),
+        Owned(12, 3),
+    ],
+    content_pool: [],
+}

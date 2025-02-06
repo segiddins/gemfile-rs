@@ -1,0 +1,334 @@
+Program {
+    source: "",
+    header: Header {
+        prism_major: 1,
+        prism_minor: 3,
+        prism_patch: 0,
+        only_semantics_serialized: false,
+        encoding_name: "UTF-8",
+        start_line: 1,
+        newline_offsets: [
+            0,
+            8,
+            48,
+            53,
+            57,
+        ],
+        comments: [],
+        magic_comments: [],
+        end_keyword: None,
+        errors: [],
+        warnings: [
+            Warning {
+                type: 317,
+                message: "assigned but unused variable - x",
+                location: Location { start: 27, length: 1 },
+                level: 1,
+            },
+            Warning {
+                type: 317,
+                message: "assigned but unused variable - f",
+                location: Location { start: 38, length: 1 },
+                level: 1,
+            },
+        ],
+        content_pool_offset: 304,
+        content_pool_size: 3,
+    },
+    root: NodeRef(19),
+    nodes: [
+        Node {
+            identifier: 2,
+            location: Location { start: 5, length: 2 },
+            flags: 18,
+            node_kind: SymbolNode(
+                SymbolNode {
+                    opening_loc: Some(
+                        Location { start: 5, length: 1 },
+                    ),
+                    value_loc: Some(
+                        Location { start: 6, length: 1 },
+                    ),
+                    closing_loc: None,
+                    unescaped: "",
+                },
+            ),
+        },
+        Node {
+            identifier: 4,
+            location: Location { start: 13, length: 2 },
+            flags: 18,
+            node_kind: SymbolNode(
+                SymbolNode {
+                    opening_loc: None,
+                    value_loc: Some(
+                        Location { start: 13, length: 1 },
+                    ),
+                    closing_loc: Some(
+                        Location { start: 14, length: 1 },
+                    ),
+                    unescaped: "",
+                },
+            ),
+        },
+        Node {
+            identifier: 5,
+            location: Location { start: 16, length: 7 },
+            flags: 0,
+            node_kind: ConstantReadNode(
+                ConstantReadNode {
+                    name: ConstantRef(1),
+                },
+            ),
+        },
+        Node {
+            identifier: 6,
+            location: Location { start: 27, length: 1 },
+            flags: 0,
+            node_kind: LocalVariableTargetNode(
+                LocalVariableTargetNode {
+                    name: ConstantRef(2),
+                    depth: 0,
+                },
+            ),
+        },
+        Node {
+            identifier: 7,
+            location: Location { start: 16, length: 12 },
+            flags: 0,
+            node_kind: CapturePatternNode(
+                CapturePatternNode {
+                    value: NodeRef(2),
+                    target: NodeRef(3),
+                    operator_loc: Location { start: 24, length: 2 },
+                },
+            ),
+        },
+        Node {
+            identifier: 8,
+            location: Location { start: 13, length: 15 },
+            flags: 0,
+            node_kind: AssocNode(
+                AssocNode {
+                    key: NodeRef(1),
+                    value: NodeRef(4),
+                    operator_loc: None,
+                },
+            ),
+        },
+        Node {
+            identifier: 9,
+            location: Location { start: 30, length: 2 },
+            flags: 18,
+            node_kind: SymbolNode(
+                SymbolNode {
+                    opening_loc: None,
+                    value_loc: Some(
+                        Location { start: 30, length: 1 },
+                    ),
+                    closing_loc: Some(
+                        Location { start: 31, length: 1 },
+                    ),
+                    unescaped: "",
+                },
+            ),
+        },
+        Node {
+            identifier: 10,
+            location: Location { start: 33, length: 3 },
+            flags: 0,
+            node_kind: StringNode(
+                StringNode {
+                    opening_loc: Some(
+                        Location { start: 33, length: 1 },
+                    ),
+                    content_loc: Location { start: 34, length: 1 },
+                    closing_loc: Some(
+                        Location { start: 35, length: 1 },
+                    ),
+                    unescaped: "",
+                },
+            ),
+        },
+        Node {
+            identifier: 11,
+            location: Location { start: 30, length: 6 },
+            flags: 0,
+            node_kind: AssocNode(
+                AssocNode {
+                    key: NodeRef(6),
+                    value: NodeRef(7),
+                    operator_loc: None,
+                },
+            ),
+        },
+        Node {
+            identifier: 12,
+            location: Location { start: 38, length: 2 },
+            flags: 18,
+            node_kind: SymbolNode(
+                SymbolNode {
+                    opening_loc: None,
+                    value_loc: Some(
+                        Location { start: 38, length: 1 },
+                    ),
+                    closing_loc: Some(
+                        Location { start: 39, length: 1 },
+                    ),
+                    unescaped: "",
+                },
+            ),
+        },
+        Node {
+            identifier: 13,
+            location: Location { start: 38, length: 1 },
+            flags: 0,
+            node_kind: LocalVariableTargetNode(
+                LocalVariableTargetNode {
+                    name: ConstantRef(3),
+                    depth: 0,
+                },
+            ),
+        },
+        Node {
+            identifier: 14,
+            location: Location { start: 38, length: 1 },
+            flags: 0,
+            node_kind: ImplicitNode(
+                ImplicitNode {
+                    value: NodeRef(10),
+                },
+            ),
+        },
+        Node {
+            identifier: 15,
+            location: Location { start: 38, length: 2 },
+            flags: 0,
+            node_kind: AssocNode(
+                AssocNode {
+                    key: NodeRef(9),
+                    value: NodeRef(11),
+                    operator_loc: None,
+                },
+            ),
+        },
+        Node {
+            identifier: 16,
+            location: Location { start: 11, length: 31 },
+            flags: 0,
+            node_kind: HashPatternNode(
+                HashPatternNode {
+                    constant: None,
+                    elements: [
+                        NodeRef(5),
+                        NodeRef(8),
+                        NodeRef(12),
+                    ],
+                    rest: None,
+                    opening_loc: Some(
+                        Location { start: 11, length: 1 },
+                    ),
+                    closing_loc: Some(
+                        Location { start: 41, length: 1 },
+                    ),
+                },
+            ),
+        },
+        Node {
+            identifier: 18,
+            location: Location { start: 50, length: 2 },
+            flags: 19,
+            node_kind: SymbolNode(
+                SymbolNode {
+                    opening_loc: Some(
+                        Location { start: 50, length: 1 },
+                    ),
+                    value_loc: Some(
+                        Location { start: 51, length: 1 },
+                    ),
+                    closing_loc: None,
+                    unescaped: "",
+                },
+            ),
+        },
+        Node {
+            identifier: 17,
+            location: Location { start: 50, length: 2 },
+            flags: 0,
+            node_kind: StatementsNode(
+                StatementsNode {
+                    body: [
+                        NodeRef(14),
+                    ],
+                },
+            ),
+        },
+        Node {
+            identifier: 19,
+            location: Location { start: 8, length: 44 },
+            flags: 0,
+            node_kind: InNode(
+                InNode {
+                    pattern: NodeRef(13),
+                    statements: Some(
+                        NodeRef(15),
+                    ),
+                    in_loc: Location { start: 8, length: 2 },
+                    then_loc: Some(
+                        Location { start: 43, length: 4 },
+                    ),
+                },
+            ),
+        },
+        Node {
+            identifier: 3,
+            location: Location { start: 0, length: 56 },
+            flags: 1,
+            node_kind: CaseMatchNode(
+                CaseMatchNode {
+                    predicate: Some(
+                        NodeRef(0),
+                    ),
+                    conditions: [
+                        NodeRef(16),
+                    ],
+                    else_clause: None,
+                    case_keyword_loc: Location { start: 0, length: 4 },
+                    end_keyword_loc: Location { start: 53, length: 3 },
+                },
+            ),
+        },
+        Node {
+            identifier: 1,
+            location: Location { start: 0, length: 56 },
+            flags: 0,
+            node_kind: StatementsNode(
+                StatementsNode {
+                    body: [
+                        NodeRef(17),
+                    ],
+                },
+            ),
+        },
+        Node {
+            identifier: 20,
+            location: Location { start: 0, length: 56 },
+            flags: 0,
+            node_kind: ProgramNode(
+                ProgramNode {
+                    locals: [
+                        ConstantRef(2),
+                        ConstantRef(3),
+                    ],
+                    statements: NodeRef(18),
+                },
+            ),
+        },
+    ],
+    constants: [
+        Owned(16, 7),
+        Owned(27, 1),
+        Owned(38, 1),
+    ],
+    content_pool: [],
+}
