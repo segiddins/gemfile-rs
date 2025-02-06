@@ -1,5 +1,6 @@
 use std::fmt::Debug;
 
+use expect_test::expect;
 use ruby_prism;
 
 #[derive(Debug)]
@@ -15,10 +16,10 @@ pub struct Program {
 #[derive(Debug, Clone)]
 pub struct Node {
     // pub(super) kind: u8,
+    pub(super) node_kind: super::generated::NodeKind,
     pub(super) identifier: u32,
     pub(super) location: Location,
     pub(super) flags: u32,
-    pub(super) node_kind: super::generated::NodeKind,
 }
 
 pub(super) struct LocationSnapshot<'a> {
@@ -28,27 +29,47 @@ pub(super) struct LocationSnapshot<'a> {
 
 impl Debug for LocationSnapshot<'_> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        let start_line_idx = self
-            .program
-            .header
-            .newline_offsets
+        eprintln!(
+            "loc: {:?}, offsets: {:?}",
+            self.location, self.program.header.newline_offsets
+        );
+
+        let offsets = &self.program.header.newline_offsets;
+        let start_line = offsets
             .iter()
-            .position(|&offset| offset > self.location.start)
-            .expect("start line index");
-        let end_line_idx = self.program.header.newline_offsets[(start_line_idx as usize)..]
+            .position(|&offset| offset >= self.location.start)
+            .unwrap_or(offsets.len());
+
+        if self.location.length == 0 {
+            let line = start_line + 1;
+            let col =
+                self.location.start - self.program.header.newline_offsets[start_line as usize];
+            return write!(f, "({line},{col})-({line},{col})",);
+        }
+
+        let end_line = offsets[(start_line as usize)..]
             .iter()
-            .position(|&offset| offset > self.location.start + self.location.length)
-            .expect("end_line_idx")
-            + start_line_idx;
+            .rposition(|&offset| offset < self.location.start + self.location.length)
+            .unwrap_or(0)
+            + start_line;
+
+        let end_line_offset = match end_line {
+            0 => 0,
+            _ => offsets[end_line - 1],
+        };
+
+        eprintln!(
+            "loc: {:?}, start_line: {}, end_line: {}, end_line_offset: {}",
+            self.location, start_line, end_line, end_line_offset
+        );
 
         write!(
             f,
             "({},{})-({},{})",
-            start_line_idx,
-            self.location.start - self.program.header.newline_offsets[start_line_idx - 1 as usize],
-            end_line_idx,
-            self.location.start + self.location.length
-                - self.program.header.newline_offsets[end_line_idx - 1 as usize]
+            start_line + 1,
+            self.location.start - self.program.header.newline_offsets[start_line as usize],
+            end_line + 1,
+            (self.location.start + self.location.length - end_line_offset - 1)
         )
     }
 }
@@ -70,6 +91,10 @@ impl Program {
 
     pub fn node(&self, node_ref: &NodeRef) -> &Node {
         &self.nodes[node_ref.0 as usize]
+    }
+
+    pub fn constant(&self, constant_ref: &ConstantRef) -> &Constant {
+        &self.constants[constant_ref.0 as usize]
     }
 
     pub fn root(&self) -> &Node {
@@ -162,7 +187,7 @@ impl Debug for NodeRef {
     }
 }
 
-#[derive(Clone)]
+#[derive(Clone, Copy)]
 pub struct ConstantRef(u32);
 
 impl Debug for ConstantRef {
@@ -544,6 +569,16 @@ fn test_parse_empty() {
         )
     "#]]
     .assert_debug_eq(&program);
+
+    expect![[r#"
+        @ ProgramNode (location: (1,0)-(1,0))
+        ├── flags: ∅
+        ├── locals: []
+        └── statements:
+            @ StatementsNode (location: (1,0)-(1,0))
+            ├── flags: ∅
+            └── body: (length: 0)"#]]
+    .assert_eq(&program.unwrap().snapshot().trim_end());
 }
 
 #[test]

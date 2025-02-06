@@ -1526,13 +1526,10 @@ impl EnsureNode {
 
 // 50
 #[derive(Debug, Clone)]
-pub struct FalseNode(());
+pub struct FalseNode {}
 impl FalseNode {
     pub fn into_node_kind(self) -> NodeKind {
         NodeKind::FalseNode(self)
-    }
-    pub fn new() -> Self {
-        Self(())
     }
 }
 
@@ -1656,25 +1653,19 @@ impl ForNode {
 
 // 55
 #[derive(Debug, Clone)]
-pub struct ForwardingArgumentsNode(());
+pub struct ForwardingArgumentsNode {}
 impl ForwardingArgumentsNode {
     pub fn into_node_kind(self) -> NodeKind {
         NodeKind::ForwardingArgumentsNode(self)
-    }
-    pub fn new() -> Self {
-        Self(())
     }
 }
 
 // 56
 #[derive(Debug, Clone)]
-pub struct ForwardingParameterNode(());
+pub struct ForwardingParameterNode {}
 impl ForwardingParameterNode {
     pub fn into_node_kind(self) -> NodeKind {
         NodeKind::ForwardingParameterNode(self)
-    }
-    pub fn new() -> Self {
-        Self(())
     }
 }
 
@@ -2011,13 +2002,10 @@ impl ImplicitNode {
 
 // 69
 #[derive(Debug, Clone)]
-pub struct ImplicitRestNode(());
+pub struct ImplicitRestNode {}
 impl ImplicitRestNode {
     pub fn into_node_kind(self) -> NodeKind {
         NodeKind::ImplicitRestNode(self)
-    }
-    pub fn new() -> Self {
-        Self(())
     }
 }
 
@@ -2572,25 +2560,19 @@ impl InterpolatedXStringNode {
 
 // 87
 #[derive(Debug, Clone)]
-pub struct ItLocalVariableReadNode(());
+pub struct ItLocalVariableReadNode {}
 impl ItLocalVariableReadNode {
     pub fn into_node_kind(self) -> NodeKind {
         NodeKind::ItLocalVariableReadNode(self)
-    }
-    pub fn new() -> Self {
-        Self(())
     }
 }
 
 // 88
 #[derive(Debug, Clone)]
-pub struct ItParametersNode(());
+pub struct ItParametersNode {}
 impl ItParametersNode {
     pub fn into_node_kind(self) -> NodeKind {
         NodeKind::ItParametersNode(self)
-    }
-    pub fn new() -> Self {
-        Self(())
     }
 }
 
@@ -2990,13 +2972,10 @@ impl MatchWriteNode {
 
 // 102
 #[derive(Debug, Clone)]
-pub struct MissingNode(());
+pub struct MissingNode {}
 impl MissingNode {
     pub fn into_node_kind(self) -> NodeKind {
         NodeKind::MissingNode(self)
-    }
-    pub fn new() -> Self {
-        Self(())
     }
 }
 
@@ -3134,13 +3113,10 @@ impl NextNode {
 
 // 107
 #[derive(Debug, Clone)]
-pub struct NilNode(());
+pub struct NilNode {}
 impl NilNode {
     pub fn into_node_kind(self) -> NodeKind {
         NodeKind::NilNode(self)
-    }
-    pub fn new() -> Self {
-        Self(())
     }
 }
 
@@ -3560,13 +3536,10 @@ impl RationalNode {
 
 // 123
 #[derive(Debug, Clone)]
-pub struct RedoNode(());
+pub struct RedoNode {}
 impl RedoNode {
     pub fn into_node_kind(self) -> NodeKind {
         NodeKind::RedoNode(self)
-    }
-    pub fn new() -> Self {
-        Self(())
     }
 }
 
@@ -3747,13 +3720,10 @@ impl RestParameterNode {
 
 // 130
 #[derive(Debug, Clone)]
-pub struct RetryNode(());
+pub struct RetryNode {}
 impl RetryNode {
     pub fn into_node_kind(self) -> NodeKind {
         NodeKind::RetryNode(self)
-    }
-    pub fn new() -> Self {
-        Self(())
     }
 }
 
@@ -3782,13 +3752,10 @@ impl ReturnNode {
 
 // 132
 #[derive(Debug, Clone)]
-pub struct SelfNode(());
+pub struct SelfNode {}
 impl SelfNode {
     pub fn into_node_kind(self) -> NodeKind {
         NodeKind::SelfNode(self)
-    }
-    pub fn new() -> Self {
-        Self(())
     }
 }
 
@@ -3855,13 +3822,10 @@ impl SingletonClassNode {
 
 // 135
 #[derive(Debug, Clone)]
-pub struct SourceEncodingNode(());
+pub struct SourceEncodingNode {}
 impl SourceEncodingNode {
     pub fn into_node_kind(self) -> NodeKind {
         NodeKind::SourceEncodingNode(self)
-    }
-    pub fn new() -> Self {
-        Self(())
     }
 }
 
@@ -3887,13 +3851,10 @@ impl SourceFileNode {
 
 // 137
 #[derive(Debug, Clone)]
-pub struct SourceLineNode(());
+pub struct SourceLineNode {}
 impl SourceLineNode {
     pub fn into_node_kind(self) -> NodeKind {
         NodeKind::SourceLineNode(self)
-    }
-    pub fn new() -> Self {
-        Self(())
     }
 }
 
@@ -4031,13 +3992,10 @@ impl SymbolNode {
 
 // 143
 #[derive(Debug, Clone)]
-pub struct TrueNode(());
+pub struct TrueNode {}
 impl TrueNode {
     pub fn into_node_kind(self) -> NodeKind {
         NodeKind::TrueNode(self)
-    }
-    pub fn new() -> Self {
-        Self(())
     }
 }
 
@@ -4729,7 +4687,7 @@ pub fn parse_node(input: &mut super::deserialize::Stream) -> winnow::ModalResult
             .map(EnsureNode::into_node_kind)
             .parse_next(input),
         51 => winnow::combinator::empty
-            .value(FalseNode::new().into_node_kind())
+            .value(FalseNode {}.into_node_kind())
             .parse_next(input),
         52 => FindPatternNode::parser
             .map(FindPatternNode::into_node_kind)
@@ -4744,10 +4702,10 @@ pub fn parse_node(input: &mut super::deserialize::Stream) -> winnow::ModalResult
             .map(ForNode::into_node_kind)
             .parse_next(input),
         56 => winnow::combinator::empty
-            .value(ForwardingArgumentsNode::new().into_node_kind())
+            .value(ForwardingArgumentsNode {}.into_node_kind())
             .parse_next(input),
         57 => winnow::combinator::empty
-            .value(ForwardingParameterNode::new().into_node_kind())
+            .value(ForwardingParameterNode {}.into_node_kind())
             .parse_next(input),
         58 => ForwardingSuperNode::parser
             .map(ForwardingSuperNode::into_node_kind)
@@ -4784,7 +4742,7 @@ pub fn parse_node(input: &mut super::deserialize::Stream) -> winnow::ModalResult
             .map(ImplicitNode::into_node_kind)
             .parse_next(input),
         70 => winnow::combinator::empty
-            .value(ImplicitRestNode::new().into_node_kind())
+            .value(ImplicitRestNode {}.into_node_kind())
             .parse_next(input),
         71 => InNode::parser.map(InNode::into_node_kind).parse_next(input),
         72 => IndexAndWriteNode::parser
@@ -4836,10 +4794,10 @@ pub fn parse_node(input: &mut super::deserialize::Stream) -> winnow::ModalResult
             .map(InterpolatedXStringNode::into_node_kind)
             .parse_next(input),
         88 => winnow::combinator::empty
-            .value(ItLocalVariableReadNode::new().into_node_kind())
+            .value(ItLocalVariableReadNode {}.into_node_kind())
             .parse_next(input),
         89 => winnow::combinator::empty
-            .value(ItParametersNode::new().into_node_kind())
+            .value(ItParametersNode {}.into_node_kind())
             .parse_next(input),
         90 => KeywordHashNode::parser
             .map(KeywordHashNode::into_node_kind)
@@ -4881,7 +4839,7 @@ pub fn parse_node(input: &mut super::deserialize::Stream) -> winnow::ModalResult
             .map(MatchWriteNode::into_node_kind)
             .parse_next(input),
         103 => winnow::combinator::empty
-            .value(MissingNode::new().into_node_kind())
+            .value(MissingNode {}.into_node_kind())
             .parse_next(input),
         104 => ModuleNode::parser
             .map(ModuleNode::into_node_kind)
@@ -4896,7 +4854,7 @@ pub fn parse_node(input: &mut super::deserialize::Stream) -> winnow::ModalResult
             .map(NextNode::into_node_kind)
             .parse_next(input),
         108 => winnow::combinator::empty
-            .value(NilNode::new().into_node_kind())
+            .value(NilNode {}.into_node_kind())
             .parse_next(input),
         109 => NoKeywordsParameterNode::parser
             .map(NoKeywordsParameterNode::into_node_kind)
@@ -4942,7 +4900,7 @@ pub fn parse_node(input: &mut super::deserialize::Stream) -> winnow::ModalResult
             .map(RationalNode::into_node_kind)
             .parse_next(input),
         124 => winnow::combinator::empty
-            .value(RedoNode::new().into_node_kind())
+            .value(RedoNode {}.into_node_kind())
             .parse_next(input),
         125 => RegularExpressionNode::parser
             .map(RegularExpressionNode::into_node_kind)
@@ -4963,13 +4921,13 @@ pub fn parse_node(input: &mut super::deserialize::Stream) -> winnow::ModalResult
             .map(RestParameterNode::into_node_kind)
             .parse_next(input),
         131 => winnow::combinator::empty
-            .value(RetryNode::new().into_node_kind())
+            .value(RetryNode {}.into_node_kind())
             .parse_next(input),
         132 => ReturnNode::parser
             .map(ReturnNode::into_node_kind)
             .parse_next(input),
         133 => winnow::combinator::empty
-            .value(SelfNode::new().into_node_kind())
+            .value(SelfNode {}.into_node_kind())
             .parse_next(input),
         134 => ShareableConstantNode::parser
             .map(ShareableConstantNode::into_node_kind)
@@ -4978,13 +4936,13 @@ pub fn parse_node(input: &mut super::deserialize::Stream) -> winnow::ModalResult
             .map(SingletonClassNode::into_node_kind)
             .parse_next(input),
         136 => winnow::combinator::empty
-            .value(SourceEncodingNode::new().into_node_kind())
+            .value(SourceEncodingNode {}.into_node_kind())
             .parse_next(input),
         137 => SourceFileNode::parser
             .map(SourceFileNode::into_node_kind)
             .parse_next(input),
         138 => winnow::combinator::empty
-            .value(SourceLineNode::new().into_node_kind())
+            .value(SourceLineNode {}.into_node_kind())
             .parse_next(input),
         139 => SplatNode::parser
             .map(SplatNode::into_node_kind)
@@ -5002,7 +4960,7 @@ pub fn parse_node(input: &mut super::deserialize::Stream) -> winnow::ModalResult
             .map(SymbolNode::into_node_kind)
             .parse_next(input),
         144 => winnow::combinator::empty
-            .value(TrueNode::new().into_node_kind())
+            .value(TrueNode {}.into_node_kind())
             .parse_next(input),
         145 => UndefNode::parser
             .map(UndefNode::into_node_kind)
@@ -5067,7 +5025,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
         match &node.node_kind {
             NodeKind::AliasGlobalVariableNode(node) => {
                 write!(f, "├── new_name:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -5079,7 +5037,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                 )?;
                 drop(pad);
                 write!(f, "├── old_name:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -5102,7 +5060,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::AliasMethodNode(node) => {
                 write!(f, "├── new_name:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -5114,7 +5072,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                 )?;
                 drop(pad);
                 write!(f, "├── old_name:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -5137,7 +5095,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::AlternationPatternNode(node) => {
                 write!(f, "├── left:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -5149,7 +5107,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                 )?;
                 drop(pad);
                 write!(f, "├── right:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -5172,7 +5130,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::AndNode(node) => {
                 write!(f, "├── left:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -5184,7 +5142,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                 )?;
                 drop(pad);
                 write!(f, "├── right:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -5207,7 +5165,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::ArgumentsNode(node) => {
                 write!(f, "└── arguments:")?;
-                writeln!(f, " (length: {})", node.arguments.len());
+                writeln!(f, " (length: {})", node.arguments.len())?;
                 let mut pad = PadWriter::new(f, "|   ", true);
                 for node in &node.arguments {
                     writeln!(
@@ -5223,7 +5181,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::ArrayNode(node) => {
                 write!(f, "├── elements:")?;
-                writeln!(f, " (length: {})", node.elements.len());
+                writeln!(f, " (length: {})", node.elements.len())?;
                 let mut pad = PadWriter::new(f, "|   ", true);
                 for node in &node.elements {
                     writeln!(
@@ -5263,9 +5221,9 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::ArrayPatternNode(node) => {
                 write!(f, "├── constant:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.constant)?;
                 write!(f, "├── requireds:")?;
-                writeln!(f, " (length: {})", node.requireds.len());
+                writeln!(f, " (length: {})", node.requireds.len())?;
                 let mut pad = PadWriter::new(f, "|   ", true);
                 for node in &node.requireds {
                     writeln!(
@@ -5279,9 +5237,9 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                 }
                 drop(pad);
                 write!(f, "├── rest:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.rest)?;
                 write!(f, "├── posts:")?;
-                writeln!(f, " (length: {})", node.posts.len());
+                writeln!(f, " (length: {})", node.posts.len())?;
                 let mut pad = PadWriter::new(f, "|   ", true);
                 for node in &node.posts {
                     writeln!(
@@ -5321,7 +5279,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::AssocNode(node) => {
                 write!(f, "├── key:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -5333,7 +5291,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                 )?;
                 drop(pad);
                 write!(f, "├── value:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -5359,7 +5317,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::AssocSplatNode(node) => {
                 write!(f, "├── value:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.value)?;
                 write!(f, "└── operator_loc:")?;
                 writeln!(
                     f,
@@ -5372,7 +5330,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::BackReferenceReadNode(node) => {
                 write!(f, "└── name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.name))?;
             }
             NodeKind::BeginNode(node) => {
                 write!(f, "├── begin_keyword_loc:")?;
@@ -5388,13 +5346,13 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     None => writeln!(f, " ∅"),
                 }?;
                 write!(f, "├── statements:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.statements)?;
                 write!(f, "├── rescue_clause:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.rescue_clause)?;
                 write!(f, "├── else_clause:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.else_clause)?;
                 write!(f, "├── ensure_clause:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.ensure_clause)?;
                 write!(f, "└── end_keyword_loc:")?;
                 match &node.end_keyword_loc {
                     Some(loc) => writeln!(
@@ -5410,7 +5368,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::BlockArgumentNode(node) => {
                 write!(f, "├── expression:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.expression)?;
                 write!(f, "└── operator_loc:")?;
                 writeln!(
                     f,
@@ -5423,15 +5381,22 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::BlockLocalVariableNode(node) => {
                 write!(f, "└── name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.name))?;
             }
             NodeKind::BlockNode(node) => {
                 write!(f, "├── locals:")?;
-                writeln!(f);
+                writeln!(
+                    f,
+                    " {:?}",
+                    node.locals
+                        .iter()
+                        .map(|r| self.program.constant(r))
+                        .collect::<Vec<_>>()
+                )?;
                 write!(f, "├── parameters:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.parameters)?;
                 write!(f, "├── body:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.body)?;
                 write!(f, "├── opening_loc:")?;
                 writeln!(
                     f,
@@ -5453,7 +5418,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::BlockParameterNode(node) => {
                 write!(f, "├── name:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.name)?;
                 write!(f, "├── name_loc:")?;
                 match &node.name_loc {
                     Some(loc) => writeln!(
@@ -5478,9 +5443,9 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::BlockParametersNode(node) => {
                 write!(f, "├── parameters:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.parameters)?;
                 write!(f, "├── locals:")?;
-                writeln!(f, " (length: {})", node.locals.len());
+                writeln!(f, " (length: {})", node.locals.len())?;
                 let mut pad = PadWriter::new(f, "|   ", true);
                 for node in &node.locals {
                     writeln!(
@@ -5520,7 +5485,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::BreakNode(node) => {
                 write!(f, "├── arguments:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.arguments)?;
                 write!(f, "└── keyword_loc:")?;
                 writeln!(
                     f,
@@ -5533,7 +5498,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::CallAndWriteNode(node) => {
                 write!(f, "├── receiver:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.receiver)?;
                 write!(f, "├── call_operator_loc:")?;
                 match &node.call_operator_loc {
                     Some(loc) => writeln!(
@@ -5559,9 +5524,9 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     None => writeln!(f, " ∅"),
                 }?;
                 write!(f, "├── read_name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.read_name))?;
                 write!(f, "├── write_name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.write_name))?;
                 write!(f, "├── operator_loc:")?;
                 writeln!(
                     f,
@@ -5572,7 +5537,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "└── value:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -5586,7 +5551,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::CallNode(node) => {
                 write!(f, "├── receiver:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.receiver)?;
                 write!(f, "├── call_operator_loc:")?;
                 match &node.call_operator_loc {
                     Some(loc) => writeln!(
@@ -5600,7 +5565,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     None => writeln!(f, " ∅"),
                 }?;
                 write!(f, "├── name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.name))?;
                 write!(f, "├── message_loc:")?;
                 match &node.message_loc {
                     Some(loc) => writeln!(
@@ -5626,7 +5591,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     None => writeln!(f, " ∅"),
                 }?;
                 write!(f, "├── arguments:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.arguments)?;
                 write!(f, "├── closing_loc:")?;
                 match &node.closing_loc {
                     Some(loc) => writeln!(
@@ -5640,11 +5605,11 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     None => writeln!(f, " ∅"),
                 }?;
                 write!(f, "└── block:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.block)?;
             }
             NodeKind::CallOperatorWriteNode(node) => {
                 write!(f, "├── receiver:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.receiver)?;
                 write!(f, "├── call_operator_loc:")?;
                 match &node.call_operator_loc {
                     Some(loc) => writeln!(
@@ -5670,11 +5635,11 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     None => writeln!(f, " ∅"),
                 }?;
                 write!(f, "├── read_name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.read_name))?;
                 write!(f, "├── write_name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.write_name))?;
                 write!(f, "├── binary_operator:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.binary_operator))?;
                 write!(f, "├── binary_operator_loc:")?;
                 writeln!(
                     f,
@@ -5685,7 +5650,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "└── value:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -5699,7 +5664,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::CallOrWriteNode(node) => {
                 write!(f, "├── receiver:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.receiver)?;
                 write!(f, "├── call_operator_loc:")?;
                 match &node.call_operator_loc {
                     Some(loc) => writeln!(
@@ -5725,9 +5690,9 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     None => writeln!(f, " ∅"),
                 }?;
                 write!(f, "├── read_name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.read_name))?;
                 write!(f, "├── write_name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.write_name))?;
                 write!(f, "├── operator_loc:")?;
                 writeln!(
                     f,
@@ -5738,7 +5703,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "└── value:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -5752,7 +5717,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::CallTargetNode(node) => {
                 write!(f, "├── receiver:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -5773,7 +5738,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "├── name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.name))?;
                 write!(f, "└── message_loc:")?;
                 writeln!(
                     f,
@@ -5786,7 +5751,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::CapturePatternNode(node) => {
                 write!(f, "├── value:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -5798,7 +5763,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                 )?;
                 drop(pad);
                 write!(f, "├── target:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -5821,9 +5786,9 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::CaseMatchNode(node) => {
                 write!(f, "├── predicate:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.predicate)?;
                 write!(f, "├── conditions:")?;
-                writeln!(f, " (length: {})", node.conditions.len());
+                writeln!(f, " (length: {})", node.conditions.len())?;
                 let mut pad = PadWriter::new(f, "|   ", true);
                 for node in &node.conditions {
                     writeln!(
@@ -5837,7 +5802,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                 }
                 drop(pad);
                 write!(f, "├── else_clause:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.else_clause)?;
                 write!(f, "├── case_keyword_loc:")?;
                 writeln!(
                     f,
@@ -5859,9 +5824,9 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::CaseNode(node) => {
                 write!(f, "├── predicate:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.predicate)?;
                 write!(f, "├── conditions:")?;
-                writeln!(f, " (length: {})", node.conditions.len());
+                writeln!(f, " (length: {})", node.conditions.len())?;
                 let mut pad = PadWriter::new(f, "|   ", true);
                 for node in &node.conditions {
                     writeln!(
@@ -5875,7 +5840,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                 }
                 drop(pad);
                 write!(f, "├── else_clause:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.else_clause)?;
                 write!(f, "├── case_keyword_loc:")?;
                 writeln!(
                     f,
@@ -5897,7 +5862,14 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::ClassNode(node) => {
                 write!(f, "├── locals:")?;
-                writeln!(f);
+                writeln!(
+                    f,
+                    " {:?}",
+                    node.locals
+                        .iter()
+                        .map(|r| self.program.constant(r))
+                        .collect::<Vec<_>>()
+                )?;
                 write!(f, "├── class_keyword_loc:")?;
                 writeln!(
                     f,
@@ -5908,7 +5880,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "├── constant_path:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -5932,9 +5904,9 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     None => writeln!(f, " ∅"),
                 }?;
                 write!(f, "├── superclass:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.superclass)?;
                 write!(f, "├── body:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.body)?;
                 write!(f, "├── end_keyword_loc:")?;
                 writeln!(
                     f,
@@ -5945,11 +5917,11 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "└── name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.name))?;
             }
             NodeKind::ClassVariableAndWriteNode(node) => {
                 write!(f, "├── name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.name))?;
                 write!(f, "├── name_loc:")?;
                 writeln!(
                     f,
@@ -5969,7 +5941,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "└── value:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -5983,7 +5955,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::ClassVariableOperatorWriteNode(node) => {
                 write!(f, "├── name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.name))?;
                 write!(f, "├── name_loc:")?;
                 writeln!(
                     f,
@@ -6003,7 +5975,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "├── value:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -6015,11 +5987,11 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                 )?;
                 drop(pad);
                 write!(f, "└── binary_operator:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.binary_operator))?;
             }
             NodeKind::ClassVariableOrWriteNode(node) => {
                 write!(f, "├── name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.name))?;
                 write!(f, "├── name_loc:")?;
                 writeln!(
                     f,
@@ -6039,7 +6011,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "└── value:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -6053,15 +6025,15 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::ClassVariableReadNode(node) => {
                 write!(f, "└── name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.name))?;
             }
             NodeKind::ClassVariableTargetNode(node) => {
                 write!(f, "└── name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.name))?;
             }
             NodeKind::ClassVariableWriteNode(node) => {
                 write!(f, "├── name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.name))?;
                 write!(f, "├── name_loc:")?;
                 writeln!(
                     f,
@@ -6072,7 +6044,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "├── value:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -6095,7 +6067,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::ConstantAndWriteNode(node) => {
                 write!(f, "├── name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.name))?;
                 write!(f, "├── name_loc:")?;
                 writeln!(
                     f,
@@ -6115,7 +6087,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "└── value:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -6129,7 +6101,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::ConstantOperatorWriteNode(node) => {
                 write!(f, "├── name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.name))?;
                 write!(f, "├── name_loc:")?;
                 writeln!(
                     f,
@@ -6149,7 +6121,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "├── value:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -6161,11 +6133,11 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                 )?;
                 drop(pad);
                 write!(f, "└── binary_operator:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.binary_operator))?;
             }
             NodeKind::ConstantOrWriteNode(node) => {
                 write!(f, "├── name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.name))?;
                 write!(f, "├── name_loc:")?;
                 writeln!(
                     f,
@@ -6185,7 +6157,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "└── value:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -6199,7 +6171,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::ConstantPathAndWriteNode(node) => {
                 write!(f, "├── target:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -6220,7 +6192,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "└── value:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -6234,9 +6206,9 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::ConstantPathNode(node) => {
                 write!(f, "├── parent:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.parent)?;
                 write!(f, "├── name:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.name)?;
                 write!(f, "├── delimiter_loc:")?;
                 writeln!(
                     f,
@@ -6258,7 +6230,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::ConstantPathOperatorWriteNode(node) => {
                 write!(f, "├── target:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -6279,7 +6251,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "├── value:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -6291,11 +6263,11 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                 )?;
                 drop(pad);
                 write!(f, "└── binary_operator:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.binary_operator))?;
             }
             NodeKind::ConstantPathOrWriteNode(node) => {
                 write!(f, "├── target:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -6316,7 +6288,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "└── value:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -6330,9 +6302,9 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::ConstantPathTargetNode(node) => {
                 write!(f, "├── parent:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.parent)?;
                 write!(f, "├── name:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.name)?;
                 write!(f, "├── delimiter_loc:")?;
                 writeln!(
                     f,
@@ -6354,7 +6326,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::ConstantPathWriteNode(node) => {
                 write!(f, "├── target:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -6375,7 +6347,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "└── value:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -6389,15 +6361,15 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::ConstantReadNode(node) => {
                 write!(f, "└── name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.name))?;
             }
             NodeKind::ConstantTargetNode(node) => {
                 write!(f, "└── name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.name))?;
             }
             NodeKind::ConstantWriteNode(node) => {
                 write!(f, "├── name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.name))?;
                 write!(f, "├── name_loc:")?;
                 writeln!(
                     f,
@@ -6408,7 +6380,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "├── value:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -6431,7 +6403,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::DefNode(node) => {
                 write!(f, "├── name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.name))?;
                 write!(f, "├── name_loc:")?;
                 writeln!(
                     f,
@@ -6442,13 +6414,20 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "├── receiver:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.receiver)?;
                 write!(f, "├── parameters:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.parameters)?;
                 write!(f, "├── body:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.body)?;
                 write!(f, "├── locals:")?;
-                writeln!(f);
+                writeln!(
+                    f,
+                    " {:?}",
+                    node.locals
+                        .iter()
+                        .map(|r| self.program.constant(r))
+                        .collect::<Vec<_>>()
+                )?;
                 write!(f, "├── def_keyword_loc:")?;
                 writeln!(
                     f,
@@ -6533,7 +6512,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     None => writeln!(f, " ∅"),
                 }?;
                 write!(f, "├── value:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -6577,7 +6556,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "├── statements:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.statements)?;
                 write!(f, "└── end_keyword_loc:")?;
                 match &node.end_keyword_loc {
                     Some(loc) => writeln!(
@@ -6602,7 +6581,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "├── statements:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.statements)?;
                 write!(f, "└── closing_loc:")?;
                 writeln!(
                     f,
@@ -6624,7 +6603,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "└── variable:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -6647,7 +6626,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "├── statements:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.statements)?;
                 write!(f, "└── end_keyword_loc:")?;
                 writeln!(
                     f,
@@ -6661,9 +6640,9 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             NodeKind::FalseNode(node) => {}
             NodeKind::FindPatternNode(node) => {
                 write!(f, "├── constant:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.constant)?;
                 write!(f, "├── left:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -6675,7 +6654,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                 )?;
                 drop(pad);
                 write!(f, "├── requireds:")?;
-                writeln!(f, " (length: {})", node.requireds.len());
+                writeln!(f, " (length: {})", node.requireds.len())?;
                 let mut pad = PadWriter::new(f, "|   ", true);
                 for node in &node.requireds {
                     writeln!(
@@ -6689,7 +6668,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                 }
                 drop(pad);
                 write!(f, "├── right:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -6727,9 +6706,9 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::FlipFlopNode(node) => {
                 write!(f, "├── left:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.left)?;
                 write!(f, "├── right:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.right)?;
                 write!(f, "└── operator_loc:")?;
                 writeln!(
                     f,
@@ -6742,11 +6721,11 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::FloatNode(node) => {
                 write!(f, "└── value:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.value)?;
             }
             NodeKind::ForNode(node) => {
                 write!(f, "├── index:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -6758,7 +6737,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                 )?;
                 drop(pad);
                 write!(f, "├── collection:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -6770,7 +6749,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                 )?;
                 drop(pad);
                 write!(f, "├── statements:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.statements)?;
                 write!(f, "├── for_keyword_loc:")?;
                 writeln!(
                     f,
@@ -6815,11 +6794,11 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             NodeKind::ForwardingParameterNode(node) => {}
             NodeKind::ForwardingSuperNode(node) => {
                 write!(f, "└── block:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.block)?;
             }
             NodeKind::GlobalVariableAndWriteNode(node) => {
                 write!(f, "├── name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.name))?;
                 write!(f, "├── name_loc:")?;
                 writeln!(
                     f,
@@ -6839,7 +6818,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "└── value:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -6853,7 +6832,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::GlobalVariableOperatorWriteNode(node) => {
                 write!(f, "├── name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.name))?;
                 write!(f, "├── name_loc:")?;
                 writeln!(
                     f,
@@ -6873,7 +6852,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "├── value:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -6885,11 +6864,11 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                 )?;
                 drop(pad);
                 write!(f, "└── binary_operator:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.binary_operator))?;
             }
             NodeKind::GlobalVariableOrWriteNode(node) => {
                 write!(f, "├── name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.name))?;
                 write!(f, "├── name_loc:")?;
                 writeln!(
                     f,
@@ -6909,7 +6888,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "└── value:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -6923,15 +6902,15 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::GlobalVariableReadNode(node) => {
                 write!(f, "└── name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.name))?;
             }
             NodeKind::GlobalVariableTargetNode(node) => {
                 write!(f, "└── name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.name))?;
             }
             NodeKind::GlobalVariableWriteNode(node) => {
                 write!(f, "├── name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.name))?;
                 write!(f, "├── name_loc:")?;
                 writeln!(
                     f,
@@ -6942,7 +6921,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "├── value:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -6974,7 +6953,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "├── elements:")?;
-                writeln!(f, " (length: {})", node.elements.len());
+                writeln!(f, " (length: {})", node.elements.len())?;
                 let mut pad = PadWriter::new(f, "|   ", true);
                 for node in &node.elements {
                     writeln!(
@@ -6999,9 +6978,9 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::HashPatternNode(node) => {
                 write!(f, "├── constant:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.constant)?;
                 write!(f, "├── elements:")?;
-                writeln!(f, " (length: {})", node.elements.len());
+                writeln!(f, " (length: {})", node.elements.len())?;
                 let mut pad = PadWriter::new(f, "|   ", true);
                 for node in &node.elements {
                     writeln!(
@@ -7015,7 +6994,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                 }
                 drop(pad);
                 write!(f, "├── rest:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.rest)?;
                 write!(f, "├── opening_loc:")?;
                 match &node.opening_loc {
                     Some(loc) => writeln!(
@@ -7055,7 +7034,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     None => writeln!(f, " ∅"),
                 }?;
                 write!(f, "├── predicate:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -7079,9 +7058,9 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     None => writeln!(f, " ∅"),
                 }?;
                 write!(f, "├── statements:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.statements)?;
                 write!(f, "├── subsequent:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.subsequent)?;
                 write!(f, "└── end_keyword_loc:")?;
                 match &node.end_keyword_loc {
                     Some(loc) => writeln!(
@@ -7097,7 +7076,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::ImaginaryNode(node) => {
                 write!(f, "└── numeric:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -7111,7 +7090,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::ImplicitNode(node) => {
                 write!(f, "└── value:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -7126,7 +7105,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             NodeKind::ImplicitRestNode(node) => {}
             NodeKind::InNode(node) => {
                 write!(f, "├── pattern:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -7138,7 +7117,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                 )?;
                 drop(pad);
                 write!(f, "├── statements:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.statements)?;
                 write!(f, "├── in_loc:")?;
                 writeln!(
                     f,
@@ -7163,7 +7142,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::IndexAndWriteNode(node) => {
                 write!(f, "├── receiver:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.receiver)?;
                 write!(f, "├── call_operator_loc:")?;
                 match &node.call_operator_loc {
                     Some(loc) => writeln!(
@@ -7186,7 +7165,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "├── arguments:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.arguments)?;
                 write!(f, "├── closing_loc:")?;
                 writeln!(
                     f,
@@ -7197,7 +7176,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "├── block:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.block)?;
                 write!(f, "├── operator_loc:")?;
                 writeln!(
                     f,
@@ -7208,7 +7187,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "└── value:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -7222,7 +7201,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::IndexOperatorWriteNode(node) => {
                 write!(f, "├── receiver:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.receiver)?;
                 write!(f, "├── call_operator_loc:")?;
                 match &node.call_operator_loc {
                     Some(loc) => writeln!(
@@ -7245,7 +7224,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "├── arguments:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.arguments)?;
                 write!(f, "├── closing_loc:")?;
                 writeln!(
                     f,
@@ -7256,9 +7235,9 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "├── block:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.block)?;
                 write!(f, "├── binary_operator:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.binary_operator))?;
                 write!(f, "├── binary_operator_loc:")?;
                 writeln!(
                     f,
@@ -7269,7 +7248,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "└── value:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -7283,7 +7262,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::IndexOrWriteNode(node) => {
                 write!(f, "├── receiver:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.receiver)?;
                 write!(f, "├── call_operator_loc:")?;
                 match &node.call_operator_loc {
                     Some(loc) => writeln!(
@@ -7306,7 +7285,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "├── arguments:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.arguments)?;
                 write!(f, "├── closing_loc:")?;
                 writeln!(
                     f,
@@ -7317,7 +7296,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "├── block:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.block)?;
                 write!(f, "├── operator_loc:")?;
                 writeln!(
                     f,
@@ -7328,7 +7307,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "└── value:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -7342,7 +7321,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::IndexTargetNode(node) => {
                 write!(f, "├── receiver:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -7363,7 +7342,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "├── arguments:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.arguments)?;
                 write!(f, "├── closing_loc:")?;
                 writeln!(
                     f,
@@ -7374,11 +7353,11 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "└── block:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.block)?;
             }
             NodeKind::InstanceVariableAndWriteNode(node) => {
                 write!(f, "├── name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.name))?;
                 write!(f, "├── name_loc:")?;
                 writeln!(
                     f,
@@ -7398,7 +7377,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "└── value:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -7412,7 +7391,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::InstanceVariableOperatorWriteNode(node) => {
                 write!(f, "├── name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.name))?;
                 write!(f, "├── name_loc:")?;
                 writeln!(
                     f,
@@ -7432,7 +7411,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "├── value:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -7444,11 +7423,11 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                 )?;
                 drop(pad);
                 write!(f, "└── binary_operator:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.binary_operator))?;
             }
             NodeKind::InstanceVariableOrWriteNode(node) => {
                 write!(f, "├── name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.name))?;
                 write!(f, "├── name_loc:")?;
                 writeln!(
                     f,
@@ -7468,7 +7447,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "└── value:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -7482,15 +7461,15 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::InstanceVariableReadNode(node) => {
                 write!(f, "└── name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.name))?;
             }
             NodeKind::InstanceVariableTargetNode(node) => {
                 write!(f, "└── name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.name))?;
             }
             NodeKind::InstanceVariableWriteNode(node) => {
                 write!(f, "├── name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.name))?;
                 write!(f, "├── name_loc:")?;
                 writeln!(
                     f,
@@ -7501,7 +7480,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "├── value:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -7524,7 +7503,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::IntegerNode(node) => {
                 write!(f, "└── value:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.value)?;
             }
             NodeKind::InterpolatedMatchLastLineNode(node) => {
                 write!(f, "├── opening_loc:")?;
@@ -7537,7 +7516,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "├── parts:")?;
-                writeln!(f, " (length: {})", node.parts.len());
+                writeln!(f, " (length: {})", node.parts.len())?;
                 let mut pad = PadWriter::new(f, "|   ", true);
                 for node in &node.parts {
                     writeln!(
@@ -7571,7 +7550,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "├── parts:")?;
-                writeln!(f, " (length: {})", node.parts.len());
+                writeln!(f, " (length: {})", node.parts.len())?;
                 let mut pad = PadWriter::new(f, "|   ", true);
                 for node in &node.parts {
                     writeln!(
@@ -7608,7 +7587,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     None => writeln!(f, " ∅"),
                 }?;
                 write!(f, "├── parts:")?;
-                writeln!(f, " (length: {})", node.parts.len());
+                writeln!(f, " (length: {})", node.parts.len())?;
                 let mut pad = PadWriter::new(f, "|   ", true);
                 for node in &node.parts {
                     writeln!(
@@ -7648,7 +7627,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     None => writeln!(f, " ∅"),
                 }?;
                 write!(f, "├── parts:")?;
-                writeln!(f, " (length: {})", node.parts.len());
+                writeln!(f, " (length: {})", node.parts.len())?;
                 let mut pad = PadWriter::new(f, "|   ", true);
                 for node in &node.parts {
                     writeln!(
@@ -7685,7 +7664,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "├── parts:")?;
-                writeln!(f, " (length: {})", node.parts.len());
+                writeln!(f, " (length: {})", node.parts.len())?;
                 let mut pad = PadWriter::new(f, "|   ", true);
                 for node in &node.parts {
                     writeln!(
@@ -7712,7 +7691,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             NodeKind::ItParametersNode(node) => {}
             NodeKind::KeywordHashNode(node) => {
                 write!(f, "└── elements:")?;
-                writeln!(f, " (length: {})", node.elements.len());
+                writeln!(f, " (length: {})", node.elements.len())?;
                 let mut pad = PadWriter::new(f, "|   ", true);
                 for node in &node.elements {
                     writeln!(
@@ -7728,7 +7707,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::KeywordRestParameterNode(node) => {
                 write!(f, "├── name:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.name)?;
                 write!(f, "├── name_loc:")?;
                 match &node.name_loc {
                     Some(loc) => writeln!(
@@ -7753,7 +7732,14 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::LambdaNode(node) => {
                 write!(f, "├── locals:")?;
-                writeln!(f);
+                writeln!(
+                    f,
+                    " {:?}",
+                    node.locals
+                        .iter()
+                        .map(|r| self.program.constant(r))
+                        .collect::<Vec<_>>()
+                )?;
                 write!(f, "├── operator_loc:")?;
                 writeln!(
                     f,
@@ -7782,9 +7768,9 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "├── parameters:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.parameters)?;
                 write!(f, "└── body:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.body)?;
             }
             NodeKind::LocalVariableAndWriteNode(node) => {
                 write!(f, "├── name_loc:")?;
@@ -7806,7 +7792,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "├── value:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -7818,9 +7804,9 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                 )?;
                 drop(pad);
                 write!(f, "├── name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.name))?;
                 write!(f, "└── depth:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.depth)?;
             }
             NodeKind::LocalVariableOperatorWriteNode(node) => {
                 write!(f, "├── name_loc:")?;
@@ -7842,7 +7828,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "├── value:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -7854,11 +7840,11 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                 )?;
                 drop(pad);
                 write!(f, "├── name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.name))?;
                 write!(f, "├── binary_operator:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.binary_operator))?;
                 write!(f, "└── depth:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.depth)?;
             }
             NodeKind::LocalVariableOrWriteNode(node) => {
                 write!(f, "├── name_loc:")?;
@@ -7880,7 +7866,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "├── value:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -7892,27 +7878,27 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                 )?;
                 drop(pad);
                 write!(f, "├── name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.name))?;
                 write!(f, "└── depth:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.depth)?;
             }
             NodeKind::LocalVariableReadNode(node) => {
                 write!(f, "├── name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.name))?;
                 write!(f, "└── depth:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.depth)?;
             }
             NodeKind::LocalVariableTargetNode(node) => {
                 write!(f, "├── name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.name))?;
                 write!(f, "└── depth:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.depth)?;
             }
             NodeKind::LocalVariableWriteNode(node) => {
                 write!(f, "├── name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.name))?;
                 write!(f, "├── depth:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.depth)?;
                 write!(f, "├── name_loc:")?;
                 writeln!(
                     f,
@@ -7923,7 +7909,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "├── value:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -7977,7 +7963,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::MatchPredicateNode(node) => {
                 write!(f, "├── value:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -7989,7 +7975,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                 )?;
                 drop(pad);
                 write!(f, "├── pattern:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -8012,7 +7998,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::MatchRequiredNode(node) => {
                 write!(f, "├── value:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -8024,7 +8010,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                 )?;
                 drop(pad);
                 write!(f, "├── pattern:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -8047,7 +8033,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::MatchWriteNode(node) => {
                 write!(f, "├── call:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -8059,7 +8045,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                 )?;
                 drop(pad);
                 write!(f, "└── targets:")?;
-                writeln!(f, " (length: {})", node.targets.len());
+                writeln!(f, " (length: {})", node.targets.len())?;
                 let mut pad = PadWriter::new(f, "|   ", true);
                 for node in &node.targets {
                     writeln!(
@@ -8076,7 +8062,14 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             NodeKind::MissingNode(node) => {}
             NodeKind::ModuleNode(node) => {
                 write!(f, "├── locals:")?;
-                writeln!(f);
+                writeln!(
+                    f,
+                    " {:?}",
+                    node.locals
+                        .iter()
+                        .map(|r| self.program.constant(r))
+                        .collect::<Vec<_>>()
+                )?;
                 write!(f, "├── module_keyword_loc:")?;
                 writeln!(
                     f,
@@ -8087,7 +8080,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "├── constant_path:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -8099,7 +8092,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                 )?;
                 drop(pad);
                 write!(f, "├── body:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.body)?;
                 write!(f, "├── end_keyword_loc:")?;
                 writeln!(
                     f,
@@ -8110,11 +8103,11 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "└── name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.name))?;
             }
             NodeKind::MultiTargetNode(node) => {
                 write!(f, "├── lefts:")?;
-                writeln!(f, " (length: {})", node.lefts.len());
+                writeln!(f, " (length: {})", node.lefts.len())?;
                 let mut pad = PadWriter::new(f, "|   ", true);
                 for node in &node.lefts {
                     writeln!(
@@ -8128,9 +8121,9 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                 }
                 drop(pad);
                 write!(f, "├── rest:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.rest)?;
                 write!(f, "├── rights:")?;
-                writeln!(f, " (length: {})", node.rights.len());
+                writeln!(f, " (length: {})", node.rights.len())?;
                 let mut pad = PadWriter::new(f, "|   ", true);
                 for node in &node.rights {
                     writeln!(
@@ -8170,7 +8163,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::MultiWriteNode(node) => {
                 write!(f, "├── lefts:")?;
-                writeln!(f, " (length: {})", node.lefts.len());
+                writeln!(f, " (length: {})", node.lefts.len())?;
                 let mut pad = PadWriter::new(f, "|   ", true);
                 for node in &node.lefts {
                     writeln!(
@@ -8184,9 +8177,9 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                 }
                 drop(pad);
                 write!(f, "├── rest:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.rest)?;
                 write!(f, "├── rights:")?;
-                writeln!(f, " (length: {})", node.rights.len());
+                writeln!(f, " (length: {})", node.rights.len())?;
                 let mut pad = PadWriter::new(f, "|   ", true);
                 for node in &node.rights {
                     writeln!(
@@ -8233,7 +8226,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "└── value:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -8247,7 +8240,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::NextNode(node) => {
                 write!(f, "├── arguments:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.arguments)?;
                 write!(f, "└── keyword_loc:")?;
                 writeln!(
                     f,
@@ -8281,15 +8274,15 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::NumberedParametersNode(node) => {
                 write!(f, "└── maximum:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.maximum)?;
             }
             NodeKind::NumberedReferenceReadNode(node) => {
                 write!(f, "└── number:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.number)?;
             }
             NodeKind::OptionalKeywordParameterNode(node) => {
                 write!(f, "├── name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.name))?;
                 write!(f, "├── name_loc:")?;
                 writeln!(
                     f,
@@ -8300,7 +8293,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "└── value:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -8314,7 +8307,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::OptionalParameterNode(node) => {
                 write!(f, "├── name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.name))?;
                 write!(f, "├── name_loc:")?;
                 writeln!(
                     f,
@@ -8334,7 +8327,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "└── value:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -8348,7 +8341,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::OrNode(node) => {
                 write!(f, "├── left:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -8360,7 +8353,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                 )?;
                 drop(pad);
                 write!(f, "├── right:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -8383,7 +8376,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::ParametersNode(node) => {
                 write!(f, "├── requireds:")?;
-                writeln!(f, " (length: {})", node.requireds.len());
+                writeln!(f, " (length: {})", node.requireds.len())?;
                 let mut pad = PadWriter::new(f, "|   ", true);
                 for node in &node.requireds {
                     writeln!(
@@ -8397,7 +8390,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                 }
                 drop(pad);
                 write!(f, "├── optionals:")?;
-                writeln!(f, " (length: {})", node.optionals.len());
+                writeln!(f, " (length: {})", node.optionals.len())?;
                 let mut pad = PadWriter::new(f, "|   ", true);
                 for node in &node.optionals {
                     writeln!(
@@ -8411,9 +8404,9 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                 }
                 drop(pad);
                 write!(f, "├── rest:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.rest)?;
                 write!(f, "├── posts:")?;
-                writeln!(f, " (length: {})", node.posts.len());
+                writeln!(f, " (length: {})", node.posts.len())?;
                 let mut pad = PadWriter::new(f, "|   ", true);
                 for node in &node.posts {
                     writeln!(
@@ -8427,7 +8420,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                 }
                 drop(pad);
                 write!(f, "├── keywords:")?;
-                writeln!(f, " (length: {})", node.keywords.len());
+                writeln!(f, " (length: {})", node.keywords.len())?;
                 let mut pad = PadWriter::new(f, "|   ", true);
                 for node in &node.keywords {
                     writeln!(
@@ -8441,13 +8434,13 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                 }
                 drop(pad);
                 write!(f, "├── keyword_rest:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.keyword_rest)?;
                 write!(f, "└── block:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.block)?;
             }
             NodeKind::ParenthesesNode(node) => {
                 write!(f, "├── body:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.body)?;
                 write!(f, "├── opening_loc:")?;
                 writeln!(
                     f,
@@ -8469,7 +8462,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::PinnedExpressionNode(node) => {
                 write!(f, "├── expression:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -8510,7 +8503,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::PinnedVariableNode(node) => {
                 write!(f, "├── variable:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -8533,7 +8526,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::PostExecutionNode(node) => {
                 write!(f, "├── statements:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.statements)?;
                 write!(f, "├── keyword_loc:")?;
                 writeln!(
                     f,
@@ -8564,7 +8557,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::PreExecutionNode(node) => {
                 write!(f, "├── statements:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.statements)?;
                 write!(f, "├── keyword_loc:")?;
                 writeln!(
                     f,
@@ -8595,9 +8588,16 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::ProgramNode(node) => {
                 write!(f, "├── locals:")?;
-                writeln!(f);
+                writeln!(
+                    f,
+                    " {:?}",
+                    node.locals
+                        .iter()
+                        .map(|r| self.program.constant(r))
+                        .collect::<Vec<_>>()
+                )?;
                 write!(f, "└── statements:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -8611,9 +8611,9 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::RangeNode(node) => {
                 write!(f, "├── left:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.left)?;
                 write!(f, "├── right:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.right)?;
                 write!(f, "└── operator_loc:")?;
                 writeln!(
                     f,
@@ -8626,9 +8626,9 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::RationalNode(node) => {
                 write!(f, "├── numerator:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.numerator)?;
                 write!(f, "└── denominator:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.denominator)?;
             }
             NodeKind::RedoNode(node) => {}
             NodeKind::RegularExpressionNode(node) => {
@@ -8664,7 +8664,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::RequiredKeywordParameterNode(node) => {
                 write!(f, "├── name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.name))?;
                 write!(f, "└── name_loc:")?;
                 writeln!(
                     f,
@@ -8677,11 +8677,11 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::RequiredParameterNode(node) => {
                 write!(f, "└── name:")?;
-                writeln!(f);
+                writeln!(f, " {:?}", self.program.constant(&node.name))?;
             }
             NodeKind::RescueModifierNode(node) => {
                 write!(f, "├── expression:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -8702,7 +8702,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "└── rescue_expression:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -8725,7 +8725,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "├── exceptions:")?;
-                writeln!(f, " (length: {})", node.exceptions.len());
+                writeln!(f, " (length: {})", node.exceptions.len())?;
                 let mut pad = PadWriter::new(f, "|   ", true);
                 for node in &node.exceptions {
                     writeln!(
@@ -8751,7 +8751,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     None => writeln!(f, " ∅"),
                 }?;
                 write!(f, "├── reference:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.reference)?;
                 write!(f, "├── then_keyword_loc:")?;
                 match &node.then_keyword_loc {
                     Some(loc) => writeln!(
@@ -8765,13 +8765,13 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     None => writeln!(f, " ∅"),
                 }?;
                 write!(f, "├── statements:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.statements)?;
                 write!(f, "└── subsequent:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.subsequent)?;
             }
             NodeKind::RestParameterNode(node) => {
                 write!(f, "├── name:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.name)?;
                 write!(f, "├── name_loc:")?;
                 match &node.name_loc {
                     Some(loc) => writeln!(
@@ -8806,12 +8806,12 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "└── arguments:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.arguments)?;
             }
             NodeKind::SelfNode(node) => {}
             NodeKind::ShareableConstantNode(node) => {
                 write!(f, "└── write:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -8825,7 +8825,14 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             }
             NodeKind::SingletonClassNode(node) => {
                 write!(f, "├── locals:")?;
-                writeln!(f);
+                writeln!(
+                    f,
+                    " {:?}",
+                    node.locals
+                        .iter()
+                        .map(|r| self.program.constant(r))
+                        .collect::<Vec<_>>()
+                )?;
                 write!(f, "├── class_keyword_loc:")?;
                 writeln!(
                     f,
@@ -8845,7 +8852,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "├── expression:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -8857,7 +8864,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                 )?;
                 drop(pad);
                 write!(f, "├── body:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.body)?;
                 write!(f, "└── end_keyword_loc:")?;
                 writeln!(
                     f,
@@ -8885,11 +8892,11 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "└── expression:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.expression)?;
             }
             NodeKind::StatementsNode(node) => {
                 write!(f, "└── body:")?;
-                writeln!(f, " (length: {})", node.body.len());
+                writeln!(f, " (length: {})", node.body.len())?;
                 let mut pad = PadWriter::new(f, "|   ", true);
                 for node in &node.body {
                     writeln!(
@@ -8963,7 +8970,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     None => writeln!(f, " ∅"),
                 }?;
                 write!(f, "├── arguments:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.arguments)?;
                 write!(f, "├── rparen_loc:")?;
                 match &node.rparen_loc {
                     Some(loc) => writeln!(
@@ -8977,7 +8984,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     None => writeln!(f, " ∅"),
                 }?;
                 write!(f, "└── block:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.block)?;
             }
             NodeKind::SymbolNode(node) => {
                 write!(f, "├── opening_loc:")?;
@@ -9022,7 +9029,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
             NodeKind::TrueNode(node) => {}
             NodeKind::UndefNode(node) => {
                 write!(f, "├── names:")?;
-                writeln!(f, " (length: {})", node.names.len());
+                writeln!(f, " (length: {})", node.names.len())?;
                 let mut pad = PadWriter::new(f, "|   ", true);
                 for node in &node.names {
                     writeln!(
@@ -9056,7 +9063,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "├── predicate:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -9080,9 +9087,9 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     None => writeln!(f, " ∅"),
                 }?;
                 write!(f, "├── statements:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.statements)?;
                 write!(f, "├── else_clause:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.else_clause)?;
                 write!(f, "└── end_keyword_loc:")?;
                 match &node.end_keyword_loc {
                     Some(loc) => writeln!(
@@ -9131,7 +9138,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     None => writeln!(f, " ∅"),
                 }?;
                 write!(f, "├── predicate:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -9143,7 +9150,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                 )?;
                 drop(pad);
                 write!(f, "└── statements:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.statements)?;
             }
             NodeKind::WhenNode(node) => {
                 write!(f, "├── keyword_loc:")?;
@@ -9156,7 +9163,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     }
                 )?;
                 write!(f, "├── conditions:")?;
-                writeln!(f, " (length: {})", node.conditions.len());
+                writeln!(f, " (length: {})", node.conditions.len())?;
                 let mut pad = PadWriter::new(f, "|   ", true);
                 for node in &node.conditions {
                     writeln!(
@@ -9182,7 +9189,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     None => writeln!(f, " ∅"),
                 }?;
                 write!(f, "└── statements:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.statements)?;
             }
             NodeKind::WhileNode(node) => {
                 write!(f, "├── keyword_loc:")?;
@@ -9219,7 +9226,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     None => writeln!(f, " ∅"),
                 }?;
                 write!(f, "├── predicate:")?;
-                writeln!(f);
+                writeln!(f)?;
                 let mut pad = PadWriter::new(f, "    ", true);
                 writeln!(
                     &mut pad,
@@ -9231,7 +9238,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                 )?;
                 drop(pad);
                 write!(f, "└── statements:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.statements)?;
             }
             NodeKind::XStringNode(node) => {
                 write!(f, "├── opening_loc:")?;
@@ -9287,7 +9294,7 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                     None => writeln!(f, " ∅"),
                 }?;
                 write!(f, "├── arguments:")?;
-                writeln!(f);
+                writeln!(f, "# {:?}", node.arguments)?;
                 write!(f, "└── rparen_loc:")?;
                 match &node.rparen_loc {
                     Some(loc) => writeln!(

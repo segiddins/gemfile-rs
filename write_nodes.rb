@@ -108,15 +108,11 @@ config["nodes"].each_with_index do |node, index|
   f.puts "// #{index}"
   f.puts "#[derive(Debug, Clone)]"
   f.print "pub struct #{name}"
-  if node.fields
     f.puts " {"
-    node.fields.each do |field|
+    node.fields&.each do |field|
       f.puts "  #{field.name}: #{rust_type field.type},"
     end
     f.puts "}"
-  else
-    f.puts "(());"
-  end
 
   f.puts "impl #{name} {"
   node.fields&.each do |field|
@@ -130,10 +126,8 @@ config["nodes"].each_with_index do |node, index|
   end
   f.puts "pub fn into_node_kind(self) -> NodeKind { NodeKind::#{name}(self) }"
 
-  if !node.fields&.any?
-    f.puts "pub fn new() -> Self { Self(()) }"
-  else
-  f.puts "pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {"
+  if node.fields&.any?
+    f.puts "pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {"
     f.puts "    use winnow::binary::length_repeat;"
     f.puts "    use winnow::Parser;"
     f.puts "    winnow::combinator::seq![#{name}{"
@@ -205,7 +199,7 @@ RS
   if node["fields"]&.any?
     f.puts "    #{index+1} => #{name}::parser.map(#{name}::into_node_kind).parse_next(input),"
   else
-    f.puts "    #{index+1} => winnow::combinator::empty.value(#{name}::new().into_node_kind()).parse_next(input),"
+    f.puts "    #{index+1} => winnow::combinator::empty.value(#{name} {}.into_node_kind()).parse_next(input),"
   end
   # f.puts "    #{index+1} => #{name} {"
   # node["fields"]&.each do |field|
@@ -265,15 +259,13 @@ def snapshot_field(f, field, prefix)
   f.puts "            write!(f, \"#{prefix} #{field['name']}:\")?;"
 
   case field["type"]
-  when "constant"
-    f.puts "writeln!(f);"
   when "node"
-    f.puts "writeln!(f);"
+    f.puts "writeln!(f)?;"
     f.puts "let mut pad = PadWriter::new(f, \"    \", true);"
     f.puts "writeln!(&mut pad, \"{:?}\", NodeSnapshot { program: self.program, node: node.#{field['name']} })?;"
     f.puts "drop(pad);"
   when "node[]"
-    f.puts "writeln!(f, \" (length: {})\", node.#{field['name']}.len());"
+    f.puts "writeln!(f, \" (length: {})\", node.#{field['name']}.len())?;"
     f.puts "let mut pad = PadWriter::new(f, \"|   \", true);"
     f.puts <<~RS
             for node in &node.#{field['name']} {
@@ -292,8 +284,12 @@ def snapshot_field(f, field, prefix)
     RS
   when "string"
     f.puts "writeln!(f, \" {:?}\", node.#{field['name']})?;"
+  when "constant"
+    f.puts "writeln!(f, \" {:?}\", self.program.constant(&node.#{field['name']}))?;"
+  when "constant[]"
+    f.puts "writeln!(f, \" {:?}\", node.#{field['name']}.iter().map(|r| self.program.constant(r)).collect::<Vec<_>>())?;"
   else
-    f.puts "writeln!(f);"
+    f.puts "writeln!(f, \"# {:?}\", node.#{field['name']})?;"
     # raise "Implement #{field['type']}"
   end
 end
@@ -368,7 +364,7 @@ f.puts "use gemfile_rs::prism_ast::deserialize::Program;"
 base = "/Users/segiddins/Development/github.com/ruby/prism/test/prism/fixtures"
 Dir["{**/,}*.txt", base:].sort.uniq.each do |path|
     f.puts
-    # f.puts "#[test]"
+    f.puts "#[test]"
     f.puts "fn test_ast_#{path.gsub(/[\/.]/, "_")}() {"
     f.puts "  let program = Program::parse(include_str!(\"#{File.join(base, path)}\").to_string()).unwrap();"
     f.puts "  similar_asserts::assert_eq!(include_str!(\"#{File.join(File.dirname(base), "snapshots", path)}\").trim(), program.snapshot());"
