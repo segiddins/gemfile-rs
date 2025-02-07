@@ -26,9 +26,12 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 0, length: 1 },
-            flags: 40,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1000,
+                        flags: IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(1),
@@ -45,9 +48,12 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 2, length: 1 },
-            flags: 40,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1000,
+                        flags: IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(2),
@@ -64,9 +70,12 @@ Program {
         Node {
             identifier: 7,
             location: Location { start: 18, length: 2 },
-            flags: 11,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1011,
+                        flags: BINARY | DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -79,7 +88,6 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 18, length: 2 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -91,7 +99,6 @@ Program {
         Node {
             identifier: 8,
             location: Location { start: 5, length: 24 },
-            flags: 0,
             node_kind: BeginNode(
                 BeginNode {
                     begin_keyword_loc: Some(
@@ -112,9 +119,11 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 2, length: 27 },
-            flags: 0,
             node_kind: ArgumentsNode(
                 ArgumentsNode {
+                    flags: BitFlags<ArgumentsNodeFlags> {
+                        bits: 0b0,
+                    },
                     arguments: [
                         NodeRef(1),
                         NodeRef(4),
@@ -125,9 +134,12 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 0, length: 29 },
-            flags: 273,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1,
+                        flags: SAFE_NAVIGATION,
+                    },
                     receiver: Some(
                         NodeRef(0),
                     ),
@@ -152,7 +164,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 29 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -164,7 +175,6 @@ Program {
         Node {
             identifier: 9,
             location: Location { start: 0, length: 29 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [],

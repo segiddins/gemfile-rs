@@ -108,7 +108,6 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 0, length: 6 },
-            flags: 1,
             node_kind: ReturnNode(
                 ReturnNode {
                     keyword_loc: Location { start: 0, length: 6 },
@@ -119,9 +118,12 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 16, length: 1 },
-            flags: 11,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1011,
+                        flags: BINARY | DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -134,7 +136,6 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 16, length: 1 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -146,7 +147,6 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 15, length: 3 },
-            flags: 0,
             node_kind: ParenthesesNode(
                 ParenthesesNode {
                     body: Some(
@@ -160,9 +160,12 @@ Program {
         Node {
             identifier: 7,
             location: Location { start: 21, length: 1 },
-            flags: 11,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1011,
+                        flags: BINARY | DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -175,7 +178,6 @@ Program {
         Node {
             identifier: 8,
             location: Location { start: 21, length: 1 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -187,7 +189,6 @@ Program {
         Node {
             identifier: 9,
             location: Location { start: 20, length: 3 },
-            flags: 0,
             node_kind: ParenthesesNode(
                 ParenthesesNode {
                     body: Some(
@@ -201,9 +202,12 @@ Program {
         Node {
             identifier: 10,
             location: Location { start: 26, length: 1 },
-            flags: 11,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1011,
+                        flags: BINARY | DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -216,7 +220,6 @@ Program {
         Node {
             identifier: 11,
             location: Location { start: 26, length: 1 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -228,7 +231,6 @@ Program {
         Node {
             identifier: 12,
             location: Location { start: 25, length: 3 },
-            flags: 0,
             node_kind: ParenthesesNode(
                 ParenthesesNode {
                     body: Some(
@@ -242,9 +244,11 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 15, length: 13 },
-            flags: 0,
             node_kind: ArgumentsNode(
                 ArgumentsNode {
+                    flags: BitFlags<ArgumentsNodeFlags> {
+                        bits: 0b0,
+                    },
                     arguments: [
                         NodeRef(3),
                         NodeRef(6),
@@ -256,7 +260,6 @@ Program {
         Node {
             identifier: 13,
             location: Location { start: 8, length: 20 },
-            flags: 1,
             node_kind: ReturnNode(
                 ReturnNode {
                     keyword_loc: Location { start: 8, length: 6 },
@@ -269,9 +272,12 @@ Program {
         Node {
             identifier: 14,
             location: Location { start: 38, length: 1 },
-            flags: 10,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1010,
+                        flags: DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -284,7 +290,6 @@ Program {
         Node {
             identifier: 15,
             location: Location { start: 37, length: 2 },
-            flags: 0,
             node_kind: SplatNode(
                 SplatNode {
                     operator_loc: Location { start: 37, length: 1 },
@@ -297,9 +302,11 @@ Program {
         Node {
             identifier: 16,
             location: Location { start: 37, length: 2 },
-            flags: 32,
             node_kind: ArgumentsNode(
                 ArgumentsNode {
+                    flags: BitFlags<ArgumentsNodeFlags> {
+                        bits: 0b0,
+                    },
                     arguments: [
                         NodeRef(13),
                     ],
@@ -309,7 +316,6 @@ Program {
         Node {
             identifier: 17,
             location: Location { start: 30, length: 9 },
-            flags: 1,
             node_kind: ReturnNode(
                 ReturnNode {
                     keyword_loc: Location { start: 30, length: 6 },
@@ -322,9 +328,12 @@ Program {
         Node {
             identifier: 18,
             location: Location { start: 48, length: 1 },
-            flags: 10,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1010,
+                        flags: DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -337,9 +346,11 @@ Program {
         Node {
             identifier: 19,
             location: Location { start: 48, length: 1 },
-            flags: 0,
             node_kind: ArgumentsNode(
                 ArgumentsNode {
+                    flags: BitFlags<ArgumentsNodeFlags> {
+                        bits: 0b0,
+                    },
                     arguments: [
                         NodeRef(16),
                     ],
@@ -349,7 +360,6 @@ Program {
         Node {
             identifier: 20,
             location: Location { start: 41, length: 8 },
-            flags: 1,
             node_kind: ReturnNode(
                 ReturnNode {
                     keyword_loc: Location { start: 41, length: 6 },
@@ -362,9 +372,12 @@ Program {
         Node {
             identifier: 21,
             location: Location { start: 58, length: 1 },
-            flags: 10,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1010,
+                        flags: DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -377,9 +390,12 @@ Program {
         Node {
             identifier: 23,
             location: Location { start: 61, length: 1 },
-            flags: 10,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1010,
+                        flags: DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -392,9 +408,12 @@ Program {
         Node {
             identifier: 24,
             location: Location { start: 64, length: 1 },
-            flags: 10,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1010,
+                        flags: DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -407,9 +426,11 @@ Program {
         Node {
             identifier: 22,
             location: Location { start: 58, length: 7 },
-            flags: 0,
             node_kind: ArgumentsNode(
                 ArgumentsNode {
+                    flags: BitFlags<ArgumentsNodeFlags> {
+                        bits: 0b0,
+                    },
                     arguments: [
                         NodeRef(19),
                         NodeRef(20),
@@ -421,7 +442,6 @@ Program {
         Node {
             identifier: 25,
             location: Location { start: 51, length: 14 },
-            flags: 1,
             node_kind: ReturnNode(
                 ReturnNode {
                     keyword_loc: Location { start: 51, length: 6 },
@@ -434,9 +454,12 @@ Program {
         Node {
             identifier: 26,
             location: Location { start: 74, length: 1 },
-            flags: 10,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1010,
+                        flags: DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -449,9 +472,12 @@ Program {
         Node {
             identifier: 28,
             location: Location { start: 77, length: 1 },
-            flags: 10,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1010,
+                        flags: DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -464,9 +490,12 @@ Program {
         Node {
             identifier: 29,
             location: Location { start: 80, length: 1 },
-            flags: 10,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1010,
+                        flags: DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -479,9 +508,11 @@ Program {
         Node {
             identifier: 27,
             location: Location { start: 74, length: 7 },
-            flags: 0,
             node_kind: ArgumentsNode(
                 ArgumentsNode {
+                    flags: BitFlags<ArgumentsNodeFlags> {
+                        bits: 0b0,
+                    },
                     arguments: [
                         NodeRef(24),
                         NodeRef(25),
@@ -493,7 +524,6 @@ Program {
         Node {
             identifier: 30,
             location: Location { start: 67, length: 14 },
-            flags: 1,
             node_kind: ReturnNode(
                 ReturnNode {
                     keyword_loc: Location { start: 67, length: 6 },
@@ -506,9 +536,12 @@ Program {
         Node {
             identifier: 32,
             location: Location { start: 91, length: 1 },
-            flags: 10,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1010,
+                        flags: DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -521,9 +554,12 @@ Program {
         Node {
             identifier: 33,
             location: Location { start: 94, length: 1 },
-            flags: 10,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1010,
+                        flags: DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -536,9 +572,12 @@ Program {
         Node {
             identifier: 34,
             location: Location { start: 97, length: 1 },
-            flags: 10,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1010,
+                        flags: DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -551,9 +590,11 @@ Program {
         Node {
             identifier: 31,
             location: Location { start: 90, length: 9 },
-            flags: 2,
             node_kind: ArrayNode(
                 ArrayNode {
+                    flags: BitFlags<ArrayNodeFlags> {
+                        bits: 0b0,
+                    },
                     elements: [
                         NodeRef(29),
                         NodeRef(30),
@@ -571,9 +612,11 @@ Program {
         Node {
             identifier: 35,
             location: Location { start: 90, length: 9 },
-            flags: 0,
             node_kind: ArgumentsNode(
                 ArgumentsNode {
+                    flags: BitFlags<ArgumentsNodeFlags> {
+                        bits: 0b0,
+                    },
                     arguments: [
                         NodeRef(32),
                     ],
@@ -583,7 +626,6 @@ Program {
         Node {
             identifier: 36,
             location: Location { start: 83, length: 16 },
-            flags: 1,
             node_kind: ReturnNode(
                 ReturnNode {
                     keyword_loc: Location { start: 83, length: 6 },
@@ -596,9 +638,12 @@ Program {
         Node {
             identifier: 37,
             location: Location { start: 111, length: 1 },
-            flags: 11,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1011,
+                        flags: BINARY | DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -611,9 +656,12 @@ Program {
         Node {
             identifier: 39,
             location: Location { start: 115, length: 1 },
-            flags: 11,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1011,
+                        flags: BINARY | DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -626,7 +674,6 @@ Program {
         Node {
             identifier: 38,
             location: Location { start: 111, length: 5 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -639,7 +686,6 @@ Program {
         Node {
             identifier: 40,
             location: Location { start: 107, length: 11 },
-            flags: 0,
             node_kind: ParenthesesNode(
                 ParenthesesNode {
                     body: Some(
@@ -653,9 +699,11 @@ Program {
         Node {
             identifier: 41,
             location: Location { start: 107, length: 11 },
-            flags: 0,
             node_kind: ArgumentsNode(
                 ArgumentsNode {
+                    flags: BitFlags<ArgumentsNodeFlags> {
+                        bits: 0b0,
+                    },
                     arguments: [
                         NodeRef(38),
                     ],
@@ -665,7 +713,6 @@ Program {
         Node {
             identifier: 42,
             location: Location { start: 101, length: 17 },
-            flags: 1,
             node_kind: ReturnNode(
                 ReturnNode {
                     keyword_loc: Location { start: 101, length: 6 },
@@ -678,7 +725,6 @@ Program {
         Node {
             identifier: 43,
             location: Location { start: 126, length: 2 },
-            flags: 0,
             node_kind: ParenthesesNode(
                 ParenthesesNode {
                     body: None,
@@ -690,9 +736,11 @@ Program {
         Node {
             identifier: 44,
             location: Location { start: 126, length: 2 },
-            flags: 0,
             node_kind: ArgumentsNode(
                 ArgumentsNode {
+                    flags: BitFlags<ArgumentsNodeFlags> {
+                        bits: 0b0,
+                    },
                     arguments: [
                         NodeRef(41),
                     ],
@@ -702,7 +750,6 @@ Program {
         Node {
             identifier: 45,
             location: Location { start: 120, length: 8 },
-            flags: 1,
             node_kind: ReturnNode(
                 ReturnNode {
                     keyword_loc: Location { start: 120, length: 6 },
@@ -715,9 +762,12 @@ Program {
         Node {
             identifier: 46,
             location: Location { start: 137, length: 1 },
-            flags: 11,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1011,
+                        flags: BINARY | DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -730,7 +780,6 @@ Program {
         Node {
             identifier: 47,
             location: Location { start: 137, length: 1 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -742,7 +791,6 @@ Program {
         Node {
             identifier: 48,
             location: Location { start: 136, length: 3 },
-            flags: 0,
             node_kind: ParenthesesNode(
                 ParenthesesNode {
                     body: Some(
@@ -756,9 +804,11 @@ Program {
         Node {
             identifier: 49,
             location: Location { start: 136, length: 3 },
-            flags: 0,
             node_kind: ArgumentsNode(
                 ArgumentsNode {
+                    flags: BitFlags<ArgumentsNodeFlags> {
+                        bits: 0b0,
+                    },
                     arguments: [
                         NodeRef(46),
                     ],
@@ -768,7 +818,6 @@ Program {
         Node {
             identifier: 50,
             location: Location { start: 130, length: 9 },
-            flags: 1,
             node_kind: ReturnNode(
                 ReturnNode {
                     keyword_loc: Location { start: 130, length: 6 },
@@ -781,7 +830,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 139 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -802,7 +850,6 @@ Program {
         Node {
             identifier: 51,
             location: Location { start: 0, length: 139 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [],

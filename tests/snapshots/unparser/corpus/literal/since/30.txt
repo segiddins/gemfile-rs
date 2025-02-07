@@ -40,9 +40,12 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 0, length: 1 },
-            flags: 10,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1010,
+                        flags: DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -55,7 +58,6 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 6, length: 1 },
-            flags: 0,
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
                     name: ConstantRef(1),
@@ -66,7 +68,6 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 5, length: 3 },
-            flags: 0,
             node_kind: ArrayPatternNode(
                 ArrayPatternNode {
                     constant: None,
@@ -87,7 +88,6 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 0, length: 8 },
-            flags: 1,
             node_kind: MatchRequiredNode(
                 MatchRequiredNode {
                     value: NodeRef(0),
@@ -99,9 +99,12 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 9, length: 1 },
-            flags: 10,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1010,
+                        flags: DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -114,7 +117,6 @@ Program {
         Node {
             identifier: 7,
             location: Location { start: 15, length: 1 },
-            flags: 0,
             node_kind: SplatNode(
                 SplatNode {
                     operator_loc: Location { start: 15, length: 1 },
@@ -125,7 +127,6 @@ Program {
         Node {
             identifier: 8,
             location: Location { start: 14, length: 3 },
-            flags: 0,
             node_kind: ArrayPatternNode(
                 ArrayPatternNode {
                     constant: None,
@@ -146,7 +147,6 @@ Program {
         Node {
             identifier: 9,
             location: Location { start: 9, length: 8 },
-            flags: 1,
             node_kind: MatchRequiredNode(
                 MatchRequiredNode {
                     value: NodeRef(4),
@@ -158,9 +158,12 @@ Program {
         Node {
             identifier: 10,
             location: Location { start: 18, length: 1 },
-            flags: 10,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1010,
+                        flags: DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -173,7 +176,6 @@ Program {
         Node {
             identifier: 11,
             location: Location { start: 24, length: 1 },
-            flags: 0,
             node_kind: SplatNode(
                 SplatNode {
                     operator_loc: Location { start: 24, length: 1 },
@@ -184,9 +186,12 @@ Program {
         Node {
             identifier: 12,
             location: Location { start: 27, length: 2 },
-            flags: 10,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1010,
+                        flags: DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -199,7 +204,6 @@ Program {
         Node {
             identifier: 13,
             location: Location { start: 31, length: 1 },
-            flags: 0,
             node_kind: SplatNode(
                 SplatNode {
                     operator_loc: Location { start: 31, length: 1 },
@@ -210,7 +214,6 @@ Program {
         Node {
             identifier: 14,
             location: Location { start: 23, length: 10 },
-            flags: 0,
             node_kind: FindPatternNode(
                 FindPatternNode {
                     constant: None,
@@ -231,7 +234,6 @@ Program {
         Node {
             identifier: 15,
             location: Location { start: 18, length: 15 },
-            flags: 1,
             node_kind: MatchPredicateNode(
                 MatchPredicateNode {
                     value: NodeRef(8),
@@ -243,9 +245,12 @@ Program {
         Node {
             identifier: 16,
             location: Location { start: 34, length: 1 },
-            flags: 10,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1010,
+                        flags: DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -258,7 +263,6 @@ Program {
         Node {
             identifier: 17,
             location: Location { start: 40, length: 1 },
-            flags: 0,
             node_kind: SplatNode(
                 SplatNode {
                     operator_loc: Location { start: 40, length: 1 },
@@ -269,7 +273,6 @@ Program {
         Node {
             identifier: 18,
             location: Location { start: 43, length: 1 },
-            flags: 0,
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
                     name: ConstantRef(1),
@@ -280,7 +283,6 @@ Program {
         Node {
             identifier: 19,
             location: Location { start: 47, length: 3 },
-            flags: 0,
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
                     name: ConstantRef(2),
@@ -291,7 +293,6 @@ Program {
         Node {
             identifier: 20,
             location: Location { start: 46, length: 4 },
-            flags: 0,
             node_kind: SplatNode(
                 SplatNode {
                     operator_loc: Location { start: 46, length: 1 },
@@ -304,7 +305,6 @@ Program {
         Node {
             identifier: 21,
             location: Location { start: 39, length: 12 },
-            flags: 0,
             node_kind: FindPatternNode(
                 FindPatternNode {
                     constant: None,
@@ -325,7 +325,6 @@ Program {
         Node {
             identifier: 22,
             location: Location { start: 34, length: 17 },
-            flags: 1,
             node_kind: MatchPredicateNode(
                 MatchPredicateNode {
                     value: NodeRef(14),
@@ -337,7 +336,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 51 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -352,7 +350,6 @@ Program {
         Node {
             identifier: 23,
             location: Location { start: 0, length: 51 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [

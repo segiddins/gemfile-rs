@@ -29,9 +29,12 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 5, length: 2 },
-            flags: 18,
             node_kind: SymbolNode(
                 SymbolNode {
+                    flags: BitFlags<SymbolFlags> {
+                        bits: 0b10,
+                        flags: FORCED_BINARY_ENCODING,
+                    },
                     opening_loc: Some(
                         Location { start: 5, length: 1 },
                     ),
@@ -46,7 +49,6 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 16, length: 4 },
-            flags: 2,
             node_kind: TrueNode(
                 TrueNode,
             ),
@@ -54,7 +56,6 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 11, length: 1 },
-            flags: 1,
             node_kind: ConstantReadNode(
                 ConstantReadNode {
                     name: ConstantRef(1),
@@ -64,7 +65,6 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 11, length: 1 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -76,7 +76,6 @@ Program {
         Node {
             identifier: 7,
             location: Location { start: 11, length: 9 },
-            flags: 1,
             node_kind: IfNode(
                 IfNode {
                     if_keyword_loc: Some(
@@ -95,9 +94,12 @@ Program {
         Node {
             identifier: 9,
             location: Location { start: 23, length: 2 },
-            flags: 19,
             node_kind: SymbolNode(
                 SymbolNode {
+                    flags: BitFlags<SymbolFlags> {
+                        bits: 0b11,
+                        flags: FORCED_UTF8_ENCODING | FORCED_BINARY_ENCODING,
+                    },
                     opening_loc: Some(
                         Location { start: 23, length: 1 },
                     ),
@@ -112,7 +114,6 @@ Program {
         Node {
             identifier: 8,
             location: Location { start: 23, length: 2 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -124,7 +125,6 @@ Program {
         Node {
             identifier: 10,
             location: Location { start: 8, length: 17 },
-            flags: 0,
             node_kind: InNode(
                 InNode {
                     pattern: NodeRef(4),
@@ -139,7 +139,6 @@ Program {
         Node {
             identifier: 12,
             location: Location { start: 38, length: 5 },
-            flags: 2,
             node_kind: FalseNode(
                 FalseNode,
             ),
@@ -147,7 +146,6 @@ Program {
         Node {
             identifier: 11,
             location: Location { start: 29, length: 1 },
-            flags: 1,
             node_kind: ConstantReadNode(
                 ConstantReadNode {
                     name: ConstantRef(2),
@@ -157,7 +155,6 @@ Program {
         Node {
             identifier: 13,
             location: Location { start: 29, length: 1 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -169,7 +166,6 @@ Program {
         Node {
             identifier: 14,
             location: Location { start: 29, length: 14 },
-            flags: 1,
             node_kind: UnlessNode(
                 UnlessNode {
                     keyword_loc: Location { start: 31, length: 6 },
@@ -186,9 +182,12 @@ Program {
         Node {
             identifier: 16,
             location: Location { start: 46, length: 2 },
-            flags: 19,
             node_kind: SymbolNode(
                 SymbolNode {
+                    flags: BitFlags<SymbolFlags> {
+                        bits: 0b11,
+                        flags: FORCED_UTF8_ENCODING | FORCED_BINARY_ENCODING,
+                    },
                     opening_loc: Some(
                         Location { start: 46, length: 1 },
                     ),
@@ -203,7 +202,6 @@ Program {
         Node {
             identifier: 15,
             location: Location { start: 46, length: 2 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -215,7 +213,6 @@ Program {
         Node {
             identifier: 17,
             location: Location { start: 26, length: 22 },
-            flags: 0,
             node_kind: InNode(
                 InNode {
                     pattern: NodeRef(11),
@@ -230,7 +227,6 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 0, length: 52 },
-            flags: 1,
             node_kind: CaseMatchNode(
                 CaseMatchNode {
                     predicate: Some(
@@ -249,7 +245,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 52 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -261,7 +256,6 @@ Program {
         Node {
             identifier: 18,
             location: Location { start: 0, length: 52 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [],

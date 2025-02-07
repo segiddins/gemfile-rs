@@ -24,7 +24,6 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 11, length: 4 },
-            flags: 3,
             node_kind: TrueNode(
                 TrueNode,
             ),
@@ -32,7 +31,6 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 11, length: 4 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -44,7 +42,6 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 10, length: 6 },
-            flags: 0,
             node_kind: ParenthesesNode(
                 ParenthesesNode {
                     body: Some(
@@ -58,9 +55,11 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 6, length: 10 },
-            flags: 0,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b0,
+                    },
                     receiver: Some(
                         NodeRef(2),
                     ),
@@ -79,9 +78,12 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 0, length: 23 },
-            flags: 1,
             node_kind: WhileNode(
                 WhileNode {
+                    flags: BitFlags<LoopFlags> {
+                        bits: 0b1,
+                        flags: BEGIN_MODIFIER,
+                    },
                     keyword_loc: Location { start: 0, length: 5 },
                     do_keyword_loc: Some(
                         Location { start: 17, length: 2 },
@@ -97,7 +99,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 23 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -109,7 +110,6 @@ Program {
         Node {
             identifier: 7,
             location: Location { start: 0, length: 23 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [],

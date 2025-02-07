@@ -31,9 +31,12 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 0, length: 3 },
-            flags: 19,
             node_kind: SymbolNode(
                 SymbolNode {
+                    flags: BitFlags<SymbolFlags> {
+                        bits: 0b11,
+                        flags: FORCED_UTF8_ENCODING | FORCED_BINARY_ENCODING,
+                    },
                     opening_loc: Some(
                         Location { start: 0, length: 2 },
                     ),
@@ -50,7 +53,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 3 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -62,7 +64,6 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 0, length: 3 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [],

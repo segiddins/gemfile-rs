@@ -33,9 +33,12 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 17, length: 22 },
-            flags: 2,
             node_kind: RegularExpressionNode(
                 RegularExpressionNode {
+                    flags: BitFlags<RegularExpressionFlags> {
+                        bits: 0b10,
+                        flags: EXTENDED,
+                    },
                     opening_loc: Location { start: 17, length: 1 },
                     content_loc: Location { start: 18, length: 20 },
                     closing_loc: Location { start: 38, length: 1 },
@@ -46,9 +49,11 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 43, length: 10 },
-            flags: 0,
             node_kind: StringNode(
                 StringNode {
+                    flags: BitFlags<StringFlags> {
+                        bits: 0b0,
+                    },
                     opening_loc: Some(
                         Location { start: 43, length: 1 },
                     ),
@@ -63,9 +68,11 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 43, length: 10 },
-            flags: 0,
             node_kind: ArgumentsNode(
                 ArgumentsNode {
+                    flags: BitFlags<ArgumentsNodeFlags> {
+                        bits: 0b0,
+                    },
                     arguments: [
                         NodeRef(1),
                     ],
@@ -75,9 +82,11 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 17, length: 36 },
-            flags: 0,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b0,
+                    },
                     receiver: Some(
                         NodeRef(0),
                     ),
@@ -98,7 +107,6 @@ Program {
         Node {
             identifier: 7,
             location: Location { start: 24, length: 1 },
-            flags: 0,
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
                     name: ConstantRef(2),
@@ -109,7 +117,6 @@ Program {
         Node {
             identifier: 8,
             location: Location { start: 34, length: 1 },
-            flags: 0,
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
                     name: ConstantRef(3),
@@ -120,7 +127,6 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 17, length: 36 },
-            flags: 1,
             node_kind: MatchWriteNode(
                 MatchWriteNode {
                     call: NodeRef(3),
@@ -134,7 +140,6 @@ Program {
         Node {
             identifier: 10,
             location: Location { start: 55, length: 1 },
-            flags: 0,
             node_kind: LocalVariableReadNode(
                 LocalVariableReadNode {
                     name: ConstantRef(2),
@@ -145,7 +150,6 @@ Program {
         Node {
             identifier: 11,
             location: Location { start: 58, length: 1 },
-            flags: 0,
             node_kind: LocalVariableReadNode(
                 LocalVariableReadNode {
                     name: ConstantRef(3),
@@ -156,9 +160,12 @@ Program {
         Node {
             identifier: 9,
             location: Location { start: 54, length: 6 },
-            flags: 1,
             node_kind: ArrayNode(
                 ArrayNode {
+                    flags: BitFlags<ArrayNodeFlags> {
+                        bits: 0b1,
+                        flags: CONTAINS_SPLAT,
+                    },
                     elements: [
                         NodeRef(7),
                         NodeRef(8),
@@ -175,7 +182,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 17, length: 43 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -188,7 +194,6 @@ Program {
         Node {
             identifier: 12,
             location: Location { start: 17, length: 43 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [

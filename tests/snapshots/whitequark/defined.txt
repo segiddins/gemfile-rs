@@ -47,7 +47,6 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 9, length: 4 },
-            flags: 0,
             node_kind: InstanceVariableReadNode(
                 InstanceVariableReadNode {
                     name: ConstantRef(1),
@@ -57,7 +56,6 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 0, length: 13 },
-            flags: 1,
             node_kind: DefinedNode(
                 DefinedNode {
                     lparen_loc: None,
@@ -70,9 +68,12 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 24, length: 3 },
-            flags: 40,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1000,
+                        flags: IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(2),
@@ -89,7 +90,6 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 15, length: 12 },
-            flags: 1,
             node_kind: DefinedNode(
                 DefinedNode {
                     lparen_loc: None,
@@ -102,9 +102,12 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 38, length: 3 },
-            flags: 40,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1000,
+                        flags: IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(2),
@@ -121,7 +124,6 @@ Program {
         Node {
             identifier: 7,
             location: Location { start: 29, length: 13 },
-            flags: 1,
             node_kind: DefinedNode(
                 DefinedNode {
                     lparen_loc: Some(
@@ -138,7 +140,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 42 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -152,7 +153,6 @@ Program {
         Node {
             identifier: 8,
             location: Location { start: 0, length: 42 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [],

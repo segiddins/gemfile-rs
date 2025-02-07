@@ -39,9 +39,12 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 0, length: 5 },
-            flags: 11,
             node_kind: RationalNode(
                 RationalNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1011,
+                        flags: BINARY | DECIMAL | HEXADECIMAL,
+                    },
                     numerator: Integer {
                         is_negative: false,
                         words: [
@@ -60,9 +63,12 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 7, length: 3 },
-            flags: 11,
             node_kind: RationalNode(
                 RationalNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1011,
+                        flags: BINARY | DECIMAL | HEXADECIMAL,
+                    },
                     numerator: Integer {
                         is_negative: false,
                         words: [
@@ -81,7 +87,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 10 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -94,7 +99,6 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 0, length: 10 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [],

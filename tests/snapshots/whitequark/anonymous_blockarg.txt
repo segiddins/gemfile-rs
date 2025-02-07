@@ -24,9 +24,11 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 8, length: 1 },
-            flags: 0,
             node_kind: BlockParameterNode(
                 BlockParameterNode {
+                    flags: BitFlags<ParameterFlags> {
+                        bits: 0b0,
+                    },
                     name: None,
                     name_loc: None,
                     operator_loc: Location { start: 8, length: 1 },
@@ -36,7 +38,6 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 8, length: 1 },
-            flags: 0,
             node_kind: ParametersNode(
                 ParametersNode {
                     requireds: [],
@@ -54,7 +55,6 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 16, length: 1 },
-            flags: 0,
             node_kind: BlockArgumentNode(
                 BlockArgumentNode {
                     expression: None,
@@ -65,9 +65,12 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 12, length: 5 },
-            flags: 33,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1,
+                        flags: SAFE_NAVIGATION,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(1),
@@ -90,7 +93,6 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 12, length: 5 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -102,7 +104,6 @@ Program {
         Node {
             identifier: 7,
             location: Location { start: 0, length: 23 },
-            flags: 1,
             node_kind: DefNode(
                 DefNode {
                     name: ConstantRef(2),
@@ -133,7 +134,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 23 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -145,7 +145,6 @@ Program {
         Node {
             identifier: 8,
             location: Location { start: 0, length: 23 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [],

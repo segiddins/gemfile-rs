@@ -49,7 +49,6 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 0, length: 6 },
-            flags: 1,
             node_kind: ReturnNode(
                 ReturnNode {
                     keyword_loc: Location { start: 0, length: 6 },
@@ -60,9 +59,12 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 15, length: 3 },
-            flags: 40,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1000,
+                        flags: IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(1),
@@ -79,9 +81,11 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 15, length: 3 },
-            flags: 0,
             node_kind: ArgumentsNode(
                 ArgumentsNode {
+                    flags: BitFlags<ArgumentsNodeFlags> {
+                        bits: 0b0,
+                    },
                     arguments: [
                         NodeRef(1),
                     ],
@@ -91,7 +95,6 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 8, length: 10 },
-            flags: 1,
             node_kind: ReturnNode(
                 ReturnNode {
                     keyword_loc: Location { start: 8, length: 6 },
@@ -104,7 +107,6 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 26, length: 2 },
-            flags: 0,
             node_kind: ParenthesesNode(
                 ParenthesesNode {
                     body: None,
@@ -116,9 +118,11 @@ Program {
         Node {
             identifier: 7,
             location: Location { start: 26, length: 2 },
-            flags: 0,
             node_kind: ArgumentsNode(
                 ArgumentsNode {
+                    flags: BitFlags<ArgumentsNodeFlags> {
+                        bits: 0b0,
+                    },
                     arguments: [
                         NodeRef(4),
                     ],
@@ -128,7 +132,6 @@ Program {
         Node {
             identifier: 8,
             location: Location { start: 20, length: 8 },
-            flags: 1,
             node_kind: ReturnNode(
                 ReturnNode {
                     keyword_loc: Location { start: 20, length: 6 },
@@ -141,9 +144,12 @@ Program {
         Node {
             identifier: 9,
             location: Location { start: 37, length: 3 },
-            flags: 41,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1001,
+                        flags: SAFE_NAVIGATION | IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(1),
@@ -160,7 +166,6 @@ Program {
         Node {
             identifier: 10,
             location: Location { start: 37, length: 3 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -172,7 +177,6 @@ Program {
         Node {
             identifier: 11,
             location: Location { start: 36, length: 5 },
-            flags: 0,
             node_kind: ParenthesesNode(
                 ParenthesesNode {
                     body: Some(
@@ -186,9 +190,11 @@ Program {
         Node {
             identifier: 12,
             location: Location { start: 36, length: 5 },
-            flags: 0,
             node_kind: ArgumentsNode(
                 ArgumentsNode {
+                    flags: BitFlags<ArgumentsNodeFlags> {
+                        bits: 0b0,
+                    },
                     arguments: [
                         NodeRef(9),
                     ],
@@ -198,7 +204,6 @@ Program {
         Node {
             identifier: 13,
             location: Location { start: 30, length: 11 },
-            flags: 1,
             node_kind: ReturnNode(
                 ReturnNode {
                     keyword_loc: Location { start: 30, length: 6 },
@@ -211,7 +216,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 41 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -226,7 +230,6 @@ Program {
         Node {
             identifier: 14,
             location: Location { start: 0, length: 41 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [],

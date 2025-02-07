@@ -7,11 +7,15 @@ edition = "2021"
 annotate-snippets = "0.11.5"
 anyhow = "1.0.95"
 derive-new = "0.7.0"
-expect-test = "1.5.1"
+enumflags2 = { version = "0.7.11", features = ["std"] }
 ruby-prism = { path = "/Users/segiddins/Development/github.com/ruby/prism/rust/ruby-prism" }
 ruby-prism-sys = { path = "/Users/segiddins/Development/github.com/ruby/prism/rust/ruby-prism-sys" }
 salsa = { git = "https://github.com/salsa-rs/salsa.git", branch = "master" }
-winnow = "0.7.1"
+winnow = { version = "0.7.1", features = ["std"] }
 
 [dev-dependencies]
+expect-test = "1.5.1"
 similar-asserts = "1.6.1"
+
+[profile.dev.package.dissimilar]
+opt-level = 3

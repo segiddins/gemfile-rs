@@ -24,9 +24,12 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 5, length: 1 },
-            flags: 40,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1000,
+                        flags: IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(1),
@@ -43,7 +46,6 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 5, length: 1 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -55,7 +57,6 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 3, length: 4 },
-            flags: 0,
             node_kind: EmbeddedStatementsNode(
                 EmbeddedStatementsNode {
                     opening_loc: Location { start: 3, length: 2 },
@@ -69,7 +70,6 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 3, length: 4 },
-            flags: 0,
             node_kind: InterpolatedSymbolNode(
                 InterpolatedSymbolNode {
                     opening_loc: None,
@@ -83,9 +83,12 @@ Program {
         Node {
             identifier: 9,
             location: Location { start: 10, length: 1 },
-            flags: 40,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1000,
+                        flags: IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(2),
@@ -102,7 +105,6 @@ Program {
         Node {
             identifier: 8,
             location: Location { start: 10, length: 1 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -114,7 +116,6 @@ Program {
         Node {
             identifier: 10,
             location: Location { start: 8, length: 4 },
-            flags: 0,
             node_kind: EmbeddedStatementsNode(
                 EmbeddedStatementsNode {
                     opening_loc: Location { start: 8, length: 2 },
@@ -128,7 +129,6 @@ Program {
         Node {
             identifier: 7,
             location: Location { start: 8, length: 4 },
-            flags: 0,
             node_kind: InterpolatedSymbolNode(
                 InterpolatedSymbolNode {
                     opening_loc: None,
@@ -142,9 +142,12 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 0, length: 13 },
-            flags: 1,
             node_kind: ArrayNode(
                 ArrayNode {
+                    flags: BitFlags<ArrayNodeFlags> {
+                        bits: 0b1,
+                        flags: CONTAINS_SPLAT,
+                    },
                     elements: [
                         NodeRef(3),
                         NodeRef(7),
@@ -161,7 +164,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 13 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -173,7 +175,6 @@ Program {
         Node {
             identifier: 11,
             location: Location { start: 0, length: 13 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [],

@@ -26,7 +26,6 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 2, length: 11 },
-            flags: 0,
             node_kind: ItParametersNode(
                 ItParametersNode,
             ),
@@ -34,7 +33,6 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 7, length: 2 },
-            flags: 1,
             node_kind: ItLocalVariableReadNode(
                 ItLocalVariableReadNode,
             ),
@@ -42,7 +40,6 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 7, length: 2 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -54,7 +51,6 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 2, length: 11 },
-            flags: 0,
             node_kind: BlockNode(
                 BlockNode {
                     locals: [],
@@ -72,9 +68,12 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 0, length: 13 },
-            flags: 33,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1,
+                        flags: SAFE_NAVIGATION,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(1),
@@ -93,7 +92,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 13 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -105,7 +103,6 @@ Program {
         Node {
             identifier: 7,
             location: Location { start: 0, length: 13 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [],

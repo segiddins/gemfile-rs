@@ -24,7 +24,6 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 0, length: 3 },
-            flags: 0,
             node_kind: ConstantReadNode(
                 ConstantReadNode {
                     name: ConstantRef(1),
@@ -34,7 +33,6 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 0, length: 8 },
-            flags: 0,
             node_kind: ConstantPathNode(
                 ConstantPathNode {
                     parent: Some(
@@ -51,9 +49,12 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 11, length: 2 },
-            flags: 10,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1010,
+                        flags: DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -66,7 +67,6 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 0, length: 13 },
-            flags: 1,
             node_kind: ConstantPathWriteNode(
                 ConstantPathWriteNode {
                     target: NodeRef(1),
@@ -78,7 +78,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 13 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -90,7 +89,6 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 0, length: 13 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [],

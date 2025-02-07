@@ -24,9 +24,12 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 8, length: 1 },
-            flags: 10,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1010,
+                        flags: DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -39,9 +42,12 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 19, length: 1 },
-            flags: 11,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1011,
+                        flags: BINARY | DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -54,7 +60,6 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 19, length: 1 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -66,7 +71,6 @@ Program {
         Node {
             identifier: 7,
             location: Location { start: 16, length: 8 },
-            flags: 0,
             node_kind: BlockNode(
                 BlockNode {
                     locals: [],
@@ -82,9 +86,12 @@ Program {
         Node {
             identifier: 8,
             location: Location { start: 8, length: 16 },
-            flags: 1,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1,
+                        flags: SAFE_NAVIGATION,
+                    },
                     receiver: Some(
                         NodeRef(0),
                     ),
@@ -107,7 +114,6 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 8, length: 16 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -119,7 +125,6 @@ Program {
         Node {
             identifier: 9,
             location: Location { start: 2, length: 26 },
-            flags: 0,
             node_kind: BeginNode(
                 BeginNode {
                     begin_keyword_loc: Some(
@@ -140,9 +145,11 @@ Program {
         Node {
             identifier: 10,
             location: Location { start: 2, length: 26 },
-            flags: 0,
             node_kind: ArgumentsNode(
                 ArgumentsNode {
+                    flags: BitFlags<ArgumentsNodeFlags> {
+                        bits: 0b0,
+                    },
                     arguments: [
                         NodeRef(6),
                     ],
@@ -152,9 +159,12 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 0, length: 28 },
-            flags: 33,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1,
+                        flags: SAFE_NAVIGATION,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(1),
@@ -173,7 +183,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 28 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -185,7 +194,6 @@ Program {
         Node {
             identifier: 11,
             location: Location { start: 0, length: 28 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [],

@@ -31,9 +31,12 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 4, length: 2 },
-            flags: 10,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1010,
+                        flags: DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -46,7 +49,6 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 0, length: 6 },
-            flags: 1,
             node_kind: LocalVariableWriteNode(
                 LocalVariableWriteNode {
                     name: ConstantRef(1),
@@ -60,7 +62,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 6 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -72,7 +73,6 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 0, length: 6 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [

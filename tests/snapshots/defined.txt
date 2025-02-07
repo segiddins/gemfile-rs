@@ -58,9 +58,12 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 9, length: 1 },
-            flags: 10,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1010,
+                        flags: DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -73,7 +76,6 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 0, length: 10 },
-            flags: 0,
             node_kind: DefinedNode(
                 DefinedNode {
                     lparen_loc: None,
@@ -86,9 +88,12 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 24, length: 1 },
-            flags: 10,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1010,
+                        flags: DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -101,7 +106,6 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 15, length: 10 },
-            flags: 0,
             node_kind: DefinedNode(
                 DefinedNode {
                     lparen_loc: None,
@@ -114,7 +118,6 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 0, length: 25 },
-            flags: 1,
             node_kind: AndNode(
                 AndNode {
                     left: NodeRef(1),
@@ -126,9 +129,12 @@ Program {
         Node {
             identifier: 8,
             location: Location { start: 41, length: 1 },
-            flags: 10,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1010,
+                        flags: DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -141,7 +147,6 @@ Program {
         Node {
             identifier: 9,
             location: Location { start: 36, length: 6 },
-            flags: 0,
             node_kind: LocalVariableOperatorWriteNode(
                 LocalVariableOperatorWriteNode {
                     name_loc: Location { start: 36, length: 1 },
@@ -156,7 +161,6 @@ Program {
         Node {
             identifier: 10,
             location: Location { start: 27, length: 16 },
-            flags: 1,
             node_kind: DefinedNode(
                 DefinedNode {
                     lparen_loc: Some(
@@ -173,9 +177,12 @@ Program {
         Node {
             identifier: 11,
             location: Location { start: 54, length: 3 },
-            flags: 40,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1000,
+                        flags: IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(3),
@@ -192,9 +199,12 @@ Program {
         Node {
             identifier: 12,
             location: Location { start: 62, length: 3 },
-            flags: 40,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1000,
+                        flags: IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(4),
@@ -211,7 +221,6 @@ Program {
         Node {
             identifier: 13,
             location: Location { start: 54, length: 11 },
-            flags: 0,
             node_kind: AndNode(
                 AndNode {
                     left: NodeRef(8),
@@ -223,7 +232,6 @@ Program {
         Node {
             identifier: 14,
             location: Location { start: 45, length: 21 },
-            flags: 1,
             node_kind: DefinedNode(
                 DefinedNode {
                     lparen_loc: Some(
@@ -240,9 +248,12 @@ Program {
         Node {
             identifier: 15,
             location: Location { start: 77, length: 1 },
-            flags: 10,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1010,
+                        flags: DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -255,7 +266,6 @@ Program {
         Node {
             identifier: 16,
             location: Location { start: 68, length: 10 },
-            flags: 1,
             node_kind: DefinedNode(
                 DefinedNode {
                     lparen_loc: None,
@@ -268,9 +278,11 @@ Program {
         Node {
             identifier: 17,
             location: Location { start: 89, length: 5 },
-            flags: 0,
             node_kind: StringNode(
                 StringNode {
+                    flags: BitFlags<StringFlags> {
+                        bits: 0b0,
+                    },
                     opening_loc: Some(
                         Location { start: 89, length: 1 },
                     ),
@@ -285,7 +297,6 @@ Program {
         Node {
             identifier: 18,
             location: Location { start: 80, length: 16 },
-            flags: 1,
             node_kind: DefinedNode(
                 DefinedNode {
                     lparen_loc: Some(
@@ -302,7 +313,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 96 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -318,7 +328,6 @@ Program {
         Node {
             identifier: 19,
             location: Location { start: 0, length: 96 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [

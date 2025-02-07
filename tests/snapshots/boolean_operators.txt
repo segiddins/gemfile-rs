@@ -28,9 +28,12 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 6, length: 1 },
-            flags: 40,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1000,
+                        flags: IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(2),
@@ -47,7 +50,6 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 0, length: 7 },
-            flags: 1,
             node_kind: LocalVariableAndWriteNode(
                 LocalVariableAndWriteNode {
                     name_loc: Location { start: 0, length: 1 },
@@ -61,9 +63,12 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 14, length: 1 },
-            flags: 40,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1000,
+                        flags: IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(2),
@@ -80,7 +85,6 @@ Program {
         Node {
             identifier: 7,
             location: Location { start: 9, length: 6 },
-            flags: 1,
             node_kind: LocalVariableOperatorWriteNode(
                 LocalVariableOperatorWriteNode {
                     name_loc: Location { start: 9, length: 1 },
@@ -95,9 +99,12 @@ Program {
         Node {
             identifier: 9,
             location: Location { start: 23, length: 1 },
-            flags: 40,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1000,
+                        flags: IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(2),
@@ -114,7 +121,6 @@ Program {
         Node {
             identifier: 10,
             location: Location { start: 17, length: 7 },
-            flags: 1,
             node_kind: LocalVariableOrWriteNode(
                 LocalVariableOrWriteNode {
                     name_loc: Location { start: 17, length: 1 },
@@ -128,7 +134,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 24 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -142,7 +147,6 @@ Program {
         Node {
             identifier: 11,
             location: Location { start: 0, length: 24 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [

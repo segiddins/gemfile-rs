@@ -31,9 +31,12 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 0, length: 1 },
-            flags: 10,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1010,
+                        flags: DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -46,9 +49,12 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 6, length: 1 },
-            flags: 10,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1010,
+                        flags: DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -61,9 +67,11 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 6, length: 1 },
-            flags: 0,
             node_kind: ArgumentsNode(
                 ArgumentsNode {
+                    flags: BitFlags<ArgumentsNodeFlags> {
+                        bits: 0b0,
+                    },
                     arguments: [
                         NodeRef(1),
                     ],
@@ -73,9 +81,12 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 0, length: 7 },
-            flags: 1,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1,
+                        flags: SAFE_NAVIGATION,
+                    },
                     receiver: Some(
                         NodeRef(0),
                     ),
@@ -96,7 +107,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 7 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -108,7 +118,6 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 0, length: 7 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [],

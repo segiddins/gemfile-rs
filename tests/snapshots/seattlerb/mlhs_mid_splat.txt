@@ -67,7 +67,6 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 0, length: 1 },
-            flags: 0,
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
                     name: ConstantRef(1),
@@ -78,7 +77,6 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 3, length: 1 },
-            flags: 0,
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
                     name: ConstantRef(2),
@@ -89,7 +87,6 @@ Program {
         Node {
             identifier: 8,
             location: Location { start: 6, length: 1 },
-            flags: 0,
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
                     name: ConstantRef(3),
@@ -100,7 +97,6 @@ Program {
         Node {
             identifier: 10,
             location: Location { start: 10, length: 1 },
-            flags: 0,
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
                     name: ConstantRef(4),
@@ -111,7 +107,6 @@ Program {
         Node {
             identifier: 11,
             location: Location { start: 9, length: 2 },
-            flags: 0,
             node_kind: SplatNode(
                 SplatNode {
                     operator_loc: Location { start: 9, length: 1 },
@@ -124,7 +119,6 @@ Program {
         Node {
             identifier: 13,
             location: Location { start: 13, length: 1 },
-            flags: 0,
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
                     name: ConstantRef(5),
@@ -135,7 +129,6 @@ Program {
         Node {
             identifier: 15,
             location: Location { start: 16, length: 1 },
-            flags: 0,
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
                     name: ConstantRef(6),
@@ -146,7 +139,6 @@ Program {
         Node {
             identifier: 17,
             location: Location { start: 19, length: 1 },
-            flags: 0,
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
                     name: ConstantRef(7),
@@ -157,9 +149,12 @@ Program {
         Node {
             identifier: 18,
             location: Location { start: 23, length: 1 },
-            flags: 40,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1000,
+                        flags: IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(8),
@@ -176,7 +171,6 @@ Program {
         Node {
             identifier: 19,
             location: Location { start: 0, length: 24 },
-            flags: 1,
             node_kind: MultiWriteNode(
                 MultiWriteNode {
                     lefts: [
@@ -202,7 +196,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 24 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -214,7 +207,6 @@ Program {
         Node {
             identifier: 20,
             location: Location { start: 0, length: 24 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [

@@ -24,9 +24,11 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 5, length: 5 },
-            flags: 0,
             node_kind: StringNode(
                 StringNode {
+                    flags: BitFlags<StringFlags> {
+                        bits: 0b0,
+                    },
                     opening_loc: Some(
                         Location { start: 5, length: 1 },
                     ),
@@ -41,9 +43,11 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 5, length: 5 },
-            flags: 0,
             node_kind: ArgumentsNode(
                 ArgumentsNode {
+                    flags: BitFlags<ArgumentsNodeFlags> {
+                        bits: 0b0,
+                    },
                     arguments: [
                         NodeRef(0),
                     ],
@@ -53,7 +57,6 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 11, length: 6 },
-            flags: 0,
             node_kind: BlockNode(
                 BlockNode {
                     locals: [],
@@ -67,9 +70,12 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 0, length: 17 },
-            flags: 33,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1,
+                        flags: SAFE_NAVIGATION,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(1),
@@ -90,7 +96,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 17 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -102,7 +107,6 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 0, length: 17 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [],

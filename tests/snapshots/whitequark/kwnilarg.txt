@@ -28,7 +28,6 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 3, length: 5 },
-            flags: 0,
             node_kind: NoKeywordsParameterNode(
                 NoKeywordsParameterNode {
                     operator_loc: Location { start: 3, length: 2 },
@@ -39,7 +38,6 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 3, length: 5 },
-            flags: 0,
             node_kind: ParametersNode(
                 ParametersNode {
                     requireds: [],
@@ -57,7 +55,6 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 2, length: 7 },
-            flags: 0,
             node_kind: BlockParametersNode(
                 BlockParametersNode {
                     parameters: Some(
@@ -76,7 +73,6 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 0, length: 12 },
-            flags: 1,
             node_kind: LambdaNode(
                 LambdaNode {
                     locals: [],
@@ -93,7 +89,6 @@ Program {
         Node {
             identifier: 7,
             location: Location { start: 20, length: 5 },
-            flags: 0,
             node_kind: NoKeywordsParameterNode(
                 NoKeywordsParameterNode {
                     operator_loc: Location { start: 20, length: 2 },
@@ -104,7 +99,6 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 20, length: 5 },
-            flags: 0,
             node_kind: ParametersNode(
                 ParametersNode {
                     requireds: [],
@@ -122,7 +116,6 @@ Program {
         Node {
             identifier: 8,
             location: Location { start: 14, length: 17 },
-            flags: 1,
             node_kind: DefNode(
                 DefNode {
                     name: ConstantRef(1),
@@ -151,7 +144,6 @@ Program {
         Node {
             identifier: 11,
             location: Location { start: 38, length: 5 },
-            flags: 0,
             node_kind: NoKeywordsParameterNode(
                 NoKeywordsParameterNode {
                     operator_loc: Location { start: 38, length: 2 },
@@ -162,7 +154,6 @@ Program {
         Node {
             identifier: 10,
             location: Location { start: 38, length: 5 },
-            flags: 0,
             node_kind: ParametersNode(
                 ParametersNode {
                     requireds: [],
@@ -180,7 +171,6 @@ Program {
         Node {
             identifier: 12,
             location: Location { start: 37, length: 7 },
-            flags: 0,
             node_kind: BlockParametersNode(
                 BlockParametersNode {
                     parameters: Some(
@@ -199,7 +189,6 @@ Program {
         Node {
             identifier: 13,
             location: Location { start: 35, length: 11 },
-            flags: 0,
             node_kind: BlockNode(
                 BlockNode {
                     locals: [],
@@ -215,9 +204,12 @@ Program {
         Node {
             identifier: 9,
             location: Location { start: 33, length: 13 },
-            flags: 33,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1,
+                        flags: SAFE_NAVIGATION,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(2),
@@ -236,7 +228,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 46 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -250,7 +241,6 @@ Program {
         Node {
             identifier: 14,
             location: Location { start: 0, length: 46 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [],

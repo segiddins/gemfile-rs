@@ -40,9 +40,12 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 5, length: 2 },
-            flags: 18,
             node_kind: SymbolNode(
                 SymbolNode {
+                    flags: BitFlags<SymbolFlags> {
+                        bits: 0b10,
+                        flags: FORCED_BINARY_ENCODING,
+                    },
                     opening_loc: Some(
                         Location { start: 5, length: 1 },
                     ),
@@ -57,9 +60,12 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 13, length: 2 },
-            flags: 18,
             node_kind: SymbolNode(
                 SymbolNode {
+                    flags: BitFlags<SymbolFlags> {
+                        bits: 0b10,
+                        flags: FORCED_BINARY_ENCODING,
+                    },
                     opening_loc: None,
                     value_loc: Some(
                         Location { start: 13, length: 1 },
@@ -74,7 +80,6 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 16, length: 7 },
-            flags: 0,
             node_kind: ConstantReadNode(
                 ConstantReadNode {
                     name: ConstantRef(1),
@@ -84,7 +89,6 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 27, length: 1 },
-            flags: 0,
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
                     name: ConstantRef(2),
@@ -95,7 +99,6 @@ Program {
         Node {
             identifier: 7,
             location: Location { start: 16, length: 12 },
-            flags: 0,
             node_kind: CapturePatternNode(
                 CapturePatternNode {
                     value: NodeRef(2),
@@ -107,7 +110,6 @@ Program {
         Node {
             identifier: 8,
             location: Location { start: 13, length: 15 },
-            flags: 0,
             node_kind: AssocNode(
                 AssocNode {
                     key: NodeRef(1),
@@ -119,9 +121,12 @@ Program {
         Node {
             identifier: 9,
             location: Location { start: 30, length: 2 },
-            flags: 18,
             node_kind: SymbolNode(
                 SymbolNode {
+                    flags: BitFlags<SymbolFlags> {
+                        bits: 0b10,
+                        flags: FORCED_BINARY_ENCODING,
+                    },
                     opening_loc: None,
                     value_loc: Some(
                         Location { start: 30, length: 1 },
@@ -136,9 +141,11 @@ Program {
         Node {
             identifier: 10,
             location: Location { start: 33, length: 3 },
-            flags: 0,
             node_kind: StringNode(
                 StringNode {
+                    flags: BitFlags<StringFlags> {
+                        bits: 0b0,
+                    },
                     opening_loc: Some(
                         Location { start: 33, length: 1 },
                     ),
@@ -153,7 +160,6 @@ Program {
         Node {
             identifier: 11,
             location: Location { start: 30, length: 6 },
-            flags: 0,
             node_kind: AssocNode(
                 AssocNode {
                     key: NodeRef(6),
@@ -165,9 +171,12 @@ Program {
         Node {
             identifier: 12,
             location: Location { start: 38, length: 2 },
-            flags: 18,
             node_kind: SymbolNode(
                 SymbolNode {
+                    flags: BitFlags<SymbolFlags> {
+                        bits: 0b10,
+                        flags: FORCED_BINARY_ENCODING,
+                    },
                     opening_loc: None,
                     value_loc: Some(
                         Location { start: 38, length: 1 },
@@ -182,7 +191,6 @@ Program {
         Node {
             identifier: 13,
             location: Location { start: 38, length: 1 },
-            flags: 0,
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
                     name: ConstantRef(3),
@@ -193,7 +201,6 @@ Program {
         Node {
             identifier: 14,
             location: Location { start: 38, length: 1 },
-            flags: 0,
             node_kind: ImplicitNode(
                 ImplicitNode {
                     value: NodeRef(10),
@@ -203,7 +210,6 @@ Program {
         Node {
             identifier: 15,
             location: Location { start: 38, length: 2 },
-            flags: 0,
             node_kind: AssocNode(
                 AssocNode {
                     key: NodeRef(9),
@@ -215,7 +221,6 @@ Program {
         Node {
             identifier: 16,
             location: Location { start: 11, length: 31 },
-            flags: 0,
             node_kind: HashPatternNode(
                 HashPatternNode {
                     constant: None,
@@ -237,9 +242,12 @@ Program {
         Node {
             identifier: 18,
             location: Location { start: 50, length: 2 },
-            flags: 19,
             node_kind: SymbolNode(
                 SymbolNode {
+                    flags: BitFlags<SymbolFlags> {
+                        bits: 0b11,
+                        flags: FORCED_UTF8_ENCODING | FORCED_BINARY_ENCODING,
+                    },
                     opening_loc: Some(
                         Location { start: 50, length: 1 },
                     ),
@@ -254,7 +262,6 @@ Program {
         Node {
             identifier: 17,
             location: Location { start: 50, length: 2 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -266,7 +273,6 @@ Program {
         Node {
             identifier: 19,
             location: Location { start: 8, length: 44 },
-            flags: 0,
             node_kind: InNode(
                 InNode {
                     pattern: NodeRef(13),
@@ -283,7 +289,6 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 0, length: 56 },
-            flags: 1,
             node_kind: CaseMatchNode(
                 CaseMatchNode {
                     predicate: Some(
@@ -301,7 +306,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 56 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -313,7 +317,6 @@ Program {
         Node {
             identifier: 20,
             location: Location { start: 0, length: 56 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [

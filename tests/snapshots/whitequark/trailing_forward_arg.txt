@@ -24,9 +24,11 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 8, length: 1 },
-            flags: 0,
             node_kind: RequiredParameterNode(
                 RequiredParameterNode {
+                    flags: BitFlags<ParameterFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(1),
                 },
             ),
@@ -34,9 +36,11 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 11, length: 1 },
-            flags: 0,
             node_kind: RequiredParameterNode(
                 RequiredParameterNode {
+                    flags: BitFlags<ParameterFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(2),
                 },
             ),
@@ -44,7 +48,6 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 14, length: 3 },
-            flags: 0,
             node_kind: ForwardingParameterNode(
                 ForwardingParameterNode,
             ),
@@ -52,7 +55,6 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 8, length: 9 },
-            flags: 0,
             node_kind: ParametersNode(
                 ParametersNode {
                     requireds: [
@@ -73,7 +75,6 @@ Program {
         Node {
             identifier: 8,
             location: Location { start: 24, length: 1 },
-            flags: 0,
             node_kind: LocalVariableReadNode(
                 LocalVariableReadNode {
                     name: ConstantRef(1),
@@ -84,9 +85,12 @@ Program {
         Node {
             identifier: 10,
             location: Location { start: 27, length: 2 },
-            flags: 10,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1010,
+                        flags: DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -99,7 +103,6 @@ Program {
         Node {
             identifier: 11,
             location: Location { start: 31, length: 3 },
-            flags: 0,
             node_kind: ForwardingArgumentsNode(
                 ForwardingArgumentsNode,
             ),
@@ -107,9 +110,12 @@ Program {
         Node {
             identifier: 9,
             location: Location { start: 24, length: 10 },
-            flags: 4,
             node_kind: ArgumentsNode(
                 ArgumentsNode {
+                    flags: BitFlags<ArgumentsNodeFlags> {
+                        bits: 0b100,
+                        flags: CONTAINS_KEYWORD_SPLAT,
+                    },
                     arguments: [
                         NodeRef(4),
                         NodeRef(5),
@@ -121,9 +127,12 @@ Program {
         Node {
             identifier: 7,
             location: Location { start: 20, length: 15 },
-            flags: 33,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1,
+                        flags: SAFE_NAVIGATION,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(3),
@@ -146,7 +155,6 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 20, length: 15 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -158,7 +166,6 @@ Program {
         Node {
             identifier: 12,
             location: Location { start: 0, length: 40 },
-            flags: 1,
             node_kind: DefNode(
                 DefNode {
                     name: ConstantRef(4),
@@ -192,7 +199,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 40 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -204,7 +210,6 @@ Program {
         Node {
             identifier: 13,
             location: Location { start: 0, length: 40 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [],

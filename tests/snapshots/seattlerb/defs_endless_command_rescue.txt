@@ -24,9 +24,12 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 4, length: 1 },
-            flags: 40,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1000,
+                        flags: IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(1),
@@ -43,9 +46,12 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 33, length: 2 },
-            flags: 10,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1010,
+                        flags: DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -58,9 +64,11 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 33, length: 2 },
-            flags: 0,
             node_kind: ArgumentsNode(
                 ArgumentsNode {
+                    flags: BitFlags<ArgumentsNodeFlags> {
+                        bits: 0b0,
+                    },
                     arguments: [
                         NodeRef(1),
                     ],
@@ -70,9 +78,11 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 20, length: 15 },
-            flags: 32,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b0,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(2),
@@ -91,9 +101,12 @@ Program {
         Node {
             identifier: 7,
             location: Location { start: 43, length: 2 },
-            flags: 10,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1010,
+                        flags: DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -106,7 +119,6 @@ Program {
         Node {
             identifier: 8,
             location: Location { start: 20, length: 25 },
-            flags: 0,
             node_kind: RescueModifierNode(
                 RescueModifierNode {
                     expression: NodeRef(3),
@@ -118,7 +130,6 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 20, length: 25 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -130,7 +141,6 @@ Program {
         Node {
             identifier: 9,
             location: Location { start: 0, length: 45 },
-            flags: 1,
             node_kind: DefNode(
                 DefNode {
                     name: ConstantRef(3),
@@ -159,7 +169,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 45 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -171,7 +180,6 @@ Program {
         Node {
             identifier: 10,
             location: Location { start: 0, length: 45 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [],

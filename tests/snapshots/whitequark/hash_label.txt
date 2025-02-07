@@ -24,9 +24,12 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 2, length: 4 },
-            flags: 18,
             node_kind: SymbolNode(
                 SymbolNode {
+                    flags: BitFlags<SymbolFlags> {
+                        bits: 0b10,
+                        flags: FORCED_BINARY_ENCODING,
+                    },
                     opening_loc: None,
                     value_loc: Some(
                         Location { start: 2, length: 3 },
@@ -41,9 +44,12 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 7, length: 1 },
-            flags: 10,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1010,
+                        flags: DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -56,7 +62,6 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 2, length: 6 },
-            flags: 2,
             node_kind: AssocNode(
                 AssocNode {
                     key: NodeRef(0),
@@ -68,7 +73,6 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 0, length: 10 },
-            flags: 3,
             node_kind: HashNode(
                 HashNode {
                     opening_loc: Location { start: 0, length: 1 },
@@ -82,7 +86,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 10 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -94,7 +97,6 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 0, length: 10 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [],

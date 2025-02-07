@@ -38,9 +38,11 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 6, length: 2 },
-            flags: 0,
             node_kind: RequiredKeywordParameterNode(
                 RequiredKeywordParameterNode {
+                    flags: BitFlags<ParameterFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(1),
                     name_loc: Location { start: 6, length: 2 },
                 },
@@ -49,7 +51,6 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 6, length: 2 },
-            flags: 0,
             node_kind: ParametersNode(
                 ParametersNode {
                     requireds: [],
@@ -67,7 +68,6 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 9, length: 6 },
-            flags: 1,
             node_kind: ReturnNode(
                 ReturnNode {
                     keyword_loc: Location { start: 9, length: 6 },
@@ -78,7 +78,6 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 9, length: 6 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -90,7 +89,6 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 0, length: 19 },
-            flags: 1,
             node_kind: DefNode(
                 DefNode {
                     name: ConstantRef(2),
@@ -119,9 +117,12 @@ Program {
         Node {
             identifier: 9,
             location: Location { start: 27, length: 2 },
-            flags: 18,
             node_kind: SymbolNode(
                 SymbolNode {
+                    flags: BitFlags<SymbolFlags> {
+                        bits: 0b10,
+                        flags: FORCED_BINARY_ENCODING,
+                    },
                     opening_loc: None,
                     value_loc: Some(
                         Location { start: 27, length: 1 },
@@ -136,9 +137,12 @@ Program {
         Node {
             identifier: 10,
             location: Location { start: 30, length: 1 },
-            flags: 10,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1010,
+                        flags: DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -151,7 +155,6 @@ Program {
         Node {
             identifier: 11,
             location: Location { start: 27, length: 4 },
-            flags: 2,
             node_kind: AssocNode(
                 AssocNode {
                     key: NodeRef(5),
@@ -163,7 +166,6 @@ Program {
         Node {
             identifier: 8,
             location: Location { start: 25, length: 8 },
-            flags: 2,
             node_kind: HashNode(
                 HashNode {
                     opening_loc: Location { start: 25, length: 1 },
@@ -177,7 +179,6 @@ Program {
         Node {
             identifier: 12,
             location: Location { start: 21, length: 12 },
-            flags: 1,
             node_kind: LocalVariableWriteNode(
                 LocalVariableWriteNode {
                     name: ConstantRef(3),
@@ -191,7 +192,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 33 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -204,7 +204,6 @@ Program {
         Node {
             identifier: 13,
             location: Location { start: 0, length: 33 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [

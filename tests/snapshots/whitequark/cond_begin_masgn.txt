@@ -37,9 +37,12 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 4, length: 3 },
-            flags: 41,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1001,
+                        flags: SAFE_NAVIGATION | IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(1),
@@ -56,7 +59,6 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 9, length: 1 },
-            flags: 0,
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
                     name: ConstantRef(2),
@@ -67,7 +69,6 @@ Program {
         Node {
             identifier: 8,
             location: Location { start: 12, length: 1 },
-            flags: 0,
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
                     name: ConstantRef(3),
@@ -78,9 +79,12 @@ Program {
         Node {
             identifier: 9,
             location: Location { start: 16, length: 3 },
-            flags: 40,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1000,
+                        flags: IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(4),
@@ -97,7 +101,6 @@ Program {
         Node {
             identifier: 10,
             location: Location { start: 9, length: 10 },
-            flags: 1,
             node_kind: MultiWriteNode(
                 MultiWriteNode {
                     lefts: [
@@ -116,7 +119,6 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 4, length: 15 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -129,7 +131,6 @@ Program {
         Node {
             identifier: 11,
             location: Location { start: 3, length: 17 },
-            flags: 0,
             node_kind: ParenthesesNode(
                 ParenthesesNode {
                     body: Some(
@@ -143,7 +144,6 @@ Program {
         Node {
             identifier: 12,
             location: Location { start: 0, length: 25 },
-            flags: 1,
             node_kind: IfNode(
                 IfNode {
                     if_keyword_loc: Some(
@@ -162,7 +162,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 25 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -174,7 +173,6 @@ Program {
         Node {
             identifier: 13,
             location: Location { start: 0, length: 25 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [

@@ -26,9 +26,12 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 2, length: 4 },
-            flags: 18,
             node_kind: StringNode(
                 StringNode {
+                    flags: BitFlags<StringFlags> {
+                        bits: 0b10,
+                        flags: FORCED_BINARY_ENCODING,
+                    },
                     opening_loc: Some(
                         Location { start: 2, length: 4 },
                     ),
@@ -43,9 +46,12 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 7, length: 5 },
-            flags: 18,
             node_kind: StringNode(
                 StringNode {
+                    flags: BitFlags<StringFlags> {
+                        bits: 0b10,
+                        flags: FORCED_BINARY_ENCODING,
+                    },
                     opening_loc: Some(
                         Location { start: 7, length: 1 },
                     ),
@@ -60,9 +66,12 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 2, length: 10 },
-            flags: 2,
             node_kind: InterpolatedStringNode(
                 InterpolatedStringNode {
+                    flags: BitFlags<InterpolatedStringNodeFlags> {
+                        bits: 0b10,
+                        flags: MUTABLE,
+                    },
                     opening_loc: None,
                     parts: [
                         NodeRef(0),
@@ -75,9 +84,11 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 2, length: 10 },
-            flags: 0,
             node_kind: ArgumentsNode(
                 ArgumentsNode {
+                    flags: BitFlags<ArgumentsNodeFlags> {
+                        bits: 0b0,
+                    },
                     arguments: [
                         NodeRef(2),
                     ],
@@ -87,9 +98,12 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 0, length: 12 },
-            flags: 33,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1,
+                        flags: SAFE_NAVIGATION,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(1),
@@ -108,7 +122,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 12 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -120,7 +133,6 @@ Program {
         Node {
             identifier: 7,
             location: Location { start: 0, length: 12 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [],

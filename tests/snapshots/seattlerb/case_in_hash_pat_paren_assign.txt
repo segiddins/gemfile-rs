@@ -27,9 +27,12 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 5, length: 2 },
-            flags: 18,
             node_kind: SymbolNode(
                 SymbolNode {
+                    flags: BitFlags<SymbolFlags> {
+                        bits: 0b10,
+                        flags: FORCED_BINARY_ENCODING,
+                    },
                     opening_loc: Some(
                         Location { start: 5, length: 1 },
                     ),
@@ -44,7 +47,6 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 11, length: 1 },
-            flags: 0,
             node_kind: ConstantReadNode(
                 ConstantReadNode {
                     name: ConstantRef(1),
@@ -54,9 +56,12 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 13, length: 2 },
-            flags: 18,
             node_kind: SymbolNode(
                 SymbolNode {
+                    flags: BitFlags<SymbolFlags> {
+                        bits: 0b10,
+                        flags: FORCED_BINARY_ENCODING,
+                    },
                     opening_loc: None,
                     value_loc: Some(
                         Location { start: 13, length: 1 },
@@ -71,9 +76,12 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 16, length: 2 },
-            flags: 10,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1010,
+                        flags: DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -86,7 +94,6 @@ Program {
         Node {
             identifier: 7,
             location: Location { start: 13, length: 5 },
-            flags: 2,
             node_kind: AssocNode(
                 AssocNode {
                     key: NodeRef(2),
@@ -98,7 +105,6 @@ Program {
         Node {
             identifier: 8,
             location: Location { start: 11, length: 8 },
-            flags: 0,
             node_kind: HashPatternNode(
                 HashPatternNode {
                     constant: Some(
@@ -120,9 +126,12 @@ Program {
         Node {
             identifier: 10,
             location: Location { start: 22, length: 2 },
-            flags: 19,
             node_kind: SymbolNode(
                 SymbolNode {
+                    flags: BitFlags<SymbolFlags> {
+                        bits: 0b11,
+                        flags: FORCED_UTF8_ENCODING | FORCED_BINARY_ENCODING,
+                    },
                     opening_loc: Some(
                         Location { start: 22, length: 1 },
                     ),
@@ -137,7 +146,6 @@ Program {
         Node {
             identifier: 9,
             location: Location { start: 22, length: 2 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -149,7 +157,6 @@ Program {
         Node {
             identifier: 11,
             location: Location { start: 8, length: 16 },
-            flags: 0,
             node_kind: InNode(
                 InNode {
                     pattern: NodeRef(5),
@@ -164,7 +171,6 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 0, length: 28 },
-            flags: 1,
             node_kind: CaseMatchNode(
                 CaseMatchNode {
                     predicate: Some(
@@ -182,7 +188,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 28 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -194,7 +199,6 @@ Program {
         Node {
             identifier: 12,
             location: Location { start: 0, length: 28 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [],

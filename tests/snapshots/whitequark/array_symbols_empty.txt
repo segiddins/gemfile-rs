@@ -26,9 +26,12 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 0, length: 4 },
-            flags: 3,
             node_kind: ArrayNode(
                 ArrayNode {
+                    flags: BitFlags<ArrayNodeFlags> {
+                        bits: 0b1,
+                        flags: CONTAINS_SPLAT,
+                    },
                     elements: [],
                     opening_loc: Some(
                         Location { start: 0, length: 3 },
@@ -42,9 +45,12 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 6, length: 4 },
-            flags: 3,
             node_kind: ArrayNode(
                 ArrayNode {
+                    flags: BitFlags<ArrayNodeFlags> {
+                        bits: 0b1,
+                        flags: CONTAINS_SPLAT,
+                    },
                     elements: [],
                     opening_loc: Some(
                         Location { start: 6, length: 3 },
@@ -58,7 +64,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 10 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -71,7 +76,6 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 0, length: 10 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [],

@@ -37,9 +37,12 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 3, length: 1 },
-            flags: 10,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1010,
+                        flags: DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -52,9 +55,12 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 12, length: 1 },
-            flags: 10,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1010,
+                        flags: DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -67,7 +73,6 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 6, length: 12 },
-            flags: 1,
             node_kind: IfNode(
                 IfNode {
                     if_keyword_loc: Some(
@@ -86,7 +91,6 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 0, length: 18 },
-            flags: 1,
             node_kind: IfNode(
                 IfNode {
                     if_keyword_loc: Some(
@@ -107,7 +111,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 18 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -119,7 +122,6 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 0, length: 18 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [],

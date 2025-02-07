@@ -31,9 +31,11 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 7, length: 5 },
-            flags: 0,
             node_kind: RestParameterNode(
                 RestParameterNode {
+                    flags: BitFlags<ParameterFlags> {
+                        bits: 0b0,
+                    },
                     name: Some(
                         ConstantRef(2),
                     ),
@@ -47,7 +49,6 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 7, length: 5 },
-            flags: 0,
             node_kind: ParametersNode(
                 ParametersNode {
                     requireds: [],
@@ -65,7 +66,6 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 7, length: 5 },
-            flags: 0,
             node_kind: BlockParametersNode(
                 BlockParametersNode {
                     parameters: Some(
@@ -80,7 +80,6 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 4, length: 15 },
-            flags: 0,
             node_kind: LambdaNode(
                 LambdaNode {
                     locals: [
@@ -99,7 +98,6 @@ Program {
         Node {
             identifier: 7,
             location: Location { start: 0, length: 19 },
-            flags: 1,
             node_kind: LocalVariableWriteNode(
                 LocalVariableWriteNode {
                     name: ConstantRef(1),
@@ -113,7 +111,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 19 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -125,7 +122,6 @@ Program {
         Node {
             identifier: 8,
             location: Location { start: 0, length: 19 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [

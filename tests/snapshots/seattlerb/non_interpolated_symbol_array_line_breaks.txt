@@ -35,9 +35,12 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 4, length: 1 },
-            flags: 18,
             node_kind: SymbolNode(
                 SymbolNode {
+                    flags: BitFlags<SymbolFlags> {
+                        bits: 0b10,
+                        flags: FORCED_BINARY_ENCODING,
+                    },
                     opening_loc: None,
                     value_loc: Some(
                         Location { start: 4, length: 1 },
@@ -50,9 +53,12 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 6, length: 1 },
-            flags: 18,
             node_kind: SymbolNode(
                 SymbolNode {
+                    flags: BitFlags<SymbolFlags> {
+                        bits: 0b10,
+                        flags: FORCED_BINARY_ENCODING,
+                    },
                     opening_loc: None,
                     value_loc: Some(
                         Location { start: 6, length: 1 },
@@ -65,9 +71,12 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 0, length: 9 },
-            flags: 3,
             node_kind: ArrayNode(
                 ArrayNode {
+                    flags: BitFlags<ArrayNodeFlags> {
+                        bits: 0b1,
+                        flags: CONTAINS_SPLAT,
+                    },
                     elements: [
                         NodeRef(0),
                         NodeRef(1),
@@ -84,9 +93,12 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 10, length: 1 },
-            flags: 11,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1011,
+                        flags: BINARY | DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -99,7 +111,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 11 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -112,7 +123,6 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 0, length: 11 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [],

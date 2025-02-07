@@ -63,9 +63,12 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 0, length: 5 },
-            flags: 4099,
             node_kind: RegularExpressionNode(
                 RegularExpressionNode {
+                    flags: BitFlags<RegularExpressionFlags> {
+                        bits: 0b11,
+                        flags: IGNORE_CASE | EXTENDED,
+                    },
                     opening_loc: Location { start: 0, length: 1 },
                     content_loc: Location { start: 1, length: 3 },
                     closing_loc: Location { start: 4, length: 1 },
@@ -76,9 +79,12 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 7, length: 6 },
-            flags: 4115,
             node_kind: RegularExpressionNode(
                 RegularExpressionNode {
+                    flags: BitFlags<RegularExpressionFlags> {
+                        bits: 0b10011,
+                        flags: IGNORE_CASE | EXTENDED | EUC_JP,
+                    },
                     opening_loc: Location { start: 7, length: 1 },
                     content_loc: Location { start: 8, length: 3 },
                     closing_loc: Location { start: 11, length: 2 },
@@ -89,9 +95,12 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 15, length: 6 },
-            flags: 4227,
             node_kind: RegularExpressionNode(
                 RegularExpressionNode {
+                    flags: BitFlags<RegularExpressionFlags> {
+                        bits: 0b10000011,
+                        flags: IGNORE_CASE | EXTENDED | UTF_8,
+                    },
                     opening_loc: Location { start: 15, length: 1 },
                     content_loc: Location { start: 16, length: 3 },
                     closing_loc: Location { start: 19, length: 2 },
@@ -102,9 +111,12 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 23, length: 7 },
-            flags: 4243,
             node_kind: RegularExpressionNode(
                 RegularExpressionNode {
+                    flags: BitFlags<RegularExpressionFlags> {
+                        bits: 0b10010011,
+                        flags: IGNORE_CASE | EXTENDED | EUC_JP | UTF_8,
+                    },
                     opening_loc: Location { start: 23, length: 1 },
                     content_loc: Location { start: 24, length: 3 },
                     closing_loc: Location { start: 27, length: 3 },
@@ -115,9 +127,12 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 32, length: 13 },
-            flags: 4243,
             node_kind: RegularExpressionNode(
                 RegularExpressionNode {
+                    flags: BitFlags<RegularExpressionFlags> {
+                        bits: 0b10010011,
+                        flags: IGNORE_CASE | EXTENDED | EUC_JP | UTF_8,
+                    },
                     opening_loc: Location { start: 32, length: 1 },
                     content_loc: Location { start: 33, length: 3 },
                     closing_loc: Location { start: 36, length: 9 },
@@ -128,7 +143,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 45 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -144,7 +158,6 @@ Program {
         Node {
             identifier: 7,
             location: Location { start: 0, length: 45 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [],

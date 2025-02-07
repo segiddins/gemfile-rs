@@ -44,9 +44,12 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 0, length: 7 },
-            flags: 17,
             node_kind: XStringNode(
                 XStringNode {
+                    flags: BitFlags<EncodingFlags> {
+                        bits: 0b1,
+                        flags: FORCED_UTF8_ENCODING,
+                    },
                     opening_loc: Location { start: 0, length: 3 },
                     content_loc: Location { start: 3, length: 3 },
                     closing_loc: Location { start: 6, length: 1 },
@@ -57,9 +60,12 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 10, length: 4 },
-            flags: 18,
             node_kind: StringNode(
                 StringNode {
+                    flags: BitFlags<StringFlags> {
+                        bits: 0b10,
+                        flags: FORCED_BINARY_ENCODING,
+                    },
                     opening_loc: None,
                     content_loc: Location { start: 10, length: 4 },
                     closing_loc: None,
@@ -70,9 +76,12 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 16, length: 3 },
-            flags: 40,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1000,
+                        flags: IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(1),
@@ -89,7 +98,6 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 16, length: 3 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -101,7 +109,6 @@ Program {
         Node {
             identifier: 7,
             location: Location { start: 14, length: 6 },
-            flags: 0,
             node_kind: EmbeddedStatementsNode(
                 EmbeddedStatementsNode {
                     opening_loc: Location { start: 14, length: 2 },
@@ -115,9 +122,12 @@ Program {
         Node {
             identifier: 8,
             location: Location { start: 20, length: 4 },
-            flags: 18,
             node_kind: StringNode(
                 StringNode {
+                    flags: BitFlags<StringFlags> {
+                        bits: 0b10,
+                        flags: FORCED_BINARY_ENCODING,
+                    },
                     opening_loc: None,
                     content_loc: Location { start: 20, length: 4 },
                     closing_loc: None,
@@ -128,7 +138,6 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 9, length: 16 },
-            flags: 1,
             node_kind: InterpolatedXStringNode(
                 InterpolatedXStringNode {
                     opening_loc: Location { start: 9, length: 1 },
@@ -144,9 +153,12 @@ Program {
         Node {
             identifier: 9,
             location: Location { start: 27, length: 5 },
-            flags: 17,
             node_kind: XStringNode(
                 XStringNode {
+                    flags: BitFlags<EncodingFlags> {
+                        bits: 0b1,
+                        flags: FORCED_UTF8_ENCODING,
+                    },
                     opening_loc: Location { start: 27, length: 1 },
                     content_loc: Location { start: 28, length: 3 },
                     closing_loc: Location { start: 31, length: 1 },
@@ -157,9 +169,12 @@ Program {
         Node {
             identifier: 10,
             location: Location { start: 34, length: 11 },
-            flags: 17,
             node_kind: XStringNode(
                 XStringNode {
+                    flags: BitFlags<EncodingFlags> {
+                        bits: 0b1,
+                        flags: FORCED_UTF8_ENCODING,
+                    },
                     opening_loc: Location { start: 34, length: 3 },
                     content_loc: Location { start: 37, length: 7 },
                     closing_loc: Location { start: 44, length: 1 },
@@ -170,9 +185,12 @@ Program {
         Node {
             identifier: 11,
             location: Location { start: 47, length: 2 },
-            flags: 17,
             node_kind: XStringNode(
                 XStringNode {
+                    flags: BitFlags<EncodingFlags> {
+                        bits: 0b1,
+                        flags: FORCED_UTF8_ENCODING,
+                    },
                     opening_loc: Location { start: 47, length: 1 },
                     content_loc: Location { start: 48, length: 0 },
                     closing_loc: Location { start: 48, length: 1 },
@@ -183,9 +201,12 @@ Program {
         Node {
             identifier: 12,
             location: Location { start: 51, length: 4 },
-            flags: 17,
             node_kind: XStringNode(
                 XStringNode {
+                    flags: BitFlags<EncodingFlags> {
+                        bits: 0b1,
+                        flags: FORCED_UTF8_ENCODING,
+                    },
                     opening_loc: Location { start: 51, length: 3 },
                     content_loc: Location { start: 54, length: 0 },
                     closing_loc: Location { start: 54, length: 1 },
@@ -196,9 +217,12 @@ Program {
         Node {
             identifier: 13,
             location: Location { start: 57, length: 14 },
-            flags: 17,
             node_kind: XStringNode(
                 XStringNode {
+                    flags: BitFlags<EncodingFlags> {
+                        bits: 0b1,
+                        flags: FORCED_UTF8_ENCODING,
+                    },
                     opening_loc: Location { start: 57, length: 1 },
                     content_loc: Location { start: 58, length: 12 },
                     closing_loc: Location { start: 70, length: 1 },
@@ -209,9 +233,12 @@ Program {
         Node {
             identifier: 14,
             location: Location { start: 73, length: 6 },
-            flags: 17,
             node_kind: XStringNode(
                 XStringNode {
+                    flags: BitFlags<EncodingFlags> {
+                        bits: 0b1,
+                        flags: FORCED_UTF8_ENCODING,
+                    },
                     opening_loc: Location { start: 73, length: 1 },
                     content_loc: Location { start: 74, length: 4 },
                     closing_loc: Location { start: 78, length: 1 },
@@ -222,7 +249,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 79 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -241,7 +267,6 @@ Program {
         Node {
             identifier: 15,
             location: Location { start: 0, length: 79 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [],

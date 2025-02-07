@@ -67,7 +67,6 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 0, length: 1 },
-            flags: 0,
             node_kind: SplatNode(
                 SplatNode {
                     operator_loc: Location { start: 0, length: 1 },
@@ -78,9 +77,12 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 4, length: 3 },
-            flags: 40,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1000,
+                        flags: IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(1),
@@ -97,7 +99,6 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 0, length: 7 },
-            flags: 1,
             node_kind: MultiWriteNode(
                 MultiWriteNode {
                     lefts: [],
@@ -115,7 +116,6 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 9, length: 1 },
-            flags: 0,
             node_kind: SplatNode(
                 SplatNode {
                     operator_loc: Location { start: 9, length: 1 },
@@ -126,7 +126,6 @@ Program {
         Node {
             identifier: 9,
             location: Location { start: 12, length: 1 },
-            flags: 0,
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
                     name: ConstantRef(2),
@@ -137,7 +136,6 @@ Program {
         Node {
             identifier: 11,
             location: Location { start: 15, length: 1 },
-            flags: 0,
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
                     name: ConstantRef(3),
@@ -148,9 +146,12 @@ Program {
         Node {
             identifier: 12,
             location: Location { start: 19, length: 3 },
-            flags: 40,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1000,
+                        flags: IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(1),
@@ -167,7 +168,6 @@ Program {
         Node {
             identifier: 13,
             location: Location { start: 9, length: 13 },
-            flags: 1,
             node_kind: MultiWriteNode(
                 MultiWriteNode {
                     lefts: [],
@@ -188,7 +188,6 @@ Program {
         Node {
             identifier: 16,
             location: Location { start: 25, length: 1 },
-            flags: 0,
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
                     name: ConstantRef(4),
@@ -199,7 +198,6 @@ Program {
         Node {
             identifier: 15,
             location: Location { start: 24, length: 2 },
-            flags: 0,
             node_kind: SplatNode(
                 SplatNode {
                     operator_loc: Location { start: 24, length: 1 },
@@ -212,9 +210,12 @@ Program {
         Node {
             identifier: 18,
             location: Location { start: 29, length: 3 },
-            flags: 40,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1000,
+                        flags: IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(1),
@@ -231,7 +232,6 @@ Program {
         Node {
             identifier: 19,
             location: Location { start: 24, length: 8 },
-            flags: 1,
             node_kind: MultiWriteNode(
                 MultiWriteNode {
                     lefts: [],
@@ -249,7 +249,6 @@ Program {
         Node {
             identifier: 20,
             location: Location { start: 35, length: 1 },
-            flags: 0,
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
                     name: ConstantRef(4),
@@ -260,7 +259,6 @@ Program {
         Node {
             identifier: 21,
             location: Location { start: 34, length: 2 },
-            flags: 0,
             node_kind: SplatNode(
                 SplatNode {
                     operator_loc: Location { start: 34, length: 1 },
@@ -273,7 +271,6 @@ Program {
         Node {
             identifier: 23,
             location: Location { start: 38, length: 1 },
-            flags: 0,
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
                     name: ConstantRef(2),
@@ -284,9 +281,12 @@ Program {
         Node {
             identifier: 24,
             location: Location { start: 42, length: 3 },
-            flags: 40,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1000,
+                        flags: IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(1),
@@ -303,7 +303,6 @@ Program {
         Node {
             identifier: 25,
             location: Location { start: 34, length: 11 },
-            flags: 1,
             node_kind: MultiWriteNode(
                 MultiWriteNode {
                     lefts: [],
@@ -323,7 +322,6 @@ Program {
         Node {
             identifier: 26,
             location: Location { start: 47, length: 4 },
-            flags: 0,
             node_kind: InstanceVariableTargetNode(
                 InstanceVariableTargetNode {
                     name: ConstantRef(5),
@@ -333,7 +331,6 @@ Program {
         Node {
             identifier: 28,
             location: Location { start: 53, length: 5 },
-            flags: 0,
             node_kind: ClassVariableTargetNode(
                 ClassVariableTargetNode {
                     name: ConstantRef(6),
@@ -343,9 +340,12 @@ Program {
         Node {
             identifier: 29,
             location: Location { start: 62, length: 3 },
-            flags: 40,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1000,
+                        flags: IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(7),
@@ -362,7 +362,6 @@ Program {
         Node {
             identifier: 30,
             location: Location { start: 61, length: 4 },
-            flags: 0,
             node_kind: SplatNode(
                 SplatNode {
                     operator_loc: Location { start: 61, length: 1 },
@@ -375,9 +374,11 @@ Program {
         Node {
             identifier: 31,
             location: Location { start: 61, length: 4 },
-            flags: 4,
             node_kind: ArrayNode(
                 ArrayNode {
+                    flags: BitFlags<ArrayNodeFlags> {
+                        bits: 0b0,
+                    },
                     elements: [
                         NodeRef(20),
                     ],
@@ -389,7 +390,6 @@ Program {
         Node {
             identifier: 32,
             location: Location { start: 47, length: 18 },
-            flags: 5,
             node_kind: MultiWriteNode(
                 MultiWriteNode {
                     lefts: [
@@ -408,7 +408,6 @@ Program {
         Node {
             identifier: 35,
             location: Location { start: 67, length: 1 },
-            flags: 0,
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
                     name: ConstantRef(8),
@@ -419,7 +418,6 @@ Program {
         Node {
             identifier: 36,
             location: Location { start: 70, length: 1 },
-            flags: 0,
             node_kind: SplatNode(
                 SplatNode {
                     operator_loc: Location { start: 70, length: 1 },
@@ -430,9 +428,12 @@ Program {
         Node {
             identifier: 37,
             location: Location { start: 74, length: 3 },
-            flags: 40,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1000,
+                        flags: IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(1),
@@ -449,7 +450,6 @@ Program {
         Node {
             identifier: 38,
             location: Location { start: 67, length: 10 },
-            flags: 1,
             node_kind: MultiWriteNode(
                 MultiWriteNode {
                     lefts: [
@@ -469,7 +469,6 @@ Program {
         Node {
             identifier: 39,
             location: Location { start: 79, length: 1 },
-            flags: 0,
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
                     name: ConstantRef(8),
@@ -480,7 +479,6 @@ Program {
         Node {
             identifier: 41,
             location: Location { start: 82, length: 1 },
-            flags: 0,
             node_kind: SplatNode(
                 SplatNode {
                     operator_loc: Location { start: 82, length: 1 },
@@ -491,7 +489,6 @@ Program {
         Node {
             identifier: 42,
             location: Location { start: 85, length: 1 },
-            flags: 0,
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
                     name: ConstantRef(2),
@@ -502,9 +499,12 @@ Program {
         Node {
             identifier: 43,
             location: Location { start: 89, length: 3 },
-            flags: 40,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1000,
+                        flags: IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(1),
@@ -521,7 +521,6 @@ Program {
         Node {
             identifier: 44,
             location: Location { start: 79, length: 13 },
-            flags: 1,
             node_kind: MultiWriteNode(
                 MultiWriteNode {
                     lefts: [
@@ -543,7 +542,6 @@ Program {
         Node {
             identifier: 45,
             location: Location { start: 94, length: 1 },
-            flags: 0,
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
                     name: ConstantRef(8),
@@ -554,7 +552,6 @@ Program {
         Node {
             identifier: 47,
             location: Location { start: 98, length: 1 },
-            flags: 0,
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
                     name: ConstantRef(4),
@@ -565,7 +562,6 @@ Program {
         Node {
             identifier: 48,
             location: Location { start: 97, length: 2 },
-            flags: 0,
             node_kind: SplatNode(
                 SplatNode {
                     operator_loc: Location { start: 97, length: 1 },
@@ -578,9 +574,12 @@ Program {
         Node {
             identifier: 49,
             location: Location { start: 102, length: 3 },
-            flags: 40,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1000,
+                        flags: IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(1),
@@ -597,7 +596,6 @@ Program {
         Node {
             identifier: 50,
             location: Location { start: 94, length: 11 },
-            flags: 1,
             node_kind: MultiWriteNode(
                 MultiWriteNode {
                     lefts: [
@@ -617,7 +615,6 @@ Program {
         Node {
             identifier: 51,
             location: Location { start: 107, length: 1 },
-            flags: 0,
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
                     name: ConstantRef(8),
@@ -628,7 +625,6 @@ Program {
         Node {
             identifier: 53,
             location: Location { start: 111, length: 1 },
-            flags: 0,
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
                     name: ConstantRef(4),
@@ -639,7 +635,6 @@ Program {
         Node {
             identifier: 54,
             location: Location { start: 110, length: 2 },
-            flags: 0,
             node_kind: SplatNode(
                 SplatNode {
                     operator_loc: Location { start: 110, length: 1 },
@@ -652,7 +647,6 @@ Program {
         Node {
             identifier: 55,
             location: Location { start: 114, length: 1 },
-            flags: 0,
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
                     name: ConstantRef(2),
@@ -663,9 +657,12 @@ Program {
         Node {
             identifier: 56,
             location: Location { start: 118, length: 3 },
-            flags: 40,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1000,
+                        flags: IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(1),
@@ -682,7 +679,6 @@ Program {
         Node {
             identifier: 57,
             location: Location { start: 107, length: 14 },
-            flags: 1,
             node_kind: MultiWriteNode(
                 MultiWriteNode {
                     lefts: [
@@ -704,7 +700,6 @@ Program {
         Node {
             identifier: 58,
             location: Location { start: 123, length: 1 },
-            flags: 0,
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
                     name: ConstantRef(8),
@@ -715,7 +710,6 @@ Program {
         Node {
             identifier: 60,
             location: Location { start: 126, length: 1 },
-            flags: 0,
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
                     name: ConstantRef(4),
@@ -726,9 +720,12 @@ Program {
         Node {
             identifier: 61,
             location: Location { start: 131, length: 3 },
-            flags: 40,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1000,
+                        flags: IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(7),
@@ -745,7 +742,6 @@ Program {
         Node {
             identifier: 62,
             location: Location { start: 130, length: 4 },
-            flags: 0,
             node_kind: SplatNode(
                 SplatNode {
                     operator_loc: Location { start: 130, length: 1 },
@@ -758,9 +754,12 @@ Program {
         Node {
             identifier: 64,
             location: Location { start: 136, length: 3 },
-            flags: 40,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1000,
+                        flags: IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(1),
@@ -777,9 +776,11 @@ Program {
         Node {
             identifier: 63,
             location: Location { start: 130, length: 9 },
-            flags: 4,
             node_kind: ArrayNode(
                 ArrayNode {
+                    flags: BitFlags<ArrayNodeFlags> {
+                        bits: 0b0,
+                    },
                     elements: [
                         NodeRef(46),
                         NodeRef(47),
@@ -792,7 +793,6 @@ Program {
         Node {
             identifier: 65,
             location: Location { start: 123, length: 16 },
-            flags: 5,
             node_kind: MultiWriteNode(
                 MultiWriteNode {
                     lefts: [
@@ -811,7 +811,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 139 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -832,7 +831,6 @@ Program {
         Node {
             identifier: 66,
             location: Location { start: 0, length: 139 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [

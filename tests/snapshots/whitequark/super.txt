@@ -28,9 +28,12 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 6, length: 3 },
-            flags: 40,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1000,
+                        flags: IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(1),
@@ -47,9 +50,11 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 6, length: 3 },
-            flags: 0,
             node_kind: ArgumentsNode(
                 ArgumentsNode {
+                    flags: BitFlags<ArgumentsNodeFlags> {
+                        bits: 0b0,
+                    },
                     arguments: [
                         NodeRef(0),
                     ],
@@ -59,7 +64,6 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 0, length: 9 },
-            flags: 1,
             node_kind: SuperNode(
                 SuperNode {
                     keyword_loc: Location { start: 0, length: 5 },
@@ -75,7 +79,6 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 11, length: 7 },
-            flags: 1,
             node_kind: SuperNode(
                 SuperNode {
                     keyword_loc: Location { start: 11, length: 5 },
@@ -93,9 +96,12 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 26, length: 3 },
-            flags: 40,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1000,
+                        flags: IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(1),
@@ -112,9 +118,11 @@ Program {
         Node {
             identifier: 7,
             location: Location { start: 26, length: 3 },
-            flags: 0,
             node_kind: ArgumentsNode(
                 ArgumentsNode {
+                    flags: BitFlags<ArgumentsNodeFlags> {
+                        bits: 0b0,
+                    },
                     arguments: [
                         NodeRef(4),
                     ],
@@ -124,7 +132,6 @@ Program {
         Node {
             identifier: 8,
             location: Location { start: 20, length: 10 },
-            flags: 1,
             node_kind: SuperNode(
                 SuperNode {
                     keyword_loc: Location { start: 20, length: 5 },
@@ -144,7 +151,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 30 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -158,7 +164,6 @@ Program {
         Node {
             identifier: 9,
             location: Location { start: 0, length: 30 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [],

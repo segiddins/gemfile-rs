@@ -24,7 +24,6 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 3, length: 1 },
-            flags: 0,
             node_kind: ConstantReadNode(
                 ConstantReadNode {
                     name: ConstantRef(2),
@@ -34,7 +33,6 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 3, length: 4 },
-            flags: 0,
             node_kind: ConstantPathNode(
                 ConstantPathNode {
                     parent: Some(
@@ -51,9 +49,12 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 13, length: 1 },
-            flags: 40,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1000,
+                        flags: IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(5),
@@ -70,9 +71,11 @@ Program {
         Node {
             identifier: 7,
             location: Location { start: 13, length: 1 },
-            flags: 0,
             node_kind: ArgumentsNode(
                 ArgumentsNode {
+                    flags: BitFlags<ArgumentsNodeFlags> {
+                        bits: 0b0,
+                    },
                     arguments: [
                         NodeRef(2),
                     ],
@@ -82,9 +85,11 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 11, length: 3 },
-            flags: 32,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b0,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(4),
@@ -103,7 +108,6 @@ Program {
         Node {
             identifier: 8,
             location: Location { start: 3, length: 11 },
-            flags: 1,
             node_kind: ConstantPathOperatorWriteNode(
                 ConstantPathOperatorWriteNode {
                     target: NodeRef(1),
@@ -116,7 +120,6 @@ Program {
         Node {
             identifier: 9,
             location: Location { start: 3, length: 11 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -128,7 +131,6 @@ Program {
         Node {
             identifier: 10,
             location: Location { start: 2, length: 13 },
-            flags: 0,
             node_kind: ParenthesesNode(
                 ParenthesesNode {
                     body: Some(
@@ -142,9 +144,11 @@ Program {
         Node {
             identifier: 11,
             location: Location { start: 2, length: 13 },
-            flags: 0,
             node_kind: ArgumentsNode(
                 ArgumentsNode {
+                    flags: BitFlags<ArgumentsNodeFlags> {
+                        bits: 0b0,
+                    },
                     arguments: [
                         NodeRef(7),
                     ],
@@ -154,9 +158,12 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 0, length: 15 },
-            flags: 33,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1,
+                        flags: SAFE_NAVIGATION,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(1),
@@ -175,7 +182,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 15 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -187,7 +193,6 @@ Program {
         Node {
             identifier: 12,
             location: Location { start: 0, length: 15 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [],

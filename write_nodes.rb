@@ -90,8 +90,23 @@ end
 f.puts "use std::fmt::Write;"
 f.puts
 f.puts "use super::deserialize::*;"
+f.puts "use enumflags2::BitFlag;"
 f.puts "use winnow::binary::length_repeat;"
 f.puts
+
+config["flags"].each do |flag|
+  f.puts "/* #{flag["comment"]} */"
+  f.puts "#[enumflags2::bitflags]"
+  f.puts "#[repr(u32)]"
+  f.puts "#[derive(Debug, Clone, Copy, PartialEq, Eq)]"
+  f.puts "pub enum #{flag["name"]} {"
+  flag["values"].each_with_index do |value, index|
+    f.puts "  /* #{flag["comment"]} */"
+    f.puts "  #{value["name"]} = 1 << #{index},"
+  end
+  f.puts "}"
+  f.puts
+end
 
 config["nodes"].each_with_index do |node, index|
   name = node["name"]
@@ -104,12 +119,16 @@ config["nodes"].each_with_index do |node, index|
     kinds.merge Array(kind).flatten
     Field.new(fname, type, kind)
   end
+  flags = node["flags"]
   node = Node.new(name, fields)
 
   f.puts "// #{index}"
   f.puts "#[derive(Debug, Clone)]"
   f.print "pub struct #{name}"
     f.puts " {"
+    if flags
+      f.puts "  pub flags: enumflags2::BitFlags<#{flags}>,"
+    end
     node.fields&.each do |field|
       f.puts "  #{field.name}: #{rust_type field.type},"
     end
@@ -127,20 +146,29 @@ config["nodes"].each_with_index do |node, index|
   end
   f.puts "pub fn into_node_kind(self) -> NodeKind { NodeKind::#{name}(self) }"
 
+  f.puts "pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {"
+  f.puts "    use winnow::Parser;"
   if node.fields&.any?
-    f.puts "pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {"
-    f.puts "    use winnow::Parser;"
     f.puts "    winnow::combinator::seq![#{name}{"
+    if name == "DefNode"
+      f.puts "        _: winnow::binary::u32(winnow::binary::Endianness::Native),"
+    end
+    if flags
+      f.puts "        flags: parse_varuint.map(#{flags}::from_bits_truncate).context(winnow::error::StrContext::Label(\"#{name}.flags\")),"
+    else
+      f.puts "        _: zero_flags.context(winnow::error::StrContext::Label(\"#{name}.flags\")),"
+    end
     node["fields"]&.each do |field|
       f.puts "        #{field["name"]}: #{parse_method(field["type"])}.context(winnow::error::StrContext::Label(\"#{name}.#{field['name']}\")),"
     end
     f.puts "    }].parse_next(input)"
-    f.puts "}"
+  else
+    f.puts "    zero_flags.context(winnow::error::StrContext::Label(\"#{name}.flags\")).value(Self {}).parse_next(input)"
   end
+  f.puts "}"
   f.puts
   f.puts "}"
   f.puts
-
 end
 
 f.puts <<~RS
@@ -171,45 +199,21 @@ f.puts <<~RS
 }
 
 
-pub fn parse_node(
-    input: &mut super::deserialize::Stream,
-) -> winnow::ModalResult<NodeRef> {
+pub fn parse_node(input: &mut Stream) -> winnow::ModalResult<NodeRef> {
     use winnow::Parser;
 
-    let (kind, identifier, location) = winnow::Parser::parse_next(
-        &mut winnow::combinator::seq![(
-            winnow::binary::u8,
-            parse_varuint,
-            parse_location,
-        )],
-        input,
-    )?;
-
-    if kind == 45 {
-      winnow::binary::u32(winnow::binary::Endianness::Native).parse_next(input)?;
-    }
-
-    let flags = parse_varuint.parse_next(input)?;
+    let (kind, identifier, location) = winnow::combinator::seq![(
+          winnow::binary::u8,
+          parse_varuint,
+          parse_location,
+      )].parse_next(input)?;
 
     let node_kind = match kind {
 RS
 
   config["nodes"].each_with_index do |node, index|
   name = node["name"]
-  if node["fields"]&.any?
-    f.puts "    #{index+1} => #{name}::parser.map(#{name}::into_node_kind).parse_next(input),"
-  else
-    f.puts "    #{index+1} => winnow::combinator::empty.value(#{name} {}.into_node_kind()).parse_next(input),"
-  end
-  # f.puts "    #{index+1} => #{name} {"
-  # node["fields"]&.each do |field|
-  #   f.puts "        #{field["name"]}: #{parse_method(field["type"])}.context(winnow::error::StrContext::Label(\"#{name}.#{field['name']}\")).parse_next(input)?,"
-  # end
-  # if !node["fields"]&.any?
-  #   f.puts "        0: (),"
-  # end
-  # f.puts "      }"
-  # f.puts "    .into_node_kind(),"
+  f.puts "    #{index+1} => #{name}::parser.map(#{name}::into_node_kind).parse_next(input),"
 end
 
 f.puts <<~RS
@@ -221,10 +225,8 @@ f.puts <<~RS
             .parse_next(input),
     }?;
     Ok(input.state.add_node(Node {
-        // kind,
         identifier,
         location,
-        flags,
         node_kind,
     }))
 }
@@ -246,11 +248,11 @@ impl std::fmt::Debug for NodeSnapshot<'_> {
                 location: &node.location
             }
         )?;
-        if node.flags == 0 {
+        /*if node.flags == 0 {
           writeln!(f, "├── flags: ∅")?;
         } else {
           writeln!(f, "├── flags: {:?}", node.flags)?;
-        }
+        }*/
 
         match &node.node_kind {
 RS

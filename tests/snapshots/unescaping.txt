@@ -51,9 +51,11 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 1, length: 8 },
-            flags: 0,
             node_kind: StringNode(
                 StringNode {
+                    flags: BitFlags<StringFlags> {
+                        bits: 0b0,
+                    },
                     opening_loc: Some(
                         Location { start: 1, length: 1 },
                     ),
@@ -68,9 +70,12 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 0, length: 10 },
-            flags: 1,
             node_kind: ArrayNode(
                 ArrayNode {
+                    flags: BitFlags<ArrayNodeFlags> {
+                        bits: 0b1,
+                        flags: CONTAINS_SPLAT,
+                    },
                     elements: [
                         NodeRef(0),
                     ],
@@ -86,9 +91,12 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 12, length: 8 },
-            flags: 4099,
             node_kind: RegularExpressionNode(
                 RegularExpressionNode {
+                    flags: BitFlags<RegularExpressionFlags> {
+                        bits: 0b11,
+                        flags: IGNORE_CASE | EXTENDED,
+                    },
                     opening_loc: Location { start: 12, length: 1 },
                     content_loc: Location { start: 13, length: 6 },
                     closing_loc: Location { start: 19, length: 1 },
@@ -99,9 +107,12 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 22, length: 8 },
-            flags: 1,
             node_kind: StringNode(
                 StringNode {
+                    flags: BitFlags<StringFlags> {
+                        bits: 0b1,
+                        flags: FORCED_UTF8_ENCODING,
+                    },
                     opening_loc: Some(
                         Location { start: 22, length: 1 },
                     ),
@@ -116,9 +127,12 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 32, length: 7 },
-            flags: 1,
             node_kind: StringNode(
                 StringNode {
+                    flags: BitFlags<StringFlags> {
+                        bits: 0b1,
+                        flags: FORCED_UTF8_ENCODING,
+                    },
                     opening_loc: Some(
                         Location { start: 32, length: 7 },
                     ),
@@ -133,7 +147,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 39 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -148,7 +161,6 @@ Program {
         Node {
             identifier: 7,
             location: Location { start: 0, length: 39 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [],

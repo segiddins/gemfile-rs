@@ -24,9 +24,12 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 1, length: 2 },
-            flags: 18,
             node_kind: SymbolNode(
                 SymbolNode {
+                    flags: BitFlags<SymbolFlags> {
+                        bits: 0b10,
+                        flags: FORCED_BINARY_ENCODING,
+                    },
                     opening_loc: None,
                     value_loc: Some(
                         Location { start: 1, length: 1 },
@@ -41,7 +44,6 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 7, length: 4 },
-            flags: 2,
             node_kind: TrueNode(
                 TrueNode,
             ),
@@ -49,9 +51,12 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 17, length: 2 },
-            flags: 11,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1011,
+                        flags: BINARY | DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -64,7 +69,6 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 17, length: 2 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -76,7 +80,6 @@ Program {
         Node {
             identifier: 7,
             location: Location { start: 4, length: 19 },
-            flags: 1,
             node_kind: IfNode(
                 IfNode {
                     if_keyword_loc: Some(
@@ -99,7 +102,6 @@ Program {
         Node {
             identifier: 8,
             location: Location { start: 1, length: 22 },
-            flags: 0,
             node_kind: AssocNode(
                 AssocNode {
                     key: NodeRef(0),
@@ -111,7 +113,6 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 0, length: 24 },
-            flags: 1,
             node_kind: HashNode(
                 HashNode {
                     opening_loc: Location { start: 0, length: 1 },
@@ -125,7 +126,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 24 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -137,7 +137,6 @@ Program {
         Node {
             identifier: 9,
             location: Location { start: 0, length: 24 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [],

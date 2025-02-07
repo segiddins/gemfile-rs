@@ -65,7 +65,6 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 6, length: 6 },
-            flags: 0,
             node_kind: RescueNode(
                 RescueNode {
                     keyword_loc: Location { start: 6, length: 6 },
@@ -81,7 +80,6 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 0, length: 16 },
-            flags: 1,
             node_kind: BeginNode(
                 BeginNode {
                     begin_keyword_loc: Some(
@@ -102,7 +100,6 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 24, length: 6 },
-            flags: 0,
             node_kind: RescueNode(
                 RescueNode {
                     keyword_loc: Location { start: 24, length: 6 },
@@ -118,7 +115,6 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 31, length: 8 },
-            flags: 0,
             node_kind: ElseNode(
                 ElseNode {
                     else_keyword_loc: Location { start: 31, length: 4 },
@@ -132,7 +128,6 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 18, length: 21 },
-            flags: 1,
             node_kind: BeginNode(
                 BeginNode {
                     begin_keyword_loc: Some(
@@ -155,9 +150,12 @@ Program {
         Node {
             identifier: 8,
             location: Location { start: 49, length: 1 },
-            flags: 41,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1001,
+                        flags: SAFE_NAVIGATION | IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(1),
@@ -174,7 +172,6 @@ Program {
         Node {
             identifier: 7,
             location: Location { start: 49, length: 1 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -186,7 +183,6 @@ Program {
         Node {
             identifier: 9,
             location: Location { start: 41, length: 13 },
-            flags: 1,
             node_kind: BeginNode(
                 BeginNode {
                     begin_keyword_loc: Some(
@@ -207,9 +203,12 @@ Program {
         Node {
             identifier: 11,
             location: Location { start: 64, length: 1 },
-            flags: 41,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1001,
+                        flags: SAFE_NAVIGATION | IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(1),
@@ -226,7 +225,6 @@ Program {
         Node {
             identifier: 10,
             location: Location { start: 64, length: 1 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -238,9 +236,12 @@ Program {
         Node {
             identifier: 15,
             location: Location { start: 75, length: 1 },
-            flags: 41,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1001,
+                        flags: SAFE_NAVIGATION | IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(2),
@@ -257,7 +258,6 @@ Program {
         Node {
             identifier: 14,
             location: Location { start: 75, length: 1 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -269,7 +269,6 @@ Program {
         Node {
             identifier: 13,
             location: Location { start: 66, length: 10 },
-            flags: 0,
             node_kind: RescueNode(
                 RescueNode {
                     keyword_loc: Location { start: 66, length: 6 },
@@ -287,7 +286,6 @@ Program {
         Node {
             identifier: 12,
             location: Location { start: 56, length: 24 },
-            flags: 1,
             node_kind: BeginNode(
                 BeginNode {
                     begin_keyword_loc: Some(
@@ -310,9 +308,12 @@ Program {
         Node {
             identifier: 17,
             location: Location { start: 90, length: 1 },
-            flags: 41,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1001,
+                        flags: SAFE_NAVIGATION | IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(1),
@@ -329,9 +330,12 @@ Program {
         Node {
             identifier: 18,
             location: Location { start: 94, length: 1 },
-            flags: 41,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1001,
+                        flags: SAFE_NAVIGATION | IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(2),
@@ -348,7 +352,6 @@ Program {
         Node {
             identifier: 16,
             location: Location { start: 90, length: 5 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -361,9 +364,12 @@ Program {
         Node {
             identifier: 22,
             location: Location { start: 105, length: 1 },
-            flags: 41,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1001,
+                        flags: SAFE_NAVIGATION | IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(2),
@@ -380,7 +386,6 @@ Program {
         Node {
             identifier: 21,
             location: Location { start: 105, length: 1 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -392,7 +397,6 @@ Program {
         Node {
             identifier: 20,
             location: Location { start: 96, length: 10 },
-            flags: 0,
             node_kind: RescueNode(
                 RescueNode {
                     keyword_loc: Location { start: 96, length: 6 },
@@ -410,7 +414,6 @@ Program {
         Node {
             identifier: 19,
             location: Location { start: 82, length: 28 },
-            flags: 1,
             node_kind: BeginNode(
                 BeginNode {
                     begin_keyword_loc: Some(
@@ -433,7 +436,6 @@ Program {
         Node {
             identifier: 25,
             location: Location { start: 125, length: 1 },
-            flags: 0,
             node_kind: ConstantReadNode(
                 ConstantReadNode {
                     name: ConstantRef(3),
@@ -443,7 +445,6 @@ Program {
         Node {
             identifier: 24,
             location: Location { start: 118, length: 8 },
-            flags: 0,
             node_kind: RescueNode(
                 RescueNode {
                     keyword_loc: Location { start: 118, length: 6 },
@@ -461,7 +462,6 @@ Program {
         Node {
             identifier: 26,
             location: Location { start: 127, length: 8 },
-            flags: 0,
             node_kind: ElseNode(
                 ElseNode {
                     else_keyword_loc: Location { start: 127, length: 4 },
@@ -475,7 +475,6 @@ Program {
         Node {
             identifier: 23,
             location: Location { start: 112, length: 23 },
-            flags: 1,
             node_kind: BeginNode(
                 BeginNode {
                     begin_keyword_loc: Some(
@@ -498,7 +497,6 @@ Program {
         Node {
             identifier: 29,
             location: Location { start: 151, length: 1 },
-            flags: 0,
             node_kind: ConstantReadNode(
                 ConstantReadNode {
                     name: ConstantRef(3),
@@ -508,7 +506,6 @@ Program {
         Node {
             identifier: 28,
             location: Location { start: 144, length: 8 },
-            flags: 0,
             node_kind: RescueNode(
                 RescueNode {
                     keyword_loc: Location { start: 144, length: 6 },
@@ -526,7 +523,6 @@ Program {
         Node {
             identifier: 30,
             location: Location { start: 154, length: 9 },
-            flags: 0,
             node_kind: ElseNode(
                 ElseNode {
                     else_keyword_loc: Location { start: 154, length: 4 },
@@ -540,7 +536,6 @@ Program {
         Node {
             identifier: 27,
             location: Location { start: 137, length: 26 },
-            flags: 1,
             node_kind: BeginNode(
                 BeginNode {
                     begin_keyword_loc: Some(
@@ -563,9 +558,12 @@ Program {
         Node {
             identifier: 32,
             location: Location { start: 173, length: 1 },
-            flags: 41,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1001,
+                        flags: SAFE_NAVIGATION | IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(1),
@@ -582,7 +580,6 @@ Program {
         Node {
             identifier: 31,
             location: Location { start: 173, length: 1 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -594,7 +591,6 @@ Program {
         Node {
             identifier: 35,
             location: Location { start: 182, length: 1 },
-            flags: 0,
             node_kind: ConstantReadNode(
                 ConstantReadNode {
                     name: ConstantRef(3),
@@ -604,9 +600,12 @@ Program {
         Node {
             identifier: 37,
             location: Location { start: 186, length: 1 },
-            flags: 41,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1001,
+                        flags: SAFE_NAVIGATION | IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(2),
@@ -623,7 +622,6 @@ Program {
         Node {
             identifier: 36,
             location: Location { start: 186, length: 1 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -635,7 +633,6 @@ Program {
         Node {
             identifier: 39,
             location: Location { start: 195, length: 1 },
-            flags: 0,
             node_kind: ConstantReadNode(
                 ConstantReadNode {
                     name: ConstantRef(4),
@@ -645,9 +642,12 @@ Program {
         Node {
             identifier: 41,
             location: Location { start: 199, length: 1 },
-            flags: 41,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1001,
+                        flags: SAFE_NAVIGATION | IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(5),
@@ -664,7 +664,6 @@ Program {
         Node {
             identifier: 40,
             location: Location { start: 199, length: 1 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -676,7 +675,6 @@ Program {
         Node {
             identifier: 38,
             location: Location { start: 188, length: 12 },
-            flags: 0,
             node_kind: RescueNode(
                 RescueNode {
                     keyword_loc: Location { start: 188, length: 6 },
@@ -696,7 +694,6 @@ Program {
         Node {
             identifier: 34,
             location: Location { start: 175, length: 25 },
-            flags: 0,
             node_kind: RescueNode(
                 RescueNode {
                     keyword_loc: Location { start: 175, length: 6 },
@@ -718,9 +715,12 @@ Program {
         Node {
             identifier: 43,
             location: Location { start: 210, length: 1 },
-            flags: 41,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1001,
+                        flags: SAFE_NAVIGATION | IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(6),
@@ -737,7 +737,6 @@ Program {
         Node {
             identifier: 42,
             location: Location { start: 210, length: 1 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -749,7 +748,6 @@ Program {
         Node {
             identifier: 44,
             location: Location { start: 201, length: 14 },
-            flags: 0,
             node_kind: EnsureNode(
                 EnsureNode {
                     ensure_keyword_loc: Location { start: 201, length: 6 },
@@ -763,7 +761,6 @@ Program {
         Node {
             identifier: 33,
             location: Location { start: 165, length: 50 },
-            flags: 1,
             node_kind: BeginNode(
                 BeginNode {
                     begin_keyword_loc: Some(
@@ -788,7 +785,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 215 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -807,7 +803,6 @@ Program {
         Node {
             identifier: 45,
             location: Location { start: 0, length: 215 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [],

@@ -50,9 +50,12 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 0, length: 8 },
-            flags: 1,
             node_kind: StringNode(
                 StringNode {
+                    flags: BitFlags<StringFlags> {
+                        bits: 0b1,
+                        flags: FORCED_UTF8_ENCODING,
+                    },
                     opening_loc: Some(
                         Location { start: 0, length: 8 },
                     ),
@@ -67,9 +70,12 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 23, length: 6 },
-            flags: 1,
             node_kind: StringNode(
                 StringNode {
+                    flags: BitFlags<StringFlags> {
+                        bits: 0b1,
+                        flags: FORCED_UTF8_ENCODING,
+                    },
                     opening_loc: Some(
                         Location { start: 23, length: 6 },
                     ),
@@ -84,9 +90,12 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 44, length: 8 },
-            flags: 1,
             node_kind: XStringNode(
                 XStringNode {
+                    flags: BitFlags<EncodingFlags> {
+                        bits: 0b1,
+                        flags: FORCED_UTF8_ENCODING,
+                    },
                     opening_loc: Location { start: 44, length: 8 },
                     content_loc: Location { start: 53, length: 8 },
                     closing_loc: Location { start: 61, length: 5 },
@@ -97,7 +106,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 52 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -111,7 +119,6 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 0, length: 52 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [],

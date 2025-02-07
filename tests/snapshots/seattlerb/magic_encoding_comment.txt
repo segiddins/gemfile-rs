@@ -41,7 +41,6 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 24, length: 28 },
-            flags: 0,
             node_kind: ConstantReadNode(
                 ConstantReadNode {
                     name: ConstantRef(1),
@@ -51,7 +50,6 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 58, length: 4 },
-            flags: 0,
             node_kind: SelfNode(
                 SelfNode,
             ),
@@ -59,9 +57,12 @@ Program {
         Node {
             identifier: 7,
             location: Location { start: 75, length: 6 },
-            flags: 2,
             node_kind: SymbolNode(
                 SymbolNode {
+                    flags: BitFlags<SymbolFlags> {
+                        bits: 0b10,
+                        flags: FORCED_BINARY_ENCODING,
+                    },
                     opening_loc: Some(
                         Location { start: 75, length: 1 },
                     ),
@@ -76,7 +77,6 @@ Program {
         Node {
             identifier: 8,
             location: Location { start: 67, length: 14 },
-            flags: 1,
             node_kind: LocalVariableWriteNode(
                 LocalVariableWriteNode {
                     name: ConstantRef(2),
@@ -90,7 +90,6 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 67, length: 14 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -102,7 +101,6 @@ Program {
         Node {
             identifier: 9,
             location: Location { start: 54, length: 32 },
-            flags: 1,
             node_kind: DefNode(
                 DefNode {
                     name: ConstantRef(3),
@@ -133,7 +131,6 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 54, length: 32 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -145,7 +142,6 @@ Program {
         Node {
             identifier: 10,
             location: Location { start: 18, length: 72 },
-            flags: 1,
             node_kind: ClassNode(
                 ClassNode {
                     locals: [],
@@ -164,7 +160,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 18, length: 72 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -176,7 +171,6 @@ Program {
         Node {
             identifier: 11,
             location: Location { start: 18, length: 72 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [],

@@ -190,9 +190,12 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 4, length: 5 },
-            flags: 4098,
             node_kind: RegularExpressionNode(
                 RegularExpressionNode {
+                    flags: BitFlags<RegularExpressionFlags> {
+                        bits: 0b10,
+                        flags: EXTENDED,
+                    },
                     opening_loc: Location { start: 4, length: 1 },
                     content_loc: Location { start: 5, length: 3 },
                     closing_loc: Location { start: 8, length: 1 },
@@ -203,9 +206,11 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 4, length: 5 },
-            flags: 0,
             node_kind: ArgumentsNode(
                 ArgumentsNode {
+                    flags: BitFlags<ArgumentsNodeFlags> {
+                        bits: 0b0,
+                    },
                     arguments: [
                         NodeRef(0),
                     ],
@@ -215,9 +220,12 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 0, length: 9 },
-            flags: 33,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1,
+                        flags: SAFE_NAVIGATION,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(1),
@@ -236,9 +244,12 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 11, length: 8 },
-            flags: 4103,
             node_kind: RegularExpressionNode(
                 RegularExpressionNode {
+                    flags: BitFlags<RegularExpressionFlags> {
+                        bits: 0b111,
+                        flags: IGNORE_CASE | EXTENDED | MULTI_LINE,
+                    },
                     opening_loc: Location { start: 11, length: 3 },
                     content_loc: Location { start: 14, length: 3 },
                     closing_loc: Location { start: 17, length: 2 },
@@ -249,9 +260,12 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 21, length: 5 },
-            flags: 4099,
             node_kind: RegularExpressionNode(
                 RegularExpressionNode {
+                    flags: BitFlags<RegularExpressionFlags> {
+                        bits: 0b11,
+                        flags: IGNORE_CASE | EXTENDED,
+                    },
                     opening_loc: Location { start: 21, length: 1 },
                     content_loc: Location { start: 22, length: 3 },
                     closing_loc: Location { start: 25, length: 1 },
@@ -262,9 +276,12 @@ Program {
         Node {
             identifier: 8,
             location: Location { start: 29, length: 4 },
-            flags: 18,
             node_kind: StringNode(
                 StringNode {
+                    flags: BitFlags<StringFlags> {
+                        bits: 0b10,
+                        flags: FORCED_BINARY_ENCODING,
+                    },
                     opening_loc: None,
                     content_loc: Location { start: 29, length: 4 },
                     closing_loc: None,
@@ -275,7 +292,6 @@ Program {
         Node {
             identifier: 9,
             location: Location { start: 34, length: 4 },
-            flags: 0,
             node_kind: GlobalVariableReadNode(
                 GlobalVariableReadNode {
                     name: ConstantRef(2),
@@ -285,7 +301,6 @@ Program {
         Node {
             identifier: 10,
             location: Location { start: 33, length: 5 },
-            flags: 0,
             node_kind: EmbeddedVariableNode(
                 EmbeddedVariableNode {
                     operator_loc: Location { start: 33, length: 1 },
@@ -296,9 +311,12 @@ Program {
         Node {
             identifier: 7,
             location: Location { start: 28, length: 11 },
-            flags: 1,
             node_kind: InterpolatedRegularExpressionNode(
                 InterpolatedRegularExpressionNode {
+                    flags: BitFlags<RegularExpressionFlags> {
+                        bits: 0b1,
+                        flags: IGNORE_CASE,
+                    },
                     opening_loc: Location { start: 28, length: 1 },
                     parts: [
                         NodeRef(5),
@@ -311,9 +329,12 @@ Program {
         Node {
             identifier: 12,
             location: Location { start: 42, length: 4 },
-            flags: 18,
             node_kind: StringNode(
                 StringNode {
+                    flags: BitFlags<StringFlags> {
+                        bits: 0b10,
+                        flags: FORCED_BINARY_ENCODING,
+                    },
                     opening_loc: None,
                     content_loc: Location { start: 42, length: 4 },
                     closing_loc: None,
@@ -324,9 +345,12 @@ Program {
         Node {
             identifier: 14,
             location: Location { start: 48, length: 3 },
-            flags: 40,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1000,
+                        flags: IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(3),
@@ -343,7 +367,6 @@ Program {
         Node {
             identifier: 13,
             location: Location { start: 48, length: 3 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -355,7 +378,6 @@ Program {
         Node {
             identifier: 15,
             location: Location { start: 46, length: 6 },
-            flags: 0,
             node_kind: EmbeddedStatementsNode(
                 EmbeddedStatementsNode {
                     opening_loc: Location { start: 46, length: 2 },
@@ -369,9 +391,12 @@ Program {
         Node {
             identifier: 16,
             location: Location { start: 52, length: 4 },
-            flags: 18,
             node_kind: StringNode(
                 StringNode {
+                    flags: BitFlags<StringFlags> {
+                        bits: 0b10,
+                        flags: FORCED_BINARY_ENCODING,
+                    },
                     opening_loc: None,
                     content_loc: Location { start: 52, length: 4 },
                     closing_loc: None,
@@ -382,9 +407,12 @@ Program {
         Node {
             identifier: 11,
             location: Location { start: 41, length: 16 },
-            flags: 1,
             node_kind: InterpolatedRegularExpressionNode(
                 InterpolatedRegularExpressionNode {
+                    flags: BitFlags<RegularExpressionFlags> {
+                        bits: 0b1,
+                        flags: IGNORE_CASE,
+                    },
                     opening_loc: Location { start: 41, length: 1 },
                     parts: [
                         NodeRef(9),
@@ -398,9 +426,12 @@ Program {
         Node {
             identifier: 18,
             location: Location { start: 60, length: 13 },
-            flags: 4098,
             node_kind: RegularExpressionNode(
                 RegularExpressionNode {
+                    flags: BitFlags<RegularExpressionFlags> {
+                        bits: 0b10,
+                        flags: EXTENDED,
+                    },
                     opening_loc: Location { start: 60, length: 1 },
                     content_loc: Location { start: 61, length: 11 },
                     closing_loc: Location { start: 72, length: 1 },
@@ -411,9 +442,12 @@ Program {
         Node {
             identifier: 19,
             location: Location { start: 77, length: 3 },
-            flags: 40,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1000,
+                        flags: IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(4),
@@ -430,9 +464,11 @@ Program {
         Node {
             identifier: 21,
             location: Location { start: 77, length: 3 },
-            flags: 0,
             node_kind: ArgumentsNode(
                 ArgumentsNode {
+                    flags: BitFlags<ArgumentsNodeFlags> {
+                        bits: 0b0,
+                    },
                     arguments: [
                         NodeRef(16),
                     ],
@@ -442,9 +478,11 @@ Program {
         Node {
             identifier: 20,
             location: Location { start: 60, length: 20 },
-            flags: 0,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b0,
+                    },
                     receiver: Some(
                         NodeRef(15),
                     ),
@@ -465,7 +503,6 @@ Program {
         Node {
             identifier: 23,
             location: Location { start: 64, length: 3 },
-            flags: 0,
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
                     name: ConstantRef(1),
@@ -476,7 +513,6 @@ Program {
         Node {
             identifier: 22,
             location: Location { start: 60, length: 20 },
-            flags: 0,
             node_kind: MatchWriteNode(
                 MatchWriteNode {
                     call: NodeRef(18),
@@ -489,7 +525,6 @@ Program {
         Node {
             identifier: 24,
             location: Location { start: 82, length: 3 },
-            flags: 0,
             node_kind: LocalVariableReadNode(
                 LocalVariableReadNode {
                     name: ConstantRef(1),
@@ -500,9 +535,12 @@ Program {
         Node {
             identifier: 17,
             location: Location { start: 59, length: 27 },
-            flags: 1,
             node_kind: ArrayNode(
                 ArrayNode {
+                    flags: BitFlags<ArrayNodeFlags> {
+                        bits: 0b1,
+                        flags: CONTAINS_SPLAT,
+                    },
                     elements: [
                         NodeRef(20),
                         NodeRef(21),
@@ -519,9 +557,12 @@ Program {
         Node {
             identifier: 25,
             location: Location { start: 88, length: 6 },
-            flags: 4103,
             node_kind: RegularExpressionNode(
                 RegularExpressionNode {
+                    flags: BitFlags<RegularExpressionFlags> {
+                        bits: 0b111,
+                        flags: IGNORE_CASE | EXTENDED | MULTI_LINE,
+                    },
                     opening_loc: Location { start: 88, length: 1 },
                     content_loc: Location { start: 89, length: 3 },
                     closing_loc: Location { start: 92, length: 2 },
@@ -532,9 +573,12 @@ Program {
         Node {
             identifier: 26,
             location: Location { start: 96, length: 26 },
-            flags: 4103,
             node_kind: RegularExpressionNode(
                 RegularExpressionNode {
+                    flags: BitFlags<RegularExpressionFlags> {
+                        bits: 0b111,
+                        flags: IGNORE_CASE | EXTENDED | MULTI_LINE,
+                    },
                     opening_loc: Location { start: 96, length: 3 },
                     content_loc: Location { start: 99, length: 21 },
                     closing_loc: Location { start: 120, length: 2 },
@@ -545,9 +589,12 @@ Program {
         Node {
             identifier: 27,
             location: Location { start: 124, length: 37 },
-            flags: 4103,
             node_kind: RegularExpressionNode(
                 RegularExpressionNode {
+                    flags: BitFlags<RegularExpressionFlags> {
+                        bits: 0b111,
+                        flags: IGNORE_CASE | EXTENDED | MULTI_LINE,
+                    },
                     opening_loc: Location { start: 124, length: 3 },
                     content_loc: Location { start: 127, length: 32 },
                     closing_loc: Location { start: 159, length: 2 },
@@ -558,9 +605,12 @@ Program {
         Node {
             identifier: 28,
             location: Location { start: 163, length: 25 },
-            flags: 4103,
             node_kind: RegularExpressionNode(
                 RegularExpressionNode {
+                    flags: BitFlags<RegularExpressionFlags> {
+                        bits: 0b111,
+                        flags: IGNORE_CASE | EXTENDED | MULTI_LINE,
+                    },
                     opening_loc: Location { start: 163, length: 3 },
                     content_loc: Location { start: 166, length: 20 },
                     closing_loc: Location { start: 186, length: 2 },
@@ -571,9 +621,12 @@ Program {
         Node {
             identifier: 29,
             location: Location { start: 190, length: 55 },
-            flags: 4099,
             node_kind: RegularExpressionNode(
                 RegularExpressionNode {
+                    flags: BitFlags<RegularExpressionFlags> {
+                        bits: 0b11,
+                        flags: IGNORE_CASE | EXTENDED,
+                    },
                     opening_loc: Location { start: 190, length: 3 },
                     content_loc: Location { start: 193, length: 51 },
                     closing_loc: Location { start: 244, length: 1 },
@@ -584,9 +637,12 @@ Program {
         Node {
             identifier: 30,
             location: Location { start: 247, length: 8 },
-            flags: 4098,
             node_kind: RegularExpressionNode(
                 RegularExpressionNode {
+                    flags: BitFlags<RegularExpressionFlags> {
+                        bits: 0b10,
+                        flags: EXTENDED,
+                    },
                     opening_loc: Location { start: 247, length: 1 },
                     content_loc: Location { start: 248, length: 6 },
                     closing_loc: Location { start: 254, length: 1 },
@@ -597,9 +653,11 @@ Program {
         Node {
             identifier: 31,
             location: Location { start: 259, length: 4 },
-            flags: 0,
             node_kind: StringNode(
                 StringNode {
+                    flags: BitFlags<StringFlags> {
+                        bits: 0b0,
+                    },
                     opening_loc: Some(
                         Location { start: 259, length: 1 },
                     ),
@@ -614,9 +672,11 @@ Program {
         Node {
             identifier: 33,
             location: Location { start: 259, length: 4 },
-            flags: 0,
             node_kind: ArgumentsNode(
                 ArgumentsNode {
+                    flags: BitFlags<ArgumentsNodeFlags> {
+                        bits: 0b0,
+                    },
                     arguments: [
                         NodeRef(29),
                     ],
@@ -626,9 +686,12 @@ Program {
         Node {
             identifier: 32,
             location: Location { start: 247, length: 16 },
-            flags: 1,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1,
+                        flags: SAFE_NAVIGATION,
+                    },
                     receiver: Some(
                         NodeRef(28),
                     ),
@@ -649,9 +712,12 @@ Program {
         Node {
             identifier: 34,
             location: Location { start: 265, length: 9 },
-            flags: 4099,
             node_kind: RegularExpressionNode(
                 RegularExpressionNode {
+                    flags: BitFlags<RegularExpressionFlags> {
+                        bits: 0b11,
+                        flags: IGNORE_CASE | EXTENDED,
+                    },
                     opening_loc: Location { start: 265, length: 3 },
                     content_loc: Location { start: 268, length: 5 },
                     closing_loc: Location { start: 273, length: 1 },
@@ -662,9 +728,12 @@ Program {
         Node {
             identifier: 36,
             location: Location { start: 277, length: 4 },
-            flags: 18,
             node_kind: StringNode(
                 StringNode {
+                    flags: BitFlags<StringFlags> {
+                        bits: 0b10,
+                        flags: FORCED_BINARY_ENCODING,
+                    },
                     opening_loc: None,
                     content_loc: Location { start: 277, length: 4 },
                     closing_loc: None,
@@ -675,9 +744,12 @@ Program {
         Node {
             identifier: 38,
             location: Location { start: 283, length: 3 },
-            flags: 40,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1000,
+                        flags: IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(3),
@@ -694,7 +766,6 @@ Program {
         Node {
             identifier: 37,
             location: Location { start: 283, length: 3 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -706,7 +777,6 @@ Program {
         Node {
             identifier: 39,
             location: Location { start: 281, length: 6 },
-            flags: 0,
             node_kind: EmbeddedStatementsNode(
                 EmbeddedStatementsNode {
                     opening_loc: Location { start: 281, length: 2 },
@@ -720,9 +790,12 @@ Program {
         Node {
             identifier: 35,
             location: Location { start: 276, length: 13 },
-            flags: 33,
             node_kind: InterpolatedRegularExpressionNode(
                 InterpolatedRegularExpressionNode {
+                    flags: BitFlags<RegularExpressionFlags> {
+                        bits: 0b100001,
+                        flags: IGNORE_CASE | ASCII_8BIT,
+                    },
                     opening_loc: Location { start: 276, length: 1 },
                     parts: [
                         NodeRef(33),
@@ -735,9 +808,12 @@ Program {
         Node {
             identifier: 40,
             location: Location { start: 291, length: 11 },
-            flags: 4098,
             node_kind: RegularExpressionNode(
                 RegularExpressionNode {
+                    flags: BitFlags<RegularExpressionFlags> {
+                        bits: 0b10,
+                        flags: EXTENDED,
+                    },
                     opening_loc: Location { start: 291, length: 1 },
                     content_loc: Location { start: 292, length: 9 },
                     closing_loc: Location { start: 301, length: 1 },
@@ -748,9 +824,11 @@ Program {
         Node {
             identifier: 41,
             location: Location { start: 306, length: 2 },
-            flags: 0,
             node_kind: StringNode(
                 StringNode {
+                    flags: BitFlags<StringFlags> {
+                        bits: 0b0,
+                    },
                     opening_loc: Some(
                         Location { start: 306, length: 1 },
                     ),
@@ -765,9 +843,11 @@ Program {
         Node {
             identifier: 43,
             location: Location { start: 306, length: 2 },
-            flags: 0,
             node_kind: ArgumentsNode(
                 ArgumentsNode {
+                    flags: BitFlags<ArgumentsNodeFlags> {
+                        bits: 0b0,
+                    },
                     arguments: [
                         NodeRef(39),
                     ],
@@ -777,9 +857,11 @@ Program {
         Node {
             identifier: 42,
             location: Location { start: 291, length: 17 },
-            flags: 0,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b0,
+                    },
                     receiver: Some(
                         NodeRef(38),
                     ),
@@ -800,7 +882,6 @@ Program {
         Node {
             identifier: 45,
             location: Location { start: 291, length: 11 },
-            flags: 0,
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
                     name: ConstantRef(6),
@@ -811,7 +892,6 @@ Program {
         Node {
             identifier: 44,
             location: Location { start: 291, length: 17 },
-            flags: 1,
             node_kind: MatchWriteNode(
                 MatchWriteNode {
                     call: NodeRef(41),
@@ -824,7 +904,6 @@ Program {
         Node {
             identifier: 46,
             location: Location { start: 310, length: 2 },
-            flags: 1,
             node_kind: LocalVariableReadNode(
                 LocalVariableReadNode {
                     name: ConstantRef(6),
@@ -835,9 +914,12 @@ Program {
         Node {
             identifier: 47,
             location: Location { start: 314, length: 18 },
-            flags: 4098,
             node_kind: RegularExpressionNode(
                 RegularExpressionNode {
+                    flags: BitFlags<RegularExpressionFlags> {
+                        bits: 0b10,
+                        flags: EXTENDED,
+                    },
                     opening_loc: Location { start: 314, length: 1 },
                     content_loc: Location { start: 315, length: 16 },
                     closing_loc: Location { start: 331, length: 1 },
@@ -848,9 +930,11 @@ Program {
         Node {
             identifier: 48,
             location: Location { start: 336, length: 2 },
-            flags: 0,
             node_kind: StringNode(
                 StringNode {
+                    flags: BitFlags<StringFlags> {
+                        bits: 0b0,
+                    },
                     opening_loc: Some(
                         Location { start: 336, length: 1 },
                     ),
@@ -865,9 +949,11 @@ Program {
         Node {
             identifier: 50,
             location: Location { start: 336, length: 2 },
-            flags: 0,
             node_kind: ArgumentsNode(
                 ArgumentsNode {
+                    flags: BitFlags<ArgumentsNodeFlags> {
+                        bits: 0b0,
+                    },
                     arguments: [
                         NodeRef(46),
                     ],
@@ -877,9 +963,11 @@ Program {
         Node {
             identifier: 49,
             location: Location { start: 314, length: 24 },
-            flags: 0,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b0,
+                    },
                     receiver: Some(
                         NodeRef(45),
                     ),
@@ -900,7 +988,6 @@ Program {
         Node {
             identifier: 52,
             location: Location { start: 318, length: 3 },
-            flags: 0,
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
                     name: ConstantRef(7),
@@ -911,7 +998,6 @@ Program {
         Node {
             identifier: 51,
             location: Location { start: 314, length: 24 },
-            flags: 1,
             node_kind: MatchWriteNode(
                 MatchWriteNode {
                     call: NodeRef(48),
@@ -924,7 +1010,6 @@ Program {
         Node {
             identifier: 53,
             location: Location { start: 340, length: 3 },
-            flags: 1,
             node_kind: LocalVariableReadNode(
                 LocalVariableReadNode {
                     name: ConstantRef(7),
@@ -935,9 +1020,12 @@ Program {
         Node {
             identifier: 54,
             location: Location { start: 345, length: 10 },
-            flags: 4098,
             node_kind: RegularExpressionNode(
                 RegularExpressionNode {
+                    flags: BitFlags<RegularExpressionFlags> {
+                        bits: 0b10,
+                        flags: EXTENDED,
+                    },
                     opening_loc: Location { start: 345, length: 1 },
                     content_loc: Location { start: 346, length: 8 },
                     closing_loc: Location { start: 354, length: 1 },
@@ -948,9 +1036,11 @@ Program {
         Node {
             identifier: 55,
             location: Location { start: 359, length: 2 },
-            flags: 0,
             node_kind: StringNode(
                 StringNode {
+                    flags: BitFlags<StringFlags> {
+                        bits: 0b0,
+                    },
                     opening_loc: Some(
                         Location { start: 359, length: 1 },
                     ),
@@ -965,9 +1055,11 @@ Program {
         Node {
             identifier: 57,
             location: Location { start: 359, length: 2 },
-            flags: 0,
             node_kind: ArgumentsNode(
                 ArgumentsNode {
+                    flags: BitFlags<ArgumentsNodeFlags> {
+                        bits: 0b0,
+                    },
                     arguments: [
                         NodeRef(53),
                     ],
@@ -977,9 +1069,12 @@ Program {
         Node {
             identifier: 56,
             location: Location { start: 345, length: 16 },
-            flags: 1,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1,
+                        flags: SAFE_NAVIGATION,
+                    },
                     receiver: Some(
                         NodeRef(52),
                     ),
@@ -1000,9 +1095,12 @@ Program {
         Node {
             identifier: 59,
             location: Location { start: 367, length: 1 },
-            flags: 10,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1010,
+                        flags: DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -1015,7 +1113,6 @@ Program {
         Node {
             identifier: 60,
             location: Location { start: 363, length: 5 },
-            flags: 1,
             node_kind: LocalVariableWriteNode(
                 LocalVariableWriteNode {
                     name: ConstantRef(8),
@@ -1029,9 +1126,12 @@ Program {
         Node {
             identifier: 63,
             location: Location { start: 375, length: 8 },
-            flags: 4098,
             node_kind: RegularExpressionNode(
                 RegularExpressionNode {
+                    flags: BitFlags<RegularExpressionFlags> {
+                        bits: 0b10,
+                        flags: EXTENDED,
+                    },
                     opening_loc: Location { start: 375, length: 1 },
                     content_loc: Location { start: 376, length: 6 },
                     closing_loc: Location { start: 382, length: 1 },
@@ -1042,9 +1142,12 @@ Program {
         Node {
             identifier: 64,
             location: Location { start: 387, length: 4 },
-            flags: 40,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1000,
+                        flags: IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(10),
@@ -1061,9 +1164,11 @@ Program {
         Node {
             identifier: 66,
             location: Location { start: 387, length: 4 },
-            flags: 0,
             node_kind: ArgumentsNode(
                 ArgumentsNode {
+                    flags: BitFlags<ArgumentsNodeFlags> {
+                        bits: 0b0,
+                    },
                     arguments: [
                         NodeRef(59),
                     ],
@@ -1073,9 +1178,11 @@ Program {
         Node {
             identifier: 65,
             location: Location { start: 375, length: 16 },
-            flags: 0,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b0,
+                    },
                     receiver: Some(
                         NodeRef(58),
                     ),
@@ -1096,7 +1203,6 @@ Program {
         Node {
             identifier: 68,
             location: Location { start: 379, length: 1 },
-            flags: 0,
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
                     name: ConstantRef(8),
@@ -1107,7 +1213,6 @@ Program {
         Node {
             identifier: 67,
             location: Location { start: 375, length: 16 },
-            flags: 1,
             node_kind: MatchWriteNode(
                 MatchWriteNode {
                     call: NodeRef(61),
@@ -1120,7 +1225,6 @@ Program {
         Node {
             identifier: 62,
             location: Location { start: 375, length: 16 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -1132,7 +1236,6 @@ Program {
         Node {
             identifier: 69,
             location: Location { start: 373, length: 20 },
-            flags: 0,
             node_kind: BlockNode(
                 BlockNode {
                     locals: [],
@@ -1148,9 +1251,12 @@ Program {
         Node {
             identifier: 61,
             location: Location { start: 369, length: 24 },
-            flags: 33,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1,
+                        flags: SAFE_NAVIGATION,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(9),
@@ -1169,9 +1275,12 @@ Program {
         Node {
             identifier: 70,
             location: Location { start: 395, length: 10 },
-            flags: 4098,
             node_kind: RegularExpressionNode(
                 RegularExpressionNode {
+                    flags: BitFlags<RegularExpressionFlags> {
+                        bits: 0b10,
+                        flags: EXTENDED,
+                    },
                     opening_loc: Location { start: 395, length: 1 },
                     content_loc: Location { start: 396, length: 8 },
                     closing_loc: Location { start: 404, length: 1 },
@@ -1182,9 +1291,11 @@ Program {
         Node {
             identifier: 71,
             location: Location { start: 409, length: 2 },
-            flags: 0,
             node_kind: StringNode(
                 StringNode {
+                    flags: BitFlags<StringFlags> {
+                        bits: 0b0,
+                    },
                     opening_loc: Some(
                         Location { start: 409, length: 1 },
                     ),
@@ -1199,9 +1310,11 @@ Program {
         Node {
             identifier: 73,
             location: Location { start: 409, length: 2 },
-            flags: 0,
             node_kind: ArgumentsNode(
                 ArgumentsNode {
+                    flags: BitFlags<ArgumentsNodeFlags> {
+                        bits: 0b0,
+                    },
                     arguments: [
                         NodeRef(68),
                     ],
@@ -1211,9 +1324,11 @@ Program {
         Node {
             identifier: 72,
             location: Location { start: 395, length: 16 },
-            flags: 0,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b0,
+                    },
                     receiver: Some(
                         NodeRef(67),
                     ),
@@ -1234,7 +1349,6 @@ Program {
         Node {
             identifier: 75,
             location: Location { start: 399, length: 3 },
-            flags: 0,
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
                     name: ConstantRef(1),
@@ -1245,7 +1359,6 @@ Program {
         Node {
             identifier: 74,
             location: Location { start: 395, length: 16 },
-            flags: 1,
             node_kind: MatchWriteNode(
                 MatchWriteNode {
                     call: NodeRef(70),
@@ -1258,9 +1371,12 @@ Program {
         Node {
             identifier: 76,
             location: Location { start: 412, length: 10 },
-            flags: 4098,
             node_kind: RegularExpressionNode(
                 RegularExpressionNode {
+                    flags: BitFlags<RegularExpressionFlags> {
+                        bits: 0b10,
+                        flags: EXTENDED,
+                    },
                     opening_loc: Location { start: 412, length: 1 },
                     content_loc: Location { start: 413, length: 8 },
                     closing_loc: Location { start: 421, length: 1 },
@@ -1271,9 +1387,11 @@ Program {
         Node {
             identifier: 77,
             location: Location { start: 426, length: 2 },
-            flags: 0,
             node_kind: StringNode(
                 StringNode {
+                    flags: BitFlags<StringFlags> {
+                        bits: 0b0,
+                    },
                     opening_loc: Some(
                         Location { start: 426, length: 1 },
                     ),
@@ -1288,9 +1406,11 @@ Program {
         Node {
             identifier: 79,
             location: Location { start: 426, length: 2 },
-            flags: 0,
             node_kind: ArgumentsNode(
                 ArgumentsNode {
+                    flags: BitFlags<ArgumentsNodeFlags> {
+                        bits: 0b0,
+                    },
                     arguments: [
                         NodeRef(74),
                     ],
@@ -1300,9 +1420,12 @@ Program {
         Node {
             identifier: 78,
             location: Location { start: 412, length: 16 },
-            flags: 1,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1,
+                        flags: SAFE_NAVIGATION,
+                    },
                     receiver: Some(
                         NodeRef(73),
                     ),
@@ -1323,9 +1446,12 @@ Program {
         Node {
             identifier: 80,
             location: Location { start: 430, length: 10 },
-            flags: 4098,
             node_kind: RegularExpressionNode(
                 RegularExpressionNode {
+                    flags: BitFlags<RegularExpressionFlags> {
+                        bits: 0b10,
+                        flags: EXTENDED,
+                    },
                     opening_loc: Location { start: 430, length: 1 },
                     content_loc: Location { start: 431, length: 8 },
                     closing_loc: Location { start: 439, length: 1 },
@@ -1336,9 +1462,11 @@ Program {
         Node {
             identifier: 81,
             location: Location { start: 444, length: 2 },
-            flags: 0,
             node_kind: StringNode(
                 StringNode {
+                    flags: BitFlags<StringFlags> {
+                        bits: 0b0,
+                    },
                     opening_loc: Some(
                         Location { start: 444, length: 1 },
                     ),
@@ -1353,9 +1481,11 @@ Program {
         Node {
             identifier: 83,
             location: Location { start: 444, length: 2 },
-            flags: 0,
             node_kind: ArgumentsNode(
                 ArgumentsNode {
+                    flags: BitFlags<ArgumentsNodeFlags> {
+                        bits: 0b0,
+                    },
                     arguments: [
                         NodeRef(78),
                     ],
@@ -1365,9 +1495,12 @@ Program {
         Node {
             identifier: 82,
             location: Location { start: 430, length: 16 },
-            flags: 1,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1,
+                        flags: SAFE_NAVIGATION,
+                    },
                     receiver: Some(
                         NodeRef(77),
                     ),
@@ -1388,9 +1521,11 @@ Program {
         Node {
             identifier: 85,
             location: Location { start: 455, length: 4 },
-            flags: 0,
             node_kind: RequiredKeywordParameterNode(
                 RequiredKeywordParameterNode {
+                    flags: BitFlags<ParameterFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(11),
                     name_loc: Location { start: 455, length: 4 },
                 },
@@ -1399,7 +1534,6 @@ Program {
         Node {
             identifier: 84,
             location: Location { start: 455, length: 4 },
-            flags: 0,
             node_kind: ParametersNode(
                 ParametersNode {
                     requireds: [],
@@ -1417,9 +1551,12 @@ Program {
         Node {
             identifier: 87,
             location: Location { start: 463, length: 10 },
-            flags: 4098,
             node_kind: RegularExpressionNode(
                 RegularExpressionNode {
+                    flags: BitFlags<RegularExpressionFlags> {
+                        bits: 0b10,
+                        flags: EXTENDED,
+                    },
                     opening_loc: Location { start: 463, length: 1 },
                     content_loc: Location { start: 464, length: 8 },
                     closing_loc: Location { start: 472, length: 1 },
@@ -1430,9 +1567,11 @@ Program {
         Node {
             identifier: 88,
             location: Location { start: 477, length: 2 },
-            flags: 0,
             node_kind: StringNode(
                 StringNode {
+                    flags: BitFlags<StringFlags> {
+                        bits: 0b0,
+                    },
                     opening_loc: Some(
                         Location { start: 477, length: 1 },
                     ),
@@ -1447,9 +1586,11 @@ Program {
         Node {
             identifier: 90,
             location: Location { start: 477, length: 2 },
-            flags: 0,
             node_kind: ArgumentsNode(
                 ArgumentsNode {
+                    flags: BitFlags<ArgumentsNodeFlags> {
+                        bits: 0b0,
+                    },
                     arguments: [
                         NodeRef(84),
                     ],
@@ -1459,9 +1600,11 @@ Program {
         Node {
             identifier: 89,
             location: Location { start: 463, length: 16 },
-            flags: 0,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b0,
+                    },
                     receiver: Some(
                         NodeRef(83),
                     ),
@@ -1482,7 +1625,6 @@ Program {
         Node {
             identifier: 92,
             location: Location { start: 467, length: 3 },
-            flags: 0,
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
                     name: ConstantRef(11),
@@ -1493,7 +1635,6 @@ Program {
         Node {
             identifier: 91,
             location: Location { start: 463, length: 16 },
-            flags: 0,
             node_kind: MatchWriteNode(
                 MatchWriteNode {
                     call: NodeRef(86),
@@ -1506,7 +1647,6 @@ Program {
         Node {
             identifier: 86,
             location: Location { start: 463, length: 16 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -1518,7 +1658,6 @@ Program {
         Node {
             identifier: 93,
             location: Location { start: 447, length: 32 },
-            flags: 1,
             node_kind: DefNode(
                 DefNode {
                     name: ConstantRef(1),
@@ -1551,9 +1690,12 @@ Program {
         Node {
             identifier: 94,
             location: Location { start: 481, length: 10 },
-            flags: 4107,
             node_kind: RegularExpressionNode(
                 RegularExpressionNode {
+                    flags: BitFlags<RegularExpressionFlags> {
+                        bits: 0b1011,
+                        flags: IGNORE_CASE | EXTENDED | ONCE,
+                    },
                     opening_loc: Location { start: 481, length: 1 },
                     content_loc: Location { start: 482, length: 7 },
                     closing_loc: Location { start: 489, length: 2 },
@@ -1564,9 +1706,12 @@ Program {
         Node {
             identifier: 95,
             location: Location { start: 493, length: 22 },
-            flags: 4099,
             node_kind: RegularExpressionNode(
                 RegularExpressionNode {
+                    flags: BitFlags<RegularExpressionFlags> {
+                        bits: 0b11,
+                        flags: IGNORE_CASE | EXTENDED,
+                    },
                     opening_loc: Location { start: 493, length: 1 },
                     content_loc: Location { start: 494, length: 20 },
                     closing_loc: Location { start: 514, length: 1 },
@@ -1577,9 +1722,12 @@ Program {
         Node {
             identifier: 96,
             location: Location { start: 517, length: 2 },
-            flags: 4099,
             node_kind: RegularExpressionNode(
                 RegularExpressionNode {
+                    flags: BitFlags<RegularExpressionFlags> {
+                        bits: 0b11,
+                        flags: IGNORE_CASE | EXTENDED,
+                    },
                     opening_loc: Location { start: 517, length: 1 },
                     content_loc: Location { start: 518, length: 0 },
                     closing_loc: Location { start: 518, length: 1 },
@@ -1590,7 +1738,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 519 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -1629,7 +1776,6 @@ Program {
         Node {
             identifier: 97,
             location: Location { start: 0, length: 519 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [

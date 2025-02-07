@@ -32,9 +32,12 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 0, length: 62 },
-            flags: 22,
             node_kind: StringNode(
                 StringNode {
+                    flags: BitFlags<StringFlags> {
+                        bits: 0b110,
+                        flags: FORCED_BINARY_ENCODING | FROZEN,
+                    },
                     opening_loc: Some(
                         Location { start: 0, length: 1 },
                     ),
@@ -49,9 +52,12 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 73, length: 58 },
-            flags: 22,
             node_kind: StringNode(
                 StringNode {
+                    flags: BitFlags<StringFlags> {
+                        bits: 0b110,
+                        flags: FORCED_BINARY_ENCODING | FROZEN,
+                    },
                     opening_loc: Some(
                         Location { start: 73, length: 1 },
                     ),
@@ -66,9 +72,12 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 0, length: 131 },
-            flags: 3,
             node_kind: InterpolatedStringNode(
                 InterpolatedStringNode {
+                    flags: BitFlags<InterpolatedStringNodeFlags> {
+                        bits: 0b11,
+                        flags: FROZEN | MUTABLE,
+                    },
                     opening_loc: None,
                     parts: [
                         NodeRef(0),
@@ -81,7 +90,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 131 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -93,7 +101,6 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 0, length: 131 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [],

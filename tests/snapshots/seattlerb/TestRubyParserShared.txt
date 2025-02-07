@@ -211,9 +211,12 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 0, length: 7 },
-            flags: 3,
             node_kind: ArrayNode(
                 ArrayNode {
+                    flags: BitFlags<ArrayNodeFlags> {
+                        bits: 0b1,
+                        flags: CONTAINS_SPLAT,
+                    },
                     elements: [],
                     opening_loc: Some(
                         Location { start: 0, length: 3 },
@@ -227,9 +230,12 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 13, length: 5 },
-            flags: 18,
             node_kind: SymbolNode(
                 SymbolNode {
+                    flags: BitFlags<SymbolFlags> {
+                        bits: 0b10,
+                        flags: FORCED_BINARY_ENCODING,
+                    },
                     opening_loc: None,
                     value_loc: Some(
                         Location { start: 13, length: 5 },
@@ -242,9 +248,12 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 19, length: 5 },
-            flags: 18,
             node_kind: SymbolNode(
                 SymbolNode {
+                    flags: BitFlags<SymbolFlags> {
+                        bits: 0b10,
+                        flags: FORCED_BINARY_ENCODING,
+                    },
                     opening_loc: None,
                     value_loc: Some(
                         Location { start: 19, length: 5 },
@@ -257,9 +266,12 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 9, length: 17 },
-            flags: 3,
             node_kind: ArrayNode(
                 ArrayNode {
+                    flags: BitFlags<ArrayNodeFlags> {
+                        bits: 0b1,
+                        flags: CONTAINS_SPLAT,
+                    },
                     elements: [
                         NodeRef(1),
                         NodeRef(2),
@@ -276,9 +288,12 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 28, length: 7 },
-            flags: 3,
             node_kind: ArrayNode(
                 ArrayNode {
+                    flags: BitFlags<ArrayNodeFlags> {
+                        bits: 0b1,
+                        flags: CONTAINS_SPLAT,
+                    },
                     elements: [],
                     opening_loc: Some(
                         Location { start: 28, length: 3 },
@@ -292,9 +307,11 @@ Program {
         Node {
             identifier: 8,
             location: Location { start: 41, length: 5 },
-            flags: 0,
             node_kind: StringNode(
                 StringNode {
+                    flags: BitFlags<StringFlags> {
+                        bits: 0b0,
+                    },
                     opening_loc: None,
                     content_loc: Location { start: 41, length: 5 },
                     closing_loc: None,
@@ -305,9 +322,11 @@ Program {
         Node {
             identifier: 9,
             location: Location { start: 47, length: 5 },
-            flags: 0,
             node_kind: StringNode(
                 StringNode {
+                    flags: BitFlags<StringFlags> {
+                        bits: 0b0,
+                    },
                     opening_loc: None,
                     content_loc: Location { start: 47, length: 5 },
                     closing_loc: None,
@@ -318,9 +337,12 @@ Program {
         Node {
             identifier: 7,
             location: Location { start: 37, length: 17 },
-            flags: 1,
             node_kind: ArrayNode(
                 ArrayNode {
+                    flags: BitFlags<ArrayNodeFlags> {
+                        bits: 0b1,
+                        flags: CONTAINS_SPLAT,
+                    },
                     elements: [
                         NodeRef(5),
                         NodeRef(6),
@@ -337,9 +359,12 @@ Program {
         Node {
             identifier: 10,
             location: Location { start: 56, length: 7 },
-            flags: 3,
             node_kind: ArrayNode(
                 ArrayNode {
+                    flags: BitFlags<ArrayNodeFlags> {
+                        bits: 0b1,
+                        flags: CONTAINS_SPLAT,
+                    },
                     elements: [],
                     opening_loc: Some(
                         Location { start: 56, length: 3 },
@@ -353,9 +378,12 @@ Program {
         Node {
             identifier: 12,
             location: Location { start: 69, length: 5 },
-            flags: 18,
             node_kind: SymbolNode(
                 SymbolNode {
+                    flags: BitFlags<SymbolFlags> {
+                        bits: 0b10,
+                        flags: FORCED_BINARY_ENCODING,
+                    },
                     opening_loc: None,
                     value_loc: Some(
                         Location { start: 69, length: 5 },
@@ -368,9 +396,12 @@ Program {
         Node {
             identifier: 13,
             location: Location { start: 75, length: 5 },
-            flags: 18,
             node_kind: SymbolNode(
                 SymbolNode {
+                    flags: BitFlags<SymbolFlags> {
+                        bits: 0b10,
+                        flags: FORCED_BINARY_ENCODING,
+                    },
                     opening_loc: None,
                     value_loc: Some(
                         Location { start: 75, length: 5 },
@@ -383,9 +414,12 @@ Program {
         Node {
             identifier: 11,
             location: Location { start: 65, length: 17 },
-            flags: 3,
             node_kind: ArrayNode(
                 ArrayNode {
+                    flags: BitFlags<ArrayNodeFlags> {
+                        bits: 0b1,
+                        flags: CONTAINS_SPLAT,
+                    },
                     elements: [
                         NodeRef(9),
                         NodeRef(10),
@@ -402,9 +436,12 @@ Program {
         Node {
             identifier: 14,
             location: Location { start: 84, length: 7 },
-            flags: 4099,
             node_kind: RegularExpressionNode(
                 RegularExpressionNode {
+                    flags: BitFlags<RegularExpressionFlags> {
+                        bits: 0b11,
+                        flags: IGNORE_CASE | EXTENDED,
+                    },
                     opening_loc: Location { start: 84, length: 3 },
                     content_loc: Location { start: 87, length: 3 },
                     closing_loc: Location { start: 90, length: 1 },
@@ -415,9 +452,12 @@ Program {
         Node {
             identifier: 15,
             location: Location { start: 93, length: 7 },
-            flags: 3,
             node_kind: ArrayNode(
                 ArrayNode {
+                    flags: BitFlags<ArrayNodeFlags> {
+                        bits: 0b1,
+                        flags: CONTAINS_SPLAT,
+                    },
                     elements: [],
                     opening_loc: Some(
                         Location { start: 93, length: 3 },
@@ -431,9 +471,11 @@ Program {
         Node {
             identifier: 17,
             location: Location { start: 106, length: 5 },
-            flags: 0,
             node_kind: StringNode(
                 StringNode {
+                    flags: BitFlags<StringFlags> {
+                        bits: 0b0,
+                    },
                     opening_loc: None,
                     content_loc: Location { start: 106, length: 5 },
                     closing_loc: None,
@@ -444,9 +486,11 @@ Program {
         Node {
             identifier: 18,
             location: Location { start: 112, length: 5 },
-            flags: 0,
             node_kind: StringNode(
                 StringNode {
+                    flags: BitFlags<StringFlags> {
+                        bits: 0b0,
+                    },
                     opening_loc: None,
                     content_loc: Location { start: 112, length: 5 },
                     closing_loc: None,
@@ -457,9 +501,12 @@ Program {
         Node {
             identifier: 16,
             location: Location { start: 102, length: 17 },
-            flags: 1,
             node_kind: ArrayNode(
                 ArrayNode {
+                    flags: BitFlags<ArrayNodeFlags> {
+                        bits: 0b1,
+                        flags: CONTAINS_SPLAT,
+                    },
                     elements: [
                         NodeRef(14),
                         NodeRef(15),
@@ -476,9 +523,12 @@ Program {
         Node {
             identifier: 20,
             location: Location { start: 123, length: 6 },
-            flags: 18,
             node_kind: SymbolNode(
                 SymbolNode {
+                    flags: BitFlags<SymbolFlags> {
+                        bits: 0b10,
+                        flags: FORCED_BINARY_ENCODING,
+                    },
                     opening_loc: Some(
                         Location { start: 123, length: 1 },
                     ),
@@ -493,9 +543,12 @@ Program {
         Node {
             identifier: 21,
             location: Location { start: 131, length: 6 },
-            flags: 18,
             node_kind: SymbolNode(
                 SymbolNode {
+                    flags: BitFlags<SymbolFlags> {
+                        bits: 0b10,
+                        flags: FORCED_BINARY_ENCODING,
+                    },
                     opening_loc: Some(
                         Location { start: 131, length: 1 },
                     ),
@@ -510,9 +563,12 @@ Program {
         Node {
             identifier: 19,
             location: Location { start: 121, length: 18 },
-            flags: 3,
             node_kind: ArrayNode(
                 ArrayNode {
+                    flags: BitFlags<ArrayNodeFlags> {
+                        bits: 0b1,
+                        flags: CONTAINS_SPLAT,
+                    },
                     elements: [
                         NodeRef(17),
                         NodeRef(18),
@@ -529,7 +585,6 @@ Program {
         Node {
             identifier: 22,
             location: Location { start: 147, length: 1 },
-            flags: 0,
             node_kind: ConstantReadNode(
                 ConstantReadNode {
                     name: ConstantRef(1),
@@ -539,7 +594,6 @@ Program {
         Node {
             identifier: 24,
             location: Location { start: 172, length: 4 },
-            flags: 0,
             node_kind: SelfNode(
                 SelfNode,
             ),
@@ -547,9 +601,11 @@ Program {
         Node {
             identifier: 26,
             location: Location { start: 179, length: 1 },
-            flags: 0,
             node_kind: RequiredParameterNode(
                 RequiredParameterNode {
+                    flags: BitFlags<ParameterFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(2),
                 },
             ),
@@ -557,9 +613,11 @@ Program {
         Node {
             identifier: 27,
             location: Location { start: 199, length: 1 },
-            flags: 0,
             node_kind: RequiredParameterNode(
                 RequiredParameterNode {
+                    flags: BitFlags<ParameterFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(3),
                 },
             ),
@@ -567,7 +625,6 @@ Program {
         Node {
             identifier: 25,
             location: Location { start: 179, length: 21 },
-            flags: 0,
             node_kind: ParametersNode(
                 ParametersNode {
                     requireds: [
@@ -586,7 +643,6 @@ Program {
         Node {
             identifier: 29,
             location: Location { start: 220, length: 1 },
-            flags: 0,
             node_kind: LocalVariableReadNode(
                 LocalVariableReadNode {
                     name: ConstantRef(2),
@@ -597,7 +653,6 @@ Program {
         Node {
             identifier: 30,
             location: Location { start: 224, length: 1 },
-            flags: 0,
             node_kind: LocalVariableReadNode(
                 LocalVariableReadNode {
                     name: ConstantRef(3),
@@ -608,9 +663,11 @@ Program {
         Node {
             identifier: 32,
             location: Location { start: 224, length: 1 },
-            flags: 0,
             node_kind: ArgumentsNode(
                 ArgumentsNode {
+                    flags: BitFlags<ArgumentsNodeFlags> {
+                        bits: 0b0,
+                    },
                     arguments: [
                         NodeRef(26),
                     ],
@@ -620,9 +677,12 @@ Program {
         Node {
             identifier: 31,
             location: Location { start: 220, length: 5 },
-            flags: 1,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1,
+                        flags: SAFE_NAVIGATION,
+                    },
                     receiver: Some(
                         NodeRef(25),
                     ),
@@ -643,7 +703,6 @@ Program {
         Node {
             identifier: 28,
             location: Location { start: 220, length: 5 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -655,7 +714,6 @@ Program {
         Node {
             identifier: 33,
             location: Location { start: 168, length: 78 },
-            flags: 1,
             node_kind: DefNode(
                 DefNode {
                     name: ConstantRef(5),
@@ -693,7 +751,6 @@ Program {
         Node {
             identifier: 23,
             location: Location { start: 168, length: 78 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -705,7 +762,6 @@ Program {
         Node {
             identifier: 34,
             location: Location { start: 141, length: 128 },
-            flags: 1,
             node_kind: ClassNode(
                 ClassNode {
                     locals: [],
@@ -724,7 +780,6 @@ Program {
         Node {
             identifier: 35,
             location: Location { start: 299, length: 1 },
-            flags: 0,
             node_kind: ConstantReadNode(
                 ConstantReadNode {
                     name: ConstantRef(1),
@@ -734,7 +789,6 @@ Program {
         Node {
             identifier: 37,
             location: Location { start: 321, length: 1 },
-            flags: 0,
             node_kind: ConstantReadNode(
                 ConstantReadNode {
                     name: ConstantRef(6),
@@ -744,9 +798,12 @@ Program {
         Node {
             identifier: 40,
             location: Location { start: 341, length: 2 },
-            flags: 10,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1010,
+                        flags: DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -759,7 +816,6 @@ Program {
         Node {
             identifier: 41,
             location: Location { start: 337, length: 6 },
-            flags: 1,
             node_kind: ConstantWriteNode(
                 ConstantWriteNode {
                     name: ConstantRef(7),
@@ -772,7 +828,6 @@ Program {
         Node {
             identifier: 38,
             location: Location { start: 337, length: 6 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -784,7 +839,6 @@ Program {
         Node {
             identifier: 42,
             location: Location { start: 315, length: 43 },
-            flags: 1,
             node_kind: ClassNode(
                 ClassNode {
                     locals: [],
@@ -803,7 +857,6 @@ Program {
         Node {
             identifier: 36,
             location: Location { start: 315, length: 43 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -815,7 +868,6 @@ Program {
         Node {
             identifier: 43,
             location: Location { start: 293, length: 83 },
-            flags: 1,
             node_kind: ClassNode(
                 ClassNode {
                     locals: [],
@@ -834,7 +886,6 @@ Program {
         Node {
             identifier: 44,
             location: Location { start: 401, length: 1 },
-            flags: 0,
             node_kind: ConstantReadNode(
                 ConstantReadNode {
                     name: ConstantRef(1),
@@ -844,9 +895,11 @@ Program {
         Node {
             identifier: 47,
             location: Location { start: 423, length: 1 },
-            flags: 0,
             node_kind: RequiredParameterNode(
                 RequiredParameterNode {
+                    flags: BitFlags<ParameterFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(2),
                 },
             ),
@@ -854,9 +907,11 @@ Program {
         Node {
             identifier: 48,
             location: Location { start: 443, length: 1 },
-            flags: 0,
             node_kind: RequiredParameterNode(
                 RequiredParameterNode {
+                    flags: BitFlags<ParameterFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(3),
                 },
             ),
@@ -864,7 +919,6 @@ Program {
         Node {
             identifier: 46,
             location: Location { start: 423, length: 21 },
-            flags: 0,
             node_kind: ParametersNode(
                 ParametersNode {
                     requireds: [
@@ -883,7 +937,6 @@ Program {
         Node {
             identifier: 50,
             location: Location { start: 459, length: 1 },
-            flags: 0,
             node_kind: LocalVariableReadNode(
                 LocalVariableReadNode {
                     name: ConstantRef(2),
@@ -894,7 +947,6 @@ Program {
         Node {
             identifier: 51,
             location: Location { start: 463, length: 1 },
-            flags: 0,
             node_kind: LocalVariableReadNode(
                 LocalVariableReadNode {
                     name: ConstantRef(3),
@@ -905,9 +957,11 @@ Program {
         Node {
             identifier: 53,
             location: Location { start: 463, length: 1 },
-            flags: 0,
             node_kind: ArgumentsNode(
                 ArgumentsNode {
+                    flags: BitFlags<ArgumentsNodeFlags> {
+                        bits: 0b0,
+                    },
                     arguments: [
                         NodeRef(46),
                     ],
@@ -917,9 +971,12 @@ Program {
         Node {
             identifier: 52,
             location: Location { start: 459, length: 5 },
-            flags: 1,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1,
+                        flags: SAFE_NAVIGATION,
+                    },
                     receiver: Some(
                         NodeRef(45),
                     ),
@@ -940,7 +997,6 @@ Program {
         Node {
             identifier: 49,
             location: Location { start: 459, length: 5 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -952,7 +1008,6 @@ Program {
         Node {
             identifier: 54,
             location: Location { start: 417, length: 63 },
-            flags: 1,
             node_kind: DefNode(
                 DefNode {
                     name: ConstantRef(5),
@@ -986,7 +1041,6 @@ Program {
         Node {
             identifier: 45,
             location: Location { start: 417, length: 63 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -998,7 +1052,6 @@ Program {
         Node {
             identifier: 55,
             location: Location { start: 395, length: 103 },
-            flags: 1,
             node_kind: ClassNode(
                 ClassNode {
                     locals: [],
@@ -1017,7 +1070,6 @@ Program {
         Node {
             identifier: 56,
             location: Location { start: 524, length: 1 },
-            flags: 0,
             node_kind: ConstantReadNode(
                 ConstantReadNode {
                     name: ConstantRef(1),
@@ -1027,9 +1079,12 @@ Program {
         Node {
             identifier: 60,
             location: Location { start: 538, length: 6 },
-            flags: 18,
             node_kind: SymbolNode(
                 SymbolNode {
+                    flags: BitFlags<SymbolFlags> {
+                        bits: 0b10,
+                        flags: FORCED_BINARY_ENCODING,
+                    },
                     opening_loc: Some(
                         Location { start: 538, length: 1 },
                     ),
@@ -1044,9 +1099,12 @@ Program {
         Node {
             identifier: 61,
             location: Location { start: 550, length: 6 },
-            flags: 18,
             node_kind: SymbolNode(
                 SymbolNode {
+                    flags: BitFlags<SymbolFlags> {
+                        bits: 0b10,
+                        flags: FORCED_BINARY_ENCODING,
+                    },
                     opening_loc: Some(
                         Location { start: 550, length: 1 },
                     ),
@@ -1061,9 +1119,11 @@ Program {
         Node {
             identifier: 59,
             location: Location { start: 532, length: 29 },
-            flags: 2,
             node_kind: ArrayNode(
                 ArrayNode {
+                    flags: BitFlags<ArrayNodeFlags> {
+                        bits: 0b0,
+                    },
                     elements: [
                         NodeRef(54),
                         NodeRef(55),
@@ -1080,7 +1140,6 @@ Program {
         Node {
             identifier: 62,
             location: Location { start: 528, length: 33 },
-            flags: 1,
             node_kind: ConstantWriteNode(
                 ConstantWriteNode {
                     name: ConstantRef(1),
@@ -1093,7 +1152,6 @@ Program {
         Node {
             identifier: 57,
             location: Location { start: 528, length: 33 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -1105,7 +1163,6 @@ Program {
         Node {
             identifier: 63,
             location: Location { start: 517, length: 48 },
-            flags: 1,
             node_kind: ModuleNode(
                 ModuleNode {
                     locals: [],
@@ -1122,7 +1179,6 @@ Program {
         Node {
             identifier: 64,
             location: Location { start: 575, length: 1 },
-            flags: 0,
             node_kind: ConstantReadNode(
                 ConstantReadNode {
                     name: ConstantRef(1),
@@ -1132,7 +1188,6 @@ Program {
         Node {
             identifier: 66,
             location: Location { start: 597, length: 1 },
-            flags: 0,
             node_kind: ConstantReadNode(
                 ConstantReadNode {
                     name: ConstantRef(6),
@@ -1142,9 +1197,12 @@ Program {
         Node {
             identifier: 69,
             location: Location { start: 616, length: 2 },
-            flags: 10,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1010,
+                        flags: DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -1157,7 +1215,6 @@ Program {
         Node {
             identifier: 70,
             location: Location { start: 612, length: 6 },
-            flags: 1,
             node_kind: ConstantWriteNode(
                 ConstantWriteNode {
                     name: ConstantRef(7),
@@ -1170,7 +1227,6 @@ Program {
         Node {
             identifier: 67,
             location: Location { start: 612, length: 6 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -1182,7 +1238,6 @@ Program {
         Node {
             identifier: 71,
             location: Location { start: 590, length: 43 },
-            flags: 1,
             node_kind: ModuleNode(
                 ModuleNode {
                     locals: [],
@@ -1199,7 +1254,6 @@ Program {
         Node {
             identifier: 65,
             location: Location { start: 590, length: 43 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -1211,7 +1265,6 @@ Program {
         Node {
             identifier: 72,
             location: Location { start: 568, length: 83 },
-            flags: 1,
             node_kind: ModuleNode(
                 ModuleNode {
                     locals: [],
@@ -1228,9 +1281,12 @@ Program {
         Node {
             identifier: 74,
             location: Location { start: 673, length: 6 },
-            flags: 18,
             node_kind: SymbolNode(
                 SymbolNode {
+                    flags: BitFlags<SymbolFlags> {
+                        bits: 0b10,
+                        flags: FORCED_BINARY_ENCODING,
+                    },
                     opening_loc: Some(
                         Location { start: 673, length: 1 },
                     ),
@@ -1245,9 +1301,12 @@ Program {
         Node {
             identifier: 76,
             location: Location { start: 681, length: 6 },
-            flags: 18,
             node_kind: SymbolNode(
                 SymbolNode {
+                    flags: BitFlags<SymbolFlags> {
+                        bits: 0b10,
+                        flags: FORCED_BINARY_ENCODING,
+                    },
                     opening_loc: Some(
                         Location { start: 681, length: 1 },
                     ),
@@ -1262,9 +1321,11 @@ Program {
         Node {
             identifier: 75,
             location: Location { start: 673, length: 14 },
-            flags: 0,
             node_kind: ArgumentsNode(
                 ArgumentsNode {
+                    flags: BitFlags<ArgumentsNodeFlags> {
+                        bits: 0b0,
+                    },
                     arguments: [
                         NodeRef(68),
                         NodeRef(69),
@@ -1275,9 +1336,12 @@ Program {
         Node {
             identifier: 73,
             location: Location { start: 670, length: 19 },
-            flags: 33,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1,
+                        flags: SAFE_NAVIGATION,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(8),
@@ -1300,7 +1364,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 689 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -1327,7 +1390,6 @@ Program {
         Node {
             identifier: 77,
             location: Location { start: 0, length: 689 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [],

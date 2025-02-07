@@ -31,9 +31,12 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 0, length: 1 },
-            flags: 10,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1010,
+                        flags: DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -46,9 +49,12 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 3, length: 1 },
-            flags: 10,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1010,
+                        flags: DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -61,9 +67,12 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 0, length: 4 },
-            flags: 3,
             node_kind: RangeNode(
                 RangeNode {
+                    flags: BitFlags<RangeFlags> {
+                        bits: 0b1,
+                        flags: EXCLUDE_END,
+                    },
                     left: Some(
                         NodeRef(0),
                     ),
@@ -77,7 +86,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 4 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -89,7 +97,6 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 0, length: 4 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [],

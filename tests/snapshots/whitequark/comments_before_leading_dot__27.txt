@@ -75,9 +75,12 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 0, length: 1 },
-            flags: 40,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1000,
+                        flags: IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(1),
@@ -94,9 +97,12 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 0, length: 13 },
-            flags: 5,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b101,
+                        flags: SAFE_NAVIGATION | ATTRIBUTE_WRITE,
+                    },
                     receiver: Some(
                         NodeRef(0),
                     ),
@@ -117,9 +123,12 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 16, length: 1 },
-            flags: 40,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1000,
+                        flags: IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(1),
@@ -136,9 +145,12 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 16, length: 12 },
-            flags: 1,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1,
+                        flags: SAFE_NAVIGATION,
+                    },
                     receiver: Some(
                         NodeRef(2),
                     ),
@@ -159,9 +171,12 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 31, length: 1 },
-            flags: 40,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1000,
+                        flags: IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(1),
@@ -178,9 +193,12 @@ Program {
         Node {
             identifier: 7,
             location: Location { start: 31, length: 11 },
-            flags: 5,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b101,
+                        flags: SAFE_NAVIGATION | ATTRIBUTE_WRITE,
+                    },
                     receiver: Some(
                         NodeRef(4),
                     ),
@@ -201,9 +219,12 @@ Program {
         Node {
             identifier: 8,
             location: Location { start: 45, length: 1 },
-            flags: 40,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1000,
+                        flags: IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(1),
@@ -220,9 +241,12 @@ Program {
         Node {
             identifier: 9,
             location: Location { start: 45, length: 10 },
-            flags: 1,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1,
+                        flags: SAFE_NAVIGATION,
+                    },
                     receiver: Some(
                         NodeRef(6),
                     ),
@@ -243,7 +267,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 55 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -258,7 +281,6 @@ Program {
         Node {
             identifier: 10,
             location: Location { start: 0, length: 55 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [],

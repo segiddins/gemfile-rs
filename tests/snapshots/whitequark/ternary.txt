@@ -24,9 +24,12 @@ Program {
         Node {
             identifier: 2,
             location: Location { start: 0, length: 3 },
-            flags: 40,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1000,
+                        flags: IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(1),
@@ -43,9 +46,12 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 6, length: 1 },
-            flags: 11,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1011,
+                        flags: BINARY | DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -58,7 +64,6 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 6, length: 1 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -70,9 +75,12 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 10, length: 1 },
-            flags: 11,
             node_kind: IntegerNode(
                 IntegerNode {
+                    flags: BitFlags<IntegerBaseFlags> {
+                        bits: 0b1011,
+                        flags: BINARY | DECIMAL | HEXADECIMAL,
+                    },
                     value: Integer {
                         is_negative: false,
                         words: [
@@ -85,7 +93,6 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 10, length: 1 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -97,7 +104,6 @@ Program {
         Node {
             identifier: 7,
             location: Location { start: 8, length: 3 },
-            flags: 0,
             node_kind: ElseNode(
                 ElseNode {
                     else_keyword_loc: Location { start: 8, length: 1 },
@@ -111,7 +117,6 @@ Program {
         Node {
             identifier: 8,
             location: Location { start: 0, length: 11 },
-            flags: 1,
             node_kind: IfNode(
                 IfNode {
                     if_keyword_loc: None,
@@ -132,7 +137,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 11 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -144,7 +148,6 @@ Program {
         Node {
             identifier: 9,
             location: Location { start: 0, length: 11 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [],

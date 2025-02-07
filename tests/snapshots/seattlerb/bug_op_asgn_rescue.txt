@@ -24,9 +24,12 @@ Program {
         Node {
             identifier: 3,
             location: Location { start: 6, length: 1 },
-            flags: 40,
             node_kind: CallNode(
                 CallNode {
+                    flags: BitFlags<CallNodeFlags> {
+                        bits: 0b1000,
+                        flags: IGNORE_VISIBILITY,
+                    },
                     receiver: None,
                     call_operator_loc: None,
                     name: ConstantRef(2),
@@ -43,7 +46,6 @@ Program {
         Node {
             identifier: 4,
             location: Location { start: 15, length: 3 },
-            flags: 2,
             node_kind: NilNode(
                 NilNode,
             ),
@@ -51,7 +53,6 @@ Program {
         Node {
             identifier: 5,
             location: Location { start: 6, length: 12 },
-            flags: 0,
             node_kind: RescueModifierNode(
                 RescueModifierNode {
                     expression: NodeRef(0),
@@ -63,7 +64,6 @@ Program {
         Node {
             identifier: 6,
             location: Location { start: 0, length: 18 },
-            flags: 1,
             node_kind: LocalVariableOrWriteNode(
                 LocalVariableOrWriteNode {
                     name_loc: Location { start: 0, length: 1 },
@@ -77,7 +77,6 @@ Program {
         Node {
             identifier: 1,
             location: Location { start: 0, length: 18 },
-            flags: 0,
             node_kind: StatementsNode(
                 StatementsNode {
                     body: [
@@ -89,7 +88,6 @@ Program {
         Node {
             identifier: 7,
             location: Location { start: 0, length: 18 },
-            flags: 0,
             node_kind: ProgramNode(
                 ProgramNode {
                     locals: [
