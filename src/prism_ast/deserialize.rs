@@ -1,6 +1,16 @@
-use std::fmt::Debug;
+use std::fmt::{self, Debug};
+use std::io;
 
-use expect_test::expect;
+use winnow::{
+    binary::{self, length_repeat, length_take, u32, u8, Endianness},
+    combinator::{alt, empty, eof, fail, repeat, seq, trace},
+    error::StrContext,
+    token::take_until,
+    Bytes, ModalResult, Parser,
+};
+
+use crate::prism_ast::generated::parse_node;
+
 use ruby_prism;
 
 #[derive(Debug)]
@@ -16,10 +26,19 @@ pub struct Program {
 #[derive(Debug, Clone)]
 pub struct Node {
     // pub(super) kind: u8,
-    pub(super) node_kind: super::generated::NodeKind,
     pub(super) identifier: u32,
     pub(super) location: Location,
     pub(super) flags: u32,
+    pub(super) node_kind: super::generated::NodeKind,
+}
+
+enum NodeFieldType {
+    NodeRef,
+    ConstantRef,
+    Location,
+    String,
+    Integer,
+    Bool,
 }
 
 pub(super) struct LocationSnapshot<'a> {
@@ -28,7 +47,7 @@ pub(super) struct LocationSnapshot<'a> {
 }
 
 impl Debug for LocationSnapshot<'_> {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         eprintln!(
             "loc: {:?}, offsets: {:?}",
             self.location, self.program.header.newline_offsets
@@ -112,23 +131,6 @@ impl Program {
     }
 }
 
-use winnow::binary::length_repeat;
-use winnow::binary::length_take;
-use winnow::binary::u32;
-use winnow::binary::u8;
-use winnow::combinator::empty;
-use winnow::combinator::eof;
-use winnow::combinator::fail;
-use winnow::combinator::repeat;
-use winnow::combinator::seq;
-use winnow::combinator::trace;
-use winnow::token::take_until;
-use winnow::Bytes;
-use winnow::ModalResult;
-use winnow::Parser;
-
-use crate::prism_ast::generated::parse_node;
-
 pub(super) type Stream<'i> = winnow::Stateful<winnow::Partial<&'i Bytes>, State>;
 
 #[derive(Debug)]
@@ -146,8 +148,44 @@ pub struct Location {
     length: u32,
 }
 
+impl Location {
+    pub fn snapshot(&self, program: &Program, f: &mut dyn io::Write) -> io::Result<()> {
+        let offsets = &program.header.newline_offsets;
+        let start_line = offsets
+            .iter()
+            .position(|&offset| offset >= self.start)
+            .unwrap_or(offsets.len());
+
+        if self.length == 0 {
+            let line = start_line + 1;
+            let col = self.start - program.header.newline_offsets[start_line as usize];
+            return write!(f, "({line},{col})-({line},{col})",);
+        }
+
+        let end_line = offsets[(start_line as usize)..]
+            .iter()
+            .rposition(|&offset| offset < self.start + self.length)
+            .unwrap_or(0)
+            + start_line;
+
+        let end_line_offset = match end_line {
+            0 => 0,
+            _ => offsets[end_line - 1],
+        };
+
+        write!(
+            f,
+            "({},{})-({},{})",
+            start_line + 1,
+            self.start - program.header.newline_offsets[start_line as usize],
+            end_line + 1,
+            (self.start + self.length - end_line_offset - 1)
+        )
+    }
+}
+
 impl Debug for Location {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(
             f,
             "Location {{ start: {}, length: {} }}",
@@ -182,7 +220,7 @@ struct Warning {
 pub struct NodeRef(u32);
 
 impl Debug for NodeRef {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "NodeRef({})", self.0)
     }
 }
@@ -191,7 +229,7 @@ impl Debug for NodeRef {
 pub struct ConstantRef(u32);
 
 impl Debug for ConstantRef {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "ConstantRef({})", self.0)
     }
 }
@@ -217,7 +255,7 @@ struct Header {
 pub(super) fn parse_string(input: &mut Stream) -> ModalResult<String> {
     length_take(parse_varuint)
         .map(|bytes| String::from_utf8_lossy(bytes).into_owned())
-        .context(winnow::error::StrContext::Label("string"))
+        .context(StrContext::Label("string"))
         .parse_next(input)
 }
 
@@ -236,7 +274,7 @@ pub(super) fn parse_varuint(i: &mut Stream) -> ModalResult<u32> {
         let mut result: u32 = 0;
         let mut shift: u32 = 0;
         loop {
-            let byte = winnow::binary::u8.parse_next(input)?;
+            let byte = u8.parse_next(input)?;
             result |= ((byte & 0b0111_1111) as u32) << shift;
             if byte < 0b1000_0000 {
                 break;
@@ -256,7 +294,7 @@ pub enum Constant {
 }
 
 impl Debug for Constant {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
             Constant::Owned(offset, length) => {
                 write!(f, "Owned({}, {})", offset, length)
@@ -296,8 +334,8 @@ fn parse_varsint(input: &mut Stream) -> ModalResult<i32> {
 }
 
 pub(super) fn parse_optional_node(input: &mut Stream) -> ModalResult<Option<NodeRef>> {
-    winnow::combinator::alt((
-        winnow::binary::u8.verify(|value| *value == 0).map(|_| None),
+    alt((
+        u8.verify(|value| *value == 0).map(|_| None),
         parse_node.map(Some),
     ))
     .parse_next(input)
@@ -308,7 +346,7 @@ pub(super) fn parse_integer(input: &mut Stream) -> ModalResult<Integer> {
         is_negative: parse_bool,
         words: length_repeat(parse_varuint, parse_varuint),
     }]
-    .context(winnow::error::StrContext::Label("integer"))
+    .context(StrContext::Label("integer"))
     .parse_next(input)
 }
 
@@ -317,15 +355,15 @@ pub(super) fn parse_constant(input: &mut Stream) -> ModalResult<ConstantRef> {
 }
 
 pub(super) fn parse_optional_constant(input: &mut Stream) -> ModalResult<Option<ConstantRef>> {
-    winnow::combinator::alt((
-        winnow::binary::u8.verify(|value| *value == 0).map(|_| None),
+    alt((
+        u8.verify(|value| *value == 0).map(|_| None),
         parse_constant.map(Some),
     ))
     .parse_next(input)
 }
 
 pub(super) fn parse_bool(input: &mut Stream) -> ModalResult<bool> {
-    winnow::binary::u8.map(|value| value == 1).parse_next(input)
+    u8.map(|value| value == 1).parse_next(input)
 }
 
 fn parse_comment(input: &mut Stream) -> ModalResult<Comment> {
@@ -344,7 +382,7 @@ fn parse_magic_comment(input: &mut Stream) -> ModalResult<MagicComment> {
     .parse_next(input)
 }
 pub(super) fn parse_double(input: &mut Stream) -> ModalResult<f64> {
-    winnow::binary::f64(winnow::binary::Endianness::Native).parse_next(input)
+    binary::f64(Endianness::Native).parse_next(input)
 }
 
 // pub(super) fn parse_option<Input, Output, Error, ParseNext>(
@@ -367,10 +405,7 @@ pub(super) fn parse_double(input: &mut Stream) -> ModalResult<f64> {
 // }
 
 fn parse_content(input: &mut Stream) -> ModalResult<Constant> {
-    (
-        u32(winnow::binary::Endianness::Native),
-        u32(winnow::binary::Endianness::Native),
-    )
+    (u32(Endianness::Native), u32(Endianness::Native))
         .map(|(offset, length)| {
             if offset & (1 << 31) == 0 {
                 Constant::Owned(offset, length)
@@ -394,9 +429,9 @@ fn parse_error(input: &mut Stream) -> ModalResult<Error> {
 fn parse_header(input: &mut Stream) -> ModalResult<Header> {
     seq![Header {
         _: "PRISM".context(winnow::error::StrContext::Expected("PRISM".into())),
-        prism_major: winnow::binary::u8,
-        prism_minor: winnow::binary::u8,
-        prism_patch: winnow::binary::u8,
+        prism_major: u8,
+        prism_minor: u8,
+        prism_patch: u8,
         only_semantics_serialized: parse_bool,
         encoding_name: parse_string,
         start_line: parse_varsint,
@@ -411,7 +446,7 @@ fn parse_header(input: &mut Stream) -> ModalResult<Header> {
             location: e.location,
             level: e.level,
         })),
-        content_pool_offset: winnow::binary::u32(winnow::binary::Endianness::Native),
+        content_pool_offset: binary::u32(Endianness::Native),
         content_pool_size: parse_varuint,
     }]
     .parse_next(input)
@@ -570,7 +605,7 @@ fn test_parse_empty() {
     "#]]
     .assert_debug_eq(&program);
 
-    expect![[r#"
+    expect_test::expect![[r#"
         @ ProgramNode (location: (1,0)-(1,0))
         ├── flags: ∅
         ├── locals: []

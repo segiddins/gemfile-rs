@@ -1,4 +1,4 @@
-use std::{fmt, io::Read};
+use std::{fmt, io::Read, path::Iter};
 
 pub mod deserialize;
 mod generated;
@@ -6,13 +6,13 @@ mod generated;
 struct Program {
     source: String,
 
-    expressions: Vec<Expression>,
+    expressions: Vec<Expression<ExpressionRef, LocationRef>>,
 
     toplevel_statements: Vec<ExpressionRef>,
 }
 
 impl Program {
-    fn expression(&self, r#ref: ExpressionRef) -> &Expression {
+    fn expression(&self, r#ref: ExpressionRef) -> &Expression<ExpressionRef, LocationRef> {
         &self.expressions[r#ref.0 as usize]
     }
 }
@@ -78,28 +78,31 @@ struct LocationRef {
 }
 
 #[derive(Debug)]
-struct Expression {
-    kind: ExpressionKind,
-    loc: LocationRef,
+struct Expression<Expr, Loc> {
+    kind: ExpressionKind<Expr>,
+    loc: Loc,
 }
 
 #[derive(Debug)]
-enum ExpressionKind {
+enum ExpressionKind<T> {
     Integer(i32),
     String(String),
-    Call(CallStatement),
+    Call(CallStatement<T>),
     Nil,
     Error(anyhow::Error),
 }
 
 #[derive(Debug)]
-struct CallStatement {
+struct CallStatement<T> {
     name: String,
-    receiver: Option<ExpressionRef>,
-    args: Vec<ExpressionRef>,
+    receiver: Option<T>,
+    args: Vec<T>,
 }
 
-fn map_expression_node(node: ruby_prism::Node, expressions: &mut Vec<Expression>) -> ExpressionRef {
+fn map_expression_node(
+    node: ruby_prism::Node,
+    expressions: &mut Vec<Expression<ExpressionRef, LocationRef>>,
+) -> ExpressionRef {
     let kind = match node {
         ruby_prism::Node::IntegerNode { .. } => {
             let node = node.as_integer_node().unwrap();
