@@ -1,6 +1,7 @@
 use std::fmt::Write;
 
 use super::deserialize::*;
+use winnow::binary::length_repeat;
 
 // 0
 #[derive(Debug, Clone)]
@@ -14,7 +15,6 @@ impl AliasGlobalVariableNode {
         NodeKind::AliasGlobalVariableNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![AliasGlobalVariableNode {
             new_name: parse_node.context(winnow::error::StrContext::Label(
@@ -43,7 +43,6 @@ impl AliasMethodNode {
         NodeKind::AliasMethodNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![AliasMethodNode {
             new_name: parse_node
@@ -70,7 +69,6 @@ impl AlternationPatternNode {
         NodeKind::AlternationPatternNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![AlternationPatternNode {
             left: parse_node.context(winnow::error::StrContext::Label(
@@ -99,7 +97,6 @@ impl AndNode {
         NodeKind::AndNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![AndNode {
             left: parse_node.context(winnow::error::StrContext::Label("AndNode.left")),
@@ -121,7 +118,6 @@ impl ArgumentsNode {
         NodeKind::ArgumentsNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![ArgumentsNode {
             arguments: length_repeat(parse_varuint, parse_node)
@@ -143,7 +139,6 @@ impl ArrayNode {
         NodeKind::ArrayNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![ArrayNode {
             elements: length_repeat(parse_varuint, parse_node)
@@ -172,7 +167,6 @@ impl ArrayPatternNode {
         NodeKind::ArrayPatternNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![ArrayPatternNode {
             constant: parse_optional_node.context(winnow::error::StrContext::Label(
@@ -208,7 +202,6 @@ impl AssocNode {
         NodeKind::AssocNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![AssocNode {
             key: parse_node.context(winnow::error::StrContext::Label("AssocNode.key")),
@@ -231,7 +224,6 @@ impl AssocSplatNode {
         NodeKind::AssocSplatNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![AssocSplatNode {
             value: parse_optional_node
@@ -254,7 +246,6 @@ impl BackReferenceReadNode {
         NodeKind::BackReferenceReadNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![BackReferenceReadNode {
             name: parse_constant.context(winnow::error::StrContext::Label(
@@ -280,7 +271,6 @@ impl BeginNode {
         NodeKind::BeginNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![BeginNode {
             begin_keyword_loc: parse_optional_location.context(winnow::error::StrContext::Label(
@@ -313,7 +303,6 @@ impl BlockArgumentNode {
         NodeKind::BlockArgumentNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![BlockArgumentNode {
             expression: parse_optional_node.context(winnow::error::StrContext::Label(
@@ -337,7 +326,6 @@ impl BlockLocalVariableNode {
         NodeKind::BlockLocalVariableNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![BlockLocalVariableNode {
             name: parse_constant.context(winnow::error::StrContext::Label(
@@ -362,7 +350,6 @@ impl BlockNode {
         NodeKind::BlockNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![BlockNode {
             locals: length_repeat(parse_varuint, parse_constant)
@@ -391,7 +378,6 @@ impl BlockParameterNode {
         NodeKind::BlockParameterNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![BlockParameterNode {
             name: parse_optional_constant
@@ -420,7 +406,6 @@ impl BlockParametersNode {
         NodeKind::BlockParametersNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![BlockParametersNode {
             parameters: parse_optional_node.context(winnow::error::StrContext::Label(
@@ -451,7 +436,6 @@ impl BreakNode {
         NodeKind::BreakNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![BreakNode {
             arguments: parse_optional_node
@@ -479,7 +463,6 @@ impl CallAndWriteNode {
         NodeKind::CallAndWriteNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![CallAndWriteNode {
             receiver: parse_optional_node.context(winnow::error::StrContext::Label(
@@ -523,7 +506,6 @@ impl CallNode {
         NodeKind::CallNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![CallNode {
             receiver: parse_optional_node
@@ -563,7 +545,6 @@ impl CallOperatorWriteNode {
         NodeKind::CallOperatorWriteNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![CallOperatorWriteNode {
             receiver: parse_optional_node.context(winnow::error::StrContext::Label(
@@ -611,7 +592,6 @@ impl CallOrWriteNode {
         NodeKind::CallOrWriteNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![CallOrWriteNode {
             receiver: parse_optional_node
@@ -650,7 +630,6 @@ impl CallTargetNode {
         NodeKind::CallTargetNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![CallTargetNode {
             receiver: parse_node
@@ -679,7 +658,6 @@ impl CapturePatternNode {
         NodeKind::CapturePatternNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![CapturePatternNode {
             value: parse_node.context(winnow::error::StrContext::Label("CapturePatternNode.value")),
@@ -708,7 +686,6 @@ impl CaseMatchNode {
         NodeKind::CaseMatchNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![CaseMatchNode {
             predicate: parse_optional_node
@@ -743,7 +720,6 @@ impl CaseNode {
         NodeKind::CaseNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![CaseNode {
             predicate: parse_optional_node
@@ -779,7 +755,6 @@ impl ClassNode {
         NodeKind::ClassNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![ClassNode {
             locals: length_repeat(parse_varuint, parse_constant)
@@ -817,7 +792,6 @@ impl ClassVariableAndWriteNode {
         NodeKind::ClassVariableAndWriteNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![ClassVariableAndWriteNode {
             name: parse_constant.context(winnow::error::StrContext::Label(
@@ -851,7 +825,6 @@ impl ClassVariableOperatorWriteNode {
         NodeKind::ClassVariableOperatorWriteNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![ClassVariableOperatorWriteNode {
             name: parse_constant.context(winnow::error::StrContext::Label(
@@ -887,7 +860,6 @@ impl ClassVariableOrWriteNode {
         NodeKind::ClassVariableOrWriteNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![ClassVariableOrWriteNode {
             name: parse_constant.context(winnow::error::StrContext::Label(
@@ -917,7 +889,6 @@ impl ClassVariableReadNode {
         NodeKind::ClassVariableReadNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![ClassVariableReadNode {
             name: parse_constant.context(winnow::error::StrContext::Label(
@@ -938,7 +909,6 @@ impl ClassVariableTargetNode {
         NodeKind::ClassVariableTargetNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![ClassVariableTargetNode {
             name: parse_constant.context(winnow::error::StrContext::Label(
@@ -962,7 +932,6 @@ impl ClassVariableWriteNode {
         NodeKind::ClassVariableWriteNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![ClassVariableWriteNode {
             name: parse_constant.context(winnow::error::StrContext::Label(
@@ -995,7 +964,6 @@ impl ConstantAndWriteNode {
         NodeKind::ConstantAndWriteNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![ConstantAndWriteNode {
             name: parse_constant.context(winnow::error::StrContext::Label(
@@ -1029,7 +997,6 @@ impl ConstantOperatorWriteNode {
         NodeKind::ConstantOperatorWriteNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![ConstantOperatorWriteNode {
             name: parse_constant.context(winnow::error::StrContext::Label(
@@ -1065,7 +1032,6 @@ impl ConstantOrWriteNode {
         NodeKind::ConstantOrWriteNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![ConstantOrWriteNode {
             name: parse_constant
@@ -1096,7 +1062,6 @@ impl ConstantPathAndWriteNode {
         NodeKind::ConstantPathAndWriteNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![ConstantPathAndWriteNode {
             target: parse_node.context(winnow::error::StrContext::Label(
@@ -1126,7 +1091,6 @@ impl ConstantPathNode {
         NodeKind::ConstantPathNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![ConstantPathNode {
             parent: parse_optional_node
@@ -1157,7 +1121,6 @@ impl ConstantPathOperatorWriteNode {
         NodeKind::ConstantPathOperatorWriteNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![ConstantPathOperatorWriteNode {
             target: parse_node.context(winnow::error::StrContext::Label(
@@ -1189,7 +1152,6 @@ impl ConstantPathOrWriteNode {
         NodeKind::ConstantPathOrWriteNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![ConstantPathOrWriteNode {
             target: parse_node.context(winnow::error::StrContext::Label(
@@ -1219,7 +1181,6 @@ impl ConstantPathTargetNode {
         NodeKind::ConstantPathTargetNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![ConstantPathTargetNode {
             parent: parse_optional_node.context(winnow::error::StrContext::Label(
@@ -1251,7 +1212,6 @@ impl ConstantPathWriteNode {
         NodeKind::ConstantPathWriteNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![ConstantPathWriteNode {
             target: parse_node.context(winnow::error::StrContext::Label(
@@ -1278,7 +1238,6 @@ impl ConstantReadNode {
         NodeKind::ConstantReadNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![ConstantReadNode {
             name: parse_constant.context(winnow::error::StrContext::Label("ConstantReadNode.name")),
@@ -1297,7 +1256,6 @@ impl ConstantTargetNode {
         NodeKind::ConstantTargetNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![ConstantTargetNode {
             name: parse_constant
@@ -1320,7 +1278,6 @@ impl ConstantWriteNode {
         NodeKind::ConstantWriteNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![ConstantWriteNode {
             name: parse_constant
@@ -1358,7 +1315,6 @@ impl DefNode {
         NodeKind::DefNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![DefNode {
             name: parse_constant.context(winnow::error::StrContext::Label("DefNode.name")),
@@ -1400,7 +1356,6 @@ impl DefinedNode {
         NodeKind::DefinedNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![DefinedNode {
             lparen_loc: parse_optional_location
@@ -1427,7 +1382,6 @@ impl ElseNode {
         NodeKind::ElseNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![ElseNode {
             else_keyword_loc: parse_location.context(winnow::error::StrContext::Label(
@@ -1454,7 +1408,6 @@ impl EmbeddedStatementsNode {
         NodeKind::EmbeddedStatementsNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![EmbeddedStatementsNode {
             opening_loc: parse_location.context(winnow::error::StrContext::Label(
@@ -1482,7 +1435,6 @@ impl EmbeddedVariableNode {
         NodeKind::EmbeddedVariableNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![EmbeddedVariableNode {
             operator_loc: parse_location.context(winnow::error::StrContext::Label(
@@ -1508,7 +1460,6 @@ impl EnsureNode {
         NodeKind::EnsureNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![EnsureNode {
             ensure_keyword_loc: parse_location.context(winnow::error::StrContext::Label(
@@ -1548,7 +1499,6 @@ impl FindPatternNode {
         NodeKind::FindPatternNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![FindPatternNode {
             constant: parse_optional_node
@@ -1581,7 +1531,6 @@ impl FlipFlopNode {
         NodeKind::FlipFlopNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![FlipFlopNode {
             left: parse_optional_node
@@ -1606,7 +1555,6 @@ impl FloatNode {
         NodeKind::FloatNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![FloatNode {
             value: parse_double.context(winnow::error::StrContext::Label("FloatNode.value")),
@@ -1631,7 +1579,6 @@ impl ForNode {
         NodeKind::ForNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![ForNode {
             index: parse_node.context(winnow::error::StrContext::Label("ForNode.index")),
@@ -1679,7 +1626,6 @@ impl ForwardingSuperNode {
         NodeKind::ForwardingSuperNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![ForwardingSuperNode {
             block: parse_optional_node.context(winnow::error::StrContext::Label(
@@ -1703,7 +1649,6 @@ impl GlobalVariableAndWriteNode {
         NodeKind::GlobalVariableAndWriteNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![GlobalVariableAndWriteNode {
             name: parse_constant.context(winnow::error::StrContext::Label(
@@ -1737,7 +1682,6 @@ impl GlobalVariableOperatorWriteNode {
         NodeKind::GlobalVariableOperatorWriteNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![GlobalVariableOperatorWriteNode {
             name: parse_constant.context(winnow::error::StrContext::Label(
@@ -1773,7 +1717,6 @@ impl GlobalVariableOrWriteNode {
         NodeKind::GlobalVariableOrWriteNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![GlobalVariableOrWriteNode {
             name: parse_constant.context(winnow::error::StrContext::Label(
@@ -1803,7 +1746,6 @@ impl GlobalVariableReadNode {
         NodeKind::GlobalVariableReadNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![GlobalVariableReadNode {
             name: parse_constant.context(winnow::error::StrContext::Label(
@@ -1824,7 +1766,6 @@ impl GlobalVariableTargetNode {
         NodeKind::GlobalVariableTargetNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![GlobalVariableTargetNode {
             name: parse_constant.context(winnow::error::StrContext::Label(
@@ -1848,7 +1789,6 @@ impl GlobalVariableWriteNode {
         NodeKind::GlobalVariableWriteNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![GlobalVariableWriteNode {
             name: parse_constant.context(winnow::error::StrContext::Label(
@@ -1880,7 +1820,6 @@ impl HashNode {
         NodeKind::HashNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![HashNode {
             opening_loc: parse_location
@@ -1908,7 +1847,6 @@ impl HashPatternNode {
         NodeKind::HashPatternNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![HashPatternNode {
             constant: parse_optional_node
@@ -1943,7 +1881,6 @@ impl IfNode {
         NodeKind::IfNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![IfNode {
             if_keyword_loc: parse_optional_location
@@ -1972,7 +1909,6 @@ impl ImaginaryNode {
         NodeKind::ImaginaryNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![ImaginaryNode {
             numeric: parse_node.context(winnow::error::StrContext::Label("ImaginaryNode.numeric")),
@@ -1991,7 +1927,6 @@ impl ImplicitNode {
         NodeKind::ImplicitNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![ImplicitNode {
             value: parse_node.context(winnow::error::StrContext::Label("ImplicitNode.value")),
@@ -2022,7 +1957,6 @@ impl InNode {
         NodeKind::InNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![InNode {
             pattern: parse_node.context(winnow::error::StrContext::Label("InNode.pattern")),
@@ -2053,7 +1987,6 @@ impl IndexAndWriteNode {
         NodeKind::IndexAndWriteNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![IndexAndWriteNode {
             receiver: parse_optional_node.context(winnow::error::StrContext::Label(
@@ -2100,7 +2033,6 @@ impl IndexOperatorWriteNode {
         NodeKind::IndexOperatorWriteNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![IndexOperatorWriteNode {
             receiver: parse_optional_node.context(winnow::error::StrContext::Label(
@@ -2152,7 +2084,6 @@ impl IndexOrWriteNode {
         NodeKind::IndexOrWriteNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![IndexOrWriteNode {
             receiver: parse_optional_node.context(winnow::error::StrContext::Label(
@@ -2195,7 +2126,6 @@ impl IndexTargetNode {
         NodeKind::IndexTargetNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![IndexTargetNode {
             receiver: parse_node
@@ -2229,7 +2159,6 @@ impl InstanceVariableAndWriteNode {
         NodeKind::InstanceVariableAndWriteNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![InstanceVariableAndWriteNode {
             name: parse_constant.context(winnow::error::StrContext::Label(
@@ -2263,7 +2192,6 @@ impl InstanceVariableOperatorWriteNode {
         NodeKind::InstanceVariableOperatorWriteNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![InstanceVariableOperatorWriteNode {
             name: parse_constant.context(winnow::error::StrContext::Label(
@@ -2299,7 +2227,6 @@ impl InstanceVariableOrWriteNode {
         NodeKind::InstanceVariableOrWriteNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![InstanceVariableOrWriteNode {
             name: parse_constant.context(winnow::error::StrContext::Label(
@@ -2329,7 +2256,6 @@ impl InstanceVariableReadNode {
         NodeKind::InstanceVariableReadNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![InstanceVariableReadNode {
             name: parse_constant.context(winnow::error::StrContext::Label(
@@ -2350,7 +2276,6 @@ impl InstanceVariableTargetNode {
         NodeKind::InstanceVariableTargetNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![InstanceVariableTargetNode {
             name: parse_constant.context(winnow::error::StrContext::Label(
@@ -2374,7 +2299,6 @@ impl InstanceVariableWriteNode {
         NodeKind::InstanceVariableWriteNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![InstanceVariableWriteNode {
             name: parse_constant.context(winnow::error::StrContext::Label(
@@ -2404,7 +2328,6 @@ impl IntegerNode {
         NodeKind::IntegerNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![IntegerNode {
             value: parse_integer.context(winnow::error::StrContext::Label("IntegerNode.value")),
@@ -2425,7 +2348,6 @@ impl InterpolatedMatchLastLineNode {
         NodeKind::InterpolatedMatchLastLineNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![InterpolatedMatchLastLineNode {
             opening_loc: parse_location.context(winnow::error::StrContext::Label(
@@ -2454,7 +2376,6 @@ impl InterpolatedRegularExpressionNode {
         NodeKind::InterpolatedRegularExpressionNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![InterpolatedRegularExpressionNode {
             opening_loc: parse_location.context(winnow::error::StrContext::Label(
@@ -2483,7 +2404,6 @@ impl InterpolatedStringNode {
         NodeKind::InterpolatedStringNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![InterpolatedStringNode {
             opening_loc: parse_optional_location.context(winnow::error::StrContext::Label(
@@ -2512,7 +2432,6 @@ impl InterpolatedSymbolNode {
         NodeKind::InterpolatedSymbolNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![InterpolatedSymbolNode {
             opening_loc: parse_optional_location.context(winnow::error::StrContext::Label(
@@ -2541,7 +2460,6 @@ impl InterpolatedXStringNode {
         NodeKind::InterpolatedXStringNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![InterpolatedXStringNode {
             opening_loc: parse_location.context(winnow::error::StrContext::Label(
@@ -2586,7 +2504,6 @@ impl KeywordHashNode {
         NodeKind::KeywordHashNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![KeywordHashNode {
             elements: length_repeat(parse_varuint, parse_node)
@@ -2608,7 +2525,6 @@ impl KeywordRestParameterNode {
         NodeKind::KeywordRestParameterNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![KeywordRestParameterNode {
             name: parse_optional_constant.context(winnow::error::StrContext::Label(
@@ -2640,7 +2556,6 @@ impl LambdaNode {
         NodeKind::LambdaNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![LambdaNode {
             locals: length_repeat(parse_varuint, parse_constant)
@@ -2673,7 +2588,6 @@ impl LocalVariableAndWriteNode {
         NodeKind::LocalVariableAndWriteNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![LocalVariableAndWriteNode {
             name_loc: parse_location.context(winnow::error::StrContext::Label(
@@ -2711,7 +2625,6 @@ impl LocalVariableOperatorWriteNode {
         NodeKind::LocalVariableOperatorWriteNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![LocalVariableOperatorWriteNode {
             name_loc: parse_location.context(winnow::error::StrContext::Label(
@@ -2751,7 +2664,6 @@ impl LocalVariableOrWriteNode {
         NodeKind::LocalVariableOrWriteNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![LocalVariableOrWriteNode {
             name_loc: parse_location.context(winnow::error::StrContext::Label(
@@ -2785,7 +2697,6 @@ impl LocalVariableReadNode {
         NodeKind::LocalVariableReadNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![LocalVariableReadNode {
             name: parse_constant.context(winnow::error::StrContext::Label(
@@ -2810,7 +2721,6 @@ impl LocalVariableTargetNode {
         NodeKind::LocalVariableTargetNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![LocalVariableTargetNode {
             name: parse_constant.context(winnow::error::StrContext::Label(
@@ -2838,7 +2748,6 @@ impl LocalVariableWriteNode {
         NodeKind::LocalVariableWriteNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![LocalVariableWriteNode {
             name: parse_constant.context(winnow::error::StrContext::Label(
@@ -2874,7 +2783,6 @@ impl MatchLastLineNode {
         NodeKind::MatchLastLineNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![MatchLastLineNode {
             opening_loc: parse_location.context(winnow::error::StrContext::Label(
@@ -2906,7 +2814,6 @@ impl MatchPredicateNode {
         NodeKind::MatchPredicateNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![MatchPredicateNode {
             value: parse_node.context(winnow::error::StrContext::Label("MatchPredicateNode.value")),
@@ -2933,7 +2840,6 @@ impl MatchRequiredNode {
         NodeKind::MatchRequiredNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![MatchRequiredNode {
             value: parse_node.context(winnow::error::StrContext::Label("MatchRequiredNode.value")),
@@ -2959,7 +2865,6 @@ impl MatchWriteNode {
         NodeKind::MatchWriteNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![MatchWriteNode {
             call: parse_node.context(winnow::error::StrContext::Label("MatchWriteNode.call")),
@@ -2994,7 +2899,6 @@ impl ModuleNode {
         NodeKind::ModuleNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![ModuleNode {
             locals: length_repeat(parse_varuint, parse_constant)
@@ -3028,7 +2932,6 @@ impl MultiTargetNode {
         NodeKind::MultiTargetNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![MultiTargetNode {
             lefts: length_repeat(parse_varuint, parse_node)
@@ -3064,7 +2967,6 @@ impl MultiWriteNode {
         NodeKind::MultiWriteNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![MultiWriteNode {
             lefts: length_repeat(parse_varuint, parse_node)
@@ -3099,7 +3001,6 @@ impl NextNode {
         NodeKind::NextNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![NextNode {
             arguments: parse_optional_node
@@ -3131,7 +3032,6 @@ impl NoKeywordsParameterNode {
         NodeKind::NoKeywordsParameterNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![NoKeywordsParameterNode {
             operator_loc: parse_location.context(winnow::error::StrContext::Label(
@@ -3155,7 +3055,6 @@ impl NumberedParametersNode {
         NodeKind::NumberedParametersNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![NumberedParametersNode {
             maximum: winnow::binary::u8.context(winnow::error::StrContext::Label(
@@ -3176,7 +3075,6 @@ impl NumberedReferenceReadNode {
         NodeKind::NumberedReferenceReadNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![NumberedReferenceReadNode {
             number: parse_varuint.context(winnow::error::StrContext::Label(
@@ -3199,7 +3097,6 @@ impl OptionalKeywordParameterNode {
         NodeKind::OptionalKeywordParameterNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![OptionalKeywordParameterNode {
             name: parse_constant.context(winnow::error::StrContext::Label(
@@ -3229,7 +3126,6 @@ impl OptionalParameterNode {
         NodeKind::OptionalParameterNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![OptionalParameterNode {
             name: parse_constant.context(winnow::error::StrContext::Label(
@@ -3261,7 +3157,6 @@ impl OrNode {
         NodeKind::OrNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![OrNode {
             left: parse_node.context(winnow::error::StrContext::Label("OrNode.left")),
@@ -3289,7 +3184,6 @@ impl ParametersNode {
         NodeKind::ParametersNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![ParametersNode {
             requireds: length_repeat(parse_varuint, parse_node)
@@ -3324,7 +3218,6 @@ impl ParenthesesNode {
         NodeKind::ParenthesesNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![ParenthesesNode {
             body: parse_optional_node
@@ -3353,7 +3246,6 @@ impl PinnedExpressionNode {
         NodeKind::PinnedExpressionNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![PinnedExpressionNode {
             expression: parse_node.context(winnow::error::StrContext::Label(
@@ -3384,7 +3276,6 @@ impl PinnedVariableNode {
         NodeKind::PinnedVariableNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![PinnedVariableNode {
             variable: parse_node.context(winnow::error::StrContext::Label(
@@ -3411,7 +3302,6 @@ impl PostExecutionNode {
         NodeKind::PostExecutionNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![PostExecutionNode {
             statements: parse_optional_node.context(winnow::error::StrContext::Label(
@@ -3444,7 +3334,6 @@ impl PreExecutionNode {
         NodeKind::PreExecutionNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![PreExecutionNode {
             statements: parse_optional_node.context(winnow::error::StrContext::Label(
@@ -3475,7 +3364,6 @@ impl ProgramNode {
         NodeKind::ProgramNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![ProgramNode {
             locals: length_repeat(parse_varuint, parse_constant)
@@ -3499,7 +3387,6 @@ impl RangeNode {
         NodeKind::RangeNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![RangeNode {
             left: parse_optional_node.context(winnow::error::StrContext::Label("RangeNode.left")),
@@ -3522,7 +3409,6 @@ impl RationalNode {
         NodeKind::RationalNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![RationalNode {
             numerator: parse_integer
@@ -3556,7 +3442,6 @@ impl RegularExpressionNode {
         NodeKind::RegularExpressionNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![RegularExpressionNode {
             opening_loc: parse_location.context(winnow::error::StrContext::Label(
@@ -3587,7 +3472,6 @@ impl RequiredKeywordParameterNode {
         NodeKind::RequiredKeywordParameterNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![RequiredKeywordParameterNode {
             name: parse_constant.context(winnow::error::StrContext::Label(
@@ -3611,7 +3495,6 @@ impl RequiredParameterNode {
         NodeKind::RequiredParameterNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![RequiredParameterNode {
             name: parse_constant.context(winnow::error::StrContext::Label(
@@ -3634,7 +3517,6 @@ impl RescueModifierNode {
         NodeKind::RescueModifierNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![RescueModifierNode {
             expression: parse_node.context(winnow::error::StrContext::Label(
@@ -3667,7 +3549,6 @@ impl RescueNode {
         NodeKind::RescueNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![RescueNode {
             keyword_loc: parse_location
@@ -3702,7 +3583,6 @@ impl RestParameterNode {
         NodeKind::RestParameterNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![RestParameterNode {
             name: parse_optional_constant
@@ -3738,7 +3618,6 @@ impl ReturnNode {
         NodeKind::ReturnNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![ReturnNode {
             keyword_loc: parse_location
@@ -3769,7 +3648,6 @@ impl ShareableConstantNode {
         NodeKind::ShareableConstantNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![ShareableConstantNode {
             write: parse_node.context(winnow::error::StrContext::Label(
@@ -3795,7 +3673,6 @@ impl SingletonClassNode {
         NodeKind::SingletonClassNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![SingletonClassNode {
             locals: length_repeat(parse_varuint, parse_constant).context(
@@ -3839,7 +3716,6 @@ impl SourceFileNode {
         NodeKind::SourceFileNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![SourceFileNode {
             filepath: parse_string_field
@@ -3869,7 +3745,6 @@ impl SplatNode {
         NodeKind::SplatNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![SplatNode {
             operator_loc: parse_location
@@ -3891,7 +3766,6 @@ impl StatementsNode {
         NodeKind::StatementsNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![StatementsNode {
             body: length_repeat(parse_varuint, parse_node)
@@ -3914,7 +3788,6 @@ impl StringNode {
         NodeKind::StringNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![StringNode {
             opening_loc: parse_optional_location
@@ -3944,7 +3817,6 @@ impl SuperNode {
         NodeKind::SuperNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![SuperNode {
             keyword_loc: parse_location
@@ -3974,7 +3846,6 @@ impl SymbolNode {
         NodeKind::SymbolNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![SymbolNode {
             opening_loc: parse_optional_location
@@ -4010,7 +3881,6 @@ impl UndefNode {
         NodeKind::UndefNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![UndefNode {
             names: length_repeat(parse_varuint, parse_node)
@@ -4037,7 +3907,6 @@ impl UnlessNode {
         NodeKind::UnlessNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![UnlessNode {
             keyword_loc: parse_location
@@ -4072,7 +3941,6 @@ impl UntilNode {
         NodeKind::UntilNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![UntilNode {
             keyword_loc: parse_location
@@ -4102,7 +3970,6 @@ impl WhenNode {
         NodeKind::WhenNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![WhenNode {
             keyword_loc: parse_location
@@ -4133,7 +4000,6 @@ impl WhileNode {
         NodeKind::WhileNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![WhileNode {
             keyword_loc: parse_location
@@ -4163,7 +4029,6 @@ impl XStringNode {
         NodeKind::XStringNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![XStringNode {
             opening_loc: parse_location
@@ -4192,7 +4057,6 @@ impl YieldNode {
         NodeKind::YieldNode(self)
     }
     pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {
-        use winnow::binary::length_repeat;
         use winnow::Parser;
         winnow::combinator::seq![YieldNode {
             keyword_loc: parse_location

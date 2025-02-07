@@ -1,4 +1,4 @@
-use std::{fmt, io::Read, path::Iter};
+use std::fmt;
 
 pub mod deserialize;
 mod generated;
@@ -165,13 +165,11 @@ fn parse(input: String) -> Program {
 
     drop(parse_result);
 
-    let program = Program {
+    Program {
         source: input,
         expressions,
         toplevel_statements,
-    };
-
-    program
+    }
 }
 
 #[test]

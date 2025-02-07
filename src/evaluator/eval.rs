@@ -50,7 +50,7 @@ impl Diagnostic {
             let source = src.source(db);
             let line_start = source[..location.start].lines().count() + 1;
             message = message.snippet(
-                Snippet::source(&source)
+                Snippet::source(source)
                     .line_start(line_start)
                     .origin(src.path(db).to_str().unwrap())
                     .fold(true)

@@ -1,6 +1,9 @@
-use std::{str::FromStr, sync::Mutex};
+#[cfg(test)]
+use salsa::Database as _;
+#[cfg(test)]
+use std::str::FromStr as _;
 
-use salsa::{Accumulator, Database};
+use salsa::Accumulator;
 
 use crate::evaluator::{eval, ir::Gemfile};
 

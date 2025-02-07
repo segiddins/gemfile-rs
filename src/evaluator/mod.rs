@@ -9,10 +9,7 @@ mod tests {
 
     use expect_test::expect;
 
-    use super::{
-        eval::{Definition, Diagnostic},
-        *,
-    };
+    use super::*;
 
     #[test]
     fn test_eval_empty() {

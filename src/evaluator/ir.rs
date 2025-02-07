@@ -94,7 +94,7 @@ pub struct SalsaOutput<'db> {
     pub substring_range: Range<usize>,
 }
 
-impl<'db> SalsaOutput<'db> {
+impl SalsaOutput<'_> {
     pub fn substring<'a>(&self, db: &'a dyn super::db::Db) -> &'a str {
         &self.input(db).source(db)[self.substring_range(db)]
     }

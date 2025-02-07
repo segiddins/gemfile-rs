@@ -90,6 +90,7 @@ end
 f.puts "use std::fmt::Write;"
 f.puts
 f.puts "use super::deserialize::*;"
+f.puts "use winnow::binary::length_repeat;"
 f.puts
 
 config["nodes"].each_with_index do |node, index|
@@ -128,7 +129,6 @@ config["nodes"].each_with_index do |node, index|
 
   if node.fields&.any?
     f.puts "pub fn parser(input: &mut super::deserialize::Stream) -> winnow::ModalResult<Self> {"
-    f.puts "    use winnow::binary::length_repeat;"
     f.puts "    use winnow::Parser;"
     f.puts "    winnow::combinator::seq![#{name}{"
     node["fields"]&.each do |field|

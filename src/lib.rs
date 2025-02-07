@@ -1,6 +1,5 @@
 use std::rc::Rc;
 
-use ruby_prism;
 use ruby_prism::Visit;
 
 mod evaluator;
@@ -48,7 +47,7 @@ impl TryFrom<ruby_prism::Node<'_>> for GemfileNode {
     }
 }
 
-impl<'pr> ruby_prism::Visit<'pr> for Visitor {
+impl ruby_prism::Visit<'_> for Visitor {
     fn visit_branch_node_enter(&mut self, node: ruby_prism::Node<'_>) {
         let new_node = Rc::new(GemfileNode::try_from(node).unwrap());
     }

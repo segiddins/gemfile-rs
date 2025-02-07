@@ -62,11 +62,11 @@ impl Debug for LocationSnapshot<'_> {
         if self.location.length == 0 {
             let line = start_line + 1;
             let col =
-                self.location.start - self.program.header.newline_offsets[start_line as usize];
+                self.location.start - self.program.header.newline_offsets[start_line];
             return write!(f, "({line},{col})-({line},{col})",);
         }
 
-        let end_line = offsets[(start_line as usize)..]
+        let end_line = offsets[start_line..]
             .iter()
             .rposition(|&offset| offset < self.location.start + self.location.length)
             .unwrap_or(0)
@@ -86,7 +86,7 @@ impl Debug for LocationSnapshot<'_> {
             f,
             "({},{})-({},{})",
             start_line + 1,
-            self.location.start - self.program.header.newline_offsets[start_line as usize],
+            self.location.start - self.program.header.newline_offsets[start_line],
             end_line + 1,
             (self.location.start + self.location.length - end_line_offset - 1)
         )
@@ -158,11 +158,11 @@ impl Location {
 
         if self.length == 0 {
             let line = start_line + 1;
-            let col = self.start - program.header.newline_offsets[start_line as usize];
+            let col = self.start - program.header.newline_offsets[start_line];
             return write!(f, "({line},{col})-({line},{col})",);
         }
 
-        let end_line = offsets[(start_line as usize)..]
+        let end_line = offsets[start_line..]
             .iter()
             .rposition(|&offset| offset < self.start + self.length)
             .unwrap_or(0)
@@ -177,7 +177,7 @@ impl Location {
             f,
             "({},{})-({},{})",
             start_line + 1,
-            self.start - program.header.newline_offsets[start_line as usize],
+            self.start - program.header.newline_offsets[start_line],
             end_line + 1,
             (self.start + self.length - end_line_offset - 1)
         )
@@ -613,7 +613,7 @@ fn test_parse_empty() {
             @ StatementsNode (location: (1,0)-(1,0))
             ├── flags: ∅
             └── body: (length: 0)"#]]
-    .assert_eq(&program.unwrap().snapshot().trim_end());
+    .assert_eq(program.unwrap().snapshot().trim_end());
 }
 
 #[test]
