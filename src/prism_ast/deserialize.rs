@@ -16,11 +16,11 @@ use ruby_prism;
 #[derive(Debug)]
 pub struct Program {
     source: String,
-    header: Header,
+    pub header: Header,
     root: NodeRef,
     nodes: Vec<Node>,
     constants: Vec<Constant>,
-    content_pool: Vec<u8>,
+    pub content_pool: Vec<u8>,
 }
 
 #[derive(Debug, Clone)]
@@ -101,14 +101,21 @@ impl Program {
             input: Bytes::new(&serialized),
             state,
         };
-        parse_program.complete_err().parse(stream).map_err(|error| {
-            anyhow::anyhow!(
-                "failed to parse program: {:?} at {:?}:\n{error:?}",
-                error.inner().context().collect::<Vec<_>>(),
-                error.offset(),
-                // Bytes::new(&serialized[error.offset()..]),
-            )
-        })
+        parse_program
+            .complete_err()
+            .parse(stream)
+            .map_err(|error| {
+                anyhow::anyhow!(
+                    "failed to parse program: {:?} at {:?}:\n{error:?}",
+                    error.inner().context().collect::<Vec<_>>(),
+                    error.offset(),
+                    // Bytes::new(&serialized[error.offset()..]),
+                )
+            })
+            .map(move |mut program| {
+                program.source = source;
+                program
+            })
     }
 
     pub fn node(&self, node_ref: &NodeRef) -> &Node {
@@ -116,7 +123,7 @@ impl Program {
     }
 
     pub fn constant(&self, constant_ref: &ConstantRef) -> &Constant {
-        &self.constants[constant_ref.0 as usize]
+        &self.constants[constant_ref.0 as usize - 1]
     }
 
     pub fn root(&self) -> &Node {
@@ -132,6 +139,37 @@ impl Program {
             }
         )
     }
+
+    pub fn source(&self, location: &Location) -> &str {
+        &self.source[location.start as usize..(location.start + location.length) as usize]
+    }
+
+    pub fn line_column(&self, cursor: u32) -> (i32, u32) {
+        let start_line = self.header.start_line;
+        debug_assert!(cursor >= self.header.newline_offsets[0]);
+        let offset = (cursor - self.header.newline_offsets[0]) as i64;
+
+        let mut left = 0i64;
+        let mut right = self.header.newline_offsets.len() as i64 - 1;
+
+        while left <= right {
+            let mid = left + (right - left) / 2;
+            let mid_offset = self.header.newline_offsets[mid as usize] as i64;
+
+            if mid_offset == offset {
+                return (mid as i32 + start_line, 0);
+            } else if mid_offset < offset {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        (
+            (left as i32) + start_line - 1,
+            (offset as u32 - self.header.newline_offsets[left as usize - 1]) as u32,
+        )
+    }
 }
 
 pub(super) type Stream<'i> = winnow::Stateful<&'i Bytes, State>;
@@ -145,10 +183,10 @@ struct Comment {
 #[derive(Debug)]
 struct MagicComment {}
 
-#[derive(Clone)]
+#[derive(Clone, Copy)]
 pub struct Location {
-    start: u32,
-    length: u32,
+    pub start: u32,
+    pub length: u32,
 }
 
 impl Location {
@@ -238,14 +276,14 @@ impl Debug for ConstantRef {
 }
 
 #[derive(Debug)]
-struct Header {
+pub struct Header {
     prism_major: u8,
     prism_minor: u8,
     prism_patch: u8,
     only_semantics_serialized: bool,
     encoding_name: String,
     start_line: i32,
-    newline_offsets: Vec<u32>,
+    pub newline_offsets: Vec<u32>,
     comments: Vec<Comment>,
     magic_comments: Vec<MagicComment>,
     end_keyword: Option<Location>,

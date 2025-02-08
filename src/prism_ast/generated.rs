@@ -1151,10 +1151,10 @@ impl ConstantPathAndWriteNode {
 // 36
 #[derive(Debug, Clone)]
 pub struct ConstantPathNode {
-    parent: Option<NodeRef>,
-    name: Option<ConstantRef>,
-    delimiter_loc: Location,
-    name_loc: Location,
+    pub parent: Option<NodeRef>,
+    pub name: Option<ConstantRef>,
+    pub delimiter_loc: Location,
+    pub name_loc: Location,
 }
 impl ConstantPathNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -1267,7 +1267,7 @@ impl ConstantPathWriteNode {
 // 41
 #[derive(Debug, Clone)]
 pub struct ConstantReadNode {
-    name: ConstantRef,
+    pub name: ConstantRef,
 }
 impl ConstantReadNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -2821,12 +2821,12 @@ impl MissingNode {
 // 103
 #[derive(Debug, Clone)]
 pub struct ModuleNode {
-    locals: Vec<ConstantRef>,
-    module_keyword_loc: Location,
-    constant_path: NodeRef,
-    body: Option<NodeRef>,
-    end_keyword_loc: Location,
-    name: ConstantRef,
+    pub locals: Vec<ConstantRef>,
+    pub module_keyword_loc: Location,
+    pub constant_path: NodeRef,
+    pub body: Option<NodeRef>,
+    pub end_keyword_loc: Location,
+    pub name: ConstantRef,
 }
 impl ModuleNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -3235,8 +3235,8 @@ impl PreExecutionNode {
 // 120
 #[derive(Debug, Clone)]
 pub struct ProgramNode {
-    locals: Vec<ConstantRef>,
-    statements: NodeRef,
+    pub locals: Vec<ConstantRef>,
+    pub statements: NodeRef,
 }
 impl ProgramNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -3682,7 +3682,7 @@ impl SplatNode {
 // 139
 #[derive(Debug, Clone)]
 pub struct StatementsNode {
-    body: Vec<NodeRef>,
+    pub body: Vec<NodeRef>,
 }
 impl StatementsNode {
     pub fn into_node_kind(self) -> NodeKind {

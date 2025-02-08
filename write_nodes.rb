@@ -383,3 +383,5 @@ end
 f.close
 
 `rustfmt src/prism_ast/generated.rs`
+
+f = File.open("src/prism_ast/snapshot.rs", "w")

@@ -2,6 +2,7 @@ use std::fmt;
 
 pub mod deserialize;
 mod generated;
+pub mod snapshot;
 
 struct Program {
     source: String,
