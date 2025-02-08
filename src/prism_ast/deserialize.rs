@@ -1,7 +1,6 @@
 use std::borrow::Cow;
 use std::fmt::{self, Debug};
 use std::io;
-use std::path::Display;
 
 use winnow::{
     binary::{self, length_repeat, length_take, u32, u8, Endianness},
@@ -314,10 +313,10 @@ impl Debug for StringField {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
             StringField::Shared(offset, length) => {
-                write!(f, "Shared({}, {})", offset, length)
+                write!(f, "Shared({offset}, {length})")
             }
             StringField::Owned(s) => {
-                write!(f, "Owned({:?})", s)
+                write!(f, "Owned({s:?})")
             }
         }
     }
@@ -351,7 +350,7 @@ pub(super) fn parse_string(input: &mut Stream) -> ModalResult<String> {
 pub(super) fn parse_string_field(input: &mut Stream) -> ModalResult<StringField> {
     winnow::combinator::dispatch!( winnow::token::any;
       1 => (parse_varuint, parse_varuint).map(|(o, l)| StringField::Shared(o, l)), //
-      2 => parse_string.map(|s| StringField::Owned(s)),
+      2 => parse_string.map(StringField::Owned),
       _ => fail,
     )
     .parse_next(input)
@@ -634,7 +633,7 @@ fn input(bytes: &[u8]) -> Stream {
     let input = Bytes::new(bytes);
     let state = State::default();
     let mut stream = winnow::Stateful { input, state };
-    let _ = stream.complete();
+    stream.complete();
     stream
 }
 

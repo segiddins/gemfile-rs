@@ -1,5 +1,4 @@
 use core::fmt;
-use std::ffi::OsStr;
 use std::fmt::Debug;
 
 use enumflags2::BitFlag;
