@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "foo\nfoo(1)\n\na.===(b).c == d\n\na == d.c.===(c)\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -45,8 +45,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1001,
-                        flags: SAFE_NAVIGATION | IGNORE_VISIBILITY,
+                        bits: 0b101001,
+                        flags: NEWLINE | VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -68,7 +68,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -99,8 +99,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1,
-                        flags: SAFE_NAVIGATION,
+                        bits: 0b100001,
+                        flags: NEWLINE | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -127,8 +127,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -149,8 +149,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -241,8 +241,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -278,7 +278,7 @@ Program {
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
                         bits: 0b1,
-                        flags: SAFE_NAVIGATION,
+                        flags: NEWLINE,
                     },
                     receiver: Some(
                         NodeRef(8),
@@ -303,8 +303,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -325,8 +325,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -372,8 +372,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -454,7 +454,7 @@ Program {
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
                         bits: 0b1,
-                        flags: SAFE_NAVIGATION,
+                        flags: NEWLINE,
                     },
                     receiver: Some(
                         NodeRef(12),
@@ -478,6 +478,9 @@ Program {
             location: Location { start: 0, length: 44 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(0),
                         NodeRef(3),
@@ -492,6 +495,9 @@ Program {
             location: Location { start: 0, length: 44 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(20),
                 },

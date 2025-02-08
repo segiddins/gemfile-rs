@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "      string = <<-\"^D\"\n        very long string\n      ^D\n      puts string\n\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -40,7 +40,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 48, length: 9 },
                     ),
-                    unescaped: "",
+                    unescaped: Shared(23, 25),
                 },
             ),
         },
@@ -49,6 +49,10 @@ Program {
             location: Location { start: 6, length: 16 },
             node_kind: LocalVariableWriteNode(
                 LocalVariableWriteNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(1),
                     depth: 0,
                     name_loc: Location { start: 6, length: 6 },
@@ -62,6 +66,9 @@ Program {
             location: Location { start: 68, length: 6 },
             node_kind: LocalVariableReadNode(
                 LocalVariableReadNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(1),
                     depth: 0,
                 },
@@ -87,8 +94,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1,
-                        flags: SAFE_NAVIGATION,
+                        bits: 0b100001,
+                        flags: NEWLINE | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -110,6 +117,9 @@ Program {
             location: Location { start: 6, length: 68 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(1),
                         NodeRef(4),
@@ -122,6 +132,9 @@ Program {
             location: Location { start: 6, length: 68 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [
                         ConstantRef(1),
                     ],

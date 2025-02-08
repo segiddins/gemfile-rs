@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "case :a\nin b: c, **rest then :d\nend\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -42,8 +42,8 @@ Program {
             node_kind: SymbolNode(
                 SymbolNode {
                     flags: BitFlags<SymbolFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FORCED_US_ASCII_ENCODING,
                     },
                     opening_loc: Some(
                         Location { start: 5, length: 1 },
@@ -52,7 +52,7 @@ Program {
                         Location { start: 6, length: 1 },
                     ),
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(6, 1),
                 },
             ),
         },
@@ -62,8 +62,8 @@ Program {
             node_kind: SymbolNode(
                 SymbolNode {
                     flags: BitFlags<SymbolFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FORCED_US_ASCII_ENCODING,
                     },
                     opening_loc: None,
                     value_loc: Some(
@@ -72,7 +72,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 12, length: 1 },
                     ),
-                    unescaped: "",
+                    unescaped: Shared(11, 1),
                 },
             ),
         },
@@ -81,6 +81,9 @@ Program {
             location: Location { start: 14, length: 1 },
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(1),
                     depth: 0,
                 },
@@ -91,6 +94,9 @@ Program {
             location: Location { start: 11, length: 4 },
             node_kind: AssocNode(
                 AssocNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     key: NodeRef(1),
                     value: NodeRef(2),
                     operator_loc: None,
@@ -102,6 +108,9 @@ Program {
             location: Location { start: 19, length: 4 },
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(2),
                     depth: 0,
                 },
@@ -112,6 +121,9 @@ Program {
             location: Location { start: 17, length: 6 },
             node_kind: AssocSplatNode(
                 AssocSplatNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     value: Some(
                         NodeRef(4),
                     ),
@@ -124,6 +136,9 @@ Program {
             location: Location { start: 11, length: 12 },
             node_kind: HashPatternNode(
                 HashPatternNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     constant: None,
                     elements: [
                         NodeRef(3),
@@ -142,8 +157,8 @@ Program {
             node_kind: SymbolNode(
                 SymbolNode {
                     flags: BitFlags<SymbolFlags> {
-                        bits: 0b11,
-                        flags: FORCED_UTF8_ENCODING | FORCED_BINARY_ENCODING,
+                        bits: 0b10011,
+                        flags: NEWLINE | STATIC_LITERAL | FORCED_US_ASCII_ENCODING,
                     },
                     opening_loc: Some(
                         Location { start: 29, length: 1 },
@@ -152,7 +167,7 @@ Program {
                         Location { start: 30, length: 1 },
                     ),
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(30, 1),
                 },
             ),
         },
@@ -161,6 +176,9 @@ Program {
             location: Location { start: 29, length: 2 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(7),
                     ],
@@ -172,6 +190,9 @@ Program {
             location: Location { start: 8, length: 23 },
             node_kind: InNode(
                 InNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     pattern: NodeRef(6),
                     statements: Some(
                         NodeRef(8),
@@ -188,6 +209,10 @@ Program {
             location: Location { start: 0, length: 35 },
             node_kind: CaseMatchNode(
                 CaseMatchNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     predicate: Some(
                         NodeRef(0),
                     ),
@@ -205,6 +230,9 @@ Program {
             location: Location { start: 0, length: 35 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(10),
                     ],
@@ -216,6 +244,9 @@ Program {
             location: Location { start: 0, length: 35 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [
                         ConstantRef(1),
                         ConstantRef(2),

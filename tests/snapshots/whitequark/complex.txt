@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "42.1i\n\n42.1ri\n\n42i\n\n42ri\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -57,6 +57,10 @@ Program {
             location: Location { start: 0, length: 4 },
             node_kind: FloatNode(
                 FloatNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b10,
+                        flags: STATIC_LITERAL,
+                    },
                     value: 42.1,
                 },
             ),
@@ -66,6 +70,10 @@ Program {
             location: Location { start: 0, length: 5 },
             node_kind: ImaginaryNode(
                 ImaginaryNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b11,
+                        flags: NEWLINE | STATIC_LITERAL,
+                    },
                     numeric: NodeRef(0),
                 },
             ),
@@ -77,7 +85,7 @@ Program {
                 RationalNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     numerator: Integer {
                         is_negative: false,
@@ -99,6 +107,10 @@ Program {
             location: Location { start: 7, length: 6 },
             node_kind: ImaginaryNode(
                 ImaginaryNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b11,
+                        flags: NEWLINE | STATIC_LITERAL,
+                    },
                     numeric: NodeRef(2),
                 },
             ),
@@ -110,7 +122,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -126,6 +138,10 @@ Program {
             location: Location { start: 15, length: 3 },
             node_kind: ImaginaryNode(
                 ImaginaryNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b11,
+                        flags: NEWLINE | STATIC_LITERAL,
+                    },
                     numeric: NodeRef(4),
                 },
             ),
@@ -137,7 +153,7 @@ Program {
                 RationalNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     numerator: Integer {
                         is_negative: false,
@@ -159,6 +175,10 @@ Program {
             location: Location { start: 20, length: 4 },
             node_kind: ImaginaryNode(
                 ImaginaryNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b11,
+                        flags: NEWLINE | STATIC_LITERAL,
+                    },
                     numeric: NodeRef(6),
                 },
             ),
@@ -168,6 +188,9 @@ Program {
             location: Location { start: 0, length: 24 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(1),
                         NodeRef(3),
@@ -182,6 +205,9 @@ Program {
             location: Location { start: 0, length: 24 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(8),
                 },

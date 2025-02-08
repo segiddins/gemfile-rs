@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "a = <<~\"EOF\"\n  blah blah\n \tblah blah\n  EOF\n\n\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -39,13 +39,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 13, length: 12 },
                     closing_loc: None,
-                    unescaped: "blah blah\n",
+                    unescaped: Owned("blah blah\n"),
                 },
             ),
         },
@@ -55,13 +55,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 25, length: 12 },
                     closing_loc: None,
-                    unescaped: "\tblah blah\n",
+                    unescaped: Owned("\tblah blah\n"),
                 },
             ),
         },
@@ -72,7 +72,7 @@ Program {
                 InterpolatedStringNode {
                     flags: BitFlags<InterpolatedStringNodeFlags> {
                         bits: 0b10,
-                        flags: MUTABLE,
+                        flags: STATIC_LITERAL,
                     },
                     opening_loc: Some(
                         Location { start: 4, length: 8 },
@@ -92,6 +92,10 @@ Program {
             location: Location { start: 0, length: 12 },
             node_kind: LocalVariableWriteNode(
                 LocalVariableWriteNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(1),
                     depth: 0,
                     name_loc: Location { start: 0, length: 1 },
@@ -105,6 +109,9 @@ Program {
             location: Location { start: 0, length: 12 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(3),
                     ],
@@ -116,6 +123,9 @@ Program {
             location: Location { start: 0, length: 12 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [
                         ConstantRef(1),
                     ],

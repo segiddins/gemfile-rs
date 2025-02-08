@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "/\\u{c0de babe}/\n\n/\\u{df}/\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -43,12 +43,12 @@ Program {
                 RegularExpressionNode {
                     flags: BitFlags<RegularExpressionFlags> {
                         bits: 0b10000000011,
-                        flags: IGNORE_CASE | EXTENDED | FORCED_US_ASCII_ENCODING,
+                        flags: NEWLINE | STATIC_LITERAL | FORCED_UTF8_ENCODING,
                     },
                     opening_loc: Location { start: 0, length: 1 },
                     content_loc: Location { start: 1, length: 13 },
                     closing_loc: Location { start: 14, length: 1 },
-                    unescaped: "\\u{c0de babe}",
+                    unescaped: Owned("\\u{c0de babe}"),
                 },
             ),
         },
@@ -59,12 +59,12 @@ Program {
                 RegularExpressionNode {
                     flags: BitFlags<RegularExpressionFlags> {
                         bits: 0b10000000011,
-                        flags: IGNORE_CASE | EXTENDED | FORCED_US_ASCII_ENCODING,
+                        flags: NEWLINE | STATIC_LITERAL | FORCED_UTF8_ENCODING,
                     },
                     opening_loc: Location { start: 17, length: 1 },
                     content_loc: Location { start: 18, length: 6 },
                     closing_loc: Location { start: 24, length: 1 },
-                    unescaped: "\\u{df}",
+                    unescaped: Owned("\\u{df}"),
                 },
             ),
         },
@@ -73,6 +73,9 @@ Program {
             location: Location { start: 0, length: 25 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(0),
                         NodeRef(1),
@@ -85,6 +88,9 @@ Program {
             location: Location { start: 0, length: 25 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(2),
                 },

@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "super do end\n\nsuper foo, bar do end\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -28,6 +28,9 @@ Program {
             location: Location { start: 6, length: 6 },
             node_kind: BlockNode(
                 BlockNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     parameters: None,
                     body: None,
@@ -41,6 +44,10 @@ Program {
             location: Location { start: 0, length: 12 },
             node_kind: ForwardingSuperNode(
                 ForwardingSuperNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     block: Some(
                         NodeRef(0),
                     ),
@@ -53,8 +60,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -75,8 +82,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -111,6 +118,9 @@ Program {
             location: Location { start: 29, length: 6 },
             node_kind: BlockNode(
                 BlockNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     parameters: None,
                     body: None,
@@ -124,6 +134,10 @@ Program {
             location: Location { start: 14, length: 21 },
             node_kind: SuperNode(
                 SuperNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     keyword_loc: Location { start: 14, length: 5 },
                     lparen_loc: None,
                     arguments: Some(
@@ -141,6 +155,9 @@ Program {
             location: Location { start: 0, length: 35 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(1),
                         NodeRef(6),
@@ -153,6 +170,9 @@ Program {
             location: Location { start: 0, length: 35 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(7),
                 },

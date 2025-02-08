@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "%W[foo #{bar}]\n\n%W[foo #{bar}foo#@baz]\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -34,7 +34,7 @@ Program {
                     opening_loc: None,
                     content_loc: Location { start: 3, length: 3 },
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(3, 3),
                 },
             ),
         },
@@ -44,8 +44,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -65,6 +65,9 @@ Program {
             location: Location { start: 9, length: 3 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(1),
                     ],
@@ -76,6 +79,9 @@ Program {
             location: Location { start: 7, length: 6 },
             node_kind: EmbeddedStatementsNode(
                 EmbeddedStatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     opening_loc: Location { start: 7, length: 2 },
                     statements: Some(
                         NodeRef(2),
@@ -107,7 +113,7 @@ Program {
                 ArrayNode {
                     flags: BitFlags<ArrayNodeFlags> {
                         bits: 0b1,
-                        flags: CONTAINS_SPLAT,
+                        flags: NEWLINE,
                     },
                     elements: [
                         NodeRef(0),
@@ -133,7 +139,7 @@ Program {
                     opening_loc: None,
                     content_loc: Location { start: 19, length: 3 },
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(19, 3),
                 },
             ),
         },
@@ -143,8 +149,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -164,6 +170,9 @@ Program {
             location: Location { start: 25, length: 3 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(7),
                     ],
@@ -175,6 +184,9 @@ Program {
             location: Location { start: 23, length: 6 },
             node_kind: EmbeddedStatementsNode(
                 EmbeddedStatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     opening_loc: Location { start: 23, length: 2 },
                     statements: Some(
                         NodeRef(8),
@@ -189,13 +201,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 29, length: 3 },
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(29, 3),
                 },
             ),
         },
@@ -204,6 +216,9 @@ Program {
             location: Location { start: 33, length: 4 },
             node_kind: InstanceVariableReadNode(
                 InstanceVariableReadNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(2),
                 },
             ),
@@ -213,6 +228,9 @@ Program {
             location: Location { start: 32, length: 5 },
             node_kind: EmbeddedVariableNode(
                 EmbeddedVariableNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     operator_loc: Location { start: 32, length: 1 },
                     variable: NodeRef(11),
                 },
@@ -243,7 +261,7 @@ Program {
                 ArrayNode {
                     flags: BitFlags<ArrayNodeFlags> {
                         bits: 0b1,
-                        flags: CONTAINS_SPLAT,
+                        flags: NEWLINE,
                     },
                     elements: [
                         NodeRef(6),
@@ -263,6 +281,9 @@ Program {
             location: Location { start: 0, length: 38 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(5),
                         NodeRef(14),
@@ -275,6 +296,9 @@ Program {
             location: Location { start: 0, length: 38 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(15),
                 },

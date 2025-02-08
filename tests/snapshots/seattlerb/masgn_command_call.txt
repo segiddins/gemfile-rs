@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "a, = b.c 1\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -33,6 +33,9 @@ Program {
             location: Location { start: 0, length: 1 },
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(1),
                     depth: 0,
                 },
@@ -42,7 +45,11 @@ Program {
             identifier: 5,
             location: Location { start: 1, length: 1 },
             node_kind: ImplicitRestNode(
-                ImplicitRestNode,
+                ImplicitRestNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
+                },
             ),
         },
         Node {
@@ -51,8 +58,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -74,7 +81,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -131,6 +138,10 @@ Program {
             location: Location { start: 0, length: 10 },
             node_kind: MultiWriteNode(
                 MultiWriteNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     lefts: [
                         NodeRef(0),
                     ],
@@ -150,6 +161,9 @@ Program {
             location: Location { start: 0, length: 10 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(6),
                     ],
@@ -161,6 +175,9 @@ Program {
             location: Location { start: 0, length: 10 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [
                         ConstantRef(1),
                     ],

@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "%W(a\\nb\nc d\ne\\\nf\ngy h\\y i\\y)\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -36,7 +36,7 @@ Program {
                     opening_loc: None,
                     content_loc: Location { start: 3, length: 4 },
                     closing_loc: None,
-                    unescaped: "a\nb",
+                    unescaped: Owned("a\nb"),
                 },
             ),
         },
@@ -51,7 +51,7 @@ Program {
                     opening_loc: None,
                     content_loc: Location { start: 8, length: 1 },
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(8, 1),
                 },
             ),
         },
@@ -66,7 +66,7 @@ Program {
                     opening_loc: None,
                     content_loc: Location { start: 10, length: 1 },
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(10, 1),
                 },
             ),
         },
@@ -81,7 +81,7 @@ Program {
                     opening_loc: None,
                     content_loc: Location { start: 12, length: 4 },
                     closing_loc: None,
-                    unescaped: "e\nf",
+                    unescaped: Owned("e\nf"),
                 },
             ),
         },
@@ -96,7 +96,7 @@ Program {
                     opening_loc: None,
                     content_loc: Location { start: 17, length: 2 },
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(17, 2),
                 },
             ),
         },
@@ -111,7 +111,7 @@ Program {
                     opening_loc: None,
                     content_loc: Location { start: 20, length: 3 },
                     closing_loc: None,
-                    unescaped: "hy",
+                    unescaped: Owned("hy"),
                 },
             ),
         },
@@ -126,7 +126,7 @@ Program {
                     opening_loc: None,
                     content_loc: Location { start: 24, length: 3 },
                     closing_loc: None,
-                    unescaped: "iy",
+                    unescaped: Owned("iy"),
                 },
             ),
         },
@@ -137,7 +137,7 @@ Program {
                 ArrayNode {
                     flags: BitFlags<ArrayNodeFlags> {
                         bits: 0b1,
-                        flags: CONTAINS_SPLAT,
+                        flags: NEWLINE,
                     },
                     elements: [
                         NodeRef(0),
@@ -162,6 +162,9 @@ Program {
             location: Location { start: 0, length: 28 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(7),
                     ],
@@ -173,6 +176,9 @@ Program {
             location: Location { start: 0, length: 28 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(8),
                 },

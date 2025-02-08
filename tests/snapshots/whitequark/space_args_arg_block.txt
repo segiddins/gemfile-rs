@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "foo.fun (1) {}\n\nfoo::fun (1) {}\n\nfun (1) {}\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -31,8 +31,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -54,7 +54,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1011,
-                        flags: BINARY | DECIMAL | HEXADECIMAL,
+                        flags: NEWLINE | STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -70,6 +70,9 @@ Program {
             location: Location { start: 9, length: 1 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(1),
                     ],
@@ -81,6 +84,9 @@ Program {
             location: Location { start: 8, length: 3 },
             node_kind: ParenthesesNode(
                 ParenthesesNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: Some(
                         NodeRef(2),
                     ),
@@ -108,6 +114,9 @@ Program {
             location: Location { start: 12, length: 2 },
             node_kind: BlockNode(
                 BlockNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     parameters: None,
                     body: None,
@@ -123,7 +132,7 @@ Program {
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
                         bits: 0b1,
-                        flags: SAFE_NAVIGATION,
+                        flags: NEWLINE,
                     },
                     receiver: Some(
                         NodeRef(0),
@@ -152,8 +161,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -175,7 +184,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1011,
-                        flags: BINARY | DECIMAL | HEXADECIMAL,
+                        flags: NEWLINE | STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -191,6 +200,9 @@ Program {
             location: Location { start: 26, length: 1 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(8),
                     ],
@@ -202,6 +214,9 @@ Program {
             location: Location { start: 25, length: 3 },
             node_kind: ParenthesesNode(
                 ParenthesesNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: Some(
                         NodeRef(9),
                     ),
@@ -229,6 +244,9 @@ Program {
             location: Location { start: 29, length: 2 },
             node_kind: BlockNode(
                 BlockNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     parameters: None,
                     body: None,
@@ -244,7 +262,7 @@ Program {
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
                         bits: 0b1,
-                        flags: SAFE_NAVIGATION,
+                        flags: NEWLINE,
                     },
                     receiver: Some(
                         NodeRef(7),
@@ -274,7 +292,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1011,
-                        flags: BINARY | DECIMAL | HEXADECIMAL,
+                        flags: NEWLINE | STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -290,6 +308,9 @@ Program {
             location: Location { start: 38, length: 1 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(14),
                     ],
@@ -301,6 +322,9 @@ Program {
             location: Location { start: 37, length: 3 },
             node_kind: ParenthesesNode(
                 ParenthesesNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: Some(
                         NodeRef(15),
                     ),
@@ -328,6 +352,9 @@ Program {
             location: Location { start: 41, length: 2 },
             node_kind: BlockNode(
                 BlockNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     parameters: None,
                     body: None,
@@ -342,8 +369,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1,
-                        flags: SAFE_NAVIGATION,
+                        bits: 0b100001,
+                        flags: NEWLINE | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -367,6 +394,9 @@ Program {
             location: Location { start: 0, length: 43 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(6),
                         NodeRef(13),
@@ -380,6 +410,9 @@ Program {
             location: Location { start: 0, length: 43 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(20),
                 },

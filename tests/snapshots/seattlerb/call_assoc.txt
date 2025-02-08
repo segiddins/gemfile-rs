@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "f(2=>3)\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -28,7 +28,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -46,7 +46,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -62,6 +62,10 @@ Program {
             location: Location { start: 2, length: 4 },
             node_kind: AssocNode(
                 AssocNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b10,
+                        flags: STATIC_LITERAL,
+                    },
                     key: NodeRef(0),
                     value: NodeRef(1),
                     operator_loc: Some(
@@ -91,7 +95,7 @@ Program {
                 ArgumentsNode {
                     flags: BitFlags<ArgumentsNodeFlags> {
                         bits: 0b1000,
-                        flags: CONTAINS_SPLAT,
+                        flags: CONTAINS_KEYWORDS,
                     },
                     arguments: [
                         NodeRef(3),
@@ -105,8 +109,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1,
-                        flags: SAFE_NAVIGATION,
+                        bits: 0b100001,
+                        flags: NEWLINE | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -132,6 +136,9 @@ Program {
             location: Location { start: 0, length: 7 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(5),
                     ],
@@ -143,6 +150,9 @@ Program {
             location: Location { start: 0, length: 7 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(6),
                 },

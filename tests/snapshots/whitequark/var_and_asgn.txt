@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "a &&= 1\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -28,7 +28,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -44,6 +44,10 @@ Program {
             location: Location { start: 0, length: 7 },
             node_kind: LocalVariableAndWriteNode(
                 LocalVariableAndWriteNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name_loc: Location { start: 0, length: 1 },
                     operator_loc: Location { start: 2, length: 3 },
                     value: NodeRef(0),
@@ -57,6 +61,9 @@ Program {
             location: Location { start: 0, length: 7 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(1),
                     ],
@@ -68,6 +75,9 @@ Program {
             location: Location { start: 0, length: 7 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [
                         ConstantRef(1),
                     ],

@@ -13,7 +13,7 @@ end
 Optional = Struct.new(:type)
 Repeated = Struct.new(:type)
 
-Field = Struct.new(:name, :type, :kind)
+Field = Struct.new(:name, :type, :kind, :comment)
 
 types = Set.new
 types_with_kinds = Set.new
@@ -44,7 +44,7 @@ def rust_type(type)
   when "node?"
     "Option<NodeRef>"
   when "string"
-    "String"
+    "StringField"
   when "uint32"
     "u32"
   when "uint8"
@@ -100,9 +100,11 @@ config["flags"].each do |flag|
   f.puts "#[repr(u32)]"
   f.puts "#[derive(Debug, Clone, Copy, PartialEq, Eq)]"
   f.puts "pub enum #{flag["name"]} {"
+  f.puts "  NEWLINE = 1 << 0,"
+  f.puts "  STATIC_LITERAL = 1 << 1,"
   flag["values"].each_with_index do |value, index|
     f.puts "  /* #{flag["comment"]} */"
-    f.puts "  #{value["name"]} = 1 << #{index},"
+    f.puts "  #{value["name"]} = 1 << #{index+2},"
   end
   f.puts "}"
   f.puts
@@ -117,20 +119,20 @@ config["nodes"].each_with_index do |node, index|
     types << type
     types_with_kinds << type if kind
     kinds.merge Array(kind).flatten
-    Field.new(fname, type, kind)
+    Field.new(fname, type, kind, field["comment"])
   end
   flags = node["flags"]
+  comment = node["comment"]
   node = Node.new(name, fields)
 
-  f.puts "// #{index}"
-  f.puts "#[derive(Debug, Clone)]"
+  f.puts "/**\n#{comment.gsub(/^/, "  ")}  */"
+  f.puts "#[derive(Debug, Clone, PartialEq)]"
   f.print "pub struct #{name}"
     f.puts " {"
-    if flags
-      f.puts "  pub flags: enumflags2::BitFlags<#{flags}>,"
-    end
+    f.puts "  pub flags: enumflags2::BitFlags<#{flags || :DefaultNodeFlags}>,"
     node.fields&.each do |field|
-      f.puts "  #{field.name}: #{rust_type field.type},"
+      f.puts "  /**\n#{field.comment.gsub(/^/, "    ")}    */" if field.comment
+      f.puts "  pub #{field.name}: #{rust_type field.type},"
     end
     f.puts "}"
 
@@ -148,23 +150,15 @@ config["nodes"].each_with_index do |node, index|
 
   f.puts "pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {"
   f.puts "    use winnow::Parser;"
-  if node.fields&.any?
-    f.puts "    winnow::combinator::seq![#{name}{"
-    if name == "DefNode"
-      f.puts "        _: winnow::binary::u32(winnow::binary::Endianness::Native),"
-    end
-    if flags
-      f.puts "        flags: parse_varuint.map(#{flags}::from_bits_truncate).context(winnow::error::StrContext::Label(\"#{name}.flags\")),"
-    else
-      f.puts "        _: zero_flags.context(winnow::error::StrContext::Label(\"#{name}.flags\")),"
-    end
-    node["fields"]&.each do |field|
-      f.puts "        #{field["name"]}: #{parse_method(field["type"])}.context(winnow::error::StrContext::Label(\"#{name}.#{field['name']}\")),"
-    end
-    f.puts "    }].parse_next(input)"
-  else
-    f.puts "    zero_flags.context(winnow::error::StrContext::Label(\"#{name}.flags\")).value(Self {}).parse_next(input)"
+  f.puts "    winnow::combinator::seq![#{name}{"
+  if name == "DefNode"
+    f.puts "        _: winnow::binary::u32(winnow::binary::Endianness::Native),"
   end
+  f.puts "        flags: parse_varuint.map(#{flags || :DefaultNodeFlags}::from_bits_truncate).context(winnow::error::StrContext::Label(\"#{name}.flags\")),"
+  node["fields"]&.each do |field|
+    f.puts "        #{field["name"]}: #{parse_method(field["type"])}.context(winnow::error::StrContext::Label(\"#{name}.#{field['name']}\")),"
+  end
+  f.puts "    }].parse_next(input)"
   f.puts "}"
   f.puts
   f.puts "}"
@@ -173,7 +167,7 @@ end
 
 f.puts <<~RS
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq)]
 pub enum NodeKind {
 RS
 config["nodes"].each_with_index do |node, index|
@@ -363,13 +357,14 @@ require "fileutils"
 
 f = File.open("tests/fixture_tests.rs", "w")
 f.puts "use gemfile_rs::prism_ast::deserialize::Program;"
+f.puts "use gemfile_rs::prism_ast::snapshot::snapshot;"
 base = "/Users/segiddins/Development/github.com/ruby/prism/test/prism/fixtures"
 Dir["{**/,}*.txt", base:].sort.uniq.each do |path|
     f.puts
     f.puts "#[test]"
     f.puts "fn test_ast_#{path.gsub(/[\/.]/, "_")}() {"
     f.puts "  let program = Program::parse(include_str!(\"#{File.join(base, path)}\").to_string()).unwrap();"
-    f.puts "  similar_asserts::assert_eq!(include_str!(\"#{File.join(File.dirname(base), "snapshots", path)}\").trim(), program.snapshot());"
+    f.puts "  similar_asserts::assert_eq!(include_str!(\"#{File.join(File.dirname(base), "snapshots", path)}\").trim(), snapshot(&program));"
     f.puts "}"
     f.puts "#[test]"
     f.puts "fn test_program_#{path.gsub(/[\/.]/, "_")}() {"
@@ -384,4 +379,45 @@ f.close
 
 `rustfmt src/prism_ast/generated.rs`
 
-f = File.open("src/prism_ast/snapshot.rs", "w")
+snapshot = File.read("src/prism_ast/snapshot.rs")
+
+
+
+snapshot_body = +""
+
+snapshot_body << <<~RUST
+  impl Snapshot for NodeKind {
+    fn snapshot<'a>(
+        &'a self,
+        program: &'a Program,
+        hardline: RcDoc<'a, ()>,
+    ) -> pretty::RcDoc<'a, ()> {
+        match self {
+            #{config['nodes'].map { |node| "NodeKind::#{node['name']}(node) => node.snapshot(program, hardline)," }.join("\n            ")}
+        }
+    }
+  }
+RUST
+
+config['nodes'].each do |node|
+  args = %w[self program hardline flags]
+  args.concat(node['fields'].map { |field| field['name'] }) if node['fields']
+  snapshot_body << <<~RUST
+    impl Snapshot for #{node['name']} {
+        fn snapshot<'a>(
+            &'a self,
+            program: &'a Program,
+            hardline: RcDoc<'a, ()>,
+        ) -> pretty::RcDoc<'a, ()> {
+            docs![#{args.join(', ')}]
+        }
+    }
+  RUST
+end
+
+raise unless snapshot.sub!(%r{(// BEGIN GENERATED CODE. DO NOT EDIT\n).*(// END GENERATED CODE. DO NOT EDIT\n)}m, "\\1#{snapshot_body}\\2")
+
+
+File.write("src/prism_ast/snapshot.rs", snapshot)
+
+`rustfmt src/prism_ast/snapshot.rs`

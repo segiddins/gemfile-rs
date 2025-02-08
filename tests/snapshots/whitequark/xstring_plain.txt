@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "`foobar`\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -28,12 +28,12 @@ Program {
                 XStringNode {
                     flags: BitFlags<EncodingFlags> {
                         bits: 0b1,
-                        flags: FORCED_UTF8_ENCODING,
+                        flags: NEWLINE,
                     },
                     opening_loc: Location { start: 0, length: 1 },
                     content_loc: Location { start: 1, length: 6 },
                     closing_loc: Location { start: 7, length: 1 },
-                    unescaped: "",
+                    unescaped: Shared(1, 6),
                 },
             ),
         },
@@ -42,6 +42,9 @@ Program {
             location: Location { start: 0, length: 8 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(0),
                     ],
@@ -53,6 +56,9 @@ Program {
             location: Location { start: 0, length: 8 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(1),
                 },

@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "case [0, 1, 2]\nin [0, 1,]\n  true\nend\n\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -32,7 +32,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -50,7 +50,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -68,7 +68,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -85,7 +85,8 @@ Program {
             node_kind: ArrayNode(
                 ArrayNode {
                     flags: BitFlags<ArrayNodeFlags> {
-                        bits: 0b0,
+                        bits: 0b10,
+                        flags: STATIC_LITERAL,
                     },
                     elements: [
                         NodeRef(0),
@@ -108,7 +109,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -126,7 +127,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -141,7 +142,11 @@ Program {
             identifier: 9,
             location: Location { start: 23, length: 1 },
             node_kind: ImplicitRestNode(
-                ImplicitRestNode,
+                ImplicitRestNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
+                },
             ),
         },
         Node {
@@ -149,6 +154,9 @@ Program {
             location: Location { start: 18, length: 7 },
             node_kind: ArrayPatternNode(
                 ArrayPatternNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     constant: None,
                     requireds: [
                         NodeRef(4),
@@ -171,7 +179,12 @@ Program {
             identifier: 12,
             location: Location { start: 28, length: 4 },
             node_kind: TrueNode(
-                TrueNode,
+                TrueNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b11,
+                        flags: NEWLINE | STATIC_LITERAL,
+                    },
+                },
             ),
         },
         Node {
@@ -179,6 +192,9 @@ Program {
             location: Location { start: 28, length: 4 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(8),
                     ],
@@ -190,6 +206,9 @@ Program {
             location: Location { start: 15, length: 17 },
             node_kind: InNode(
                 InNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     pattern: NodeRef(7),
                     statements: Some(
                         NodeRef(9),
@@ -204,6 +223,10 @@ Program {
             location: Location { start: 0, length: 36 },
             node_kind: CaseMatchNode(
                 CaseMatchNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     predicate: Some(
                         NodeRef(3),
                     ),
@@ -221,6 +244,9 @@ Program {
             location: Location { start: 0, length: 36 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(11),
                     ],
@@ -232,6 +258,9 @@ Program {
             location: Location { start: 0, length: 36 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(12),
                 },

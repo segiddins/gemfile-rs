@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "case 1; in 2; 3; else; end\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -28,7 +28,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -46,7 +46,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -64,7 +64,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1011,
-                        flags: BINARY | DECIMAL | HEXADECIMAL,
+                        flags: NEWLINE | STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -80,6 +80,9 @@ Program {
             location: Location { start: 14, length: 1 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(2),
                     ],
@@ -91,6 +94,9 @@ Program {
             location: Location { start: 8, length: 7 },
             node_kind: InNode(
                 InNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     pattern: NodeRef(1),
                     statements: Some(
                         NodeRef(3),
@@ -105,6 +111,9 @@ Program {
             location: Location { start: 17, length: 9 },
             node_kind: ElseNode(
                 ElseNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     else_keyword_loc: Location { start: 17, length: 4 },
                     statements: None,
                     end_keyword_loc: Some(
@@ -118,6 +127,10 @@ Program {
             location: Location { start: 0, length: 26 },
             node_kind: CaseMatchNode(
                 CaseMatchNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     predicate: Some(
                         NodeRef(0),
                     ),
@@ -137,6 +150,9 @@ Program {
             location: Location { start: 0, length: 26 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(6),
                     ],
@@ -148,6 +164,9 @@ Program {
             location: Location { start: 0, length: 26 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(7),
                 },

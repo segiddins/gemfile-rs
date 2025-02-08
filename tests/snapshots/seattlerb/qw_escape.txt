@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "%q(\u{1}\\')\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -35,7 +35,7 @@ Program {
                 StringNode {
                     flags: BitFlags<StringFlags> {
                         bits: 0b1,
-                        flags: FORCED_UTF8_ENCODING,
+                        flags: NEWLINE,
                     },
                     opening_loc: Some(
                         Location { start: 0, length: 3 },
@@ -44,7 +44,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 6, length: 1 },
                     ),
-                    unescaped: "\u{1}\\'",
+                    unescaped: Owned("\u{1}\\'"),
                 },
             ),
         },
@@ -53,6 +53,9 @@ Program {
             location: Location { start: 0, length: 7 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(0),
                     ],
@@ -64,6 +67,9 @@ Program {
             location: Location { start: 0, length: 7 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(1),
                 },

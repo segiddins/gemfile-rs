@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "{ 1 => 2 }\n\n{ 1 => 2, :foo => \"bar\" }\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -30,7 +30,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -48,7 +48,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -64,6 +64,10 @@ Program {
             location: Location { start: 2, length: 6 },
             node_kind: AssocNode(
                 AssocNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b10,
+                        flags: STATIC_LITERAL,
+                    },
                     key: NodeRef(0),
                     value: NodeRef(1),
                     operator_loc: Some(
@@ -77,6 +81,10 @@ Program {
             location: Location { start: 0, length: 10 },
             node_kind: HashNode(
                 HashNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b11,
+                        flags: NEWLINE | STATIC_LITERAL,
+                    },
                     opening_loc: Location { start: 0, length: 1 },
                     elements: [
                         NodeRef(2),
@@ -92,7 +100,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -110,7 +118,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -126,6 +134,10 @@ Program {
             location: Location { start: 14, length: 6 },
             node_kind: AssocNode(
                 AssocNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b10,
+                        flags: STATIC_LITERAL,
+                    },
                     key: NodeRef(4),
                     value: NodeRef(5),
                     operator_loc: Some(
@@ -140,8 +152,8 @@ Program {
             node_kind: SymbolNode(
                 SymbolNode {
                     flags: BitFlags<SymbolFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FORCED_US_ASCII_ENCODING,
                     },
                     opening_loc: Some(
                         Location { start: 22, length: 1 },
@@ -150,7 +162,7 @@ Program {
                         Location { start: 23, length: 3 },
                     ),
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(23, 3),
                 },
             ),
         },
@@ -169,7 +181,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 34, length: 1 },
                     ),
-                    unescaped: "",
+                    unescaped: Shared(31, 3),
                 },
             ),
         },
@@ -178,6 +190,9 @@ Program {
             location: Location { start: 22, length: 13 },
             node_kind: AssocNode(
                 AssocNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     key: NodeRef(7),
                     value: NodeRef(8),
                     operator_loc: Some(
@@ -191,6 +206,10 @@ Program {
             location: Location { start: 12, length: 25 },
             node_kind: HashNode(
                 HashNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     opening_loc: Location { start: 12, length: 1 },
                     elements: [
                         NodeRef(6),
@@ -205,6 +224,9 @@ Program {
             location: Location { start: 0, length: 37 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(3),
                         NodeRef(10),
@@ -217,6 +239,9 @@ Program {
             location: Location { start: 0, length: 37 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(11),
                 },

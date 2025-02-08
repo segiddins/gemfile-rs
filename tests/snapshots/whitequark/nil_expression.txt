@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "()\n\nbegin end\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -28,6 +28,10 @@ Program {
             location: Location { start: 0, length: 2 },
             node_kind: ParenthesesNode(
                 ParenthesesNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     body: None,
                     opening_loc: Location { start: 0, length: 1 },
                     closing_loc: Location { start: 1, length: 1 },
@@ -39,6 +43,10 @@ Program {
             location: Location { start: 4, length: 9 },
             node_kind: BeginNode(
                 BeginNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     begin_keyword_loc: Some(
                         Location { start: 4, length: 5 },
                     ),
@@ -57,6 +65,9 @@ Program {
             location: Location { start: 0, length: 13 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(0),
                         NodeRef(1),
@@ -69,6 +80,9 @@ Program {
             location: Location { start: 0, length: 13 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(2),
                 },

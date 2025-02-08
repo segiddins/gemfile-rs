@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "<<'HERE'\nfoo\nbar\nHERE\n\n<<HERE\nfoo\nbar\nHERE\n\n<<`HERE`\nfoo\nbar\nHERE\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -54,7 +54,7 @@ Program {
                 StringNode {
                     flags: BitFlags<StringFlags> {
                         bits: 0b1,
-                        flags: FORCED_UTF8_ENCODING,
+                        flags: NEWLINE,
                     },
                     opening_loc: Some(
                         Location { start: 0, length: 8 },
@@ -63,7 +63,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 17, length: 5 },
                     ),
-                    unescaped: "",
+                    unescaped: Shared(9, 8),
                 },
             ),
         },
@@ -74,7 +74,7 @@ Program {
                 StringNode {
                     flags: BitFlags<StringFlags> {
                         bits: 0b1,
-                        flags: FORCED_UTF8_ENCODING,
+                        flags: NEWLINE,
                     },
                     opening_loc: Some(
                         Location { start: 23, length: 6 },
@@ -83,7 +83,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 38, length: 5 },
                     ),
-                    unescaped: "",
+                    unescaped: Shared(30, 8),
                 },
             ),
         },
@@ -94,12 +94,12 @@ Program {
                 XStringNode {
                     flags: BitFlags<EncodingFlags> {
                         bits: 0b1,
-                        flags: FORCED_UTF8_ENCODING,
+                        flags: NEWLINE,
                     },
                     opening_loc: Location { start: 44, length: 8 },
                     content_loc: Location { start: 53, length: 8 },
                     closing_loc: Location { start: 61, length: 5 },
-                    unescaped: "",
+                    unescaped: Shared(53, 8),
                 },
             ),
         },
@@ -108,6 +108,9 @@ Program {
             location: Location { start: 0, length: 52 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(0),
                         NodeRef(1),
@@ -121,6 +124,9 @@ Program {
             location: Location { start: 0, length: 52 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(3),
                 },

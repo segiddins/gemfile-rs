@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "a(\"\\n\", true)\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -36,7 +36,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 5, length: 1 },
                     ),
-                    unescaped: "\n",
+                    unescaped: Owned("\n"),
                 },
             ),
         },
@@ -44,7 +44,12 @@ Program {
             identifier: 5,
             location: Location { start: 8, length: 4 },
             node_kind: TrueNode(
-                TrueNode,
+                TrueNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b10,
+                        flags: STATIC_LITERAL,
+                    },
+                },
             ),
         },
         Node {
@@ -68,8 +73,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1,
-                        flags: SAFE_NAVIGATION,
+                        bits: 0b100001,
+                        flags: NEWLINE | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -95,6 +100,9 @@ Program {
             location: Location { start: 0, length: 13 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(3),
                     ],
@@ -106,6 +114,9 @@ Program {
             location: Location { start: 0, length: 13 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(4),
                 },

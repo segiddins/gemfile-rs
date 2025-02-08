@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "<<-EOE\n some\n heredocs\nEOE",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -37,7 +37,7 @@ Program {
                 StringNode {
                     flags: BitFlags<StringFlags> {
                         bits: 0b1,
-                        flags: FORCED_UTF8_ENCODING,
+                        flags: NEWLINE,
                     },
                     opening_loc: Some(
                         Location { start: 0, length: 6 },
@@ -46,7 +46,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 23, length: 3 },
                     ),
-                    unescaped: "",
+                    unescaped: Shared(7, 16),
                 },
             ),
         },
@@ -55,6 +55,9 @@ Program {
             location: Location { start: 0, length: 6 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(0),
                     ],
@@ -66,6 +69,9 @@ Program {
             location: Location { start: 0, length: 6 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(1),
                 },

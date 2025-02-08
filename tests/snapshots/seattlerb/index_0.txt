@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "a[] = b\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -27,8 +27,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -49,8 +49,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -85,8 +85,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1,
-                        flags: SAFE_NAVIGATION,
+                        bits: 0b10001,
+                        flags: NEWLINE | ATTRIBUTE_WRITE,
                     },
                     receiver: Some(
                         NodeRef(0),
@@ -114,6 +114,9 @@ Program {
             location: Location { start: 0, length: 7 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(3),
                     ],
@@ -125,6 +128,9 @@ Program {
             location: Location { start: 0, length: 7 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(4),
                 },
@@ -133,7 +139,7 @@ Program {
     ],
     constants: [
         Owned(0, 1),
-        Shared(0, 2),
+        Shared(3, 2),
         Owned(6, 1),
         Shared(0, 3),
     ],

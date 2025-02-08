@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "[1, 2]\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -28,7 +28,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -46,7 +46,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -63,8 +63,8 @@ Program {
             node_kind: ArrayNode(
                 ArrayNode {
                     flags: BitFlags<ArrayNodeFlags> {
-                        bits: 0b1,
-                        flags: CONTAINS_SPLAT,
+                        bits: 0b11,
+                        flags: NEWLINE | STATIC_LITERAL,
                     },
                     elements: [
                         NodeRef(0),
@@ -84,6 +84,9 @@ Program {
             location: Location { start: 0, length: 6 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(2),
                     ],
@@ -95,6 +98,9 @@ Program {
             location: Location { start: 0, length: 6 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(3),
                 },

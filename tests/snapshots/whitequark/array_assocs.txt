@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "[ 1 => 2 ]\n\n[ 1, 2 => 3 ]\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -30,7 +30,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -48,7 +48,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -64,6 +64,10 @@ Program {
             location: Location { start: 2, length: 6 },
             node_kind: AssocNode(
                 AssocNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b10,
+                        flags: STATIC_LITERAL,
+                    },
                     key: NodeRef(0),
                     value: NodeRef(1),
                     operator_loc: Some(
@@ -93,7 +97,7 @@ Program {
                 ArrayNode {
                     flags: BitFlags<ArrayNodeFlags> {
                         bits: 0b1,
-                        flags: CONTAINS_SPLAT,
+                        flags: NEWLINE,
                     },
                     elements: [
                         NodeRef(3),
@@ -114,7 +118,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -132,7 +136,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -150,7 +154,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -166,6 +170,10 @@ Program {
             location: Location { start: 17, length: 6 },
             node_kind: AssocNode(
                 AssocNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b10,
+                        flags: STATIC_LITERAL,
+                    },
                     key: NodeRef(6),
                     value: NodeRef(7),
                     operator_loc: Some(
@@ -195,7 +203,7 @@ Program {
                 ArrayNode {
                     flags: BitFlags<ArrayNodeFlags> {
                         bits: 0b1,
-                        flags: CONTAINS_SPLAT,
+                        flags: NEWLINE,
                     },
                     elements: [
                         NodeRef(5),
@@ -215,6 +223,9 @@ Program {
             location: Location { start: 0, length: 25 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(4),
                         NodeRef(10),
@@ -227,6 +238,9 @@ Program {
             location: Location { start: 0, length: 25 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(11),
                 },

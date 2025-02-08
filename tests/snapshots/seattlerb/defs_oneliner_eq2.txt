@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "class X\n  def self.==(o) = 42\nend\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -28,6 +28,9 @@ Program {
             location: Location { start: 6, length: 1 },
             node_kind: ConstantReadNode(
                 ConstantReadNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(1),
                 },
             ),
@@ -36,7 +39,11 @@ Program {
             identifier: 4,
             location: Location { start: 14, length: 4 },
             node_kind: SelfNode(
-                SelfNode,
+                SelfNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
+                },
             ),
         },
         Node {
@@ -56,6 +63,9 @@ Program {
             location: Location { start: 22, length: 1 },
             node_kind: ParametersNode(
                 ParametersNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     requireds: [
                         NodeRef(2),
                     ],
@@ -75,7 +85,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -91,6 +101,9 @@ Program {
             location: Location { start: 27, length: 2 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(4),
                     ],
@@ -102,6 +115,10 @@ Program {
             location: Location { start: 10, length: 19 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(3),
                     name_loc: Location { start: 19, length: 2 },
                     receiver: Some(
@@ -138,6 +155,9 @@ Program {
             location: Location { start: 10, length: 19 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(6),
                     ],
@@ -149,6 +169,10 @@ Program {
             location: Location { start: 0, length: 33 },
             node_kind: ClassNode(
                 ClassNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     locals: [],
                     class_keyword_loc: Location { start: 0, length: 5 },
                     constant_path: NodeRef(0),
@@ -167,6 +191,9 @@ Program {
             location: Location { start: 0, length: 33 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(8),
                     ],
@@ -178,6 +205,9 @@ Program {
             location: Location { start: 0, length: 33 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(9),
                 },

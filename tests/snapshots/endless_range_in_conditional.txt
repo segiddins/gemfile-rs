@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "if 1..2 ; end\nif ..1 ; end\nif 1.. ; end\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -55,7 +55,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -73,7 +73,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -90,7 +90,8 @@ Program {
             node_kind: FlipFlopNode(
                 FlipFlopNode {
                     flags: BitFlags<RangeFlags> {
-                        bits: 0b0,
+                        bits: 0b10,
+                        flags: STATIC_LITERAL,
                     },
                     left: Some(
                         NodeRef(0),
@@ -107,6 +108,10 @@ Program {
             location: Location { start: 0, length: 13 },
             node_kind: IfNode(
                 IfNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     if_keyword_loc: Some(
                         Location { start: 0, length: 2 },
                     ),
@@ -127,7 +132,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -144,7 +149,8 @@ Program {
             node_kind: FlipFlopNode(
                 FlipFlopNode {
                     flags: BitFlags<RangeFlags> {
-                        bits: 0b0,
+                        bits: 0b10,
+                        flags: STATIC_LITERAL,
                     },
                     left: None,
                     right: Some(
@@ -159,6 +165,10 @@ Program {
             location: Location { start: 14, length: 12 },
             node_kind: IfNode(
                 IfNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     if_keyword_loc: Some(
                         Location { start: 14, length: 2 },
                     ),
@@ -179,7 +189,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -196,7 +206,8 @@ Program {
             node_kind: FlipFlopNode(
                 FlipFlopNode {
                     flags: BitFlags<RangeFlags> {
-                        bits: 0b0,
+                        bits: 0b10,
+                        flags: STATIC_LITERAL,
                     },
                     left: Some(
                         NodeRef(7),
@@ -211,6 +222,10 @@ Program {
             location: Location { start: 27, length: 12 },
             node_kind: IfNode(
                 IfNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     if_keyword_loc: Some(
                         Location { start: 27, length: 2 },
                     ),
@@ -229,6 +244,9 @@ Program {
             location: Location { start: 0, length: 39 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(3),
                         NodeRef(6),
@@ -242,6 +260,9 @@ Program {
             location: Location { start: 0, length: 39 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(10),
                 },

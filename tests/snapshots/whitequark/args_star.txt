@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "fun(*bar)\n\nfun(*bar, &baz)\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -29,8 +29,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -50,6 +50,9 @@ Program {
             location: Location { start: 4, length: 4 },
             node_kind: SplatNode(
                 SplatNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     operator_loc: Location { start: 4, length: 1 },
                     expression: Some(
                         NodeRef(0),
@@ -63,7 +66,8 @@ Program {
             node_kind: ArgumentsNode(
                 ArgumentsNode {
                     flags: BitFlags<ArgumentsNodeFlags> {
-                        bits: 0b0,
+                        bits: 0b100000,
+                        flags: CONTAINS_SPLAT,
                     },
                     arguments: [
                         NodeRef(1),
@@ -77,8 +81,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1,
-                        flags: SAFE_NAVIGATION,
+                        bits: 0b100001,
+                        flags: NEWLINE | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -105,8 +109,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -126,6 +130,9 @@ Program {
             location: Location { start: 15, length: 4 },
             node_kind: SplatNode(
                 SplatNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     operator_loc: Location { start: 15, length: 1 },
                     expression: Some(
                         NodeRef(4),
@@ -139,7 +146,8 @@ Program {
             node_kind: ArgumentsNode(
                 ArgumentsNode {
                     flags: BitFlags<ArgumentsNodeFlags> {
-                        bits: 0b0,
+                        bits: 0b100000,
+                        flags: CONTAINS_SPLAT,
                     },
                     arguments: [
                         NodeRef(5),
@@ -153,8 +161,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -174,6 +182,9 @@ Program {
             location: Location { start: 21, length: 4 },
             node_kind: BlockArgumentNode(
                 BlockArgumentNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     expression: Some(
                         NodeRef(7),
                     ),
@@ -187,8 +198,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1,
-                        flags: SAFE_NAVIGATION,
+                        bits: 0b100001,
+                        flags: NEWLINE | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -216,6 +227,9 @@ Program {
             location: Location { start: 0, length: 25 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(3),
                         NodeRef(9),
@@ -228,6 +242,9 @@ Program {
             location: Location { start: 0, length: 25 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(10),
                 },

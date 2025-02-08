@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: ":\"foo\n  bar\"\n\n:\"\n’\"\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -44,8 +44,8 @@ Program {
             node_kind: SymbolNode(
                 SymbolNode {
                     flags: BitFlags<SymbolFlags> {
-                        bits: 0b11,
-                        flags: FORCED_UTF8_ENCODING | FORCED_BINARY_ENCODING,
+                        bits: 0b10011,
+                        flags: NEWLINE | STATIC_LITERAL | FORCED_US_ASCII_ENCODING,
                     },
                     opening_loc: Some(
                         Location { start: 0, length: 2 },
@@ -56,7 +56,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 11, length: 1 },
                     ),
-                    unescaped: "",
+                    unescaped: Shared(2, 9),
                 },
             ),
         },
@@ -67,7 +67,7 @@ Program {
                 SymbolNode {
                     flags: BitFlags<SymbolFlags> {
                         bits: 0b11,
-                        flags: FORCED_UTF8_ENCODING | FORCED_BINARY_ENCODING,
+                        flags: NEWLINE | STATIC_LITERAL,
                     },
                     opening_loc: Some(
                         Location { start: 14, length: 2 },
@@ -78,7 +78,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 20, length: 1 },
                     ),
-                    unescaped: "",
+                    unescaped: Shared(16, 4),
                 },
             ),
         },
@@ -87,6 +87,9 @@ Program {
             location: Location { start: 0, length: 21 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(0),
                         NodeRef(1),
@@ -99,6 +102,9 @@ Program {
             location: Location { start: 0, length: 21 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(2),
                 },

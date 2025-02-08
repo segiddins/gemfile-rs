@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "a, b, c, *s = f\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -51,6 +51,9 @@ Program {
             location: Location { start: 0, length: 1 },
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(1),
                     depth: 0,
                 },
@@ -61,6 +64,9 @@ Program {
             location: Location { start: 3, length: 1 },
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(2),
                     depth: 0,
                 },
@@ -71,6 +77,9 @@ Program {
             location: Location { start: 6, length: 1 },
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(3),
                     depth: 0,
                 },
@@ -81,6 +90,9 @@ Program {
             location: Location { start: 10, length: 1 },
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(4),
                     depth: 0,
                 },
@@ -91,6 +103,9 @@ Program {
             location: Location { start: 9, length: 2 },
             node_kind: SplatNode(
                 SplatNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     operator_loc: Location { start: 9, length: 1 },
                     expression: Some(
                         NodeRef(3),
@@ -104,8 +119,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -125,6 +140,10 @@ Program {
             location: Location { start: 0, length: 15 },
             node_kind: MultiWriteNode(
                 MultiWriteNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     lefts: [
                         NodeRef(0),
                         NodeRef(1),
@@ -146,6 +165,9 @@ Program {
             location: Location { start: 0, length: 15 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(6),
                     ],
@@ -157,6 +179,9 @@ Program {
             location: Location { start: 0, length: 15 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [
                         ConstantRef(1),
                         ConstantRef(2),

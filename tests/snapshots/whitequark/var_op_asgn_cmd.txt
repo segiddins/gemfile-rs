@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "foo += m foo\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -26,6 +26,9 @@ Program {
             location: Location { start: 9, length: 3 },
             node_kind: LocalVariableReadNode(
                 LocalVariableReadNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(1),
                     depth: 0,
                 },
@@ -51,7 +54,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b0,
+                        bits: 0b100000,
+                        flags: IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -73,6 +77,10 @@ Program {
             location: Location { start: 0, length: 12 },
             node_kind: LocalVariableOperatorWriteNode(
                 LocalVariableOperatorWriteNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name_loc: Location { start: 0, length: 3 },
                     binary_operator_loc: Location { start: 4, length: 2 },
                     value: NodeRef(2),
@@ -87,6 +95,9 @@ Program {
             location: Location { start: 0, length: 12 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(3),
                     ],
@@ -98,6 +109,9 @@ Program {
             location: Location { start: 0, length: 12 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [
                         ConstantRef(1),
                     ],

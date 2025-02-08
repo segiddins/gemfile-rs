@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "%x[foo]\n\n`foo #{bar} baz`\n\n`foo`\n\n%x{\n  foo\n}\n\n``\n\n%x{}\n\n`\nfoo\\\nb\\nar\n`\n\n`\n’`\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -48,12 +48,12 @@ Program {
                 XStringNode {
                     flags: BitFlags<EncodingFlags> {
                         bits: 0b1,
-                        flags: FORCED_UTF8_ENCODING,
+                        flags: NEWLINE,
                     },
                     opening_loc: Location { start: 0, length: 3 },
                     content_loc: Location { start: 3, length: 3 },
                     closing_loc: Location { start: 6, length: 1 },
-                    unescaped: "",
+                    unescaped: Shared(3, 3),
                 },
             ),
         },
@@ -63,13 +63,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 10, length: 4 },
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(10, 4),
                 },
             ),
         },
@@ -79,8 +79,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -100,6 +100,9 @@ Program {
             location: Location { start: 16, length: 3 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(2),
                     ],
@@ -111,6 +114,9 @@ Program {
             location: Location { start: 14, length: 6 },
             node_kind: EmbeddedStatementsNode(
                 EmbeddedStatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     opening_loc: Location { start: 14, length: 2 },
                     statements: Some(
                         NodeRef(3),
@@ -125,13 +131,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 20, length: 4 },
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(20, 4),
                 },
             ),
         },
@@ -140,6 +146,10 @@ Program {
             location: Location { start: 9, length: 16 },
             node_kind: InterpolatedXStringNode(
                 InterpolatedXStringNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     opening_loc: Location { start: 9, length: 1 },
                     parts: [
                         NodeRef(1),
@@ -157,12 +167,12 @@ Program {
                 XStringNode {
                     flags: BitFlags<EncodingFlags> {
                         bits: 0b1,
-                        flags: FORCED_UTF8_ENCODING,
+                        flags: NEWLINE,
                     },
                     opening_loc: Location { start: 27, length: 1 },
                     content_loc: Location { start: 28, length: 3 },
                     closing_loc: Location { start: 31, length: 1 },
-                    unescaped: "",
+                    unescaped: Shared(28, 3),
                 },
             ),
         },
@@ -173,12 +183,12 @@ Program {
                 XStringNode {
                     flags: BitFlags<EncodingFlags> {
                         bits: 0b1,
-                        flags: FORCED_UTF8_ENCODING,
+                        flags: NEWLINE,
                     },
                     opening_loc: Location { start: 34, length: 3 },
                     content_loc: Location { start: 37, length: 7 },
                     closing_loc: Location { start: 44, length: 1 },
-                    unescaped: "",
+                    unescaped: Shared(37, 7),
                 },
             ),
         },
@@ -189,12 +199,12 @@ Program {
                 XStringNode {
                     flags: BitFlags<EncodingFlags> {
                         bits: 0b1,
-                        flags: FORCED_UTF8_ENCODING,
+                        flags: NEWLINE,
                     },
                     opening_loc: Location { start: 47, length: 1 },
                     content_loc: Location { start: 48, length: 0 },
                     closing_loc: Location { start: 48, length: 1 },
-                    unescaped: "",
+                    unescaped: Owned(""),
                 },
             ),
         },
@@ -205,12 +215,12 @@ Program {
                 XStringNode {
                     flags: BitFlags<EncodingFlags> {
                         bits: 0b1,
-                        flags: FORCED_UTF8_ENCODING,
+                        flags: NEWLINE,
                     },
                     opening_loc: Location { start: 51, length: 3 },
                     content_loc: Location { start: 54, length: 0 },
                     closing_loc: Location { start: 54, length: 1 },
-                    unescaped: "",
+                    unescaped: Owned(""),
                 },
             ),
         },
@@ -221,12 +231,12 @@ Program {
                 XStringNode {
                     flags: BitFlags<EncodingFlags> {
                         bits: 0b1,
-                        flags: FORCED_UTF8_ENCODING,
+                        flags: NEWLINE,
                     },
                     opening_loc: Location { start: 57, length: 1 },
                     content_loc: Location { start: 58, length: 12 },
                     closing_loc: Location { start: 70, length: 1 },
-                    unescaped: "\nfoob\nar\n",
+                    unescaped: Owned("\nfoob\nar\n"),
                 },
             ),
         },
@@ -237,12 +247,12 @@ Program {
                 XStringNode {
                     flags: BitFlags<EncodingFlags> {
                         bits: 0b1,
-                        flags: FORCED_UTF8_ENCODING,
+                        flags: NEWLINE,
                     },
                     opening_loc: Location { start: 73, length: 1 },
                     content_loc: Location { start: 74, length: 4 },
                     closing_loc: Location { start: 78, length: 1 },
-                    unescaped: "",
+                    unescaped: Shared(74, 4),
                 },
             ),
         },
@@ -251,6 +261,9 @@ Program {
             location: Location { start: 0, length: 79 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(0),
                         NodeRef(6),
@@ -269,6 +282,9 @@ Program {
             location: Location { start: 0, length: 79 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(13),
                 },

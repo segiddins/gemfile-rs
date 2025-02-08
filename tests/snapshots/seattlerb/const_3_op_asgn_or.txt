@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "::X ||= 1\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -26,6 +26,9 @@ Program {
             location: Location { start: 0, length: 3 },
             node_kind: ConstantPathNode(
                 ConstantPathNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     parent: None,
                     name: Some(
                         ConstantRef(1),
@@ -42,7 +45,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -58,6 +61,10 @@ Program {
             location: Location { start: 0, length: 9 },
             node_kind: ConstantPathOrWriteNode(
                 ConstantPathOrWriteNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     target: NodeRef(0),
                     operator_loc: Location { start: 4, length: 3 },
                     value: NodeRef(1),
@@ -69,6 +76,9 @@ Program {
             location: Location { start: 0, length: 9 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(2),
                     ],
@@ -80,6 +90,9 @@ Program {
             location: Location { start: 0, length: 9 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(3),
                 },

@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "def foo = 42\n\ndef foo = 42 rescue nil\n\ndef self.foo = 42\n\ndef self.foo = 42 rescue nil\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -34,7 +34,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -50,6 +50,9 @@ Program {
             location: Location { start: 10, length: 2 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(0),
                     ],
@@ -61,6 +64,10 @@ Program {
             location: Location { start: 0, length: 12 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(1),
                     name_loc: Location { start: 4, length: 3 },
                     receiver: None,
@@ -87,7 +94,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -102,7 +109,12 @@ Program {
             identifier: 7,
             location: Location { start: 34, length: 3 },
             node_kind: NilNode(
-                NilNode,
+                NilNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b10,
+                        flags: STATIC_LITERAL,
+                    },
+                },
             ),
         },
         Node {
@@ -110,6 +122,9 @@ Program {
             location: Location { start: 24, length: 13 },
             node_kind: RescueModifierNode(
                 RescueModifierNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     expression: NodeRef(3),
                     keyword_loc: Location { start: 27, length: 6 },
                     rescue_expression: NodeRef(4),
@@ -121,6 +136,9 @@ Program {
             location: Location { start: 24, length: 13 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(5),
                     ],
@@ -132,6 +150,10 @@ Program {
             location: Location { start: 14, length: 23 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(1),
                     name_loc: Location { start: 18, length: 3 },
                     receiver: None,
@@ -155,7 +177,11 @@ Program {
             identifier: 10,
             location: Location { start: 43, length: 4 },
             node_kind: SelfNode(
-                SelfNode,
+                SelfNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
+                },
             ),
         },
         Node {
@@ -165,7 +191,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -181,6 +207,9 @@ Program {
             location: Location { start: 54, length: 2 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(9),
                     ],
@@ -192,6 +221,10 @@ Program {
             location: Location { start: 39, length: 17 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(1),
                     name_loc: Location { start: 48, length: 3 },
                     receiver: Some(
@@ -219,7 +252,11 @@ Program {
             identifier: 14,
             location: Location { start: 62, length: 4 },
             node_kind: SelfNode(
-                SelfNode,
+                SelfNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
+                },
             ),
         },
         Node {
@@ -229,7 +266,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -244,7 +281,12 @@ Program {
             identifier: 17,
             location: Location { start: 83, length: 3 },
             node_kind: NilNode(
-                NilNode,
+                NilNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b10,
+                        flags: STATIC_LITERAL,
+                    },
+                },
             ),
         },
         Node {
@@ -252,6 +294,9 @@ Program {
             location: Location { start: 73, length: 13 },
             node_kind: RescueModifierNode(
                 RescueModifierNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     expression: NodeRef(13),
                     keyword_loc: Location { start: 76, length: 6 },
                     rescue_expression: NodeRef(14),
@@ -263,6 +308,9 @@ Program {
             location: Location { start: 73, length: 13 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(15),
                     ],
@@ -274,6 +322,10 @@ Program {
             location: Location { start: 58, length: 28 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(1),
                     name_loc: Location { start: 67, length: 3 },
                     receiver: Some(
@@ -302,6 +354,9 @@ Program {
             location: Location { start: 0, length: 86 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(2),
                         NodeRef(7),
@@ -316,6 +371,9 @@ Program {
             location: Location { start: 0, length: 86 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(18),
                 },

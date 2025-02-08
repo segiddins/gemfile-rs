@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "# encoding: sjis\n/Ⅷ(?<a>.)Ⅹ(?<b>.)/ =~ 'ⅧaⅩb'\n[a, b]\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -37,12 +37,12 @@ Program {
                 RegularExpressionNode {
                     flags: BitFlags<RegularExpressionFlags> {
                         bits: 0b10,
-                        flags: EXTENDED,
+                        flags: STATIC_LITERAL,
                     },
                     opening_loc: Location { start: 17, length: 1 },
                     content_loc: Location { start: 18, length: 20 },
                     closing_loc: Location { start: 38, length: 1 },
-                    unescaped: "",
+                    unescaped: Shared(18, 20),
                 },
             ),
         },
@@ -61,7 +61,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 52, length: 1 },
                     ),
-                    unescaped: "",
+                    unescaped: Shared(44, 8),
                 },
             ),
         },
@@ -109,6 +109,9 @@ Program {
             location: Location { start: 24, length: 1 },
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(2),
                     depth: 0,
                 },
@@ -119,6 +122,9 @@ Program {
             location: Location { start: 34, length: 1 },
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(3),
                     depth: 0,
                 },
@@ -129,6 +135,10 @@ Program {
             location: Location { start: 17, length: 36 },
             node_kind: MatchWriteNode(
                 MatchWriteNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     call: NodeRef(3),
                     targets: [
                         NodeRef(4),
@@ -142,6 +152,9 @@ Program {
             location: Location { start: 55, length: 1 },
             node_kind: LocalVariableReadNode(
                 LocalVariableReadNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(2),
                     depth: 0,
                 },
@@ -152,6 +165,9 @@ Program {
             location: Location { start: 58, length: 1 },
             node_kind: LocalVariableReadNode(
                 LocalVariableReadNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(3),
                     depth: 0,
                 },
@@ -164,7 +180,7 @@ Program {
                 ArrayNode {
                     flags: BitFlags<ArrayNodeFlags> {
                         bits: 0b1,
-                        flags: CONTAINS_SPLAT,
+                        flags: NEWLINE,
                     },
                     elements: [
                         NodeRef(7),
@@ -184,6 +200,9 @@ Program {
             location: Location { start: 17, length: 43 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(6),
                         NodeRef(9),
@@ -196,6 +215,9 @@ Program {
             location: Location { start: 17, length: 43 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [
                         ConstantRef(2),
                         ConstantRef(3),

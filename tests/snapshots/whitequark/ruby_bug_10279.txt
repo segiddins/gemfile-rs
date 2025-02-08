@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "{a: if true then 42 end}\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -27,8 +27,8 @@ Program {
             node_kind: SymbolNode(
                 SymbolNode {
                     flags: BitFlags<SymbolFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FORCED_US_ASCII_ENCODING,
                     },
                     opening_loc: None,
                     value_loc: Some(
@@ -37,7 +37,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 2, length: 1 },
                     ),
-                    unescaped: "",
+                    unescaped: Shared(1, 1),
                 },
             ),
         },
@@ -45,7 +45,12 @@ Program {
             identifier: 4,
             location: Location { start: 7, length: 4 },
             node_kind: TrueNode(
-                TrueNode,
+                TrueNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b10,
+                        flags: STATIC_LITERAL,
+                    },
+                },
             ),
         },
         Node {
@@ -55,7 +60,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1011,
-                        flags: BINARY | DECIMAL | HEXADECIMAL,
+                        flags: NEWLINE | STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -71,6 +76,9 @@ Program {
             location: Location { start: 17, length: 2 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(2),
                     ],
@@ -82,6 +90,10 @@ Program {
             location: Location { start: 4, length: 19 },
             node_kind: IfNode(
                 IfNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     if_keyword_loc: Some(
                         Location { start: 4, length: 2 },
                     ),
@@ -104,6 +116,9 @@ Program {
             location: Location { start: 1, length: 22 },
             node_kind: AssocNode(
                 AssocNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     key: NodeRef(0),
                     value: NodeRef(4),
                     operator_loc: None,
@@ -115,6 +130,10 @@ Program {
             location: Location { start: 0, length: 24 },
             node_kind: HashNode(
                 HashNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     opening_loc: Location { start: 0, length: 1 },
                     elements: [
                         NodeRef(5),
@@ -128,6 +147,9 @@ Program {
             location: Location { start: 0, length: 24 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(6),
                     ],
@@ -139,6 +161,9 @@ Program {
             location: Location { start: 0, length: 24 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(7),
                 },

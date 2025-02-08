@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "def f(a: nil, **); b(**) end\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -25,7 +25,12 @@ Program {
             identifier: 3,
             location: Location { start: 9, length: 3 },
             node_kind: NilNode(
-                NilNode,
+                NilNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b10,
+                        flags: STATIC_LITERAL,
+                    },
+                },
             ),
         },
         Node {
@@ -61,6 +66,9 @@ Program {
             location: Location { start: 6, length: 10 },
             node_kind: ParametersNode(
                 ParametersNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     requireds: [],
                     optionals: [],
                     rest: None,
@@ -80,6 +88,9 @@ Program {
             location: Location { start: 21, length: 2 },
             node_kind: AssocSplatNode(
                 AssocSplatNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     value: None,
                     operator_loc: Location { start: 21, length: 2 },
                 },
@@ -106,7 +117,7 @@ Program {
                 ArgumentsNode {
                     flags: BitFlags<ArgumentsNodeFlags> {
                         bits: 0b11000,
-                        flags: CONTAINS_SPLAT | CONTAINS_MULTIPLE_SPLATS,
+                        flags: CONTAINS_KEYWORDS | CONTAINS_KEYWORD_SPLAT,
                     },
                     arguments: [
                         NodeRef(5),
@@ -120,8 +131,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1,
-                        flags: SAFE_NAVIGATION,
+                        bits: 0b100001,
+                        flags: NEWLINE | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -147,6 +158,9 @@ Program {
             location: Location { start: 19, length: 5 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(7),
                     ],
@@ -158,6 +172,10 @@ Program {
             location: Location { start: 0, length: 28 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(3),
                     name_loc: Location { start: 4, length: 1 },
                     receiver: None,
@@ -190,6 +208,9 @@ Program {
             location: Location { start: 0, length: 28 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(9),
                     ],
@@ -201,6 +222,9 @@ Program {
             location: Location { start: 0, length: 28 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(10),
                 },

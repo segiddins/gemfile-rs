@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "...100\n\n..100\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -43,7 +43,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -60,8 +60,8 @@ Program {
             node_kind: RangeNode(
                 RangeNode {
                     flags: BitFlags<RangeFlags> {
-                        bits: 0b1,
-                        flags: EXCLUDE_END,
+                        bits: 0b111,
+                        flags: NEWLINE | STATIC_LITERAL | EXCLUDE_END,
                     },
                     left: None,
                     right: Some(
@@ -78,7 +78,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -95,8 +95,8 @@ Program {
             node_kind: RangeNode(
                 RangeNode {
                     flags: BitFlags<RangeFlags> {
-                        bits: 0b1,
-                        flags: EXCLUDE_END,
+                        bits: 0b11,
+                        flags: NEWLINE | STATIC_LITERAL,
                     },
                     left: None,
                     right: Some(
@@ -111,6 +111,9 @@ Program {
             location: Location { start: 0, length: 13 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(1),
                         NodeRef(3),
@@ -123,6 +126,9 @@ Program {
             location: Location { start: 0, length: 13 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(4),
                 },

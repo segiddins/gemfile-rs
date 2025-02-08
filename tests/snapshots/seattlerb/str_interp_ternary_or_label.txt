@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "\"#{a.b? ? \"\"+a+\"\": \"\"}\"\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -34,8 +34,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -90,7 +90,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 11, length: 1 },
                     ),
-                    unescaped: "",
+                    unescaped: Shared(11, 0),
                 },
             ),
         },
@@ -100,8 +100,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -170,7 +170,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 16, length: 1 },
                     ),
-                    unescaped: "",
+                    unescaped: Shared(16, 0),
                 },
             ),
         },
@@ -195,7 +195,7 @@ Program {
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
                         bits: 0b1,
-                        flags: SAFE_NAVIGATION,
+                        flags: NEWLINE,
                     },
                     receiver: Some(
                         NodeRef(5),
@@ -219,6 +219,9 @@ Program {
             location: Location { start: 10, length: 7 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(8),
                     ],
@@ -232,7 +235,7 @@ Program {
                 StringNode {
                     flags: BitFlags<StringFlags> {
                         bits: 0b1,
-                        flags: FORCED_UTF8_ENCODING,
+                        flags: NEWLINE,
                     },
                     opening_loc: Some(
                         Location { start: 19, length: 1 },
@@ -241,7 +244,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 20, length: 1 },
                     ),
-                    unescaped: "",
+                    unescaped: Shared(20, 0),
                 },
             ),
         },
@@ -250,6 +253,9 @@ Program {
             location: Location { start: 19, length: 2 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(10),
                     ],
@@ -261,6 +267,9 @@ Program {
             location: Location { start: 17, length: 4 },
             node_kind: ElseNode(
                 ElseNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     else_keyword_loc: Location { start: 17, length: 1 },
                     statements: Some(
                         NodeRef(11),
@@ -274,6 +283,9 @@ Program {
             location: Location { start: 3, length: 18 },
             node_kind: IfNode(
                 IfNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     if_keyword_loc: None,
                     predicate: NodeRef(1),
                     then_keyword_loc: Some(
@@ -294,6 +306,9 @@ Program {
             location: Location { start: 3, length: 18 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(13),
                     ],
@@ -305,6 +320,9 @@ Program {
             location: Location { start: 1, length: 21 },
             node_kind: EmbeddedStatementsNode(
                 EmbeddedStatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     opening_loc: Location { start: 1, length: 2 },
                     statements: Some(
                         NodeRef(14),
@@ -320,7 +338,7 @@ Program {
                 InterpolatedStringNode {
                     flags: BitFlags<InterpolatedStringNodeFlags> {
                         bits: 0b1,
-                        flags: FROZEN,
+                        flags: NEWLINE,
                     },
                     opening_loc: Some(
                         Location { start: 0, length: 1 },
@@ -339,6 +357,9 @@ Program {
             location: Location { start: 0, length: 23 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(16),
                     ],
@@ -350,6 +371,9 @@ Program {
             location: Location { start: 0, length: 23 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(17),
                 },

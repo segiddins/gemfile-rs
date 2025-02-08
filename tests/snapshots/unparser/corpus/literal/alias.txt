@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "alias $foo $bar\nalias :foo :bar\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -27,6 +27,9 @@ Program {
             location: Location { start: 6, length: 4 },
             node_kind: GlobalVariableReadNode(
                 GlobalVariableReadNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(1),
                 },
             ),
@@ -36,6 +39,9 @@ Program {
             location: Location { start: 11, length: 4 },
             node_kind: GlobalVariableReadNode(
                 GlobalVariableReadNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(2),
                 },
             ),
@@ -45,6 +51,10 @@ Program {
             location: Location { start: 0, length: 15 },
             node_kind: AliasGlobalVariableNode(
                 AliasGlobalVariableNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     new_name: NodeRef(0),
                     old_name: NodeRef(1),
                     keyword_loc: Location { start: 0, length: 5 },
@@ -57,8 +67,8 @@ Program {
             node_kind: SymbolNode(
                 SymbolNode {
                     flags: BitFlags<SymbolFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FORCED_US_ASCII_ENCODING,
                     },
                     opening_loc: Some(
                         Location { start: 22, length: 1 },
@@ -67,7 +77,7 @@ Program {
                         Location { start: 23, length: 3 },
                     ),
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(23, 3),
                 },
             ),
         },
@@ -77,8 +87,8 @@ Program {
             node_kind: SymbolNode(
                 SymbolNode {
                     flags: BitFlags<SymbolFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FORCED_US_ASCII_ENCODING,
                     },
                     opening_loc: Some(
                         Location { start: 27, length: 1 },
@@ -87,7 +97,7 @@ Program {
                         Location { start: 28, length: 3 },
                     ),
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(28, 3),
                 },
             ),
         },
@@ -96,6 +106,10 @@ Program {
             location: Location { start: 16, length: 15 },
             node_kind: AliasMethodNode(
                 AliasMethodNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     new_name: NodeRef(3),
                     old_name: NodeRef(4),
                     keyword_loc: Location { start: 16, length: 5 },
@@ -107,6 +121,9 @@ Program {
             location: Location { start: 0, length: 31 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(2),
                         NodeRef(5),
@@ -119,6 +136,9 @@ Program {
             location: Location { start: 0, length: 31 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(6),
                 },

@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "<<EOS\nfoo\\r#@bar\nEOS\n\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -37,13 +37,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 6, length: 5 },
                     closing_loc: None,
-                    unescaped: "foo\r",
+                    unescaped: Owned("foo\r"),
                 },
             ),
         },
@@ -52,6 +52,9 @@ Program {
             location: Location { start: 12, length: 4 },
             node_kind: InstanceVariableReadNode(
                 InstanceVariableReadNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(1),
                 },
             ),
@@ -61,6 +64,9 @@ Program {
             location: Location { start: 11, length: 5 },
             node_kind: EmbeddedVariableNode(
                 EmbeddedVariableNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     operator_loc: Location { start: 11, length: 1 },
                     variable: NodeRef(1),
                 },
@@ -72,13 +78,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 16, length: 1 },
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(16, 1),
                 },
             ),
         },
@@ -89,7 +95,7 @@ Program {
                 InterpolatedStringNode {
                     flags: BitFlags<InterpolatedStringNodeFlags> {
                         bits: 0b1,
-                        flags: FROZEN,
+                        flags: NEWLINE,
                     },
                     opening_loc: Some(
                         Location { start: 0, length: 5 },
@@ -110,6 +116,9 @@ Program {
             location: Location { start: 0, length: 5 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(4),
                     ],
@@ -121,6 +130,9 @@ Program {
             location: Location { start: 0, length: 5 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(5),
                 },

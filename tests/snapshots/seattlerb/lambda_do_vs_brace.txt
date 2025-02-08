@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "f -> do end\n\nf -> {}\n\nf ->() do end\n\nf ->() {}\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -32,6 +32,9 @@ Program {
             location: Location { start: 2, length: 9 },
             node_kind: LambdaNode(
                 LambdaNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     operator_loc: Location { start: 2, length: 2 },
                     opening_loc: Location { start: 5, length: 2 },
@@ -61,8 +64,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1,
-                        flags: SAFE_NAVIGATION,
+                        bits: 0b100001,
+                        flags: NEWLINE | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -84,6 +87,9 @@ Program {
             location: Location { start: 15, length: 5 },
             node_kind: LambdaNode(
                 LambdaNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     operator_loc: Location { start: 15, length: 2 },
                     opening_loc: Location { start: 18, length: 1 },
@@ -113,8 +119,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1,
-                        flags: SAFE_NAVIGATION,
+                        bits: 0b100001,
+                        flags: NEWLINE | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -136,6 +142,9 @@ Program {
             location: Location { start: 26, length: 2 },
             node_kind: BlockParametersNode(
                 BlockParametersNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     parameters: None,
                     locals: [],
                     opening_loc: Some(
@@ -152,6 +161,9 @@ Program {
             location: Location { start: 24, length: 11 },
             node_kind: LambdaNode(
                 LambdaNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     operator_loc: Location { start: 24, length: 2 },
                     opening_loc: Location { start: 29, length: 2 },
@@ -183,8 +195,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1,
-                        flags: SAFE_NAVIGATION,
+                        bits: 0b100001,
+                        flags: NEWLINE | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -206,6 +218,9 @@ Program {
             location: Location { start: 41, length: 2 },
             node_kind: BlockParametersNode(
                 BlockParametersNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     parameters: None,
                     locals: [],
                     opening_loc: Some(
@@ -222,6 +237,9 @@ Program {
             location: Location { start: 39, length: 7 },
             node_kind: LambdaNode(
                 LambdaNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     operator_loc: Location { start: 39, length: 2 },
                     opening_loc: Location { start: 44, length: 1 },
@@ -253,8 +271,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1,
-                        flags: SAFE_NAVIGATION,
+                        bits: 0b100001,
+                        flags: NEWLINE | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -276,6 +294,9 @@ Program {
             location: Location { start: 0, length: 46 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(2),
                         NodeRef(5),
@@ -290,6 +311,9 @@ Program {
             location: Location { start: 0, length: 46 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(14),
                 },

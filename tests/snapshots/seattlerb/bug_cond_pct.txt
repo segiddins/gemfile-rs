@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "case; when %r%blahblah%; end\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -27,13 +27,13 @@ Program {
             node_kind: RegularExpressionNode(
                 RegularExpressionNode {
                     flags: BitFlags<RegularExpressionFlags> {
-                        bits: 0b10,
-                        flags: EXTENDED,
+                        bits: 0b1000000000010,
+                        flags: STATIC_LITERAL | FORCED_US_ASCII_ENCODING,
                     },
                     opening_loc: Location { start: 11, length: 3 },
                     content_loc: Location { start: 14, length: 8 },
                     closing_loc: Location { start: 22, length: 1 },
-                    unescaped: "",
+                    unescaped: Shared(14, 8),
                 },
             ),
         },
@@ -42,6 +42,9 @@ Program {
             location: Location { start: 6, length: 17 },
             node_kind: WhenNode(
                 WhenNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     keyword_loc: Location { start: 6, length: 4 },
                     conditions: [
                         NodeRef(0),
@@ -56,6 +59,10 @@ Program {
             location: Location { start: 0, length: 28 },
             node_kind: CaseNode(
                 CaseNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     predicate: None,
                     conditions: [
                         NodeRef(1),
@@ -71,6 +78,9 @@ Program {
             location: Location { start: 0, length: 28 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(2),
                     ],
@@ -82,6 +92,9 @@ Program {
             location: Location { start: 0, length: 28 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(3),
                 },

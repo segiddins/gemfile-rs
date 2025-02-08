@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "<<END\\\nblah\nEND\n.strip\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -39,7 +39,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 12, length: 4 },
                     ),
-                    unescaped: "",
+                    unescaped: Shared(7, 5),
                 },
             ),
         },
@@ -50,7 +50,7 @@ Program {
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
                         bits: 0b1,
-                        flags: SAFE_NAVIGATION,
+                        flags: NEWLINE,
                     },
                     receiver: Some(
                         NodeRef(0),
@@ -74,6 +74,9 @@ Program {
             location: Location { start: 0, length: 22 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(1),
                     ],
@@ -85,6 +88,9 @@ Program {
             location: Location { start: 0, length: 22 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(2),
                 },

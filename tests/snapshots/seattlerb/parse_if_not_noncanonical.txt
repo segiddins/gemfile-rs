@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "if not var.nil? then 'foo' else 'bar'\nend\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -28,8 +28,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -99,7 +99,7 @@ Program {
                 StringNode {
                     flags: BitFlags<StringFlags> {
                         bits: 0b1,
-                        flags: FORCED_UTF8_ENCODING,
+                        flags: NEWLINE,
                     },
                     opening_loc: Some(
                         Location { start: 21, length: 1 },
@@ -108,7 +108,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 25, length: 1 },
                     ),
-                    unescaped: "",
+                    unescaped: Shared(22, 3),
                 },
             ),
         },
@@ -117,6 +117,9 @@ Program {
             location: Location { start: 21, length: 5 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(3),
                     ],
@@ -130,7 +133,7 @@ Program {
                 StringNode {
                     flags: BitFlags<StringFlags> {
                         bits: 0b1,
-                        flags: FORCED_UTF8_ENCODING,
+                        flags: NEWLINE,
                     },
                     opening_loc: Some(
                         Location { start: 32, length: 1 },
@@ -139,7 +142,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 36, length: 1 },
                     ),
-                    unescaped: "",
+                    unescaped: Shared(33, 3),
                 },
             ),
         },
@@ -148,6 +151,9 @@ Program {
             location: Location { start: 32, length: 5 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(5),
                     ],
@@ -159,6 +165,9 @@ Program {
             location: Location { start: 27, length: 14 },
             node_kind: ElseNode(
                 ElseNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     else_keyword_loc: Location { start: 27, length: 4 },
                     statements: Some(
                         NodeRef(6),
@@ -174,6 +183,10 @@ Program {
             location: Location { start: 0, length: 41 },
             node_kind: IfNode(
                 IfNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     if_keyword_loc: Some(
                         Location { start: 0, length: 2 },
                     ),
@@ -198,6 +211,9 @@ Program {
             location: Location { start: 0, length: 41 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(8),
                     ],
@@ -209,6 +225,9 @@ Program {
             location: Location { start: 0, length: 41 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(9),
                 },

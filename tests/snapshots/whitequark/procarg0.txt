@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "m { |(foo, bar)| } \n\nm { |foo| } \n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -52,6 +52,9 @@ Program {
             location: Location { start: 5, length: 10 },
             node_kind: MultiTargetNode(
                 MultiTargetNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     lefts: [
                         NodeRef(0),
                         NodeRef(1),
@@ -72,6 +75,9 @@ Program {
             location: Location { start: 5, length: 10 },
             node_kind: ParametersNode(
                 ParametersNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     requireds: [
                         NodeRef(2),
                     ],
@@ -89,6 +95,9 @@ Program {
             location: Location { start: 4, length: 12 },
             node_kind: BlockParametersNode(
                 BlockParametersNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     parameters: Some(
                         NodeRef(3),
                     ),
@@ -107,6 +116,9 @@ Program {
             location: Location { start: 2, length: 16 },
             node_kind: BlockNode(
                 BlockNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [
                         ConstantRef(2),
                         ConstantRef(3),
@@ -126,8 +138,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1,
-                        flags: SAFE_NAVIGATION,
+                        bits: 0b100001,
+                        flags: NEWLINE | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -161,6 +173,9 @@ Program {
             location: Location { start: 26, length: 3 },
             node_kind: ParametersNode(
                 ParametersNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     requireds: [
                         NodeRef(7),
                     ],
@@ -178,6 +193,9 @@ Program {
             location: Location { start: 25, length: 5 },
             node_kind: BlockParametersNode(
                 BlockParametersNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     parameters: Some(
                         NodeRef(8),
                     ),
@@ -196,6 +214,9 @@ Program {
             location: Location { start: 23, length: 9 },
             node_kind: BlockNode(
                 BlockNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [
                         ConstantRef(2),
                     ],
@@ -214,8 +235,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1,
-                        flags: SAFE_NAVIGATION,
+                        bits: 0b100001,
+                        flags: NEWLINE | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -237,6 +258,9 @@ Program {
             location: Location { start: 0, length: 32 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(6),
                         NodeRef(11),
@@ -249,6 +273,9 @@ Program {
             location: Location { start: 0, length: 32 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(12),
                 },

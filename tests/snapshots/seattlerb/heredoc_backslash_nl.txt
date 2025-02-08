@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "\"  why would someone do this? \\\n  blah\n\"\n\n<<-DESC\n  why would someone do this? \\\n  blah\nDESC\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -48,7 +48,7 @@ Program {
                 StringNode {
                     flags: BitFlags<StringFlags> {
                         bits: 0b1,
-                        flags: FORCED_UTF8_ENCODING,
+                        flags: NEWLINE,
                     },
                     opening_loc: Some(
                         Location { start: 0, length: 1 },
@@ -57,7 +57,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 39, length: 1 },
                     ),
-                    unescaped: "  why would someone do this?   blah\n",
+                    unescaped: Owned("  why would someone do this?   blah\n"),
                 },
             ),
         },
@@ -68,7 +68,7 @@ Program {
                 StringNode {
                     flags: BitFlags<StringFlags> {
                         bits: 0b1,
-                        flags: FORCED_UTF8_ENCODING,
+                        flags: NEWLINE,
                     },
                     opening_loc: Some(
                         Location { start: 42, length: 7 },
@@ -77,7 +77,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 88, length: 5 },
                     ),
-                    unescaped: "  why would someone do this?   blah\n",
+                    unescaped: Owned("  why would someone do this?   blah\n"),
                 },
             ),
         },
@@ -86,6 +86,9 @@ Program {
             location: Location { start: 0, length: 49 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(0),
                         NodeRef(1),
@@ -98,6 +101,9 @@ Program {
             location: Location { start: 0, length: 49 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(2),
                 },

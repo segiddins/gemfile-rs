@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "a += b += raise :x\n\na += b = raise :x\n\na = b += raise :x\n\na = b = raise :x\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -33,8 +33,8 @@ Program {
             node_kind: SymbolNode(
                 SymbolNode {
                     flags: BitFlags<SymbolFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FORCED_US_ASCII_ENCODING,
                     },
                     opening_loc: Some(
                         Location { start: 16, length: 1 },
@@ -43,7 +43,7 @@ Program {
                         Location { start: 17, length: 1 },
                     ),
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(17, 1),
                 },
             ),
         },
@@ -67,7 +67,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b0,
+                        bits: 0b100000,
+                        flags: IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -89,6 +90,9 @@ Program {
             location: Location { start: 5, length: 13 },
             node_kind: LocalVariableOperatorWriteNode(
                 LocalVariableOperatorWriteNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name_loc: Location { start: 5, length: 1 },
                     binary_operator_loc: Location { start: 7, length: 2 },
                     value: NodeRef(2),
@@ -103,6 +107,10 @@ Program {
             location: Location { start: 0, length: 18 },
             node_kind: LocalVariableOperatorWriteNode(
                 LocalVariableOperatorWriteNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name_loc: Location { start: 0, length: 1 },
                     binary_operator_loc: Location { start: 2, length: 2 },
                     value: NodeRef(3),
@@ -118,8 +126,8 @@ Program {
             node_kind: SymbolNode(
                 SymbolNode {
                     flags: BitFlags<SymbolFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FORCED_US_ASCII_ENCODING,
                     },
                     opening_loc: Some(
                         Location { start: 35, length: 1 },
@@ -128,7 +136,7 @@ Program {
                         Location { start: 36, length: 1 },
                     ),
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(36, 1),
                 },
             ),
         },
@@ -152,7 +160,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b0,
+                        bits: 0b100000,
+                        flags: IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -174,6 +183,9 @@ Program {
             location: Location { start: 25, length: 12 },
             node_kind: LocalVariableWriteNode(
                 LocalVariableWriteNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(2),
                     depth: 0,
                     name_loc: Location { start: 25, length: 1 },
@@ -187,6 +199,10 @@ Program {
             location: Location { start: 20, length: 17 },
             node_kind: LocalVariableOperatorWriteNode(
                 LocalVariableOperatorWriteNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name_loc: Location { start: 20, length: 1 },
                     binary_operator_loc: Location { start: 22, length: 2 },
                     value: NodeRef(8),
@@ -202,8 +218,8 @@ Program {
             node_kind: SymbolNode(
                 SymbolNode {
                     flags: BitFlags<SymbolFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FORCED_US_ASCII_ENCODING,
                     },
                     opening_loc: Some(
                         Location { start: 54, length: 1 },
@@ -212,7 +228,7 @@ Program {
                         Location { start: 55, length: 1 },
                     ),
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(55, 1),
                 },
             ),
         },
@@ -236,7 +252,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b0,
+                        bits: 0b100000,
+                        flags: IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -258,6 +275,9 @@ Program {
             location: Location { start: 43, length: 13 },
             node_kind: LocalVariableOperatorWriteNode(
                 LocalVariableOperatorWriteNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name_loc: Location { start: 43, length: 1 },
                     binary_operator_loc: Location { start: 45, length: 2 },
                     value: NodeRef(12),
@@ -272,6 +292,10 @@ Program {
             location: Location { start: 39, length: 17 },
             node_kind: LocalVariableWriteNode(
                 LocalVariableWriteNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(1),
                     depth: 0,
                     name_loc: Location { start: 39, length: 1 },
@@ -286,8 +310,8 @@ Program {
             node_kind: SymbolNode(
                 SymbolNode {
                     flags: BitFlags<SymbolFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FORCED_US_ASCII_ENCODING,
                     },
                     opening_loc: Some(
                         Location { start: 72, length: 1 },
@@ -296,7 +320,7 @@ Program {
                         Location { start: 73, length: 1 },
                     ),
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(73, 1),
                 },
             ),
         },
@@ -320,7 +344,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b0,
+                        bits: 0b100000,
+                        flags: IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -342,6 +367,9 @@ Program {
             location: Location { start: 62, length: 12 },
             node_kind: LocalVariableWriteNode(
                 LocalVariableWriteNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(2),
                     depth: 0,
                     name_loc: Location { start: 62, length: 1 },
@@ -355,6 +383,10 @@ Program {
             location: Location { start: 58, length: 16 },
             node_kind: LocalVariableWriteNode(
                 LocalVariableWriteNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(1),
                     depth: 0,
                     name_loc: Location { start: 58, length: 1 },
@@ -368,6 +400,9 @@ Program {
             location: Location { start: 0, length: 74 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(4),
                         NodeRef(9),
@@ -382,6 +417,9 @@ Program {
             location: Location { start: 0, length: 74 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [
                         ConstantRef(1),
                         ConstantRef(2),

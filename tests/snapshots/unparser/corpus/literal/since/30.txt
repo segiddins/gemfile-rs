@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "1 => [a]\n1 => [*]\n1 in [*, 42, *]\n1 in [*, a, *foo]\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -44,7 +44,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -60,6 +60,9 @@ Program {
             location: Location { start: 6, length: 1 },
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(1),
                     depth: 0,
                 },
@@ -70,6 +73,9 @@ Program {
             location: Location { start: 5, length: 3 },
             node_kind: ArrayPatternNode(
                 ArrayPatternNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     constant: None,
                     requireds: [
                         NodeRef(1),
@@ -90,6 +96,10 @@ Program {
             location: Location { start: 0, length: 8 },
             node_kind: MatchRequiredNode(
                 MatchRequiredNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     value: NodeRef(0),
                     pattern: NodeRef(2),
                     operator_loc: Location { start: 2, length: 2 },
@@ -103,7 +113,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -119,6 +129,9 @@ Program {
             location: Location { start: 15, length: 1 },
             node_kind: SplatNode(
                 SplatNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     operator_loc: Location { start: 15, length: 1 },
                     expression: None,
                 },
@@ -129,6 +142,9 @@ Program {
             location: Location { start: 14, length: 3 },
             node_kind: ArrayPatternNode(
                 ArrayPatternNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     constant: None,
                     requireds: [],
                     rest: Some(
@@ -149,6 +165,10 @@ Program {
             location: Location { start: 9, length: 8 },
             node_kind: MatchRequiredNode(
                 MatchRequiredNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     value: NodeRef(4),
                     pattern: NodeRef(6),
                     operator_loc: Location { start: 11, length: 2 },
@@ -162,7 +182,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -178,6 +198,9 @@ Program {
             location: Location { start: 24, length: 1 },
             node_kind: SplatNode(
                 SplatNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     operator_loc: Location { start: 24, length: 1 },
                     expression: None,
                 },
@@ -190,7 +213,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -206,6 +229,9 @@ Program {
             location: Location { start: 31, length: 1 },
             node_kind: SplatNode(
                 SplatNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     operator_loc: Location { start: 31, length: 1 },
                     expression: None,
                 },
@@ -216,6 +242,9 @@ Program {
             location: Location { start: 23, length: 10 },
             node_kind: FindPatternNode(
                 FindPatternNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     constant: None,
                     left: NodeRef(9),
                     requireds: [
@@ -236,6 +265,10 @@ Program {
             location: Location { start: 18, length: 15 },
             node_kind: MatchPredicateNode(
                 MatchPredicateNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     value: NodeRef(8),
                     pattern: NodeRef(12),
                     operator_loc: Location { start: 20, length: 2 },
@@ -249,7 +282,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -265,6 +298,9 @@ Program {
             location: Location { start: 40, length: 1 },
             node_kind: SplatNode(
                 SplatNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     operator_loc: Location { start: 40, length: 1 },
                     expression: None,
                 },
@@ -275,6 +311,9 @@ Program {
             location: Location { start: 43, length: 1 },
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(1),
                     depth: 0,
                 },
@@ -285,6 +324,9 @@ Program {
             location: Location { start: 47, length: 3 },
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(2),
                     depth: 0,
                 },
@@ -295,6 +337,9 @@ Program {
             location: Location { start: 46, length: 4 },
             node_kind: SplatNode(
                 SplatNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     operator_loc: Location { start: 46, length: 1 },
                     expression: Some(
                         NodeRef(17),
@@ -307,6 +352,9 @@ Program {
             location: Location { start: 39, length: 12 },
             node_kind: FindPatternNode(
                 FindPatternNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     constant: None,
                     left: NodeRef(15),
                     requireds: [
@@ -327,6 +375,10 @@ Program {
             location: Location { start: 34, length: 17 },
             node_kind: MatchPredicateNode(
                 MatchPredicateNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     value: NodeRef(14),
                     pattern: NodeRef(19),
                     operator_loc: Location { start: 36, length: 2 },
@@ -338,6 +390,9 @@ Program {
             location: Location { start: 0, length: 51 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(3),
                         NodeRef(7),
@@ -352,6 +407,9 @@ Program {
             location: Location { start: 0, length: 51 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [
                         ConstantRef(1),
                         ConstantRef(2),

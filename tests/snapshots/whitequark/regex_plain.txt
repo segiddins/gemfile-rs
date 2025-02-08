@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "/source/im\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -34,13 +34,13 @@ Program {
             node_kind: RegularExpressionNode(
                 RegularExpressionNode {
                     flags: BitFlags<RegularExpressionFlags> {
-                        bits: 0b10111,
-                        flags: IGNORE_CASE | EXTENDED | MULTI_LINE | EUC_JP,
+                        bits: 0b1000000010111,
+                        flags: NEWLINE | STATIC_LITERAL | IGNORE_CASE | MULTI_LINE | FORCED_US_ASCII_ENCODING,
                     },
                     opening_loc: Location { start: 0, length: 1 },
                     content_loc: Location { start: 1, length: 6 },
                     closing_loc: Location { start: 7, length: 3 },
-                    unescaped: "",
+                    unescaped: Shared(1, 6),
                 },
             ),
         },
@@ -49,6 +49,9 @@ Program {
             location: Location { start: 0, length: 10 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(0),
                     ],
@@ -60,6 +63,9 @@ Program {
             location: Location { start: 0, length: 10 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(1),
                 },

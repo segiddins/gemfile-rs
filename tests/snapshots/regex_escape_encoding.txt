@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "# encoding: US-ASCII\nstr = \"hello \\xFC\"\nstr =~ /hello \\u{fc}/\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -37,7 +37,7 @@ Program {
                 StringNode {
                     flags: BitFlags<StringFlags> {
                         bits: 0b1000,
-                        flags: MUTABLE,
+                        flags: FORCED_BINARY_ENCODING,
                     },
                     opening_loc: Some(
                         Location { start: 27, length: 1 },
@@ -46,7 +46,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 38, length: 1 },
                     ),
-                    unescaped: "hello �",
+                    unescaped: Owned("hello �"),
                 },
             ),
         },
@@ -55,6 +55,10 @@ Program {
             location: Location { start: 21, length: 18 },
             node_kind: LocalVariableWriteNode(
                 LocalVariableWriteNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(1),
                     depth: 0,
                     name_loc: Location { start: 21, length: 3 },
@@ -68,6 +72,9 @@ Program {
             location: Location { start: 40, length: 3 },
             node_kind: LocalVariableReadNode(
                 LocalVariableReadNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(1),
                     depth: 0,
                 },
@@ -80,12 +87,12 @@ Program {
                 RegularExpressionNode {
                     flags: BitFlags<RegularExpressionFlags> {
                         bits: 0b10000000010,
-                        flags: EXTENDED | FORCED_US_ASCII_ENCODING,
+                        flags: STATIC_LITERAL | FORCED_UTF8_ENCODING,
                     },
                     opening_loc: Location { start: 47, length: 1 },
                     content_loc: Location { start: 48, length: 12 },
                     closing_loc: Location { start: 60, length: 1 },
-                    unescaped: "hello \\u{fc}",
+                    unescaped: Owned("hello \\u{fc}"),
                 },
             ),
         },
@@ -110,7 +117,7 @@ Program {
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
                         bits: 0b1,
-                        flags: SAFE_NAVIGATION,
+                        flags: NEWLINE,
                     },
                     receiver: Some(
                         NodeRef(2),
@@ -134,6 +141,9 @@ Program {
             location: Location { start: 21, length: 40 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(1),
                         NodeRef(5),
@@ -146,6 +156,9 @@ Program {
             location: Location { start: 21, length: 40 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [
                         ConstantRef(1),
                     ],

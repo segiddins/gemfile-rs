@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "super\nsuper()\nsuper(a)\nsuper(a, b)\nsuper(&block)\nsuper(a, &block)\nsuper(a {\n  foo\n})\nsuper {\n  foo\n}\nsuper(a) {\n  foo\n}\nsuper() {\n  foo\n}\nsuper(a, b) {\n  foo\n}\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -46,6 +46,10 @@ Program {
             location: Location { start: 0, length: 5 },
             node_kind: ForwardingSuperNode(
                 ForwardingSuperNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     block: None,
                 },
             ),
@@ -55,6 +59,10 @@ Program {
             location: Location { start: 6, length: 7 },
             node_kind: SuperNode(
                 SuperNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     keyword_loc: Location { start: 6, length: 5 },
                     lparen_loc: Some(
                         Location { start: 11, length: 1 },
@@ -73,8 +81,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -108,6 +116,10 @@ Program {
             location: Location { start: 14, length: 8 },
             node_kind: SuperNode(
                 SuperNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     keyword_loc: Location { start: 14, length: 5 },
                     lparen_loc: Some(
                         Location { start: 19, length: 1 },
@@ -128,8 +140,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -150,8 +162,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -186,6 +198,10 @@ Program {
             location: Location { start: 23, length: 11 },
             node_kind: SuperNode(
                 SuperNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     keyword_loc: Location { start: 23, length: 5 },
                     lparen_loc: Some(
                         Location { start: 28, length: 1 },
@@ -206,8 +222,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -227,6 +243,9 @@ Program {
             location: Location { start: 41, length: 6 },
             node_kind: BlockArgumentNode(
                 BlockArgumentNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     expression: Some(
                         NodeRef(9),
                     ),
@@ -239,6 +258,10 @@ Program {
             location: Location { start: 35, length: 13 },
             node_kind: SuperNode(
                 SuperNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     keyword_loc: Location { start: 35, length: 5 },
                     lparen_loc: Some(
                         Location { start: 40, length: 1 },
@@ -259,8 +282,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -295,8 +318,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -316,6 +339,9 @@ Program {
             location: Location { start: 58, length: 6 },
             node_kind: BlockArgumentNode(
                 BlockArgumentNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     expression: Some(
                         NodeRef(14),
                     ),
@@ -328,6 +354,10 @@ Program {
             location: Location { start: 49, length: 16 },
             node_kind: SuperNode(
                 SuperNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     keyword_loc: Location { start: 49, length: 5 },
                     lparen_loc: Some(
                         Location { start: 54, length: 1 },
@@ -350,8 +380,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1001,
-                        flags: SAFE_NAVIGATION | IGNORE_VISIBILITY,
+                        bits: 0b101001,
+                        flags: NEWLINE | VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -371,6 +401,9 @@ Program {
             location: Location { start: 78, length: 3 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(17),
                     ],
@@ -382,6 +415,9 @@ Program {
             location: Location { start: 74, length: 9 },
             node_kind: BlockNode(
                 BlockNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     parameters: None,
                     body: Some(
@@ -398,7 +434,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b0,
+                        bits: 0b100000,
+                        flags: IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -434,6 +471,10 @@ Program {
             location: Location { start: 66, length: 18 },
             node_kind: SuperNode(
                 SuperNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     keyword_loc: Location { start: 66, length: 5 },
                     lparen_loc: Some(
                         Location { start: 71, length: 1 },
@@ -454,8 +495,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1001,
-                        flags: SAFE_NAVIGATION | IGNORE_VISIBILITY,
+                        bits: 0b101001,
+                        flags: NEWLINE | VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -475,6 +516,9 @@ Program {
             location: Location { start: 95, length: 3 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(23),
                     ],
@@ -486,6 +530,9 @@ Program {
             location: Location { start: 91, length: 9 },
             node_kind: BlockNode(
                 BlockNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     parameters: None,
                     body: Some(
@@ -501,6 +548,10 @@ Program {
             location: Location { start: 85, length: 15 },
             node_kind: ForwardingSuperNode(
                 ForwardingSuperNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     block: Some(
                         NodeRef(25),
                     ),
@@ -513,8 +564,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -549,8 +600,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1001,
-                        flags: SAFE_NAVIGATION | IGNORE_VISIBILITY,
+                        bits: 0b101001,
+                        flags: NEWLINE | VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -570,6 +621,9 @@ Program {
             location: Location { start: 114, length: 3 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(29),
                     ],
@@ -581,6 +635,9 @@ Program {
             location: Location { start: 110, length: 9 },
             node_kind: BlockNode(
                 BlockNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     parameters: None,
                     body: Some(
@@ -596,6 +653,10 @@ Program {
             location: Location { start: 101, length: 18 },
             node_kind: SuperNode(
                 SuperNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     keyword_loc: Location { start: 101, length: 5 },
                     lparen_loc: Some(
                         Location { start: 106, length: 1 },
@@ -618,8 +679,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1001,
-                        flags: SAFE_NAVIGATION | IGNORE_VISIBILITY,
+                        bits: 0b101001,
+                        flags: NEWLINE | VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -639,6 +700,9 @@ Program {
             location: Location { start: 132, length: 3 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(33),
                     ],
@@ -650,6 +714,9 @@ Program {
             location: Location { start: 128, length: 9 },
             node_kind: BlockNode(
                 BlockNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     parameters: None,
                     body: Some(
@@ -665,6 +732,10 @@ Program {
             location: Location { start: 120, length: 17 },
             node_kind: SuperNode(
                 SuperNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     keyword_loc: Location { start: 120, length: 5 },
                     lparen_loc: Some(
                         Location { start: 125, length: 1 },
@@ -685,8 +756,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -707,8 +778,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -744,8 +815,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1001,
-                        flags: SAFE_NAVIGATION | IGNORE_VISIBILITY,
+                        bits: 0b101001,
+                        flags: NEWLINE | VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -765,6 +836,9 @@ Program {
             location: Location { start: 154, length: 3 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(40),
                     ],
@@ -776,6 +850,9 @@ Program {
             location: Location { start: 150, length: 9 },
             node_kind: BlockNode(
                 BlockNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     parameters: None,
                     body: Some(
@@ -791,6 +868,10 @@ Program {
             location: Location { start: 138, length: 21 },
             node_kind: SuperNode(
                 SuperNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     keyword_loc: Location { start: 138, length: 5 },
                     lparen_loc: Some(
                         Location { start: 143, length: 1 },
@@ -812,6 +893,9 @@ Program {
             location: Location { start: 0, length: 159 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(0),
                         NodeRef(1),
@@ -833,6 +917,9 @@ Program {
             location: Location { start: 0, length: 159 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(44),
                 },

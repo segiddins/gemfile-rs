@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "a...b or c...d\na...b and c...d\n\nif a...b or c...d\nend\n\nif a...b and c...d\nend\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -34,8 +34,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -56,8 +56,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -78,7 +78,8 @@ Program {
             node_kind: RangeNode(
                 RangeNode {
                     flags: BitFlags<RangeFlags> {
-                        bits: 0b0,
+                        bits: 0b100,
+                        flags: EXCLUDE_END,
                     },
                     left: Some(
                         NodeRef(0),
@@ -96,8 +97,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -118,8 +119,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -140,7 +141,8 @@ Program {
             node_kind: RangeNode(
                 RangeNode {
                     flags: BitFlags<RangeFlags> {
-                        bits: 0b0,
+                        bits: 0b100,
+                        flags: EXCLUDE_END,
                     },
                     left: Some(
                         NodeRef(3),
@@ -157,6 +159,10 @@ Program {
             location: Location { start: 0, length: 14 },
             node_kind: OrNode(
                 OrNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     left: NodeRef(2),
                     right: NodeRef(5),
                     operator_loc: Location { start: 6, length: 2 },
@@ -169,8 +175,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -191,8 +197,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -213,7 +219,8 @@ Program {
             node_kind: RangeNode(
                 RangeNode {
                     flags: BitFlags<RangeFlags> {
-                        bits: 0b0,
+                        bits: 0b100,
+                        flags: EXCLUDE_END,
                     },
                     left: Some(
                         NodeRef(7),
@@ -231,8 +238,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -253,8 +260,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -275,7 +282,8 @@ Program {
             node_kind: RangeNode(
                 RangeNode {
                     flags: BitFlags<RangeFlags> {
-                        bits: 0b0,
+                        bits: 0b100,
+                        flags: EXCLUDE_END,
                     },
                     left: Some(
                         NodeRef(10),
@@ -292,6 +300,10 @@ Program {
             location: Location { start: 15, length: 15 },
             node_kind: AndNode(
                 AndNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     left: NodeRef(9),
                     right: NodeRef(12),
                     operator_loc: Location { start: 21, length: 3 },
@@ -304,8 +316,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -326,8 +338,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -348,7 +360,8 @@ Program {
             node_kind: FlipFlopNode(
                 FlipFlopNode {
                     flags: BitFlags<RangeFlags> {
-                        bits: 0b0,
+                        bits: 0b100,
+                        flags: EXCLUDE_END,
                     },
                     left: Some(
                         NodeRef(14),
@@ -366,8 +379,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -388,8 +401,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -410,7 +423,8 @@ Program {
             node_kind: FlipFlopNode(
                 FlipFlopNode {
                     flags: BitFlags<RangeFlags> {
-                        bits: 0b0,
+                        bits: 0b100,
+                        flags: EXCLUDE_END,
                     },
                     left: Some(
                         NodeRef(17),
@@ -427,6 +441,9 @@ Program {
             location: Location { start: 35, length: 14 },
             node_kind: OrNode(
                 OrNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     left: NodeRef(16),
                     right: NodeRef(19),
                     operator_loc: Location { start: 41, length: 2 },
@@ -438,6 +455,10 @@ Program {
             location: Location { start: 32, length: 21 },
             node_kind: IfNode(
                 IfNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     if_keyword_loc: Some(
                         Location { start: 32, length: 2 },
                     ),
@@ -457,8 +478,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -479,8 +500,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -501,7 +522,8 @@ Program {
             node_kind: FlipFlopNode(
                 FlipFlopNode {
                     flags: BitFlags<RangeFlags> {
-                        bits: 0b0,
+                        bits: 0b100,
+                        flags: EXCLUDE_END,
                     },
                     left: Some(
                         NodeRef(22),
@@ -519,8 +541,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -541,8 +563,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -563,7 +585,8 @@ Program {
             node_kind: FlipFlopNode(
                 FlipFlopNode {
                     flags: BitFlags<RangeFlags> {
-                        bits: 0b0,
+                        bits: 0b100,
+                        flags: EXCLUDE_END,
                     },
                     left: Some(
                         NodeRef(25),
@@ -580,6 +603,9 @@ Program {
             location: Location { start: 58, length: 15 },
             node_kind: AndNode(
                 AndNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     left: NodeRef(24),
                     right: NodeRef(27),
                     operator_loc: Location { start: 64, length: 3 },
@@ -591,6 +617,10 @@ Program {
             location: Location { start: 55, length: 22 },
             node_kind: IfNode(
                 IfNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     if_keyword_loc: Some(
                         Location { start: 55, length: 2 },
                     ),
@@ -609,6 +639,9 @@ Program {
             location: Location { start: 0, length: 77 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(6),
                         NodeRef(13),
@@ -623,6 +656,9 @@ Program {
             location: Location { start: 0, length: 77 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(30),
                 },

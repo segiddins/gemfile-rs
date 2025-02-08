@@ -166,11 +166,13 @@ fn parse(input: String) -> Program {
 
     drop(parse_result);
 
-    Program {
+    let program = Program {
         source: input,
         expressions,
         toplevel_statements,
-    }
+    };
+
+    program
 }
 
 #[test]

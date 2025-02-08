@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "begin\n\nrescue\n\nelse\n\nensure\n\nend\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -34,6 +34,9 @@ Program {
             location: Location { start: 7, length: 6 },
             node_kind: RescueNode(
                 RescueNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     keyword_loc: Location { start: 7, length: 6 },
                     exceptions: [],
                     operator_loc: None,
@@ -49,6 +52,9 @@ Program {
             location: Location { start: 15, length: 12 },
             node_kind: ElseNode(
                 ElseNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     else_keyword_loc: Location { start: 15, length: 4 },
                     statements: None,
                     end_keyword_loc: Some(
@@ -62,6 +68,9 @@ Program {
             location: Location { start: 21, length: 11 },
             node_kind: EnsureNode(
                 EnsureNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     ensure_keyword_loc: Location { start: 21, length: 6 },
                     statements: None,
                     end_keyword_loc: Location { start: 29, length: 3 },
@@ -73,6 +82,10 @@ Program {
             location: Location { start: 0, length: 32 },
             node_kind: BeginNode(
                 BeginNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     begin_keyword_loc: Some(
                         Location { start: 0, length: 5 },
                     ),
@@ -97,6 +110,9 @@ Program {
             location: Location { start: 0, length: 32 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(3),
                     ],
@@ -108,6 +124,9 @@ Program {
             location: Location { start: 0, length: 32 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(4),
                 },

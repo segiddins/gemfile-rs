@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "a \"\\\\n\";b\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -36,7 +36,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 6, length: 1 },
                     ),
-                    unescaped: "\\n",
+                    unescaped: Owned("\\n"),
                 },
             ),
         },
@@ -60,8 +60,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1,
-                        flags: SAFE_NAVIGATION,
+                        bits: 0b100001,
+                        flags: NEWLINE | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -84,8 +84,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1001,
-                        flags: SAFE_NAVIGATION | IGNORE_VISIBILITY,
+                        bits: 0b101001,
+                        flags: NEWLINE | VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -105,6 +105,9 @@ Program {
             location: Location { start: 0, length: 9 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(2),
                         NodeRef(3),
@@ -117,6 +120,9 @@ Program {
             location: Location { start: 0, length: 9 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(4),
                 },

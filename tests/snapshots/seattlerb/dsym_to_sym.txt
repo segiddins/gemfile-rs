@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "alias :\"<<\" :\">>\"\n\nalias :<< :>>\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -29,8 +29,8 @@ Program {
             node_kind: SymbolNode(
                 SymbolNode {
                     flags: BitFlags<SymbolFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FORCED_US_ASCII_ENCODING,
                     },
                     opening_loc: Some(
                         Location { start: 6, length: 2 },
@@ -41,7 +41,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 10, length: 1 },
                     ),
-                    unescaped: "",
+                    unescaped: Shared(8, 2),
                 },
             ),
         },
@@ -51,8 +51,8 @@ Program {
             node_kind: SymbolNode(
                 SymbolNode {
                     flags: BitFlags<SymbolFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FORCED_US_ASCII_ENCODING,
                     },
                     opening_loc: Some(
                         Location { start: 12, length: 2 },
@@ -63,7 +63,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 16, length: 1 },
                     ),
-                    unescaped: "",
+                    unescaped: Shared(14, 2),
                 },
             ),
         },
@@ -72,6 +72,10 @@ Program {
             location: Location { start: 0, length: 17 },
             node_kind: AliasMethodNode(
                 AliasMethodNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     new_name: NodeRef(0),
                     old_name: NodeRef(1),
                     keyword_loc: Location { start: 0, length: 5 },
@@ -84,8 +88,8 @@ Program {
             node_kind: SymbolNode(
                 SymbolNode {
                     flags: BitFlags<SymbolFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FORCED_US_ASCII_ENCODING,
                     },
                     opening_loc: Some(
                         Location { start: 25, length: 1 },
@@ -94,7 +98,7 @@ Program {
                         Location { start: 26, length: 2 },
                     ),
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(26, 2),
                 },
             ),
         },
@@ -104,8 +108,8 @@ Program {
             node_kind: SymbolNode(
                 SymbolNode {
                     flags: BitFlags<SymbolFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FORCED_US_ASCII_ENCODING,
                     },
                     opening_loc: Some(
                         Location { start: 29, length: 1 },
@@ -114,7 +118,7 @@ Program {
                         Location { start: 30, length: 2 },
                     ),
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(30, 2),
                 },
             ),
         },
@@ -123,6 +127,10 @@ Program {
             location: Location { start: 19, length: 13 },
             node_kind: AliasMethodNode(
                 AliasMethodNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     new_name: NodeRef(3),
                     old_name: NodeRef(4),
                     keyword_loc: Location { start: 19, length: 5 },
@@ -134,6 +142,9 @@ Program {
             location: Location { start: 0, length: 32 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(2),
                         NodeRef(5),
@@ -146,6 +157,9 @@ Program {
             location: Location { start: 0, length: 32 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(6),
                 },

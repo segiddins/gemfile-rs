@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "p <<-END+'b\n  a\n  END\n  c'+'d'\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -39,7 +39,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 16, length: 6 },
                     ),
-                    unescaped: "",
+                    unescaped: Shared(12, 4),
                 },
             ),
         },
@@ -49,13 +49,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 10, length: 2 },
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(10, 2),
                 },
             ),
         },
@@ -65,13 +65,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 22, length: 3 },
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(22, 3),
                 },
             ),
         },
@@ -82,7 +82,7 @@ Program {
                 InterpolatedStringNode {
                     flags: BitFlags<InterpolatedStringNodeFlags> {
                         bits: 0b10,
-                        flags: MUTABLE,
+                        flags: STATIC_LITERAL,
                     },
                     opening_loc: Some(
                         Location { start: 9, length: 1 },
@@ -151,7 +151,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 29, length: 1 },
                     ),
-                    unescaped: "",
+                    unescaped: Shared(28, 1),
                 },
             ),
         },
@@ -214,8 +214,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1,
-                        flags: SAFE_NAVIGATION,
+                        bits: 0b100001,
+                        flags: NEWLINE | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -237,6 +237,9 @@ Program {
             location: Location { start: 0, length: 30 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(10),
                     ],
@@ -248,6 +251,9 @@ Program {
             location: Location { start: 0, length: 30 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(11),
                 },

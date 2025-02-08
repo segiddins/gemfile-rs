@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "<<A+%\nA\n\n\n<<A+%r\nA\n\n\n<<A+%q\nA\n\n\n<<A+%Q\nA\n\n\n<<A+%s\nA\n\n\n<<A+%x\nA\n\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -95,7 +95,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 6, length: 2 },
                     ),
-                    unescaped: "",
+                    unescaped: Owned(""),
                 },
             ),
         },
@@ -114,7 +114,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 8, length: 1 },
                     ),
-                    unescaped: "",
+                    unescaped: Shared(8, 0),
                 },
             ),
         },
@@ -139,7 +139,7 @@ Program {
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
                         bits: 0b1,
-                        flags: SAFE_NAVIGATION,
+                        flags: NEWLINE,
                     },
                     receiver: Some(
                         NodeRef(0),
@@ -173,7 +173,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 17, length: 2 },
                     ),
-                    unescaped: "",
+                    unescaped: Owned(""),
                 },
             ),
         },
@@ -183,13 +183,13 @@ Program {
             node_kind: RegularExpressionNode(
                 RegularExpressionNode {
                     flags: BitFlags<RegularExpressionFlags> {
-                        bits: 0b10,
-                        flags: EXTENDED,
+                        bits: 0b1000000000010,
+                        flags: STATIC_LITERAL | FORCED_US_ASCII_ENCODING,
                     },
                     opening_loc: Location { start: 14, length: 3 },
                     content_loc: Location { start: 17, length: 0 },
                     closing_loc: Location { start: 19, length: 1 },
-                    unescaped: "",
+                    unescaped: Owned(""),
                 },
             ),
         },
@@ -214,7 +214,7 @@ Program {
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
                         bits: 0b1,
-                        flags: SAFE_NAVIGATION,
+                        flags: NEWLINE,
                     },
                     receiver: Some(
                         NodeRef(4),
@@ -248,7 +248,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 28, length: 2 },
                     ),
-                    unescaped: "",
+                    unescaped: Owned(""),
                 },
             ),
         },
@@ -267,7 +267,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 30, length: 1 },
                     ),
-                    unescaped: "",
+                    unescaped: Shared(30, 0),
                 },
             ),
         },
@@ -292,7 +292,7 @@ Program {
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
                         bits: 0b1,
-                        flags: SAFE_NAVIGATION,
+                        flags: NEWLINE,
                     },
                     receiver: Some(
                         NodeRef(8),
@@ -326,7 +326,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 39, length: 2 },
                     ),
-                    unescaped: "",
+                    unescaped: Owned(""),
                 },
             ),
         },
@@ -345,7 +345,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 41, length: 1 },
                     ),
-                    unescaped: "",
+                    unescaped: Shared(41, 0),
                 },
             ),
         },
@@ -370,7 +370,7 @@ Program {
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
                         bits: 0b1,
-                        flags: SAFE_NAVIGATION,
+                        flags: NEWLINE,
                     },
                     receiver: Some(
                         NodeRef(12),
@@ -404,7 +404,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 50, length: 2 },
                     ),
-                    unescaped: "",
+                    unescaped: Owned(""),
                 },
             ),
         },
@@ -414,8 +414,8 @@ Program {
             node_kind: SymbolNode(
                 SymbolNode {
                     flags: BitFlags<SymbolFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FORCED_US_ASCII_ENCODING,
                     },
                     opening_loc: Some(
                         Location { start: 47, length: 3 },
@@ -426,7 +426,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 52, length: 1 },
                     ),
-                    unescaped: "",
+                    unescaped: Shared(50, 0),
                 },
             ),
         },
@@ -451,7 +451,7 @@ Program {
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
                         bits: 0b1,
-                        flags: SAFE_NAVIGATION,
+                        flags: NEWLINE,
                     },
                     receiver: Some(
                         NodeRef(16),
@@ -485,7 +485,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 61, length: 2 },
                     ),
-                    unescaped: "",
+                    unescaped: Owned(""),
                 },
             ),
         },
@@ -500,7 +500,7 @@ Program {
                     opening_loc: Location { start: 58, length: 3 },
                     content_loc: Location { start: 61, length: 0 },
                     closing_loc: Location { start: 63, length: 1 },
-                    unescaped: "",
+                    unescaped: Owned(""),
                 },
             ),
         },
@@ -525,7 +525,7 @@ Program {
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
                         bits: 0b1,
-                        flags: SAFE_NAVIGATION,
+                        flags: NEWLINE,
                     },
                     receiver: Some(
                         NodeRef(20),
@@ -549,6 +549,9 @@ Program {
             location: Location { start: 0, length: 64 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(3),
                         NodeRef(7),
@@ -565,6 +568,9 @@ Program {
             location: Location { start: 0, length: 64 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(24),
                 },

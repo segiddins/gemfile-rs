@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "/\n  \\n\n  \\n\n  exit\n  \\\\n\n  \\n\\n\\n\\n\n  argh\n  \\\\\n  \\\\\\\n  foo\\nbar\n  \\f\n  ok\n/\n\n%r{\n  \\n\n  \\n\n  exit\n  \\\\n\n  \\n\\n\\n\\n\n  argh\n  \\\\\n  \\\\\\\n  foo\\nbar\n  \\f\n  ok\n}\n\n%r{\n  #{123}\\n\n  \\n\n  exit\\\\\\\n  \\\\#{123}n\n  \\n#{123}\\n\\n\\n\n  argh\\\n  \\\\#{123}baz\\\\\n  \\\\\\\n  foo\\nbar\n  \\f\n  ok\n}\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -86,13 +86,13 @@ Program {
             node_kind: RegularExpressionNode(
                 RegularExpressionNode {
                     flags: BitFlags<RegularExpressionFlags> {
-                        bits: 0b11,
-                        flags: IGNORE_CASE | EXTENDED,
+                        bits: 0b1000000000011,
+                        flags: NEWLINE | STATIC_LITERAL | FORCED_US_ASCII_ENCODING,
                     },
                     opening_loc: Location { start: 0, length: 1 },
                     content_loc: Location { start: 1, length: 74 },
                     closing_loc: Location { start: 75, length: 1 },
-                    unescaped: "\n  \\n\n  \\n\n  exit\n  \\\\n\n  \\n\\n\\n\\n\n  argh\n  \\\\\n  \\\\  foo\\nbar\n  \\f\n  ok\n",
+                    unescaped: Owned("\n  \\n\n  \\n\n  exit\n  \\\\n\n  \\n\\n\\n\\n\n  argh\n  \\\\\n  \\\\  foo\\nbar\n  \\f\n  ok\n"),
                 },
             ),
         },
@@ -102,13 +102,13 @@ Program {
             node_kind: RegularExpressionNode(
                 RegularExpressionNode {
                     flags: BitFlags<RegularExpressionFlags> {
-                        bits: 0b11,
-                        flags: IGNORE_CASE | EXTENDED,
+                        bits: 0b1000000000011,
+                        flags: NEWLINE | STATIC_LITERAL | FORCED_US_ASCII_ENCODING,
                     },
                     opening_loc: Location { start: 78, length: 3 },
                     content_loc: Location { start: 81, length: 74 },
                     closing_loc: Location { start: 155, length: 1 },
-                    unescaped: "\n  \\n\n  \\n\n  exit\n  \\\\n\n  \\n\\n\\n\\n\n  argh\n  \\\\\n  \\\\  foo\\nbar\n  \\f\n  ok\n",
+                    unescaped: Owned("\n  \\n\n  \\n\n  exit\n  \\\\n\n  \\n\\n\\n\\n\n  argh\n  \\\\\n  \\\\  foo\\nbar\n  \\f\n  ok\n"),
                 },
             ),
         },
@@ -118,13 +118,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 161, length: 3 },
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(161, 3),
                 },
             ),
         },
@@ -135,7 +135,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -151,6 +151,9 @@ Program {
             location: Location { start: 166, length: 3 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(3),
                     ],
@@ -162,6 +165,9 @@ Program {
             location: Location { start: 164, length: 6 },
             node_kind: EmbeddedStatementsNode(
                 EmbeddedStatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     opening_loc: Location { start: 164, length: 2 },
                     statements: Some(
                         NodeRef(4),
@@ -176,13 +182,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 170, length: 22 },
                     closing_loc: None,
-                    unescaped: "\\n\n  \\n\n  exit\\\\  \\\\",
+                    unescaped: Owned("\\n\n  \\n\n  exit\\\\  \\\\"),
                 },
             ),
         },
@@ -193,7 +199,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -209,6 +215,9 @@ Program {
             location: Location { start: 194, length: 3 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(7),
                     ],
@@ -220,6 +229,9 @@ Program {
             location: Location { start: 192, length: 6 },
             node_kind: EmbeddedStatementsNode(
                 EmbeddedStatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     opening_loc: Location { start: 192, length: 2 },
                     statements: Some(
                         NodeRef(8),
@@ -234,13 +246,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 198, length: 6 },
                     closing_loc: None,
-                    unescaped: "n\n  \\n",
+                    unescaped: Owned("n\n  \\n"),
                 },
             ),
         },
@@ -251,7 +263,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -267,6 +279,9 @@ Program {
             location: Location { start: 206, length: 3 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(11),
                     ],
@@ -278,6 +293,9 @@ Program {
             location: Location { start: 204, length: 6 },
             node_kind: EmbeddedStatementsNode(
                 EmbeddedStatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     opening_loc: Location { start: 204, length: 2 },
                     statements: Some(
                         NodeRef(12),
@@ -292,13 +310,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 210, length: 19 },
                     closing_loc: None,
-                    unescaped: "\\n\\n\\n\n  argh  \\\\",
+                    unescaped: Owned("\\n\\n\\n\n  argh  \\\\"),
                 },
             ),
         },
@@ -309,7 +327,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -325,6 +343,9 @@ Program {
             location: Location { start: 231, length: 3 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(15),
                     ],
@@ -336,6 +357,9 @@ Program {
             location: Location { start: 229, length: 6 },
             node_kind: EmbeddedStatementsNode(
                 EmbeddedStatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     opening_loc: Location { start: 229, length: 2 },
                     statements: Some(
                         NodeRef(16),
@@ -350,13 +374,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 235, length: 33 },
                     closing_loc: None,
-                    unescaped: "baz\\\\\n  \\\\  foo\\nbar\n  \\f\n  ok\n",
+                    unescaped: Owned("baz\\\\\n  \\\\  foo\\nbar\n  \\f\n  ok\n"),
                 },
             ),
         },
@@ -367,7 +391,7 @@ Program {
                 InterpolatedRegularExpressionNode {
                     flags: BitFlags<RegularExpressionFlags> {
                         bits: 0b1,
-                        flags: IGNORE_CASE,
+                        flags: NEWLINE,
                     },
                     opening_loc: Location { start: 158, length: 3 },
                     parts: [
@@ -390,6 +414,9 @@ Program {
             location: Location { start: 0, length: 269 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(0),
                         NodeRef(1),
@@ -403,6 +430,9 @@ Program {
             location: Location { start: 0, length: 269 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(20),
                 },

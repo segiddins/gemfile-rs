@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "Bar::Foo\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -33,6 +33,9 @@ Program {
             location: Location { start: 0, length: 3 },
             node_kind: ConstantReadNode(
                 ConstantReadNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(1),
                 },
             ),
@@ -42,6 +45,10 @@ Program {
             location: Location { start: 0, length: 8 },
             node_kind: ConstantPathNode(
                 ConstantPathNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     parent: Some(
                         NodeRef(0),
                     ),
@@ -58,6 +65,9 @@ Program {
             location: Location { start: 0, length: 8 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(1),
                     ],
@@ -69,6 +79,9 @@ Program {
             location: Location { start: 0, length: 8 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(2),
                 },

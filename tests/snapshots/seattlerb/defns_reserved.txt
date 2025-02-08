@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "def self.return; end\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -25,7 +25,11 @@ Program {
             identifier: 2,
             location: Location { start: 4, length: 4 },
             node_kind: SelfNode(
-                SelfNode,
+                SelfNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
+                },
             ),
         },
         Node {
@@ -33,6 +37,10 @@ Program {
             location: Location { start: 0, length: 20 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(1),
                     name_loc: Location { start: 9, length: 6 },
                     receiver: Some(
@@ -59,6 +67,9 @@ Program {
             location: Location { start: 0, length: 20 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(1),
                     ],
@@ -70,6 +81,9 @@ Program {
             location: Location { start: 0, length: 20 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(2),
                 },

@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "\"#@a #@@a #$a\"\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -33,6 +33,9 @@ Program {
             location: Location { start: 2, length: 2 },
             node_kind: InstanceVariableReadNode(
                 InstanceVariableReadNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(1),
                 },
             ),
@@ -42,6 +45,9 @@ Program {
             location: Location { start: 1, length: 3 },
             node_kind: EmbeddedVariableNode(
                 EmbeddedVariableNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     operator_loc: Location { start: 1, length: 1 },
                     variable: NodeRef(0),
                 },
@@ -53,13 +59,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 4, length: 1 },
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(4, 1),
                 },
             ),
         },
@@ -68,6 +74,9 @@ Program {
             location: Location { start: 6, length: 3 },
             node_kind: ClassVariableReadNode(
                 ClassVariableReadNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(2),
                 },
             ),
@@ -77,6 +86,9 @@ Program {
             location: Location { start: 5, length: 4 },
             node_kind: EmbeddedVariableNode(
                 EmbeddedVariableNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     operator_loc: Location { start: 5, length: 1 },
                     variable: NodeRef(3),
                 },
@@ -88,13 +100,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 9, length: 1 },
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(9, 1),
                 },
             ),
         },
@@ -103,6 +115,9 @@ Program {
             location: Location { start: 11, length: 2 },
             node_kind: GlobalVariableReadNode(
                 GlobalVariableReadNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(3),
                 },
             ),
@@ -112,6 +127,9 @@ Program {
             location: Location { start: 10, length: 3 },
             node_kind: EmbeddedVariableNode(
                 EmbeddedVariableNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     operator_loc: Location { start: 10, length: 1 },
                     variable: NodeRef(6),
                 },
@@ -124,7 +142,7 @@ Program {
                 InterpolatedStringNode {
                     flags: BitFlags<InterpolatedStringNodeFlags> {
                         bits: 0b1,
-                        flags: FROZEN,
+                        flags: NEWLINE,
                     },
                     opening_loc: Some(
                         Location { start: 0, length: 1 },
@@ -147,6 +165,9 @@ Program {
             location: Location { start: 0, length: 14 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(8),
                     ],
@@ -158,6 +179,9 @@ Program {
             location: Location { start: 0, length: 14 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(9),
                 },

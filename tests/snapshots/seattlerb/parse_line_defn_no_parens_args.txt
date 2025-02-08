@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "def f a\nend\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -39,6 +39,9 @@ Program {
             location: Location { start: 6, length: 1 },
             node_kind: ParametersNode(
                 ParametersNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     requireds: [
                         NodeRef(0),
                     ],
@@ -56,6 +59,10 @@ Program {
             location: Location { start: 0, length: 11 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(2),
                     name_loc: Location { start: 4, length: 1 },
                     receiver: None,
@@ -82,6 +89,9 @@ Program {
             location: Location { start: 0, length: 11 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(2),
                     ],
@@ -93,6 +103,9 @@ Program {
             location: Location { start: 0, length: 11 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(3),
                 },

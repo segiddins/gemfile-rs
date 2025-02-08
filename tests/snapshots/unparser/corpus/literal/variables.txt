@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "a\n@a\n@@a\n$a\n$1\n$`\nCONST\nSCOPED::CONST\n::TOPLEVEL\n::TOPLEVEL::CONST\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -91,8 +91,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1001,
-                        flags: SAFE_NAVIGATION | IGNORE_VISIBILITY,
+                        bits: 0b101001,
+                        flags: NEWLINE | VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -112,6 +112,10 @@ Program {
             location: Location { start: 2, length: 2 },
             node_kind: InstanceVariableReadNode(
                 InstanceVariableReadNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(2),
                 },
             ),
@@ -121,6 +125,10 @@ Program {
             location: Location { start: 5, length: 3 },
             node_kind: ClassVariableReadNode(
                 ClassVariableReadNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(3),
                 },
             ),
@@ -130,6 +138,10 @@ Program {
             location: Location { start: 9, length: 2 },
             node_kind: GlobalVariableReadNode(
                 GlobalVariableReadNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(4),
                 },
             ),
@@ -139,6 +151,10 @@ Program {
             location: Location { start: 12, length: 2 },
             node_kind: NumberedReferenceReadNode(
                 NumberedReferenceReadNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     number: 1,
                 },
             ),
@@ -148,6 +164,10 @@ Program {
             location: Location { start: 15, length: 2 },
             node_kind: BackReferenceReadNode(
                 BackReferenceReadNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(5),
                 },
             ),
@@ -157,6 +177,10 @@ Program {
             location: Location { start: 18, length: 5 },
             node_kind: ConstantReadNode(
                 ConstantReadNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(6),
                 },
             ),
@@ -166,6 +190,9 @@ Program {
             location: Location { start: 24, length: 6 },
             node_kind: ConstantReadNode(
                 ConstantReadNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(7),
                 },
             ),
@@ -175,6 +202,10 @@ Program {
             location: Location { start: 24, length: 13 },
             node_kind: ConstantPathNode(
                 ConstantPathNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     parent: Some(
                         NodeRef(7),
                     ),
@@ -191,6 +222,10 @@ Program {
             location: Location { start: 38, length: 10 },
             node_kind: ConstantPathNode(
                 ConstantPathNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     parent: None,
                     name: Some(
                         ConstantRef(8),
@@ -205,6 +240,9 @@ Program {
             location: Location { start: 49, length: 10 },
             node_kind: ConstantPathNode(
                 ConstantPathNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     parent: None,
                     name: Some(
                         ConstantRef(8),
@@ -219,6 +257,10 @@ Program {
             location: Location { start: 49, length: 17 },
             node_kind: ConstantPathNode(
                 ConstantPathNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     parent: Some(
                         NodeRef(10),
                     ),
@@ -235,6 +277,9 @@ Program {
             location: Location { start: 0, length: 66 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(0),
                         NodeRef(1),
@@ -255,6 +300,9 @@ Program {
             location: Location { start: 0, length: 66 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(12),
                 },

@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "def f(a, b = :c, d) end\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -39,8 +39,8 @@ Program {
             node_kind: SymbolNode(
                 SymbolNode {
                     flags: BitFlags<SymbolFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FORCED_US_ASCII_ENCODING,
                     },
                     opening_loc: Some(
                         Location { start: 13, length: 1 },
@@ -49,7 +49,7 @@ Program {
                         Location { start: 14, length: 1 },
                     ),
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(14, 1),
                 },
             ),
         },
@@ -85,6 +85,9 @@ Program {
             location: Location { start: 6, length: 12 },
             node_kind: ParametersNode(
                 ParametersNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     requireds: [
                         NodeRef(0),
                     ],
@@ -106,6 +109,10 @@ Program {
             location: Location { start: 0, length: 23 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(4),
                     name_loc: Location { start: 4, length: 1 },
                     receiver: None,
@@ -138,6 +145,9 @@ Program {
             location: Location { start: 0, length: 23 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(5),
                     ],
@@ -149,6 +159,9 @@ Program {
             location: Location { start: 0, length: 23 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(6),
                 },

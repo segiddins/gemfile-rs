@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "[\"  some text\n\",]\n\n[<<-FILE,\n  some text\nFILE\n]\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -42,7 +42,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 14, length: 1 },
                     ),
-                    unescaped: "",
+                    unescaped: Shared(2, 12),
                 },
             ),
         },
@@ -53,7 +53,7 @@ Program {
                 ArrayNode {
                     flags: BitFlags<ArrayNodeFlags> {
                         bits: 0b1,
-                        flags: CONTAINS_SPLAT,
+                        flags: NEWLINE,
                     },
                     elements: [
                         NodeRef(0),
@@ -82,7 +82,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 41, length: 5 },
                     ),
-                    unescaped: "",
+                    unescaped: Shared(29, 12),
                 },
             ),
         },
@@ -93,7 +93,7 @@ Program {
                 ArrayNode {
                     flags: BitFlags<ArrayNodeFlags> {
                         bits: 0b1,
-                        flags: CONTAINS_SPLAT,
+                        flags: NEWLINE,
                     },
                     elements: [
                         NodeRef(2),
@@ -112,6 +112,9 @@ Program {
             location: Location { start: 0, length: 47 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(1),
                         NodeRef(3),
@@ -124,6 +127,9 @@ Program {
             location: Location { start: 0, length: 47 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(4),
                 },

@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "::A, ::B = 1, 2\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -26,6 +26,9 @@ Program {
             location: Location { start: 0, length: 3 },
             node_kind: ConstantPathTargetNode(
                 ConstantPathTargetNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     parent: None,
                     name: Some(
                         ConstantRef(1),
@@ -40,6 +43,9 @@ Program {
             location: Location { start: 5, length: 3 },
             node_kind: ConstantPathTargetNode(
                 ConstantPathTargetNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     parent: None,
                     name: Some(
                         ConstantRef(2),
@@ -56,7 +62,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -74,7 +80,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -91,7 +97,8 @@ Program {
             node_kind: ArrayNode(
                 ArrayNode {
                     flags: BitFlags<ArrayNodeFlags> {
-                        bits: 0b0,
+                        bits: 0b10,
+                        flags: STATIC_LITERAL,
                     },
                     elements: [
                         NodeRef(2),
@@ -107,6 +114,10 @@ Program {
             location: Location { start: 0, length: 15 },
             node_kind: MultiWriteNode(
                 MultiWriteNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     lefts: [
                         NodeRef(0),
                         NodeRef(1),
@@ -125,6 +136,9 @@ Program {
             location: Location { start: 0, length: 15 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(5),
                     ],
@@ -136,6 +150,9 @@ Program {
             location: Location { start: 0, length: 15 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(6),
                 },

@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "# encoding: euc-jp\n\n# \\x8E indicates a double-byte character, \\x01 is not a valid second byte in euc-jp\n\"\\x8E\\x01\"\n\n%W[\"\\x8E\\x01\"]\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -51,7 +51,7 @@ Program {
                 StringNode {
                     flags: BitFlags<StringFlags> {
                         bits: 0b1,
-                        flags: FORCED_UTF8_ENCODING,
+                        flags: NEWLINE,
                     },
                     opening_loc: Some(
                         Location { start: 104, length: 1 },
@@ -60,7 +60,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 113, length: 1 },
                     ),
-                    unescaped: "�\u{1}",
+                    unescaped: Owned("�\u{1}"),
                 },
             ),
         },
@@ -75,7 +75,7 @@ Program {
                     opening_loc: None,
                     content_loc: Location { start: 119, length: 10 },
                     closing_loc: None,
-                    unescaped: "\"�\u{1}\"",
+                    unescaped: Owned("\"�\u{1}\""),
                 },
             ),
         },
@@ -86,7 +86,7 @@ Program {
                 ArrayNode {
                     flags: BitFlags<ArrayNodeFlags> {
                         bits: 0b1,
-                        flags: CONTAINS_SPLAT,
+                        flags: NEWLINE,
                     },
                     elements: [
                         NodeRef(1),
@@ -105,6 +105,9 @@ Program {
             location: Location { start: 104, length: 26 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(0),
                         NodeRef(2),
@@ -117,6 +120,9 @@ Program {
             location: Location { start: 104, length: 26 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(3),
                 },

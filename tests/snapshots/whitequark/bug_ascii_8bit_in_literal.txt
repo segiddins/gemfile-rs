@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "# coding:utf-8\n         \"\\xD0\\xBF\\xD1\\x80\\xD0\\xBE\\xD0\\xB2\\xD0\\xB5\\xD1\\x80\\xD0\\xBA\\xD0\\xB0\"\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -43,7 +43,7 @@ Program {
                 StringNode {
                     flags: BitFlags<StringFlags> {
                         bits: 0b101,
-                        flags: FORCED_UTF8_ENCODING | FROZEN,
+                        flags: NEWLINE | FORCED_UTF8_ENCODING,
                     },
                     opening_loc: Some(
                         Location { start: 24, length: 1 },
@@ -52,7 +52,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 89, length: 1 },
                     ),
-                    unescaped: "проверка",
+                    unescaped: Owned("проверка"),
                 },
             ),
         },
@@ -61,6 +61,9 @@ Program {
             location: Location { start: 24, length: 66 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(0),
                     ],
@@ -72,6 +75,9 @@ Program {
             location: Location { start: 24, length: 66 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(1),
                 },

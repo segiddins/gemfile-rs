@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "<<' FOO'\n[Bug #19539]\n FOO\n\n\n<<-' FOO'\n[Bug #19539]\n FOO\n\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -49,7 +49,7 @@ Program {
                 StringNode {
                     flags: BitFlags<StringFlags> {
                         bits: 0b1,
-                        flags: FORCED_UTF8_ENCODING,
+                        flags: NEWLINE,
                     },
                     opening_loc: Some(
                         Location { start: 0, length: 8 },
@@ -58,7 +58,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 22, length: 5 },
                     ),
-                    unescaped: "",
+                    unescaped: Shared(9, 13),
                 },
             ),
         },
@@ -69,7 +69,7 @@ Program {
                 StringNode {
                     flags: BitFlags<StringFlags> {
                         bits: 0b1,
-                        flags: FORCED_UTF8_ENCODING,
+                        flags: NEWLINE,
                     },
                     opening_loc: Some(
                         Location { start: 29, length: 9 },
@@ -78,7 +78,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 52, length: 5 },
                     ),
-                    unescaped: "",
+                    unescaped: Shared(39, 13),
                 },
             ),
         },
@@ -87,6 +87,9 @@ Program {
             location: Location { start: 0, length: 38 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(0),
                         NodeRef(1),
@@ -99,6 +102,9 @@ Program {
             location: Location { start: 0, length: 38 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(2),
                 },

@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "<<~EOF\n  a\n#{1}\n  a\nEOF\n\n<<~EOF\n  a\nEOF\n\n<<~EOF\n\ta\n  b\n\t\tc\nEOF\n\n<<~EOF\n  #{1} a\nEOF\n\n<<~EOF\n  a #{1}\nEOF\n\n<<~EOF\n  a\n #{1}\nEOF\n\n<<~EOF\n  a\n  #{1}\nEOF\n\n<<~EOF\n  a\n  b\nEOF\n\n<<~EOF\n  a\n   b\nEOF\n\n<<~EOF\n\t\t\ta\n\t\tb\nEOF\n\n<<~'EOF'\n  a #{1}\nEOF\n\n<<~EOF\n\ta\n\t b\nEOF\n\n<<~EOF\n\t a\n\tb\nEOF\n\n<<~EOF\n  \ta\n        b\nEOF\n\n<<~EOF\n  a\n\n  b\nEOF\n\n<<~EOF\n  a\n\n  b\nEOF\n\n<<~EOF\n  a\n\n\n\n  b\nEOF\n\n<<~EOF\n\n  #{1}a\n    EOF\n\n<<~EOT\n  #{1}\n\tb\nEOT\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -238,13 +238,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 7, length: 4 },
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(7, 4),
                 },
             ),
         },
@@ -255,7 +255,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -271,6 +271,9 @@ Program {
             location: Location { start: 13, length: 1 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(1),
                     ],
@@ -282,6 +285,9 @@ Program {
             location: Location { start: 11, length: 4 },
             node_kind: EmbeddedStatementsNode(
                 EmbeddedStatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     opening_loc: Location { start: 11, length: 2 },
                     statements: Some(
                         NodeRef(2),
@@ -296,13 +302,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 15, length: 1 },
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(15, 1),
                 },
             ),
         },
@@ -312,13 +318,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 16, length: 4 },
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(16, 4),
                 },
             ),
         },
@@ -329,7 +335,7 @@ Program {
                 InterpolatedStringNode {
                     flags: BitFlags<InterpolatedStringNodeFlags> {
                         bits: 0b1,
-                        flags: FROZEN,
+                        flags: NEWLINE,
                     },
                     opening_loc: Some(
                         Location { start: 0, length: 6 },
@@ -353,7 +359,7 @@ Program {
                 StringNode {
                     flags: BitFlags<StringFlags> {
                         bits: 0b1,
-                        flags: FORCED_UTF8_ENCODING,
+                        flags: NEWLINE,
                     },
                     opening_loc: Some(
                         Location { start: 25, length: 6 },
@@ -362,7 +368,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 36, length: 4 },
                     ),
-                    unescaped: "a\n",
+                    unescaped: Owned("a\n"),
                 },
             ),
         },
@@ -372,13 +378,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 48, length: 3 },
                     closing_loc: None,
-                    unescaped: "\ta\n",
+                    unescaped: Owned("\ta\n"),
                 },
             ),
         },
@@ -388,13 +394,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 51, length: 4 },
                     closing_loc: None,
-                    unescaped: "b\n",
+                    unescaped: Owned("b\n"),
                 },
             ),
         },
@@ -404,13 +410,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 55, length: 4 },
                     closing_loc: None,
-                    unescaped: "\t\tc\n",
+                    unescaped: Owned("\t\tc\n"),
                 },
             ),
         },
@@ -421,7 +427,7 @@ Program {
                 InterpolatedStringNode {
                     flags: BitFlags<InterpolatedStringNodeFlags> {
                         bits: 0b11,
-                        flags: FROZEN | MUTABLE,
+                        flags: NEWLINE | STATIC_LITERAL,
                     },
                     opening_loc: Some(
                         Location { start: 41, length: 6 },
@@ -444,7 +450,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -460,6 +466,9 @@ Program {
             location: Location { start: 75, length: 1 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(12),
                     ],
@@ -471,6 +480,9 @@ Program {
             location: Location { start: 73, length: 4 },
             node_kind: EmbeddedStatementsNode(
                 EmbeddedStatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     opening_loc: Location { start: 73, length: 2 },
                     statements: Some(
                         NodeRef(13),
@@ -485,13 +497,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 77, length: 3 },
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(77, 3),
                 },
             ),
         },
@@ -502,7 +514,7 @@ Program {
                 InterpolatedStringNode {
                     flags: BitFlags<InterpolatedStringNodeFlags> {
                         bits: 0b1,
-                        flags: FROZEN,
+                        flags: NEWLINE,
                     },
                     opening_loc: Some(
                         Location { start: 64, length: 6 },
@@ -523,13 +535,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 92, length: 4 },
                     closing_loc: None,
-                    unescaped: "a ",
+                    unescaped: Owned("a "),
                 },
             ),
         },
@@ -540,7 +552,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -556,6 +568,9 @@ Program {
             location: Location { start: 98, length: 1 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(18),
                     ],
@@ -567,6 +582,9 @@ Program {
             location: Location { start: 96, length: 4 },
             node_kind: EmbeddedStatementsNode(
                 EmbeddedStatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     opening_loc: Location { start: 96, length: 2 },
                     statements: Some(
                         NodeRef(19),
@@ -581,13 +599,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 100, length: 1 },
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(100, 1),
                 },
             ),
         },
@@ -598,7 +616,7 @@ Program {
                 InterpolatedStringNode {
                     flags: BitFlags<InterpolatedStringNodeFlags> {
                         bits: 0b1,
-                        flags: FROZEN,
+                        flags: NEWLINE,
                     },
                     opening_loc: Some(
                         Location { start: 85, length: 6 },
@@ -620,13 +638,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 113, length: 4 },
                     closing_loc: None,
-                    unescaped: " a\n",
+                    unescaped: Owned(" a\n"),
                 },
             ),
         },
@@ -637,7 +655,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -653,6 +671,9 @@ Program {
             location: Location { start: 120, length: 1 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(24),
                     ],
@@ -664,6 +685,9 @@ Program {
             location: Location { start: 118, length: 4 },
             node_kind: EmbeddedStatementsNode(
                 EmbeddedStatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     opening_loc: Location { start: 118, length: 2 },
                     statements: Some(
                         NodeRef(25),
@@ -678,13 +702,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 122, length: 1 },
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(122, 1),
                 },
             ),
         },
@@ -695,7 +719,7 @@ Program {
                 InterpolatedStringNode {
                     flags: BitFlags<InterpolatedStringNodeFlags> {
                         bits: 0b1,
-                        flags: FROZEN,
+                        flags: NEWLINE,
                     },
                     opening_loc: Some(
                         Location { start: 106, length: 6 },
@@ -717,13 +741,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 135, length: 4 },
                     closing_loc: None,
-                    unescaped: "a\n",
+                    unescaped: Owned("a\n"),
                 },
             ),
         },
@@ -734,7 +758,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -750,6 +774,9 @@ Program {
             location: Location { start: 143, length: 1 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(30),
                     ],
@@ -761,6 +788,9 @@ Program {
             location: Location { start: 141, length: 4 },
             node_kind: EmbeddedStatementsNode(
                 EmbeddedStatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     opening_loc: Location { start: 141, length: 2 },
                     statements: Some(
                         NodeRef(31),
@@ -775,13 +805,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 145, length: 1 },
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(145, 1),
                 },
             ),
         },
@@ -792,7 +822,7 @@ Program {
                 InterpolatedStringNode {
                     flags: BitFlags<InterpolatedStringNodeFlags> {
                         bits: 0b1,
-                        flags: FROZEN,
+                        flags: NEWLINE,
                     },
                     opening_loc: Some(
                         Location { start: 128, length: 6 },
@@ -814,13 +844,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 158, length: 4 },
                     closing_loc: None,
-                    unescaped: "a\n",
+                    unescaped: Owned("a\n"),
                 },
             ),
         },
@@ -830,13 +860,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 162, length: 4 },
                     closing_loc: None,
-                    unescaped: "b\n",
+                    unescaped: Owned("b\n"),
                 },
             ),
         },
@@ -847,7 +877,7 @@ Program {
                 InterpolatedStringNode {
                     flags: BitFlags<InterpolatedStringNodeFlags> {
                         bits: 0b11,
-                        flags: FROZEN | MUTABLE,
+                        flags: NEWLINE | STATIC_LITERAL,
                     },
                     opening_loc: Some(
                         Location { start: 151, length: 6 },
@@ -868,13 +898,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 178, length: 4 },
                     closing_loc: None,
-                    unescaped: "a\n",
+                    unescaped: Owned("a\n"),
                 },
             ),
         },
@@ -884,13 +914,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 182, length: 5 },
                     closing_loc: None,
-                    unescaped: " b\n",
+                    unescaped: Owned(" b\n"),
                 },
             ),
         },
@@ -901,7 +931,7 @@ Program {
                 InterpolatedStringNode {
                     flags: BitFlags<InterpolatedStringNodeFlags> {
                         bits: 0b11,
-                        flags: FROZEN | MUTABLE,
+                        flags: NEWLINE | STATIC_LITERAL,
                     },
                     opening_loc: Some(
                         Location { start: 171, length: 6 },
@@ -922,13 +952,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 199, length: 5 },
                     closing_loc: None,
-                    unescaped: "\ta\n",
+                    unescaped: Owned("\ta\n"),
                 },
             ),
         },
@@ -938,13 +968,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 204, length: 4 },
                     closing_loc: None,
-                    unescaped: "b\n",
+                    unescaped: Owned("b\n"),
                 },
             ),
         },
@@ -955,7 +985,7 @@ Program {
                 InterpolatedStringNode {
                     flags: BitFlags<InterpolatedStringNodeFlags> {
                         bits: 0b11,
-                        flags: FROZEN | MUTABLE,
+                        flags: NEWLINE | STATIC_LITERAL,
                     },
                     opening_loc: Some(
                         Location { start: 192, length: 6 },
@@ -977,7 +1007,7 @@ Program {
                 StringNode {
                     flags: BitFlags<StringFlags> {
                         bits: 0b1,
-                        flags: FORCED_UTF8_ENCODING,
+                        flags: NEWLINE,
                     },
                     opening_loc: Some(
                         Location { start: 213, length: 8 },
@@ -986,7 +1016,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 231, length: 4 },
                     ),
-                    unescaped: "a #{1}\n",
+                    unescaped: Owned("a #{1}\n"),
                 },
             ),
         },
@@ -996,13 +1026,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 243, length: 3 },
                     closing_loc: None,
-                    unescaped: "a\n",
+                    unescaped: Owned("a\n"),
                 },
             ),
         },
@@ -1012,13 +1042,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 246, length: 4 },
                     closing_loc: None,
-                    unescaped: " b\n",
+                    unescaped: Owned(" b\n"),
                 },
             ),
         },
@@ -1029,7 +1059,7 @@ Program {
                 InterpolatedStringNode {
                     flags: BitFlags<InterpolatedStringNodeFlags> {
                         bits: 0b11,
-                        flags: FROZEN | MUTABLE,
+                        flags: NEWLINE | STATIC_LITERAL,
                     },
                     opening_loc: Some(
                         Location { start: 236, length: 6 },
@@ -1050,13 +1080,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 262, length: 4 },
                     closing_loc: None,
-                    unescaped: " a\n",
+                    unescaped: Owned(" a\n"),
                 },
             ),
         },
@@ -1066,13 +1096,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 266, length: 3 },
                     closing_loc: None,
-                    unescaped: "b\n",
+                    unescaped: Owned("b\n"),
                 },
             ),
         },
@@ -1083,7 +1113,7 @@ Program {
                 InterpolatedStringNode {
                     flags: BitFlags<InterpolatedStringNodeFlags> {
                         bits: 0b11,
-                        flags: FROZEN | MUTABLE,
+                        flags: NEWLINE | STATIC_LITERAL,
                     },
                     opening_loc: Some(
                         Location { start: 255, length: 6 },
@@ -1104,13 +1134,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 281, length: 5 },
                     closing_loc: None,
-                    unescaped: "a\n",
+                    unescaped: Owned("a\n"),
                 },
             ),
         },
@@ -1120,13 +1150,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 286, length: 10 },
                     closing_loc: None,
-                    unescaped: "b\n",
+                    unescaped: Owned("b\n"),
                 },
             ),
         },
@@ -1137,7 +1167,7 @@ Program {
                 InterpolatedStringNode {
                     flags: BitFlags<InterpolatedStringNodeFlags> {
                         bits: 0b11,
-                        flags: FROZEN | MUTABLE,
+                        flags: NEWLINE | STATIC_LITERAL,
                     },
                     opening_loc: Some(
                         Location { start: 274, length: 6 },
@@ -1158,13 +1188,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 308, length: 4 },
                     closing_loc: None,
-                    unescaped: "a\n",
+                    unescaped: Owned("a\n"),
                 },
             ),
         },
@@ -1174,13 +1204,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 312, length: 1 },
                     closing_loc: None,
-                    unescaped: "\n",
+                    unescaped: Owned("\n"),
                 },
             ),
         },
@@ -1190,13 +1220,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 313, length: 4 },
                     closing_loc: None,
-                    unescaped: "b\n",
+                    unescaped: Owned("b\n"),
                 },
             ),
         },
@@ -1207,7 +1237,7 @@ Program {
                 InterpolatedStringNode {
                     flags: BitFlags<InterpolatedStringNodeFlags> {
                         bits: 0b11,
-                        flags: FROZEN | MUTABLE,
+                        flags: NEWLINE | STATIC_LITERAL,
                     },
                     opening_loc: Some(
                         Location { start: 301, length: 6 },
@@ -1229,13 +1259,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 329, length: 4 },
                     closing_loc: None,
-                    unescaped: "a\n",
+                    unescaped: Owned("a\n"),
                 },
             ),
         },
@@ -1245,13 +1275,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 333, length: 1 },
                     closing_loc: None,
-                    unescaped: "\n",
+                    unescaped: Owned("\n"),
                 },
             ),
         },
@@ -1261,13 +1291,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 334, length: 4 },
                     closing_loc: None,
-                    unescaped: "b\n",
+                    unescaped: Owned("b\n"),
                 },
             ),
         },
@@ -1278,7 +1308,7 @@ Program {
                 InterpolatedStringNode {
                     flags: BitFlags<InterpolatedStringNodeFlags> {
                         bits: 0b11,
-                        flags: FROZEN | MUTABLE,
+                        flags: NEWLINE | STATIC_LITERAL,
                     },
                     opening_loc: Some(
                         Location { start: 322, length: 6 },
@@ -1300,13 +1330,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 350, length: 4 },
                     closing_loc: None,
-                    unescaped: "a\n",
+                    unescaped: Owned("a\n"),
                 },
             ),
         },
@@ -1316,13 +1346,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 354, length: 1 },
                     closing_loc: None,
-                    unescaped: "\n",
+                    unescaped: Owned("\n"),
                 },
             ),
         },
@@ -1332,13 +1362,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 355, length: 1 },
                     closing_loc: None,
-                    unescaped: "\n",
+                    unescaped: Owned("\n"),
                 },
             ),
         },
@@ -1348,13 +1378,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 356, length: 1 },
                     closing_loc: None,
-                    unescaped: "\n",
+                    unescaped: Owned("\n"),
                 },
             ),
         },
@@ -1364,13 +1394,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 357, length: 4 },
                     closing_loc: None,
-                    unescaped: "b\n",
+                    unescaped: Owned("b\n"),
                 },
             ),
         },
@@ -1381,7 +1411,7 @@ Program {
                 InterpolatedStringNode {
                     flags: BitFlags<InterpolatedStringNodeFlags> {
                         bits: 0b11,
-                        flags: FROZEN | MUTABLE,
+                        flags: NEWLINE | STATIC_LITERAL,
                     },
                     opening_loc: Some(
                         Location { start: 343, length: 6 },
@@ -1405,13 +1435,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 373, length: 1 },
                     closing_loc: None,
-                    unescaped: "\n",
+                    unescaped: Owned("\n"),
                 },
             ),
         },
@@ -1422,7 +1452,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -1438,6 +1468,9 @@ Program {
             location: Location { start: 378, length: 1 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(69),
                     ],
@@ -1449,6 +1482,9 @@ Program {
             location: Location { start: 376, length: 4 },
             node_kind: EmbeddedStatementsNode(
                 EmbeddedStatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     opening_loc: Location { start: 376, length: 2 },
                     statements: Some(
                         NodeRef(70),
@@ -1463,13 +1499,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 380, length: 2 },
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(380, 2),
                 },
             ),
         },
@@ -1480,7 +1516,7 @@ Program {
                 InterpolatedStringNode {
                     flags: BitFlags<InterpolatedStringNodeFlags> {
                         bits: 0b1,
-                        flags: FROZEN,
+                        flags: NEWLINE,
                     },
                     opening_loc: Some(
                         Location { start: 366, length: 6 },
@@ -1503,7 +1539,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -1519,6 +1555,9 @@ Program {
             location: Location { start: 402, length: 1 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(74),
                     ],
@@ -1530,6 +1569,9 @@ Program {
             location: Location { start: 400, length: 4 },
             node_kind: EmbeddedStatementsNode(
                 EmbeddedStatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     opening_loc: Location { start: 400, length: 2 },
                     statements: Some(
                         NodeRef(75),
@@ -1544,13 +1586,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 404, length: 1 },
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(404, 1),
                 },
             ),
         },
@@ -1560,13 +1602,13 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b10,
-                        flags: FORCED_BINARY_ENCODING,
+                        bits: 0b10010,
+                        flags: STATIC_LITERAL | FROZEN,
                     },
                     opening_loc: None,
                     content_loc: Location { start: 405, length: 3 },
                     closing_loc: None,
-                    unescaped: "\tb\n",
+                    unescaped: Owned("\tb\n"),
                 },
             ),
         },
@@ -1577,7 +1619,7 @@ Program {
                 InterpolatedStringNode {
                     flags: BitFlags<InterpolatedStringNodeFlags> {
                         bits: 0b1,
-                        flags: FROZEN,
+                        flags: NEWLINE,
                     },
                     opening_loc: Some(
                         Location { start: 391, length: 6 },
@@ -1598,6 +1640,9 @@ Program {
             location: Location { start: 0, length: 397 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(6),
                         NodeRef(7),
@@ -1627,6 +1672,9 @@ Program {
             location: Location { start: 0, length: 397 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(80),
                 },

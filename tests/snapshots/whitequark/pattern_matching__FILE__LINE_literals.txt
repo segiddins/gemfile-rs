@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "        case [__FILE__, __LINE__ + 1, __ENCODING__]\n          in [__FILE__, __LINE__, __ENCODING__]\n        end\n\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -32,7 +32,7 @@ Program {
                     flags: BitFlags<StringFlags> {
                         bits: 0b0,
                     },
-                    filepath: "",
+                    filepath: Owned(""),
                 },
             ),
         },
@@ -40,7 +40,12 @@ Program {
             identifier: 4,
             location: Location { start: 24, length: 8 },
             node_kind: SourceLineNode(
-                SourceLineNode,
+                SourceLineNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b10,
+                        flags: STATIC_LITERAL,
+                    },
+                },
             ),
         },
         Node {
@@ -50,7 +55,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -104,7 +109,12 @@ Program {
             identifier: 8,
             location: Location { start: 38, length: 12 },
             node_kind: SourceEncodingNode(
-                SourceEncodingNode,
+                SourceEncodingNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b10,
+                        flags: STATIC_LITERAL,
+                    },
+                },
             ),
         },
         Node {
@@ -137,7 +147,7 @@ Program {
                     flags: BitFlags<StringFlags> {
                         bits: 0b0,
                     },
-                    filepath: "",
+                    filepath: Owned(""),
                 },
             ),
         },
@@ -145,14 +155,24 @@ Program {
             identifier: 11,
             location: Location { start: 76, length: 8 },
             node_kind: SourceLineNode(
-                SourceLineNode,
+                SourceLineNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b10,
+                        flags: STATIC_LITERAL,
+                    },
+                },
             ),
         },
         Node {
             identifier: 12,
             location: Location { start: 86, length: 12 },
             node_kind: SourceEncodingNode(
-                SourceEncodingNode,
+                SourceEncodingNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b10,
+                        flags: STATIC_LITERAL,
+                    },
+                },
             ),
         },
         Node {
@@ -160,6 +180,9 @@ Program {
             location: Location { start: 65, length: 34 },
             node_kind: ArrayPatternNode(
                 ArrayPatternNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     constant: None,
                     requireds: [
                         NodeRef(7),
@@ -182,6 +205,9 @@ Program {
             location: Location { start: 62, length: 37 },
             node_kind: InNode(
                 InNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     pattern: NodeRef(10),
                     statements: None,
                     in_loc: Location { start: 62, length: 2 },
@@ -194,6 +220,10 @@ Program {
             location: Location { start: 8, length: 103 },
             node_kind: CaseMatchNode(
                 CaseMatchNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     predicate: Some(
                         NodeRef(6),
                     ),
@@ -211,6 +241,9 @@ Program {
             location: Location { start: 8, length: 103 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(12),
                     ],
@@ -222,6 +255,9 @@ Program {
             location: Location { start: 8, length: 103 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(13),
                 },

@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "def foo(&)\n  bar(&)\nend\n\ndef foo(a, &)\n  bar(&)\nend\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -46,6 +46,9 @@ Program {
             location: Location { start: 8, length: 1 },
             node_kind: ParametersNode(
                 ParametersNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     requireds: [],
                     optionals: [],
                     rest: None,
@@ -63,6 +66,9 @@ Program {
             location: Location { start: 17, length: 1 },
             node_kind: BlockArgumentNode(
                 BlockArgumentNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     expression: None,
                     operator_loc: Location { start: 17, length: 1 },
                 },
@@ -74,8 +80,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1,
-                        flags: SAFE_NAVIGATION,
+                        bits: 0b100001,
+                        flags: NEWLINE | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -101,6 +107,9 @@ Program {
             location: Location { start: 13, length: 5 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(3),
                     ],
@@ -112,6 +121,10 @@ Program {
             location: Location { start: 0, length: 23 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(2),
                     name_loc: Location { start: 4, length: 3 },
                     receiver: None,
@@ -168,6 +181,9 @@ Program {
             location: Location { start: 33, length: 4 },
             node_kind: ParametersNode(
                 ParametersNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     requireds: [
                         NodeRef(6),
                     ],
@@ -187,6 +203,9 @@ Program {
             location: Location { start: 45, length: 1 },
             node_kind: BlockArgumentNode(
                 BlockArgumentNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     expression: None,
                     operator_loc: Location { start: 45, length: 1 },
                 },
@@ -198,8 +217,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1,
-                        flags: SAFE_NAVIGATION,
+                        bits: 0b100001,
+                        flags: NEWLINE | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -225,6 +244,9 @@ Program {
             location: Location { start: 41, length: 5 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(10),
                     ],
@@ -236,6 +258,10 @@ Program {
             location: Location { start: 25, length: 26 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(2),
                     name_loc: Location { start: 29, length: 3 },
                     receiver: None,
@@ -268,6 +294,9 @@ Program {
             location: Location { start: 0, length: 51 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(5),
                         NodeRef(12),
@@ -280,6 +309,9 @@ Program {
             location: Location { start: 0, length: 51 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(13),
                 },

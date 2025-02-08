@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "-> a: 1 { }\n\n-> a: { }\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -30,7 +30,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -60,6 +60,9 @@ Program {
             location: Location { start: 3, length: 4 },
             node_kind: ParametersNode(
                 ParametersNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     requireds: [],
                     optionals: [],
                     rest: None,
@@ -77,6 +80,9 @@ Program {
             location: Location { start: 3, length: 4 },
             node_kind: BlockParametersNode(
                 BlockParametersNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     parameters: Some(
                         NodeRef(2),
                     ),
@@ -91,6 +97,10 @@ Program {
             location: Location { start: 0, length: 11 },
             node_kind: LambdaNode(
                 LambdaNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     locals: [
                         ConstantRef(1),
                     ],
@@ -122,6 +132,9 @@ Program {
             location: Location { start: 16, length: 2 },
             node_kind: ParametersNode(
                 ParametersNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     requireds: [],
                     optionals: [],
                     rest: None,
@@ -139,6 +152,9 @@ Program {
             location: Location { start: 16, length: 2 },
             node_kind: BlockParametersNode(
                 BlockParametersNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     parameters: Some(
                         NodeRef(6),
                     ),
@@ -153,6 +169,10 @@ Program {
             location: Location { start: 13, length: 9 },
             node_kind: LambdaNode(
                 LambdaNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     locals: [
                         ConstantRef(1),
                     ],
@@ -171,6 +191,9 @@ Program {
             location: Location { start: 0, length: 22 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(4),
                         NodeRef(8),
@@ -183,6 +206,9 @@ Program {
             location: Location { start: 0, length: 22 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(9),
                 },

@@ -9,16 +9,18 @@ use winnow::binary::length_repeat;
 #[repr(u32)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum ArgumentsNodeFlags {
+    NEWLINE = 1 << 0,
+    STATIC_LITERAL = 1 << 1,
     /* Flags for arguments nodes. */
-    CONTAINS_FORWARDING = 1 << 0,
+    CONTAINS_FORWARDING = 1 << 2,
     /* Flags for arguments nodes. */
-    CONTAINS_KEYWORDS = 1 << 1,
+    CONTAINS_KEYWORDS = 1 << 3,
     /* Flags for arguments nodes. */
-    CONTAINS_KEYWORD_SPLAT = 1 << 2,
+    CONTAINS_KEYWORD_SPLAT = 1 << 4,
     /* Flags for arguments nodes. */
-    CONTAINS_SPLAT = 1 << 3,
+    CONTAINS_SPLAT = 1 << 5,
     /* Flags for arguments nodes. */
-    CONTAINS_MULTIPLE_SPLATS = 1 << 4,
+    CONTAINS_MULTIPLE_SPLATS = 1 << 6,
 }
 
 /* Flags for array nodes. */
@@ -26,8 +28,10 @@ pub enum ArgumentsNodeFlags {
 #[repr(u32)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum ArrayNodeFlags {
+    NEWLINE = 1 << 0,
+    STATIC_LITERAL = 1 << 1,
     /* Flags for array nodes. */
-    CONTAINS_SPLAT = 1 << 0,
+    CONTAINS_SPLAT = 1 << 2,
 }
 
 /* Flags for call nodes. */
@@ -35,14 +39,16 @@ pub enum ArrayNodeFlags {
 #[repr(u32)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum CallNodeFlags {
+    NEWLINE = 1 << 0,
+    STATIC_LITERAL = 1 << 1,
     /* Flags for call nodes. */
-    SAFE_NAVIGATION = 1 << 0,
+    SAFE_NAVIGATION = 1 << 2,
     /* Flags for call nodes. */
-    VARIABLE_CALL = 1 << 1,
+    VARIABLE_CALL = 1 << 3,
     /* Flags for call nodes. */
-    ATTRIBUTE_WRITE = 1 << 2,
+    ATTRIBUTE_WRITE = 1 << 4,
     /* Flags for call nodes. */
-    IGNORE_VISIBILITY = 1 << 3,
+    IGNORE_VISIBILITY = 1 << 5,
 }
 
 /* Flags for nodes that have unescaped content. */
@@ -50,10 +56,12 @@ pub enum CallNodeFlags {
 #[repr(u32)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum EncodingFlags {
+    NEWLINE = 1 << 0,
+    STATIC_LITERAL = 1 << 1,
     /* Flags for nodes that have unescaped content. */
-    FORCED_UTF8_ENCODING = 1 << 0,
+    FORCED_UTF8_ENCODING = 1 << 2,
     /* Flags for nodes that have unescaped content. */
-    FORCED_BINARY_ENCODING = 1 << 1,
+    FORCED_BINARY_ENCODING = 1 << 3,
 }
 
 /* Flags for integer nodes that correspond to the base of the integer. */
@@ -61,14 +69,16 @@ pub enum EncodingFlags {
 #[repr(u32)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum IntegerBaseFlags {
+    NEWLINE = 1 << 0,
+    STATIC_LITERAL = 1 << 1,
     /* Flags for integer nodes that correspond to the base of the integer. */
-    BINARY = 1 << 0,
+    BINARY = 1 << 2,
     /* Flags for integer nodes that correspond to the base of the integer. */
-    DECIMAL = 1 << 1,
+    DECIMAL = 1 << 3,
     /* Flags for integer nodes that correspond to the base of the integer. */
-    OCTAL = 1 << 2,
+    OCTAL = 1 << 4,
     /* Flags for integer nodes that correspond to the base of the integer. */
-    HEXADECIMAL = 1 << 3,
+    HEXADECIMAL = 1 << 5,
 }
 
 /* Flags for interpolated string nodes that indicated mutability if they are also marked as literals. */
@@ -76,10 +86,12 @@ pub enum IntegerBaseFlags {
 #[repr(u32)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum InterpolatedStringNodeFlags {
+    NEWLINE = 1 << 0,
+    STATIC_LITERAL = 1 << 1,
     /* Flags for interpolated string nodes that indicated mutability if they are also marked as literals. */
-    FROZEN = 1 << 0,
+    FROZEN = 1 << 2,
     /* Flags for interpolated string nodes that indicated mutability if they are also marked as literals. */
-    MUTABLE = 1 << 1,
+    MUTABLE = 1 << 3,
 }
 
 /* Flags for keyword hash nodes. */
@@ -87,8 +99,10 @@ pub enum InterpolatedStringNodeFlags {
 #[repr(u32)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum KeywordHashNodeFlags {
+    NEWLINE = 1 << 0,
+    STATIC_LITERAL = 1 << 1,
     /* Flags for keyword hash nodes. */
-    SYMBOL_KEYS = 1 << 0,
+    SYMBOL_KEYS = 1 << 2,
 }
 
 /* Flags for while and until loop nodes. */
@@ -96,8 +110,10 @@ pub enum KeywordHashNodeFlags {
 #[repr(u32)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum LoopFlags {
+    NEWLINE = 1 << 0,
+    STATIC_LITERAL = 1 << 1,
     /* Flags for while and until loop nodes. */
-    BEGIN_MODIFIER = 1 << 0,
+    BEGIN_MODIFIER = 1 << 2,
 }
 
 /* Flags for parameter nodes. */
@@ -105,8 +121,10 @@ pub enum LoopFlags {
 #[repr(u32)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum ParameterFlags {
+    NEWLINE = 1 << 0,
+    STATIC_LITERAL = 1 << 1,
     /* Flags for parameter nodes. */
-    REPEATED_PARAMETER = 1 << 0,
+    REPEATED_PARAMETER = 1 << 2,
 }
 
 /* Flags for range and flip-flop nodes. */
@@ -114,8 +132,10 @@ pub enum ParameterFlags {
 #[repr(u32)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum RangeFlags {
+    NEWLINE = 1 << 0,
+    STATIC_LITERAL = 1 << 1,
     /* Flags for range and flip-flop nodes. */
-    EXCLUDE_END = 1 << 0,
+    EXCLUDE_END = 1 << 2,
 }
 
 /* Flags for regular expression and match last line nodes. */
@@ -123,28 +143,30 @@ pub enum RangeFlags {
 #[repr(u32)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum RegularExpressionFlags {
+    NEWLINE = 1 << 0,
+    STATIC_LITERAL = 1 << 1,
     /* Flags for regular expression and match last line nodes. */
-    IGNORE_CASE = 1 << 0,
+    IGNORE_CASE = 1 << 2,
     /* Flags for regular expression and match last line nodes. */
-    EXTENDED = 1 << 1,
+    EXTENDED = 1 << 3,
     /* Flags for regular expression and match last line nodes. */
-    MULTI_LINE = 1 << 2,
+    MULTI_LINE = 1 << 4,
     /* Flags for regular expression and match last line nodes. */
-    ONCE = 1 << 3,
+    ONCE = 1 << 5,
     /* Flags for regular expression and match last line nodes. */
-    EUC_JP = 1 << 4,
+    EUC_JP = 1 << 6,
     /* Flags for regular expression and match last line nodes. */
-    ASCII_8BIT = 1 << 5,
+    ASCII_8BIT = 1 << 7,
     /* Flags for regular expression and match last line nodes. */
-    WINDOWS_31J = 1 << 6,
+    WINDOWS_31J = 1 << 8,
     /* Flags for regular expression and match last line nodes. */
-    UTF_8 = 1 << 7,
+    UTF_8 = 1 << 9,
     /* Flags for regular expression and match last line nodes. */
-    FORCED_UTF8_ENCODING = 1 << 8,
+    FORCED_UTF8_ENCODING = 1 << 10,
     /* Flags for regular expression and match last line nodes. */
-    FORCED_BINARY_ENCODING = 1 << 9,
+    FORCED_BINARY_ENCODING = 1 << 11,
     /* Flags for regular expression and match last line nodes. */
-    FORCED_US_ASCII_ENCODING = 1 << 10,
+    FORCED_US_ASCII_ENCODING = 1 << 12,
 }
 
 /* Flags for shareable constant nodes. */
@@ -152,12 +174,14 @@ pub enum RegularExpressionFlags {
 #[repr(u32)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum ShareableConstantNodeFlags {
+    NEWLINE = 1 << 0,
+    STATIC_LITERAL = 1 << 1,
     /* Flags for shareable constant nodes. */
-    LITERAL = 1 << 0,
+    LITERAL = 1 << 2,
     /* Flags for shareable constant nodes. */
-    EXPERIMENTAL_EVERYTHING = 1 << 1,
+    EXPERIMENTAL_EVERYTHING = 1 << 3,
     /* Flags for shareable constant nodes. */
-    EXPERIMENTAL_COPY = 1 << 2,
+    EXPERIMENTAL_COPY = 1 << 4,
 }
 
 /* Flags for string nodes. */
@@ -165,14 +189,16 @@ pub enum ShareableConstantNodeFlags {
 #[repr(u32)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum StringFlags {
+    NEWLINE = 1 << 0,
+    STATIC_LITERAL = 1 << 1,
     /* Flags for string nodes. */
-    FORCED_UTF8_ENCODING = 1 << 0,
+    FORCED_UTF8_ENCODING = 1 << 2,
     /* Flags for string nodes. */
-    FORCED_BINARY_ENCODING = 1 << 1,
+    FORCED_BINARY_ENCODING = 1 << 3,
     /* Flags for string nodes. */
-    FROZEN = 1 << 2,
+    FROZEN = 1 << 4,
     /* Flags for string nodes. */
-    MUTABLE = 1 << 3,
+    MUTABLE = 1 << 5,
 }
 
 /* Flags for symbol nodes. */
@@ -180,20 +206,46 @@ pub enum StringFlags {
 #[repr(u32)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum SymbolFlags {
+    NEWLINE = 1 << 0,
+    STATIC_LITERAL = 1 << 1,
     /* Flags for symbol nodes. */
-    FORCED_UTF8_ENCODING = 1 << 0,
+    FORCED_UTF8_ENCODING = 1 << 2,
     /* Flags for symbol nodes. */
-    FORCED_BINARY_ENCODING = 1 << 1,
+    FORCED_BINARY_ENCODING = 1 << 3,
     /* Flags for symbol nodes. */
-    FORCED_US_ASCII_ENCODING = 1 << 2,
+    FORCED_US_ASCII_ENCODING = 1 << 4,
 }
 
-// 0
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `alias` keyword to alias a global variable.
+
+    alias $foo $bar
+    ^^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct AliasGlobalVariableNode {
-    new_name: NodeRef,
-    old_name: NodeRef,
-    keyword_loc: Location,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    /**
+    Represents the new name of the global variable that can be used after aliasing.
+
+        alias $foo $bar
+              ^^^^
+    */
+    pub new_name: NodeRef,
+    /**
+    Represents the old name of the global variable that can be used before aliasing.
+
+        alias $foo $bar
+                   ^^^^
+    */
+    pub old_name: NodeRef,
+    /**
+    The location of the `alias` keyword.
+
+        alias $foo $bar
+        ^^^^^
+    */
+    pub keyword_loc: Location,
 }
 impl AliasGlobalVariableNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -201,21 +253,68 @@ impl AliasGlobalVariableNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![AliasGlobalVariableNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("AliasGlobalVariableNode.flags")),
-        new_name: parse_node.context(winnow::error::StrContext::Label("AliasGlobalVariableNode.new_name")),
-        old_name: parse_node.context(winnow::error::StrContext::Label("AliasGlobalVariableNode.old_name")),
-        keyword_loc: parse_location.context(winnow::error::StrContext::Label("AliasGlobalVariableNode.keyword_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![AliasGlobalVariableNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "AliasGlobalVariableNode.flags"
+                )),
+            new_name: parse_node.context(winnow::error::StrContext::Label(
+                "AliasGlobalVariableNode.new_name"
+            )),
+            old_name: parse_node.context(winnow::error::StrContext::Label(
+                "AliasGlobalVariableNode.old_name"
+            )),
+            keyword_loc: parse_location.context(winnow::error::StrContext::Label(
+                "AliasGlobalVariableNode.keyword_loc"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 1
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `alias` keyword to alias a method.
+
+    alias foo bar
+    ^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct AliasMethodNode {
-    new_name: NodeRef,
-    old_name: NodeRef,
-    keyword_loc: Location,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    /**
+    Represents the new name of the method that will be aliased.
+
+        alias foo bar
+              ^^^
+
+        alias :foo :bar
+              ^^^^
+
+        alias :"#{foo}" :"#{bar}"
+              ^^^^^^^^^
+    */
+    pub new_name: NodeRef,
+    /**
+    Represents the old name of the method that will be aliased.
+
+        alias foo bar
+                  ^^^
+
+        alias :foo :bar
+                   ^^^^
+
+        alias :"#{foo}" :"#{bar}"
+                        ^^^^^^^^^
+    */
+    pub old_name: NodeRef,
+    /**
+    Represents the location of the `alias` keyword.
+
+        alias foo bar
+        ^^^^^
+    */
+    pub keyword_loc: Location,
 }
 impl AliasMethodNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -223,21 +322,52 @@ impl AliasMethodNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![AliasMethodNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("AliasMethodNode.flags")),
-        new_name: parse_node.context(winnow::error::StrContext::Label("AliasMethodNode.new_name")),
-        old_name: parse_node.context(winnow::error::StrContext::Label("AliasMethodNode.old_name")),
-        keyword_loc: parse_location.context(winnow::error::StrContext::Label("AliasMethodNode.keyword_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![AliasMethodNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("AliasMethodNode.flags")),
+            new_name: parse_node
+                .context(winnow::error::StrContext::Label("AliasMethodNode.new_name")),
+            old_name: parse_node
+                .context(winnow::error::StrContext::Label("AliasMethodNode.old_name")),
+            keyword_loc: parse_location.context(winnow::error::StrContext::Label(
+                "AliasMethodNode.keyword_loc"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 2
-#[derive(Debug, Clone)]
+/**
+Represents an alternation pattern in pattern matching.
+
+    foo => bar | baz
+           ^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct AlternationPatternNode {
-    left: NodeRef,
-    right: NodeRef,
-    operator_loc: Location,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    /**
+    Represents the left side of the expression.
+
+        foo => bar | baz
+               ^^^
+    */
+    pub left: NodeRef,
+    /**
+    Represents the right side of the expression.
+
+        foo => bar | baz
+                     ^^^
+    */
+    pub right: NodeRef,
+    /**
+    Represents the alternation operator location.
+
+        foo => bar | baz
+                   ^
+    */
+    pub operator_loc: Location,
 }
 impl AlternationPatternNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -245,21 +375,62 @@ impl AlternationPatternNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![AlternationPatternNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("AlternationPatternNode.flags")),
-        left: parse_node.context(winnow::error::StrContext::Label("AlternationPatternNode.left")),
-        right: parse_node.context(winnow::error::StrContext::Label("AlternationPatternNode.right")),
-        operator_loc: parse_location.context(winnow::error::StrContext::Label("AlternationPatternNode.operator_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![AlternationPatternNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "AlternationPatternNode.flags"
+                )),
+            left: parse_node.context(winnow::error::StrContext::Label(
+                "AlternationPatternNode.left"
+            )),
+            right: parse_node.context(winnow::error::StrContext::Label(
+                "AlternationPatternNode.right"
+            )),
+            operator_loc: parse_location.context(winnow::error::StrContext::Label(
+                "AlternationPatternNode.operator_loc"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 3
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `&&` operator or the `and` keyword.
+
+    left and right
+    ^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct AndNode {
-    left: NodeRef,
-    right: NodeRef,
-    operator_loc: Location,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    /**
+    Represents the left side of the expression. It can be any [non-void expression](https://github.com/ruby/prism/blob/main/docs/parsing_rules.md#non-void-expression).
+
+        left and right
+        ^^^^
+
+        1 && 2
+        ^
+    */
+    pub left: NodeRef,
+    /**
+    Represents the right side of the expression.
+
+        left && right
+                ^^^^^
+
+        1 and 2
+              ^
+    */
+    pub right: NodeRef,
+    /**
+    The location of the `and` keyword or the `&&` operator.
+
+        left and right
+             ^^^
+    */
+    pub operator_loc: Location,
 }
 impl AndNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -267,20 +438,35 @@ impl AndNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![AndNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("AndNode.flags")),
-        left: parse_node.context(winnow::error::StrContext::Label("AndNode.left")),
-        right: parse_node.context(winnow::error::StrContext::Label("AndNode.right")),
-        operator_loc: parse_location.context(winnow::error::StrContext::Label("AndNode.operator_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![AndNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("AndNode.flags")),
+            left: parse_node.context(winnow::error::StrContext::Label("AndNode.left")),
+            right: parse_node.context(winnow::error::StrContext::Label("AndNode.right")),
+            operator_loc: parse_location
+                .context(winnow::error::StrContext::Label("AndNode.operator_loc")),
+        }]
+        .parse_next(input)
     }
 }
 
-// 4
-#[derive(Debug, Clone)]
+/**
+Represents a set of arguments to a method or a keyword.
+
+    return foo, bar, baz
+           ^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct ArgumentsNode {
     pub flags: enumflags2::BitFlags<ArgumentsNodeFlags>,
-    arguments: Vec<NodeRef>,
+    /**
+    The list of arguments, if present. These can be any [non-void expressions](https://github.com/ruby/prism/blob/main/docs/parsing_rules.md#non-void-expression).
+
+        foo(bar, baz)
+            ^^^^^^^^
+    */
+    pub arguments: Vec<NodeRef>,
 }
 impl ArgumentsNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -299,13 +485,36 @@ impl ArgumentsNode {
     }
 }
 
-// 5
-#[derive(Debug, Clone)]
+/**
+Represents an array literal. This can be a regular array using brackets or a special array using % like %w or %i.
+
+    [1, 2, 3]
+    ^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct ArrayNode {
     pub flags: enumflags2::BitFlags<ArrayNodeFlags>,
-    elements: Vec<NodeRef>,
-    opening_loc: Option<Location>,
-    closing_loc: Option<Location>,
+    /**
+    Represent the list of zero or more [non-void expressions](https://github.com/ruby/prism/blob/main/docs/parsing_rules.md#non-void-expression) within the array.    */
+    pub elements: Vec<NodeRef>,
+    /**
+    Represents the optional source location for the opening token.
+
+        [1,2,3]                 # "["
+        %w[foo bar baz]         # "%w["
+        %I(apple orange banana) # "%I("
+        foo = 1, 2, 3           # nil
+    */
+    pub opening_loc: Option<Location>,
+    /**
+    Represents the optional source location for the closing token.
+
+        [1,2,3]                 # "]"
+        %w[foo bar baz]         # "]"
+        %I(apple orange banana) # ")"
+        foo = 1, 2, 3           # nil
+    */
+    pub closing_loc: Option<Location>,
 }
 impl ArrayNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -328,15 +537,63 @@ impl ArrayNode {
     }
 }
 
-// 6
-#[derive(Debug, Clone)]
+/**
+Represents an array pattern in pattern matching.
+
+    foo in 1, 2
+    ^^^^^^^^^^^
+
+    foo in [1, 2]
+    ^^^^^^^^^^^^^
+
+    foo in *bar
+    ^^^^^^^^^^^
+
+    foo in Bar[]
+    ^^^^^^^^^^^^
+
+    foo in Bar[1, 2, 3]
+    ^^^^^^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct ArrayPatternNode {
-    constant: Option<NodeRef>,
-    requireds: Vec<NodeRef>,
-    rest: Option<NodeRef>,
-    posts: Vec<NodeRef>,
-    opening_loc: Option<Location>,
-    closing_loc: Option<Location>,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub constant: Option<NodeRef>,
+    /**
+    Represents the required elements of the array pattern.
+
+        foo in [1, 2]
+                ^  ^
+    */
+    pub requireds: Vec<NodeRef>,
+    /**
+    Represents the rest element of the array pattern.
+
+        foo in *bar
+               ^^^^
+    */
+    pub rest: Option<NodeRef>,
+    /**
+    Represents the elements after the rest element of the array pattern.
+
+        foo in *bar, baz
+                     ^^^
+    */
+    pub posts: Vec<NodeRef>,
+    /**
+    Represents the opening location of the array pattern.
+
+        foo in [1, 2]
+               ^
+    */
+    pub opening_loc: Option<Location>,
+    /**
+    Represents the closing location of the array pattern.
+
+        foo in [1, 2]
+                    ^
+    */
+    pub closing_loc: Option<Location>,
 }
 impl ArrayPatternNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -344,24 +601,70 @@ impl ArrayPatternNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![ArrayPatternNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("ArrayPatternNode.flags")),
-        constant: parse_optional_node.context(winnow::error::StrContext::Label("ArrayPatternNode.constant")),
-        requireds: length_repeat(parse_varuint, parse_node).context(winnow::error::StrContext::Label("ArrayPatternNode.requireds")),
-        rest: parse_optional_node.context(winnow::error::StrContext::Label("ArrayPatternNode.rest")),
-        posts: length_repeat(parse_varuint, parse_node).context(winnow::error::StrContext::Label("ArrayPatternNode.posts")),
-        opening_loc: parse_optional_location.context(winnow::error::StrContext::Label("ArrayPatternNode.opening_loc")),
-        closing_loc: parse_optional_location.context(winnow::error::StrContext::Label("ArrayPatternNode.closing_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![ArrayPatternNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("ArrayPatternNode.flags")),
+            constant: parse_optional_node.context(winnow::error::StrContext::Label(
+                "ArrayPatternNode.constant"
+            )),
+            requireds: length_repeat(parse_varuint, parse_node).context(
+                winnow::error::StrContext::Label("ArrayPatternNode.requireds")
+            ),
+            rest: parse_optional_node
+                .context(winnow::error::StrContext::Label("ArrayPatternNode.rest")),
+            posts: length_repeat(parse_varuint, parse_node)
+                .context(winnow::error::StrContext::Label("ArrayPatternNode.posts")),
+            opening_loc: parse_optional_location.context(winnow::error::StrContext::Label(
+                "ArrayPatternNode.opening_loc"
+            )),
+            closing_loc: parse_optional_location.context(winnow::error::StrContext::Label(
+                "ArrayPatternNode.closing_loc"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 7
-#[derive(Debug, Clone)]
+/**
+Represents a hash key/value pair.
+
+    { a => b }
+      ^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct AssocNode {
-    key: NodeRef,
-    value: NodeRef,
-    operator_loc: Option<Location>,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    /**
+    The key of the association. This can be any [non-void expression](https://github.com/ruby/prism/blob/main/docs/parsing_rules.md#non-void-expression).
+
+        { a: b }
+          ^
+
+        { foo => bar }
+          ^^^
+
+        { def a; end => 1 }
+          ^^^^^^^^^^
+    */
+    pub key: NodeRef,
+    /**
+    The value of the association, if present. This can be any [non-void expression](https://github.com/ruby/prism/blob/main/docs/parsing_rules.md#non-void-expression).
+
+        { foo => bar }
+                 ^^^
+
+        { x: 1 }
+             ^
+    */
+    pub value: NodeRef,
+    /**
+    The location of the `=>` operator, if present.
+
+        { foo => bar }
+              ^^
+    */
+    pub operator_loc: Option<Location>,
 }
 impl AssocNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -369,20 +672,42 @@ impl AssocNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![AssocNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("AssocNode.flags")),
-        key: parse_node.context(winnow::error::StrContext::Label("AssocNode.key")),
-        value: parse_node.context(winnow::error::StrContext::Label("AssocNode.value")),
-        operator_loc: parse_optional_location.context(winnow::error::StrContext::Label("AssocNode.operator_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![AssocNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("AssocNode.flags")),
+            key: parse_node.context(winnow::error::StrContext::Label("AssocNode.key")),
+            value: parse_node.context(winnow::error::StrContext::Label("AssocNode.value")),
+            operator_loc: parse_optional_location
+                .context(winnow::error::StrContext::Label("AssocNode.operator_loc")),
+        }]
+        .parse_next(input)
     }
 }
 
-// 8
-#[derive(Debug, Clone)]
+/**
+Represents a splat in a hash literal.
+
+    { **foo }
+      ^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct AssocSplatNode {
-    value: Option<NodeRef>,
-    operator_loc: Location,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    /**
+    The value to be splatted, if present. Will be missing when keyword rest argument forwarding is used.
+
+        { **foo }
+            ^^^
+    */
+    pub value: Option<NodeRef>,
+    /**
+    The location of the `**` operator.
+
+        { **x }
+          ^^
+    */
+    pub operator_loc: Location,
 }
 impl AssocSplatNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -390,18 +715,37 @@ impl AssocSplatNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![AssocSplatNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("AssocSplatNode.flags")),
-        value: parse_optional_node.context(winnow::error::StrContext::Label("AssocSplatNode.value")),
-        operator_loc: parse_location.context(winnow::error::StrContext::Label("AssocSplatNode.operator_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![AssocSplatNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("AssocSplatNode.flags")),
+            value: parse_optional_node
+                .context(winnow::error::StrContext::Label("AssocSplatNode.value")),
+            operator_loc: parse_location.context(winnow::error::StrContext::Label(
+                "AssocSplatNode.operator_loc"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 9
-#[derive(Debug, Clone)]
+/**
+Represents reading a reference to a field in the previous match.
+
+    $'
+    ^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct BackReferenceReadNode {
-    name: ConstantRef,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    /**
+    The name of the back-reference variable, including the leading `$`.
+
+        $& # name `:$&`
+
+        $+ # name `:$+`
+    */
+    pub name: ConstantRef,
 }
 impl BackReferenceReadNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -409,22 +753,73 @@ impl BackReferenceReadNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![BackReferenceReadNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("BackReferenceReadNode.flags")),
-        name: parse_constant.context(winnow::error::StrContext::Label("BackReferenceReadNode.name")),
-    }].parse_next(input)
+        winnow::combinator::seq![BackReferenceReadNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "BackReferenceReadNode.flags"
+                )),
+            name: parse_constant.context(winnow::error::StrContext::Label(
+                "BackReferenceReadNode.name"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 10
-#[derive(Debug, Clone)]
+/**
+Represents a begin statement.
+
+    begin
+      foo
+    end
+    ^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct BeginNode {
-    begin_keyword_loc: Option<Location>,
-    statements: Option<NodeRef>,
-    rescue_clause: Option<NodeRef>,
-    else_clause: Option<NodeRef>,
-    ensure_clause: Option<NodeRef>,
-    end_keyword_loc: Option<Location>,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    /**
+    Represents the location of the `begin` keyword.
+
+        begin x end
+        ^^^^^
+    */
+    pub begin_keyword_loc: Option<Location>,
+    /**
+    Represents the statements within the begin block.
+
+        begin x end
+              ^
+    */
+    pub statements: Option<NodeRef>,
+    /**
+    Represents the rescue clause within the begin block.
+
+        begin x; rescue y; end
+                 ^^^^^^^^
+    */
+    pub rescue_clause: Option<NodeRef>,
+    /**
+    Represents the else clause within the begin block.
+
+        begin x; rescue y; else z; end
+                           ^^^^^^
+    */
+    pub else_clause: Option<NodeRef>,
+    /**
+    Represents the ensure clause within the begin block.
+
+        begin x; ensure y; end
+                 ^^^^^^^^
+    */
+    pub ensure_clause: Option<NodeRef>,
+    /**
+    Represents the location of the `end` keyword.
+
+        begin x end
+                ^^^
+    */
+    pub end_keyword_loc: Option<Location>,
 }
 impl BeginNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -432,23 +827,52 @@ impl BeginNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![BeginNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("BeginNode.flags")),
-        begin_keyword_loc: parse_optional_location.context(winnow::error::StrContext::Label("BeginNode.begin_keyword_loc")),
-        statements: parse_optional_node.context(winnow::error::StrContext::Label("BeginNode.statements")),
-        rescue_clause: parse_optional_node.context(winnow::error::StrContext::Label("BeginNode.rescue_clause")),
-        else_clause: parse_optional_node.context(winnow::error::StrContext::Label("BeginNode.else_clause")),
-        ensure_clause: parse_optional_node.context(winnow::error::StrContext::Label("BeginNode.ensure_clause")),
-        end_keyword_loc: parse_optional_location.context(winnow::error::StrContext::Label("BeginNode.end_keyword_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![BeginNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("BeginNode.flags")),
+            begin_keyword_loc: parse_optional_location.context(winnow::error::StrContext::Label(
+                "BeginNode.begin_keyword_loc"
+            )),
+            statements: parse_optional_node
+                .context(winnow::error::StrContext::Label("BeginNode.statements")),
+            rescue_clause: parse_optional_node
+                .context(winnow::error::StrContext::Label("BeginNode.rescue_clause")),
+            else_clause: parse_optional_node
+                .context(winnow::error::StrContext::Label("BeginNode.else_clause")),
+            ensure_clause: parse_optional_node
+                .context(winnow::error::StrContext::Label("BeginNode.ensure_clause")),
+            end_keyword_loc: parse_optional_location.context(winnow::error::StrContext::Label(
+                "BeginNode.end_keyword_loc"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 11
-#[derive(Debug, Clone)]
+/**
+Represents a block argument using `&`.
+
+    bar(&args)
+    ^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct BlockArgumentNode {
-    expression: Option<NodeRef>,
-    operator_loc: Location,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    /**
+    The expression that is being passed as a block argument. This can be any [non-void expression](https://github.com/ruby/prism/blob/main/docs/parsing_rules.md#non-void-expression).
+
+        foo(&args)
+            ^^^^^
+    */
+    pub expression: Option<NodeRef>,
+    /**
+    Represents the location of the `&` operator.
+
+        foo(&args)
+            ^
+    */
+    pub operator_loc: Location,
 }
 impl BlockArgumentNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -456,19 +880,37 @@ impl BlockArgumentNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![BlockArgumentNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("BlockArgumentNode.flags")),
-        expression: parse_optional_node.context(winnow::error::StrContext::Label("BlockArgumentNode.expression")),
-        operator_loc: parse_location.context(winnow::error::StrContext::Label("BlockArgumentNode.operator_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![BlockArgumentNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("BlockArgumentNode.flags")),
+            expression: parse_optional_node.context(winnow::error::StrContext::Label(
+                "BlockArgumentNode.expression"
+            )),
+            operator_loc: parse_location.context(winnow::error::StrContext::Label(
+                "BlockArgumentNode.operator_loc"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 12
-#[derive(Debug, Clone)]
+/**
+Represents a block local variable.
+
+    a { |; b| }
+           ^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct BlockLocalVariableNode {
     pub flags: enumflags2::BitFlags<ParameterFlags>,
-    name: ConstantRef,
+    /**
+    The name of the block local variable.
+
+        a { |; b| } # name `:b`
+               ^
+    */
+    pub name: ConstantRef,
 }
 impl BlockLocalVariableNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -490,14 +932,54 @@ impl BlockLocalVariableNode {
     }
 }
 
-// 13
-#[derive(Debug, Clone)]
+/**
+Represents a block of ruby code.
+
+    [1, 2, 3].each { |i| puts x }
+                   ^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct BlockNode {
-    locals: Vec<ConstantRef>,
-    parameters: Option<NodeRef>,
-    body: Option<NodeRef>,
-    opening_loc: Location,
-    closing_loc: Location,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    /**
+    The local variables declared in the block.
+
+        [1, 2, 3].each { |i| puts x } # locals: [:i]
+                          ^
+    */
+    pub locals: Vec<ConstantRef>,
+    /**
+    The parameters of the block.
+
+        [1, 2, 3].each { |i| puts x }
+                         ^^^
+        [1, 2, 3].each { puts _1 }
+                       ^^^^^^^^^^^
+        [1, 2, 3].each { puts it }
+                       ^^^^^^^^^^^
+    */
+    pub parameters: Option<NodeRef>,
+    /**
+    The body of the block.
+
+        [1, 2, 3].each { |i| puts x }
+                             ^^^^^^
+    */
+    pub body: Option<NodeRef>,
+    /**
+    Represents the location of the opening `|`.
+
+        [1, 2, 3].each { |i| puts x }
+                         ^
+    */
+    pub opening_loc: Location,
+    /**
+    Represents the location of the closing `|`.
+
+        [1, 2, 3].each { |i| puts x }
+                           ^
+    */
+    pub closing_loc: Location,
 }
 impl BlockNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -505,24 +987,57 @@ impl BlockNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![BlockNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("BlockNode.flags")),
-        locals: length_repeat(parse_varuint, parse_constant).context(winnow::error::StrContext::Label("BlockNode.locals")),
-        parameters: parse_optional_node.context(winnow::error::StrContext::Label("BlockNode.parameters")),
-        body: parse_optional_node.context(winnow::error::StrContext::Label("BlockNode.body")),
-        opening_loc: parse_location.context(winnow::error::StrContext::Label("BlockNode.opening_loc")),
-        closing_loc: parse_location.context(winnow::error::StrContext::Label("BlockNode.closing_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![BlockNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("BlockNode.flags")),
+            locals: length_repeat(parse_varuint, parse_constant)
+                .context(winnow::error::StrContext::Label("BlockNode.locals")),
+            parameters: parse_optional_node
+                .context(winnow::error::StrContext::Label("BlockNode.parameters")),
+            body: parse_optional_node.context(winnow::error::StrContext::Label("BlockNode.body")),
+            opening_loc: parse_location
+                .context(winnow::error::StrContext::Label("BlockNode.opening_loc")),
+            closing_loc: parse_location
+                .context(winnow::error::StrContext::Label("BlockNode.closing_loc")),
+        }]
+        .parse_next(input)
     }
 }
 
-// 14
-#[derive(Debug, Clone)]
+/**
+Represents a block parameter of a method, block, or lambda definition.
+
+    def a(&b)
+          ^^
+    end
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct BlockParameterNode {
     pub flags: enumflags2::BitFlags<ParameterFlags>,
-    name: Option<ConstantRef>,
-    name_loc: Option<Location>,
-    operator_loc: Location,
+    /**
+    The name of the block parameter.
+
+        def a(&b) # name `:b`
+               ^
+        end
+    */
+    pub name: Option<ConstantRef>,
+    /**
+    Represents the location of the block parameter name.
+
+        def a(&b)
+               ^
+    */
+    pub name_loc: Option<Location>,
+    /**
+    Represents the location of the `&` operator.
+
+        def a(&b)
+              ^
+        end
+    */
+    pub operator_loc: Location,
 }
 impl BlockParameterNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -547,13 +1062,63 @@ impl BlockParameterNode {
     }
 }
 
-// 15
-#[derive(Debug, Clone)]
+/**
+Represents a block's parameters declaration.
+
+    -> (a, b = 1; local) { }
+       ^^^^^^^^^^^^^^^^^
+
+    foo do |a, b = 1; local|
+           ^^^^^^^^^^^^^^^^^
+    end
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct BlockParametersNode {
-    parameters: Option<NodeRef>,
-    locals: Vec<NodeRef>,
-    opening_loc: Option<Location>,
-    closing_loc: Option<Location>,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    /**
+    Represents the parameters of the block.
+
+        -> (a, b = 1; local) { }
+            ^^^^^^^^
+
+        foo do |a, b = 1; local|
+                ^^^^^^^^
+        end
+    */
+    pub parameters: Option<NodeRef>,
+    /**
+    Represents the local variables of the block.
+
+        -> (a, b = 1; local) { }
+                      ^^^^^
+
+        foo do |a, b = 1; local|
+                          ^^^^^
+        end
+    */
+    pub locals: Vec<NodeRef>,
+    /**
+    Represents the opening location of the block parameters.
+
+        -> (a, b = 1; local) { }
+           ^
+
+        foo do |a, b = 1; local|
+               ^
+        end
+    */
+    pub opening_loc: Option<Location>,
+    /**
+    Represents the closing location of the block parameters.
+
+        -> (a, b = 1; local) { }
+                           ^
+
+        foo do |a, b = 1; local|
+                               ^
+        end
+    */
+    pub closing_loc: Option<Location>,
 }
 impl BlockParametersNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -561,21 +1126,52 @@ impl BlockParametersNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![BlockParametersNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("BlockParametersNode.flags")),
-        parameters: parse_optional_node.context(winnow::error::StrContext::Label("BlockParametersNode.parameters")),
-        locals: length_repeat(parse_varuint, parse_node).context(winnow::error::StrContext::Label("BlockParametersNode.locals")),
-        opening_loc: parse_optional_location.context(winnow::error::StrContext::Label("BlockParametersNode.opening_loc")),
-        closing_loc: parse_optional_location.context(winnow::error::StrContext::Label("BlockParametersNode.closing_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![BlockParametersNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "BlockParametersNode.flags"
+                )),
+            parameters: parse_optional_node.context(winnow::error::StrContext::Label(
+                "BlockParametersNode.parameters"
+            )),
+            locals: length_repeat(parse_varuint, parse_node).context(
+                winnow::error::StrContext::Label("BlockParametersNode.locals")
+            ),
+            opening_loc: parse_optional_location.context(winnow::error::StrContext::Label(
+                "BlockParametersNode.opening_loc"
+            )),
+            closing_loc: parse_optional_location.context(winnow::error::StrContext::Label(
+                "BlockParametersNode.closing_loc"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 16
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `break` keyword.
+
+    break foo
+    ^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct BreakNode {
-    arguments: Option<NodeRef>,
-    keyword_loc: Location,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    /**
+    The arguments to the break statement, if present. These can be any [non-void expressions](https://github.com/ruby/prism/blob/main/docs/parsing_rules.md#non-void-expression).
+
+        break foo
+              ^^^
+    */
+    pub arguments: Option<NodeRef>,
+    /**
+    The location of the `break` keyword.
+
+        break foo
+        ^^^^^
+    */
+    pub keyword_loc: Location,
 }
 impl BreakNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -583,25 +1179,77 @@ impl BreakNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![BreakNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("BreakNode.flags")),
-        arguments: parse_optional_node.context(winnow::error::StrContext::Label("BreakNode.arguments")),
-        keyword_loc: parse_location.context(winnow::error::StrContext::Label("BreakNode.keyword_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![BreakNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("BreakNode.flags")),
+            arguments: parse_optional_node
+                .context(winnow::error::StrContext::Label("BreakNode.arguments")),
+            keyword_loc: parse_location
+                .context(winnow::error::StrContext::Label("BreakNode.keyword_loc")),
+        }]
+        .parse_next(input)
     }
 }
 
-// 17
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `&&=` operator on a call.
+
+    foo.bar &&= value
+    ^^^^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct CallAndWriteNode {
     pub flags: enumflags2::BitFlags<CallNodeFlags>,
-    receiver: Option<NodeRef>,
-    call_operator_loc: Option<Location>,
-    message_loc: Option<Location>,
-    read_name: ConstantRef,
-    write_name: ConstantRef,
-    operator_loc: Location,
-    value: NodeRef,
+    /**
+    The object that the method is being called on. This can be either `nil` or any [non-void expression](https://github.com/ruby/prism/blob/main/docs/parsing_rules.md#non-void-expression).
+
+        foo.bar &&= value
+        ^^^
+    */
+    pub receiver: Option<NodeRef>,
+    /**
+    Represents the location of the call operator.
+
+        foo.bar &&= value
+           ^
+    */
+    pub call_operator_loc: Option<Location>,
+    /**
+    Represents the location of the message.
+
+        foo.bar &&= value
+            ^^^
+    */
+    pub message_loc: Option<Location>,
+    /**
+    Represents the name of the method being called.
+
+        foo.bar &&= value # read_name `:bar`
+            ^^^
+    */
+    pub read_name: ConstantRef,
+    /**
+    Represents the name of the method being written to.
+
+        foo.bar &&= value # write_name `:bar=`
+            ^^^
+    */
+    pub write_name: ConstantRef,
+    /**
+    Represents the location of the operator.
+
+        foo.bar &&= value
+                ^^^
+    */
+    pub operator_loc: Location,
+    /**
+    Represents the value being assigned.
+
+        foo.bar &&= value
+                    ^^^^^
+    */
+    pub value: NodeRef,
 }
 impl CallAndWriteNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -637,18 +1285,94 @@ impl CallAndWriteNode {
     }
 }
 
-// 18
-#[derive(Debug, Clone)]
+/**
+Represents a method call, in all of the various forms that can take.
+
+    foo
+    ^^^
+
+    foo()
+    ^^^^^
+
+    +foo
+    ^^^^
+
+    foo + bar
+    ^^^^^^^^^
+
+    foo.bar
+    ^^^^^^^
+
+    foo&.bar
+    ^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct CallNode {
     pub flags: enumflags2::BitFlags<CallNodeFlags>,
-    receiver: Option<NodeRef>,
-    call_operator_loc: Option<Location>,
-    name: ConstantRef,
-    message_loc: Option<Location>,
-    opening_loc: Option<Location>,
-    arguments: Option<NodeRef>,
-    closing_loc: Option<Location>,
-    block: Option<NodeRef>,
+    /**
+    The object that the method is being called on. This can be either `nil` or any [non-void expression](https://github.com/ruby/prism/blob/main/docs/parsing_rules.md#non-void-expression).
+
+        foo.bar
+        ^^^
+
+        +foo
+         ^^^
+
+        foo + bar
+        ^^^
+    */
+    pub receiver: Option<NodeRef>,
+    /**
+    Represents the location of the call operator.
+
+        foo.bar
+           ^
+
+        foo&.bar
+           ^^
+    */
+    pub call_operator_loc: Option<Location>,
+    /**
+    Represents the name of the method being called.
+
+        foo.bar # name `:foo`
+        ^^^
+    */
+    pub name: ConstantRef,
+    /**
+    Represents the location of the message.
+
+        foo.bar
+            ^^^
+    */
+    pub message_loc: Option<Location>,
+    /**
+    Represents the location of the left parenthesis.
+        foo(bar)
+           ^
+    */
+    pub opening_loc: Option<Location>,
+    /**
+    Represents the arguments to the method call. These can be any [non-void expressions](https://github.com/ruby/prism/blob/main/docs/parsing_rules.md#non-void-expression).
+
+        foo(bar)
+            ^^^
+    */
+    pub arguments: Option<NodeRef>,
+    /**
+    Represents the location of the right parenthesis.
+
+        foo(bar)
+               ^
+    */
+    pub closing_loc: Option<Location>,
+    /**
+    Represents the block that is being passed to the method.
+
+        foo { |a| a }
+            ^^^^^^^^^
+    */
+    pub block: Option<NodeRef>,
 }
 impl CallNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -680,18 +1404,71 @@ impl CallNode {
     }
 }
 
-// 19
-#[derive(Debug, Clone)]
+/**
+Represents the use of an assignment operator on a call.
+
+    foo.bar += baz
+    ^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct CallOperatorWriteNode {
     pub flags: enumflags2::BitFlags<CallNodeFlags>,
-    receiver: Option<NodeRef>,
-    call_operator_loc: Option<Location>,
-    message_loc: Option<Location>,
-    read_name: ConstantRef,
-    write_name: ConstantRef,
-    binary_operator: ConstantRef,
-    binary_operator_loc: Location,
-    value: NodeRef,
+    /**
+    The object that the method is being called on. This can be either `nil` or any [non-void expressions](https://github.com/ruby/prism/blob/main/docs/parsing_rules.md#non-void-expression).
+
+        foo.bar += value
+        ^^^
+    */
+    pub receiver: Option<NodeRef>,
+    /**
+    Represents the location of the call operator.
+
+        foo.bar += value
+           ^
+    */
+    pub call_operator_loc: Option<Location>,
+    /**
+    Represents the location of the message.
+
+        foo.bar += value
+            ^^^
+    */
+    pub message_loc: Option<Location>,
+    /**
+    Represents the name of the method being called.
+
+        foo.bar += value # read_name `:bar`
+            ^^^
+    */
+    pub read_name: ConstantRef,
+    /**
+    Represents the name of the method being written to.
+
+        foo.bar += value # write_name `:bar=`
+            ^^^
+    */
+    pub write_name: ConstantRef,
+    /**
+    Represents the binary operator being used.
+
+        foo.bar += value # binary_operator `:+`
+                ^
+    */
+    pub binary_operator: ConstantRef,
+    /**
+    Represents the location of the binary operator.
+
+        foo.bar += value
+                ^^
+    */
+    pub binary_operator_loc: Location,
+    /**
+    Represents the value being assigned.
+
+        foo.bar += value
+                   ^^^^^
+    */
+    pub value: NodeRef,
 }
 impl CallOperatorWriteNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -734,17 +1511,64 @@ impl CallOperatorWriteNode {
     }
 }
 
-// 20
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `||=` operator on a call.
+
+    foo.bar ||= value
+    ^^^^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct CallOrWriteNode {
     pub flags: enumflags2::BitFlags<CallNodeFlags>,
-    receiver: Option<NodeRef>,
-    call_operator_loc: Option<Location>,
-    message_loc: Option<Location>,
-    read_name: ConstantRef,
-    write_name: ConstantRef,
-    operator_loc: Location,
-    value: NodeRef,
+    /**
+    The object that the method is being called on. This can be either `nil` or any [non-void expressions](https://github.com/ruby/prism/blob/main/docs/parsing_rules.md#non-void-expression).
+
+        foo.bar ||= value
+        ^^^
+    */
+    pub receiver: Option<NodeRef>,
+    /**
+    Represents the location of the call operator.
+
+        foo.bar ||= value
+           ^
+    */
+    pub call_operator_loc: Option<Location>,
+    /**
+    Represents the location of the message.
+
+        foo.bar ||= value
+            ^^^
+    */
+    pub message_loc: Option<Location>,
+    /**
+    Represents the name of the method being called.
+
+        foo.bar ||= value # read_name `:bar`
+            ^^^
+    */
+    pub read_name: ConstantRef,
+    /**
+    Represents the name of the method being written to.
+
+        foo.bar ||= value # write_name `:bar=`
+            ^^^
+    */
+    pub write_name: ConstantRef,
+    /**
+    Represents the location of the operator.
+
+        foo.bar ||= value
+                ^^^
+    */
+    pub operator_loc: Location,
+    /**
+    Represents the value being assigned.
+
+        foo.bar ||= value
+                    ^^^^^
+    */
+    pub value: NodeRef,
 }
 impl CallOrWriteNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -779,14 +1603,51 @@ impl CallOrWriteNode {
     }
 }
 
-// 21
-#[derive(Debug, Clone)]
+/**
+Represents assigning to a method call.
+
+    foo.bar, = 1
+    ^^^^^^^
+
+    begin
+    rescue => foo.bar
+              ^^^^^^^
+    end
+
+    for foo.bar in baz do end
+        ^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct CallTargetNode {
     pub flags: enumflags2::BitFlags<CallNodeFlags>,
-    receiver: NodeRef,
-    call_operator_loc: Location,
-    name: ConstantRef,
-    message_loc: Location,
+    /**
+    The object that the method is being called on. This can be any [non-void expression](https://github.com/ruby/prism/blob/main/docs/parsing_rules.md#non-void-expression).
+
+        foo.bar = 1
+        ^^^
+    */
+    pub receiver: NodeRef,
+    /**
+    Represents the location of the call operator.
+
+        foo.bar = 1
+           ^
+    */
+    pub call_operator_loc: Location,
+    /**
+    Represents the name of the method being called.
+
+        foo.bar = 1 # name `:foo`
+        ^^^
+    */
+    pub name: ConstantRef,
+    /**
+    Represents the location of the message.
+
+        foo.bar = 1
+            ^^^
+    */
+    pub message_loc: Location,
 }
 impl CallTargetNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -812,12 +1673,36 @@ impl CallTargetNode {
     }
 }
 
-// 22
-#[derive(Debug, Clone)]
+/**
+Represents assigning to a local variable in pattern matching.
+
+    foo => [bar => baz]
+           ^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct CapturePatternNode {
-    value: NodeRef,
-    target: NodeRef,
-    operator_loc: Location,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    /**
+    Represents the value to capture.
+
+        foo => bar
+               ^^^
+    */
+    pub value: NodeRef,
+    /**
+    Represents the target of the capture.
+
+        foo => bar
+        ^^^
+    */
+    pub target: NodeRef,
+    /**
+    Represents the location of the `=>` operator.
+
+        foo => bar
+            ^^
+    */
+    pub operator_loc: Location,
 }
 impl CapturePatternNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -825,23 +1710,68 @@ impl CapturePatternNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![CapturePatternNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("CapturePatternNode.flags")),
-        value: parse_node.context(winnow::error::StrContext::Label("CapturePatternNode.value")),
-        target: parse_node.context(winnow::error::StrContext::Label("CapturePatternNode.target")),
-        operator_loc: parse_location.context(winnow::error::StrContext::Label("CapturePatternNode.operator_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![CapturePatternNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("CapturePatternNode.flags")),
+            value: parse_node.context(winnow::error::StrContext::Label("CapturePatternNode.value")),
+            target: parse_node.context(winnow::error::StrContext::Label(
+                "CapturePatternNode.target"
+            )),
+            operator_loc: parse_location.context(winnow::error::StrContext::Label(
+                "CapturePatternNode.operator_loc"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 23
-#[derive(Debug, Clone)]
+/**
+Represents the use of a case statement for pattern matching.
+
+    case true
+    in false
+    end
+    ^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct CaseMatchNode {
-    predicate: Option<NodeRef>,
-    conditions: Vec<NodeRef>,
-    else_clause: Option<NodeRef>,
-    case_keyword_loc: Location,
-    end_keyword_loc: Location,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    /**
+    Represents the predicate of the case match. This can be either `nil` or any [non-void expressions](https://github.com/ruby/prism/blob/main/docs/parsing_rules.md#non-void-expression).
+
+        case true; in false; end
+        ^^^^
+    */
+    pub predicate: Option<NodeRef>,
+    /**
+    Represents the conditions of the case match.
+
+        case true; in false; end
+                   ^^^^^^^^
+    */
+    pub conditions: Vec<NodeRef>,
+    /**
+    Represents the else clause of the case match.
+
+        case true; in false; else; end
+                             ^^^^
+    */
+    pub else_clause: Option<NodeRef>,
+    /**
+    Represents the location of the `case` keyword.
+
+        case true; in false; end
+        ^^^^
+    */
+    pub case_keyword_loc: Location,
+    /**
+    Represents the location of the `end` keyword.
+
+        case true; in false; end
+                             ^^^
+    */
+    pub end_keyword_loc: Location,
 }
 impl CaseMatchNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -849,25 +1779,74 @@ impl CaseMatchNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![CaseMatchNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("CaseMatchNode.flags")),
-        predicate: parse_optional_node.context(winnow::error::StrContext::Label("CaseMatchNode.predicate")),
-        conditions: length_repeat(parse_varuint, parse_node).context(winnow::error::StrContext::Label("CaseMatchNode.conditions")),
-        else_clause: parse_optional_node.context(winnow::error::StrContext::Label("CaseMatchNode.else_clause")),
-        case_keyword_loc: parse_location.context(winnow::error::StrContext::Label("CaseMatchNode.case_keyword_loc")),
-        end_keyword_loc: parse_location.context(winnow::error::StrContext::Label("CaseMatchNode.end_keyword_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![CaseMatchNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("CaseMatchNode.flags")),
+            predicate: parse_optional_node
+                .context(winnow::error::StrContext::Label("CaseMatchNode.predicate")),
+            conditions: length_repeat(parse_varuint, parse_node)
+                .context(winnow::error::StrContext::Label("CaseMatchNode.conditions")),
+            else_clause: parse_optional_node.context(winnow::error::StrContext::Label(
+                "CaseMatchNode.else_clause"
+            )),
+            case_keyword_loc: parse_location.context(winnow::error::StrContext::Label(
+                "CaseMatchNode.case_keyword_loc"
+            )),
+            end_keyword_loc: parse_location.context(winnow::error::StrContext::Label(
+                "CaseMatchNode.end_keyword_loc"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 24
-#[derive(Debug, Clone)]
+/**
+Represents the use of a case statement.
+
+    case true
+    when false
+    end
+    ^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct CaseNode {
-    predicate: Option<NodeRef>,
-    conditions: Vec<NodeRef>,
-    else_clause: Option<NodeRef>,
-    case_keyword_loc: Location,
-    end_keyword_loc: Location,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    /**
+    Represents the predicate of the case statement. This can be either `nil` or any [non-void expressions](https://github.com/ruby/prism/blob/main/docs/parsing_rules.md#non-void-expression).
+
+        case true; when false; end
+        ^^^^
+    */
+    pub predicate: Option<NodeRef>,
+    /**
+    Represents the conditions of the case statement.
+
+        case true; when false; end
+                   ^^^^^^^^^^
+    */
+    pub conditions: Vec<NodeRef>,
+    /**
+    Represents the else clause of the case statement.
+
+        case true; when false; else; end
+                               ^^^^
+    */
+    pub else_clause: Option<NodeRef>,
+    /**
+    Represents the location of the `case` keyword.
+
+        case true; when false; end
+        ^^^^
+    */
+    pub case_keyword_loc: Location,
+    /**
+    Represents the location of the `end` keyword.
+
+        case true; when false; end
+                               ^^^
+    */
+    pub end_keyword_loc: Location,
 }
 impl CaseNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -875,28 +1854,43 @@ impl CaseNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![CaseNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("CaseNode.flags")),
-        predicate: parse_optional_node.context(winnow::error::StrContext::Label("CaseNode.predicate")),
-        conditions: length_repeat(parse_varuint, parse_node).context(winnow::error::StrContext::Label("CaseNode.conditions")),
-        else_clause: parse_optional_node.context(winnow::error::StrContext::Label("CaseNode.else_clause")),
-        case_keyword_loc: parse_location.context(winnow::error::StrContext::Label("CaseNode.case_keyword_loc")),
-        end_keyword_loc: parse_location.context(winnow::error::StrContext::Label("CaseNode.end_keyword_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![CaseNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("CaseNode.flags")),
+            predicate: parse_optional_node
+                .context(winnow::error::StrContext::Label("CaseNode.predicate")),
+            conditions: length_repeat(parse_varuint, parse_node)
+                .context(winnow::error::StrContext::Label("CaseNode.conditions")),
+            else_clause: parse_optional_node
+                .context(winnow::error::StrContext::Label("CaseNode.else_clause")),
+            case_keyword_loc: parse_location.context(winnow::error::StrContext::Label(
+                "CaseNode.case_keyword_loc"
+            )),
+            end_keyword_loc: parse_location
+                .context(winnow::error::StrContext::Label("CaseNode.end_keyword_loc")),
+        }]
+        .parse_next(input)
     }
 }
 
-// 25
-#[derive(Debug, Clone)]
+/**
+Represents a class declaration involving the `class` keyword.
+
+    class Foo end
+    ^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct ClassNode {
-    locals: Vec<ConstantRef>,
-    class_keyword_loc: Location,
-    constant_path: NodeRef,
-    inheritance_operator_loc: Option<Location>,
-    superclass: Option<NodeRef>,
-    body: Option<NodeRef>,
-    end_keyword_loc: Location,
-    name: ConstantRef,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub locals: Vec<ConstantRef>,
+    pub class_keyword_loc: Location,
+    pub constant_path: NodeRef,
+    pub inheritance_operator_loc: Option<Location>,
+    pub superclass: Option<NodeRef>,
+    pub body: Option<NodeRef>,
+    pub end_keyword_loc: Location,
+    pub name: ConstantRef,
 }
 impl ClassNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -904,27 +1898,69 @@ impl ClassNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![ClassNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("ClassNode.flags")),
-        locals: length_repeat(parse_varuint, parse_constant).context(winnow::error::StrContext::Label("ClassNode.locals")),
-        class_keyword_loc: parse_location.context(winnow::error::StrContext::Label("ClassNode.class_keyword_loc")),
-        constant_path: parse_node.context(winnow::error::StrContext::Label("ClassNode.constant_path")),
-        inheritance_operator_loc: parse_optional_location.context(winnow::error::StrContext::Label("ClassNode.inheritance_operator_loc")),
-        superclass: parse_optional_node.context(winnow::error::StrContext::Label("ClassNode.superclass")),
-        body: parse_optional_node.context(winnow::error::StrContext::Label("ClassNode.body")),
-        end_keyword_loc: parse_location.context(winnow::error::StrContext::Label("ClassNode.end_keyword_loc")),
-        name: parse_constant.context(winnow::error::StrContext::Label("ClassNode.name")),
-    }].parse_next(input)
+        winnow::combinator::seq![ClassNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("ClassNode.flags")),
+            locals: length_repeat(parse_varuint, parse_constant)
+                .context(winnow::error::StrContext::Label("ClassNode.locals")),
+            class_keyword_loc: parse_location.context(winnow::error::StrContext::Label(
+                "ClassNode.class_keyword_loc"
+            )),
+            constant_path: parse_node
+                .context(winnow::error::StrContext::Label("ClassNode.constant_path")),
+            inheritance_operator_loc: parse_optional_location.context(
+                winnow::error::StrContext::Label("ClassNode.inheritance_operator_loc")
+            ),
+            superclass: parse_optional_node
+                .context(winnow::error::StrContext::Label("ClassNode.superclass")),
+            body: parse_optional_node.context(winnow::error::StrContext::Label("ClassNode.body")),
+            end_keyword_loc: parse_location.context(winnow::error::StrContext::Label(
+                "ClassNode.end_keyword_loc"
+            )),
+            name: parse_constant.context(winnow::error::StrContext::Label("ClassNode.name")),
+        }]
+        .parse_next(input)
     }
 }
 
-// 26
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `&&=` operator for assignment to a class variable.
+
+    @@target &&= value
+    ^^^^^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct ClassVariableAndWriteNode {
-    name: ConstantRef,
-    name_loc: Location,
-    operator_loc: Location,
-    value: NodeRef,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    /**
+    The name of the class variable, which is a `@@` followed by an [identifier](https://github.com/ruby/prism/blob/main/docs/parsing_rules.md#identifiers).
+
+        @@target &&= value # name `:@@target`
+        ^^^^^^^^
+    */
+    pub name: ConstantRef,
+    /**
+    Represents the location of the variable name.
+
+        @@target &&= value
+        ^^^^^^^^
+    */
+    pub name_loc: Location,
+    /**
+    Represents the location of the `&&=` operator.
+
+        @@target &&= value
+                 ^^^
+    */
+    pub operator_loc: Location,
+    /**
+    Represents the value being assigned. This can be any [non-void expression](https://github.com/ruby/prism/blob/main/docs/parsing_rules.md#non-void-expression).
+
+        @@target &&= value
+                     ^^^^^
+    */
+    pub value: NodeRef,
 }
 impl ClassVariableAndWriteNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -932,24 +1968,43 @@ impl ClassVariableAndWriteNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![ClassVariableAndWriteNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("ClassVariableAndWriteNode.flags")),
-        name: parse_constant.context(winnow::error::StrContext::Label("ClassVariableAndWriteNode.name")),
-        name_loc: parse_location.context(winnow::error::StrContext::Label("ClassVariableAndWriteNode.name_loc")),
-        operator_loc: parse_location.context(winnow::error::StrContext::Label("ClassVariableAndWriteNode.operator_loc")),
-        value: parse_node.context(winnow::error::StrContext::Label("ClassVariableAndWriteNode.value")),
-    }].parse_next(input)
+        winnow::combinator::seq![ClassVariableAndWriteNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "ClassVariableAndWriteNode.flags"
+                )),
+            name: parse_constant.context(winnow::error::StrContext::Label(
+                "ClassVariableAndWriteNode.name"
+            )),
+            name_loc: parse_location.context(winnow::error::StrContext::Label(
+                "ClassVariableAndWriteNode.name_loc"
+            )),
+            operator_loc: parse_location.context(winnow::error::StrContext::Label(
+                "ClassVariableAndWriteNode.operator_loc"
+            )),
+            value: parse_node.context(winnow::error::StrContext::Label(
+                "ClassVariableAndWriteNode.value"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 27
-#[derive(Debug, Clone)]
+/**
+Represents assigning to a class variable using an operator that isn't `=`.
+
+    @@target += value
+    ^^^^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct ClassVariableOperatorWriteNode {
-    name: ConstantRef,
-    name_loc: Location,
-    binary_operator_loc: Location,
-    value: NodeRef,
-    binary_operator: ConstantRef,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub name: ConstantRef,
+    pub name_loc: Location,
+    pub binary_operator_loc: Location,
+    pub value: NodeRef,
+    pub binary_operator: ConstantRef,
 }
 impl ClassVariableOperatorWriteNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -957,24 +2012,45 @@ impl ClassVariableOperatorWriteNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![ClassVariableOperatorWriteNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("ClassVariableOperatorWriteNode.flags")),
-        name: parse_constant.context(winnow::error::StrContext::Label("ClassVariableOperatorWriteNode.name")),
-        name_loc: parse_location.context(winnow::error::StrContext::Label("ClassVariableOperatorWriteNode.name_loc")),
-        binary_operator_loc: parse_location.context(winnow::error::StrContext::Label("ClassVariableOperatorWriteNode.binary_operator_loc")),
-        value: parse_node.context(winnow::error::StrContext::Label("ClassVariableOperatorWriteNode.value")),
-        binary_operator: parse_constant.context(winnow::error::StrContext::Label("ClassVariableOperatorWriteNode.binary_operator")),
-    }].parse_next(input)
+        winnow::combinator::seq![ClassVariableOperatorWriteNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "ClassVariableOperatorWriteNode.flags"
+                )),
+            name: parse_constant.context(winnow::error::StrContext::Label(
+                "ClassVariableOperatorWriteNode.name"
+            )),
+            name_loc: parse_location.context(winnow::error::StrContext::Label(
+                "ClassVariableOperatorWriteNode.name_loc"
+            )),
+            binary_operator_loc: parse_location.context(winnow::error::StrContext::Label(
+                "ClassVariableOperatorWriteNode.binary_operator_loc"
+            )),
+            value: parse_node.context(winnow::error::StrContext::Label(
+                "ClassVariableOperatorWriteNode.value"
+            )),
+            binary_operator: parse_constant.context(winnow::error::StrContext::Label(
+                "ClassVariableOperatorWriteNode.binary_operator"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 28
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `||=` operator for assignment to a class variable.
+
+    @@target ||= value
+    ^^^^^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct ClassVariableOrWriteNode {
-    name: ConstantRef,
-    name_loc: Location,
-    operator_loc: Location,
-    value: NodeRef,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub name: ConstantRef,
+    pub name_loc: Location,
+    pub operator_loc: Location,
+    pub value: NodeRef,
 }
 impl ClassVariableOrWriteNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -982,20 +2058,46 @@ impl ClassVariableOrWriteNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![ClassVariableOrWriteNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("ClassVariableOrWriteNode.flags")),
-        name: parse_constant.context(winnow::error::StrContext::Label("ClassVariableOrWriteNode.name")),
-        name_loc: parse_location.context(winnow::error::StrContext::Label("ClassVariableOrWriteNode.name_loc")),
-        operator_loc: parse_location.context(winnow::error::StrContext::Label("ClassVariableOrWriteNode.operator_loc")),
-        value: parse_node.context(winnow::error::StrContext::Label("ClassVariableOrWriteNode.value")),
-    }].parse_next(input)
+        winnow::combinator::seq![ClassVariableOrWriteNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "ClassVariableOrWriteNode.flags"
+                )),
+            name: parse_constant.context(winnow::error::StrContext::Label(
+                "ClassVariableOrWriteNode.name"
+            )),
+            name_loc: parse_location.context(winnow::error::StrContext::Label(
+                "ClassVariableOrWriteNode.name_loc"
+            )),
+            operator_loc: parse_location.context(winnow::error::StrContext::Label(
+                "ClassVariableOrWriteNode.operator_loc"
+            )),
+            value: parse_node.context(winnow::error::StrContext::Label(
+                "ClassVariableOrWriteNode.value"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 29
-#[derive(Debug, Clone)]
+/**
+Represents referencing a class variable.
+
+    @@foo
+    ^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct ClassVariableReadNode {
-    name: ConstantRef,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    /**
+    The name of the class variable, which is a `@@` followed by an [identifier](https://github.com/ruby/prism/blob/main/docs/parsing_rules.md#identifiers).
+
+        @@abc   # name `:@@abc`
+
+        @@_test # name `:@@_test`
+    */
+    pub name: ConstantRef,
 }
 impl ClassVariableReadNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -1003,17 +2105,30 @@ impl ClassVariableReadNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![ClassVariableReadNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("ClassVariableReadNode.flags")),
-        name: parse_constant.context(winnow::error::StrContext::Label("ClassVariableReadNode.name")),
-    }].parse_next(input)
+        winnow::combinator::seq![ClassVariableReadNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "ClassVariableReadNode.flags"
+                )),
+            name: parse_constant.context(winnow::error::StrContext::Label(
+                "ClassVariableReadNode.name"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 30
-#[derive(Debug, Clone)]
+/**
+Represents writing to a class variable in a context that doesn't have an explicit value.
+
+    @@foo, @@bar = baz
+    ^^^^^  ^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct ClassVariableTargetNode {
-    name: ConstantRef,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub name: ConstantRef,
 }
 impl ClassVariableTargetNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -1021,20 +2136,61 @@ impl ClassVariableTargetNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![ClassVariableTargetNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("ClassVariableTargetNode.flags")),
-        name: parse_constant.context(winnow::error::StrContext::Label("ClassVariableTargetNode.name")),
-    }].parse_next(input)
+        winnow::combinator::seq![ClassVariableTargetNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "ClassVariableTargetNode.flags"
+                )),
+            name: parse_constant.context(winnow::error::StrContext::Label(
+                "ClassVariableTargetNode.name"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 31
-#[derive(Debug, Clone)]
+/**
+Represents writing to a class variable.
+
+    @@foo = 1
+    ^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct ClassVariableWriteNode {
-    name: ConstantRef,
-    name_loc: Location,
-    value: NodeRef,
-    operator_loc: Location,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    /**
+    The name of the class variable, which is a `@@` followed by an [identifier](https://github.com/ruby/prism/blob/main/docs/parsing_rules.md#identifiers).
+
+        @@abc = 123     # name `@@abc`
+
+        @@_test = :test # name `@@_test`
+    */
+    pub name: ConstantRef,
+    /**
+    The location of the variable name.
+
+        @@foo = :bar
+        ^^^^^
+    */
+    pub name_loc: Location,
+    /**
+    The value to write to the class variable. This can be any [non-void expression](https://github.com/ruby/prism/blob/main/docs/parsing_rules.md#non-void-expression).
+
+        @@foo = :bar
+                ^^^^
+
+        @@_xyz = 123
+                 ^^^
+    */
+    pub value: NodeRef,
+    /**
+    The location of the `=` operator.
+
+        @@foo = :bar
+              ^
+    */
+    pub operator_loc: Location,
 }
 impl ClassVariableWriteNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -1042,23 +2198,42 @@ impl ClassVariableWriteNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![ClassVariableWriteNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("ClassVariableWriteNode.flags")),
-        name: parse_constant.context(winnow::error::StrContext::Label("ClassVariableWriteNode.name")),
-        name_loc: parse_location.context(winnow::error::StrContext::Label("ClassVariableWriteNode.name_loc")),
-        value: parse_node.context(winnow::error::StrContext::Label("ClassVariableWriteNode.value")),
-        operator_loc: parse_location.context(winnow::error::StrContext::Label("ClassVariableWriteNode.operator_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![ClassVariableWriteNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "ClassVariableWriteNode.flags"
+                )),
+            name: parse_constant.context(winnow::error::StrContext::Label(
+                "ClassVariableWriteNode.name"
+            )),
+            name_loc: parse_location.context(winnow::error::StrContext::Label(
+                "ClassVariableWriteNode.name_loc"
+            )),
+            value: parse_node.context(winnow::error::StrContext::Label(
+                "ClassVariableWriteNode.value"
+            )),
+            operator_loc: parse_location.context(winnow::error::StrContext::Label(
+                "ClassVariableWriteNode.operator_loc"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 32
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `&&=` operator for assignment to a constant.
+
+    Target &&= value
+    ^^^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct ConstantAndWriteNode {
-    name: ConstantRef,
-    name_loc: Location,
-    operator_loc: Location,
-    value: NodeRef,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub name: ConstantRef,
+    pub name_loc: Location,
+    pub operator_loc: Location,
+    pub value: NodeRef,
 }
 impl ConstantAndWriteNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -1066,24 +2241,43 @@ impl ConstantAndWriteNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![ConstantAndWriteNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("ConstantAndWriteNode.flags")),
-        name: parse_constant.context(winnow::error::StrContext::Label("ConstantAndWriteNode.name")),
-        name_loc: parse_location.context(winnow::error::StrContext::Label("ConstantAndWriteNode.name_loc")),
-        operator_loc: parse_location.context(winnow::error::StrContext::Label("ConstantAndWriteNode.operator_loc")),
-        value: parse_node.context(winnow::error::StrContext::Label("ConstantAndWriteNode.value")),
-    }].parse_next(input)
+        winnow::combinator::seq![ConstantAndWriteNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "ConstantAndWriteNode.flags"
+                )),
+            name: parse_constant.context(winnow::error::StrContext::Label(
+                "ConstantAndWriteNode.name"
+            )),
+            name_loc: parse_location.context(winnow::error::StrContext::Label(
+                "ConstantAndWriteNode.name_loc"
+            )),
+            operator_loc: parse_location.context(winnow::error::StrContext::Label(
+                "ConstantAndWriteNode.operator_loc"
+            )),
+            value: parse_node.context(winnow::error::StrContext::Label(
+                "ConstantAndWriteNode.value"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 33
-#[derive(Debug, Clone)]
+/**
+Represents assigning to a constant using an operator that isn't `=`.
+
+    Target += value
+    ^^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct ConstantOperatorWriteNode {
-    name: ConstantRef,
-    name_loc: Location,
-    binary_operator_loc: Location,
-    value: NodeRef,
-    binary_operator: ConstantRef,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub name: ConstantRef,
+    pub name_loc: Location,
+    pub binary_operator_loc: Location,
+    pub value: NodeRef,
+    pub binary_operator: ConstantRef,
 }
 impl ConstantOperatorWriteNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -1091,24 +2285,45 @@ impl ConstantOperatorWriteNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![ConstantOperatorWriteNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("ConstantOperatorWriteNode.flags")),
-        name: parse_constant.context(winnow::error::StrContext::Label("ConstantOperatorWriteNode.name")),
-        name_loc: parse_location.context(winnow::error::StrContext::Label("ConstantOperatorWriteNode.name_loc")),
-        binary_operator_loc: parse_location.context(winnow::error::StrContext::Label("ConstantOperatorWriteNode.binary_operator_loc")),
-        value: parse_node.context(winnow::error::StrContext::Label("ConstantOperatorWriteNode.value")),
-        binary_operator: parse_constant.context(winnow::error::StrContext::Label("ConstantOperatorWriteNode.binary_operator")),
-    }].parse_next(input)
+        winnow::combinator::seq![ConstantOperatorWriteNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "ConstantOperatorWriteNode.flags"
+                )),
+            name: parse_constant.context(winnow::error::StrContext::Label(
+                "ConstantOperatorWriteNode.name"
+            )),
+            name_loc: parse_location.context(winnow::error::StrContext::Label(
+                "ConstantOperatorWriteNode.name_loc"
+            )),
+            binary_operator_loc: parse_location.context(winnow::error::StrContext::Label(
+                "ConstantOperatorWriteNode.binary_operator_loc"
+            )),
+            value: parse_node.context(winnow::error::StrContext::Label(
+                "ConstantOperatorWriteNode.value"
+            )),
+            binary_operator: parse_constant.context(winnow::error::StrContext::Label(
+                "ConstantOperatorWriteNode.binary_operator"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 34
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `||=` operator for assignment to a constant.
+
+    Target ||= value
+    ^^^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct ConstantOrWriteNode {
-    name: ConstantRef,
-    name_loc: Location,
-    operator_loc: Location,
-    value: NodeRef,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub name: ConstantRef,
+    pub name_loc: Location,
+    pub operator_loc: Location,
+    pub value: NodeRef,
 }
 impl ConstantOrWriteNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -1116,22 +2331,40 @@ impl ConstantOrWriteNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![ConstantOrWriteNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("ConstantOrWriteNode.flags")),
-        name: parse_constant.context(winnow::error::StrContext::Label("ConstantOrWriteNode.name")),
-        name_loc: parse_location.context(winnow::error::StrContext::Label("ConstantOrWriteNode.name_loc")),
-        operator_loc: parse_location.context(winnow::error::StrContext::Label("ConstantOrWriteNode.operator_loc")),
-        value: parse_node.context(winnow::error::StrContext::Label("ConstantOrWriteNode.value")),
-    }].parse_next(input)
+        winnow::combinator::seq![ConstantOrWriteNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "ConstantOrWriteNode.flags"
+                )),
+            name: parse_constant
+                .context(winnow::error::StrContext::Label("ConstantOrWriteNode.name")),
+            name_loc: parse_location.context(winnow::error::StrContext::Label(
+                "ConstantOrWriteNode.name_loc"
+            )),
+            operator_loc: parse_location.context(winnow::error::StrContext::Label(
+                "ConstantOrWriteNode.operator_loc"
+            )),
+            value: parse_node.context(winnow::error::StrContext::Label(
+                "ConstantOrWriteNode.value"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 35
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `&&=` operator for assignment to a constant path.
+
+    Parent::Child &&= value
+    ^^^^^^^^^^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct ConstantPathAndWriteNode {
-    target: NodeRef,
-    operator_loc: Location,
-    value: NodeRef,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub target: NodeRef,
+    pub operator_loc: Location,
+    pub value: NodeRef,
 }
 impl ConstantPathAndWriteNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -1139,21 +2372,70 @@ impl ConstantPathAndWriteNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![ConstantPathAndWriteNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("ConstantPathAndWriteNode.flags")),
-        target: parse_node.context(winnow::error::StrContext::Label("ConstantPathAndWriteNode.target")),
-        operator_loc: parse_location.context(winnow::error::StrContext::Label("ConstantPathAndWriteNode.operator_loc")),
-        value: parse_node.context(winnow::error::StrContext::Label("ConstantPathAndWriteNode.value")),
-    }].parse_next(input)
+        winnow::combinator::seq![ConstantPathAndWriteNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "ConstantPathAndWriteNode.flags"
+                )),
+            target: parse_node.context(winnow::error::StrContext::Label(
+                "ConstantPathAndWriteNode.target"
+            )),
+            operator_loc: parse_location.context(winnow::error::StrContext::Label(
+                "ConstantPathAndWriteNode.operator_loc"
+            )),
+            value: parse_node.context(winnow::error::StrContext::Label(
+                "ConstantPathAndWriteNode.value"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 36
-#[derive(Debug, Clone)]
+/**
+Represents accessing a constant through a path of `::` operators.
+
+    Foo::Bar
+    ^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct ConstantPathNode {
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    /**
+    The left-hand node of the path, if present. It can be `nil` or any [non-void expression](https://github.com/ruby/prism/blob/main/docs/parsing_rules.md#non-void-expression). It will be `nil` when the constant lookup is at the root of the module tree.
+
+        Foo::Bar
+        ^^^
+
+        self::Test
+        ^^^^
+
+        a.b::C
+        ^^^
+    */
     pub parent: Option<NodeRef>,
+    /**
+    The name of the constant being accessed. This could be `nil` in the event of a syntax error.    */
     pub name: Option<ConstantRef>,
+    /**
+    The location of the `::` delimiter.
+
+        ::Foo
+        ^^
+
+        One::Two
+           ^^
+    */
     pub delimiter_loc: Location,
+    /**
+    The location of the name of the constant.
+
+        ::Foo
+          ^^^
+
+        One::Two
+             ^^^
+    */
     pub name_loc: Location,
 }
 impl ConstantPathNode {
@@ -1162,23 +2444,38 @@ impl ConstantPathNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![ConstantPathNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("ConstantPathNode.flags")),
-        parent: parse_optional_node.context(winnow::error::StrContext::Label("ConstantPathNode.parent")),
-        name: parse_optional_constant.context(winnow::error::StrContext::Label("ConstantPathNode.name")),
-        delimiter_loc: parse_location.context(winnow::error::StrContext::Label("ConstantPathNode.delimiter_loc")),
-        name_loc: parse_location.context(winnow::error::StrContext::Label("ConstantPathNode.name_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![ConstantPathNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("ConstantPathNode.flags")),
+            parent: parse_optional_node
+                .context(winnow::error::StrContext::Label("ConstantPathNode.parent")),
+            name: parse_optional_constant
+                .context(winnow::error::StrContext::Label("ConstantPathNode.name")),
+            delimiter_loc: parse_location.context(winnow::error::StrContext::Label(
+                "ConstantPathNode.delimiter_loc"
+            )),
+            name_loc: parse_location.context(winnow::error::StrContext::Label(
+                "ConstantPathNode.name_loc"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 37
-#[derive(Debug, Clone)]
+/**
+Represents assigning to a constant path using an operator that isn't `=`.
+
+    Parent::Child += value
+    ^^^^^^^^^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct ConstantPathOperatorWriteNode {
-    target: NodeRef,
-    binary_operator_loc: Location,
-    value: NodeRef,
-    binary_operator: ConstantRef,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub target: NodeRef,
+    pub binary_operator_loc: Location,
+    pub value: NodeRef,
+    pub binary_operator: ConstantRef,
 }
 impl ConstantPathOperatorWriteNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -1186,22 +2483,41 @@ impl ConstantPathOperatorWriteNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![ConstantPathOperatorWriteNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("ConstantPathOperatorWriteNode.flags")),
-        target: parse_node.context(winnow::error::StrContext::Label("ConstantPathOperatorWriteNode.target")),
-        binary_operator_loc: parse_location.context(winnow::error::StrContext::Label("ConstantPathOperatorWriteNode.binary_operator_loc")),
-        value: parse_node.context(winnow::error::StrContext::Label("ConstantPathOperatorWriteNode.value")),
-        binary_operator: parse_constant.context(winnow::error::StrContext::Label("ConstantPathOperatorWriteNode.binary_operator")),
-    }].parse_next(input)
+        winnow::combinator::seq![ConstantPathOperatorWriteNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "ConstantPathOperatorWriteNode.flags"
+                )),
+            target: parse_node.context(winnow::error::StrContext::Label(
+                "ConstantPathOperatorWriteNode.target"
+            )),
+            binary_operator_loc: parse_location.context(winnow::error::StrContext::Label(
+                "ConstantPathOperatorWriteNode.binary_operator_loc"
+            )),
+            value: parse_node.context(winnow::error::StrContext::Label(
+                "ConstantPathOperatorWriteNode.value"
+            )),
+            binary_operator: parse_constant.context(winnow::error::StrContext::Label(
+                "ConstantPathOperatorWriteNode.binary_operator"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 38
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `||=` operator for assignment to a constant path.
+
+    Parent::Child ||= value
+    ^^^^^^^^^^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct ConstantPathOrWriteNode {
-    target: NodeRef,
-    operator_loc: Location,
-    value: NodeRef,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub target: NodeRef,
+    pub operator_loc: Location,
+    pub value: NodeRef,
 }
 impl ConstantPathOrWriteNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -1209,22 +2525,39 @@ impl ConstantPathOrWriteNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![ConstantPathOrWriteNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("ConstantPathOrWriteNode.flags")),
-        target: parse_node.context(winnow::error::StrContext::Label("ConstantPathOrWriteNode.target")),
-        operator_loc: parse_location.context(winnow::error::StrContext::Label("ConstantPathOrWriteNode.operator_loc")),
-        value: parse_node.context(winnow::error::StrContext::Label("ConstantPathOrWriteNode.value")),
-    }].parse_next(input)
+        winnow::combinator::seq![ConstantPathOrWriteNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "ConstantPathOrWriteNode.flags"
+                )),
+            target: parse_node.context(winnow::error::StrContext::Label(
+                "ConstantPathOrWriteNode.target"
+            )),
+            operator_loc: parse_location.context(winnow::error::StrContext::Label(
+                "ConstantPathOrWriteNode.operator_loc"
+            )),
+            value: parse_node.context(winnow::error::StrContext::Label(
+                "ConstantPathOrWriteNode.value"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 39
-#[derive(Debug, Clone)]
+/**
+Represents writing to a constant path in a context that doesn't have an explicit value.
+
+    Foo::Foo, Bar::Bar = baz
+    ^^^^^^^^  ^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct ConstantPathTargetNode {
-    parent: Option<NodeRef>,
-    name: Option<ConstantRef>,
-    delimiter_loc: Location,
-    name_loc: Location,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub parent: Option<NodeRef>,
+    pub name: Option<ConstantRef>,
+    pub delimiter_loc: Location,
+    pub name_loc: Location,
 }
 impl ConstantPathTargetNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -1232,22 +2565,68 @@ impl ConstantPathTargetNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![ConstantPathTargetNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("ConstantPathTargetNode.flags")),
-        parent: parse_optional_node.context(winnow::error::StrContext::Label("ConstantPathTargetNode.parent")),
-        name: parse_optional_constant.context(winnow::error::StrContext::Label("ConstantPathTargetNode.name")),
-        delimiter_loc: parse_location.context(winnow::error::StrContext::Label("ConstantPathTargetNode.delimiter_loc")),
-        name_loc: parse_location.context(winnow::error::StrContext::Label("ConstantPathTargetNode.name_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![ConstantPathTargetNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "ConstantPathTargetNode.flags"
+                )),
+            parent: parse_optional_node.context(winnow::error::StrContext::Label(
+                "ConstantPathTargetNode.parent"
+            )),
+            name: parse_optional_constant.context(winnow::error::StrContext::Label(
+                "ConstantPathTargetNode.name"
+            )),
+            delimiter_loc: parse_location.context(winnow::error::StrContext::Label(
+                "ConstantPathTargetNode.delimiter_loc"
+            )),
+            name_loc: parse_location.context(winnow::error::StrContext::Label(
+                "ConstantPathTargetNode.name_loc"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 40
-#[derive(Debug, Clone)]
+/**
+Represents writing to a constant path.
+
+    ::Foo = 1
+    ^^^^^^^^^
+
+    Foo::Bar = 1
+    ^^^^^^^^^^^^
+
+    ::Foo::Bar = 1
+    ^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct ConstantPathWriteNode {
-    target: NodeRef,
-    operator_loc: Location,
-    value: NodeRef,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    /**
+    A node representing the constant path being written to.
+
+        Foo::Bar = 1
+        ^^^^^^^^
+
+        ::Foo = :abc
+        ^^^^^
+    */
+    pub target: NodeRef,
+    /**
+    The location of the `=` operator.
+
+        ::ABC = 123
+              ^
+    */
+    pub operator_loc: Location,
+    /**
+    The value to write to the constant path. It can be any [non-void expression](https://github.com/ruby/prism/blob/main/docs/parsing_rules.md#non-void-expression).
+
+        FOO::BAR = :abc
+                   ^^^^
+    */
+    pub value: NodeRef,
 }
 impl ConstantPathWriteNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -1255,18 +2634,42 @@ impl ConstantPathWriteNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![ConstantPathWriteNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("ConstantPathWriteNode.flags")),
-        target: parse_node.context(winnow::error::StrContext::Label("ConstantPathWriteNode.target")),
-        operator_loc: parse_location.context(winnow::error::StrContext::Label("ConstantPathWriteNode.operator_loc")),
-        value: parse_node.context(winnow::error::StrContext::Label("ConstantPathWriteNode.value")),
-    }].parse_next(input)
+        winnow::combinator::seq![ConstantPathWriteNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "ConstantPathWriteNode.flags"
+                )),
+            target: parse_node.context(winnow::error::StrContext::Label(
+                "ConstantPathWriteNode.target"
+            )),
+            operator_loc: parse_location.context(winnow::error::StrContext::Label(
+                "ConstantPathWriteNode.operator_loc"
+            )),
+            value: parse_node.context(winnow::error::StrContext::Label(
+                "ConstantPathWriteNode.value"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 41
-#[derive(Debug, Clone)]
+/**
+Represents referencing a constant.
+
+    Foo
+    ^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct ConstantReadNode {
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    /**
+    The name of the [constant](https://github.com/ruby/prism/blob/main/docs/parsing_rules.md#constants).
+
+        X              # name `:X`
+
+        SOME_CONSTANT  # name `:SOME_CONSTANT`
+    */
     pub name: ConstantRef,
 }
 impl ConstantReadNode {
@@ -1275,18 +2678,26 @@ impl ConstantReadNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![ConstantReadNode{
-            _: zero_flags.context(winnow::error::StrContext::Label("ConstantReadNode.flags")),
+        winnow::combinator::seq![ConstantReadNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("ConstantReadNode.flags")),
             name: parse_constant.context(winnow::error::StrContext::Label("ConstantReadNode.name")),
         }]
         .parse_next(input)
     }
 }
 
-// 42
-#[derive(Debug, Clone)]
+/**
+Represents writing to a constant in a context that doesn't have an explicit value.
+
+    Foo, Bar = baz
+    ^^^  ^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct ConstantTargetNode {
-    name: ConstantRef,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub name: ConstantRef,
 }
 impl ConstantTargetNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -1294,20 +2705,58 @@ impl ConstantTargetNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![ConstantTargetNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("ConstantTargetNode.flags")),
-        name: parse_constant.context(winnow::error::StrContext::Label("ConstantTargetNode.name")),
-    }].parse_next(input)
+        winnow::combinator::seq![ConstantTargetNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("ConstantTargetNode.flags")),
+            name: parse_constant
+                .context(winnow::error::StrContext::Label("ConstantTargetNode.name")),
+        }]
+        .parse_next(input)
     }
 }
 
-// 43
-#[derive(Debug, Clone)]
+/**
+Represents writing to a constant.
+
+    Foo = 1
+    ^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct ConstantWriteNode {
-    name: ConstantRef,
-    name_loc: Location,
-    value: NodeRef,
-    operator_loc: Location,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    /**
+    The name of the [constant](https://github.com/ruby/prism/blob/main/docs/parsing_rules.md#constants).
+
+        Foo = :bar # name `:Foo`
+
+        XYZ = 1    # name `:XYZ`
+    */
+    pub name: ConstantRef,
+    /**
+    The location of the constant name.
+
+        FOO = 1
+        ^^^
+    */
+    pub name_loc: Location,
+    /**
+    The value to write to the constant. It can be any [non-void expression](https://github.com/ruby/prism/blob/main/docs/parsing_rules.md#non-void-expression).
+
+        FOO = :bar
+              ^^^^
+
+        MyClass = Class.new
+                  ^^^^^^^^^
+    */
+    pub value: NodeRef,
+    /**
+    The location of the `=` operator.
+
+        FOO = :bar
+            ^
+    */
+    pub operator_loc: Location,
 }
 impl ConstantWriteNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -1315,31 +2764,46 @@ impl ConstantWriteNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![ConstantWriteNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("ConstantWriteNode.flags")),
-        name: parse_constant.context(winnow::error::StrContext::Label("ConstantWriteNode.name")),
-        name_loc: parse_location.context(winnow::error::StrContext::Label("ConstantWriteNode.name_loc")),
-        value: parse_node.context(winnow::error::StrContext::Label("ConstantWriteNode.value")),
-        operator_loc: parse_location.context(winnow::error::StrContext::Label("ConstantWriteNode.operator_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![ConstantWriteNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("ConstantWriteNode.flags")),
+            name: parse_constant
+                .context(winnow::error::StrContext::Label("ConstantWriteNode.name")),
+            name_loc: parse_location.context(winnow::error::StrContext::Label(
+                "ConstantWriteNode.name_loc"
+            )),
+            value: parse_node.context(winnow::error::StrContext::Label("ConstantWriteNode.value")),
+            operator_loc: parse_location.context(winnow::error::StrContext::Label(
+                "ConstantWriteNode.operator_loc"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 44
-#[derive(Debug, Clone)]
+/**
+Represents a method definition.
+
+    def method
+    end
+    ^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct DefNode {
-    name: ConstantRef,
-    name_loc: Location,
-    receiver: Option<NodeRef>,
-    parameters: Option<NodeRef>,
-    body: Option<NodeRef>,
-    locals: Vec<ConstantRef>,
-    def_keyword_loc: Location,
-    operator_loc: Option<Location>,
-    lparen_loc: Option<Location>,
-    rparen_loc: Option<Location>,
-    equal_loc: Option<Location>,
-    end_keyword_loc: Option<Location>,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub name: ConstantRef,
+    pub name_loc: Location,
+    pub receiver: Option<NodeRef>,
+    pub parameters: Option<NodeRef>,
+    pub body: Option<NodeRef>,
+    pub locals: Vec<ConstantRef>,
+    pub def_keyword_loc: Location,
+    pub operator_loc: Option<Location>,
+    pub lparen_loc: Option<Location>,
+    pub rparen_loc: Option<Location>,
+    pub equal_loc: Option<Location>,
+    pub end_keyword_loc: Option<Location>,
 }
 impl DefNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -1349,7 +2813,7 @@ impl DefNode {
         use winnow::Parser;
         winnow::combinator::seq![DefNode{
         _: winnow::binary::u32(winnow::binary::Endianness::Native),
-        _: zero_flags.context(winnow::error::StrContext::Label("DefNode.flags")),
+        flags: parse_varuint.map(DefaultNodeFlags::from_bits_truncate).context(winnow::error::StrContext::Label("DefNode.flags")),
         name: parse_constant.context(winnow::error::StrContext::Label("DefNode.name")),
         name_loc: parse_location.context(winnow::error::StrContext::Label("DefNode.name_loc")),
         receiver: parse_optional_node.context(winnow::error::StrContext::Label("DefNode.receiver")),
@@ -1366,13 +2830,19 @@ impl DefNode {
     }
 }
 
-// 45
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `defined?` keyword.
+
+    defined?(a)
+    ^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct DefinedNode {
-    lparen_loc: Option<Location>,
-    value: NodeRef,
-    rparen_loc: Option<Location>,
-    keyword_loc: Location,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub lparen_loc: Option<Location>,
+    pub value: NodeRef,
+    pub rparen_loc: Option<Location>,
+    pub keyword_loc: Location,
 }
 impl DefinedNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -1380,22 +2850,34 @@ impl DefinedNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![DefinedNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("DefinedNode.flags")),
-        lparen_loc: parse_optional_location.context(winnow::error::StrContext::Label("DefinedNode.lparen_loc")),
-        value: parse_node.context(winnow::error::StrContext::Label("DefinedNode.value")),
-        rparen_loc: parse_optional_location.context(winnow::error::StrContext::Label("DefinedNode.rparen_loc")),
-        keyword_loc: parse_location.context(winnow::error::StrContext::Label("DefinedNode.keyword_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![DefinedNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("DefinedNode.flags")),
+            lparen_loc: parse_optional_location
+                .context(winnow::error::StrContext::Label("DefinedNode.lparen_loc")),
+            value: parse_node.context(winnow::error::StrContext::Label("DefinedNode.value")),
+            rparen_loc: parse_optional_location
+                .context(winnow::error::StrContext::Label("DefinedNode.rparen_loc")),
+            keyword_loc: parse_location
+                .context(winnow::error::StrContext::Label("DefinedNode.keyword_loc")),
+        }]
+        .parse_next(input)
     }
 }
 
-// 46
-#[derive(Debug, Clone)]
+/**
+Represents an `else` clause in a `case`, `if`, or `unless` statement.
+
+    if a then b else c end
+                ^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct ElseNode {
-    else_keyword_loc: Location,
-    statements: Option<NodeRef>,
-    end_keyword_loc: Option<Location>,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub else_keyword_loc: Location,
+    pub statements: Option<NodeRef>,
+    pub end_keyword_loc: Option<Location>,
 }
 impl ElseNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -1403,21 +2885,34 @@ impl ElseNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![ElseNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("ElseNode.flags")),
-        else_keyword_loc: parse_location.context(winnow::error::StrContext::Label("ElseNode.else_keyword_loc")),
-        statements: parse_optional_node.context(winnow::error::StrContext::Label("ElseNode.statements")),
-        end_keyword_loc: parse_optional_location.context(winnow::error::StrContext::Label("ElseNode.end_keyword_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![ElseNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("ElseNode.flags")),
+            else_keyword_loc: parse_location.context(winnow::error::StrContext::Label(
+                "ElseNode.else_keyword_loc"
+            )),
+            statements: parse_optional_node
+                .context(winnow::error::StrContext::Label("ElseNode.statements")),
+            end_keyword_loc: parse_optional_location
+                .context(winnow::error::StrContext::Label("ElseNode.end_keyword_loc")),
+        }]
+        .parse_next(input)
     }
 }
 
-// 47
-#[derive(Debug, Clone)]
+/**
+Represents an interpolated set of statements.
+
+    "foo #{bar}"
+         ^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct EmbeddedStatementsNode {
-    opening_loc: Location,
-    statements: Option<NodeRef>,
-    closing_loc: Location,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub opening_loc: Location,
+    pub statements: Option<NodeRef>,
+    pub closing_loc: Location,
 }
 impl EmbeddedStatementsNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -1425,20 +2920,37 @@ impl EmbeddedStatementsNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![EmbeddedStatementsNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("EmbeddedStatementsNode.flags")),
-        opening_loc: parse_location.context(winnow::error::StrContext::Label("EmbeddedStatementsNode.opening_loc")),
-        statements: parse_optional_node.context(winnow::error::StrContext::Label("EmbeddedStatementsNode.statements")),
-        closing_loc: parse_location.context(winnow::error::StrContext::Label("EmbeddedStatementsNode.closing_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![EmbeddedStatementsNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "EmbeddedStatementsNode.flags"
+                )),
+            opening_loc: parse_location.context(winnow::error::StrContext::Label(
+                "EmbeddedStatementsNode.opening_loc"
+            )),
+            statements: parse_optional_node.context(winnow::error::StrContext::Label(
+                "EmbeddedStatementsNode.statements"
+            )),
+            closing_loc: parse_location.context(winnow::error::StrContext::Label(
+                "EmbeddedStatementsNode.closing_loc"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 48
-#[derive(Debug, Clone)]
+/**
+Represents an interpolated variable.
+
+    "foo #@bar"
+         ^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct EmbeddedVariableNode {
-    operator_loc: Location,
-    variable: NodeRef,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub operator_loc: Location,
+    pub variable: NodeRef,
 }
 impl EmbeddedVariableNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -1446,20 +2958,39 @@ impl EmbeddedVariableNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![EmbeddedVariableNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("EmbeddedVariableNode.flags")),
-        operator_loc: parse_location.context(winnow::error::StrContext::Label("EmbeddedVariableNode.operator_loc")),
-        variable: parse_node.context(winnow::error::StrContext::Label("EmbeddedVariableNode.variable")),
-    }].parse_next(input)
+        winnow::combinator::seq![EmbeddedVariableNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "EmbeddedVariableNode.flags"
+                )),
+            operator_loc: parse_location.context(winnow::error::StrContext::Label(
+                "EmbeddedVariableNode.operator_loc"
+            )),
+            variable: parse_node.context(winnow::error::StrContext::Label(
+                "EmbeddedVariableNode.variable"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 49
-#[derive(Debug, Clone)]
+/**
+Represents an `ensure` clause in a `begin` statement.
+
+    begin
+      foo
+    ensure
+    ^^^^^^
+      bar
+    end
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct EnsureNode {
-    ensure_keyword_loc: Location,
-    statements: Option<NodeRef>,
-    end_keyword_loc: Location,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub ensure_keyword_loc: Location,
+    pub statements: Option<NodeRef>,
+    pub end_keyword_loc: Location,
 }
 impl EnsureNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -1467,40 +2998,69 @@ impl EnsureNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![EnsureNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("EnsureNode.flags")),
-        ensure_keyword_loc: parse_location.context(winnow::error::StrContext::Label("EnsureNode.ensure_keyword_loc")),
-        statements: parse_optional_node.context(winnow::error::StrContext::Label("EnsureNode.statements")),
-        end_keyword_loc: parse_location.context(winnow::error::StrContext::Label("EnsureNode.end_keyword_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![EnsureNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("EnsureNode.flags")),
+            ensure_keyword_loc: parse_location.context(winnow::error::StrContext::Label(
+                "EnsureNode.ensure_keyword_loc"
+            )),
+            statements: parse_optional_node
+                .context(winnow::error::StrContext::Label("EnsureNode.statements")),
+            end_keyword_loc: parse_location.context(winnow::error::StrContext::Label(
+                "EnsureNode.end_keyword_loc"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 50
-#[derive(Debug, Clone)]
-pub struct FalseNode {}
+/**
+Represents the use of the literal `false` keyword.
+
+    false
+    ^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
+pub struct FalseNode {
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+}
 impl FalseNode {
     pub fn into_node_kind(self) -> NodeKind {
         NodeKind::FalseNode(self)
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        zero_flags
-            .context(winnow::error::StrContext::Label("FalseNode.flags"))
-            .value(Self {})
-            .parse_next(input)
+        winnow::combinator::seq![FalseNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("FalseNode.flags")),
+        }]
+        .parse_next(input)
     }
 }
 
-// 51
-#[derive(Debug, Clone)]
+/**
+Represents a find pattern in pattern matching.
+
+    foo in *bar, baz, *qux
+           ^^^^^^^^^^^^^^^
+
+    foo in [*bar, baz, *qux]
+           ^^^^^^^^^^^^^^^^^
+
+    foo in Foo(*bar, baz, *qux)
+           ^^^^^^^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct FindPatternNode {
-    constant: Option<NodeRef>,
-    left: NodeRef,
-    requireds: Vec<NodeRef>,
-    right: NodeRef,
-    opening_loc: Option<Location>,
-    closing_loc: Option<Location>,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub constant: Option<NodeRef>,
+    pub left: NodeRef,
+    pub requireds: Vec<NodeRef>,
+    pub right: NodeRef,
+    pub opening_loc: Option<Location>,
+    pub closing_loc: Option<Location>,
 }
 impl FindPatternNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -1508,25 +3068,40 @@ impl FindPatternNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![FindPatternNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("FindPatternNode.flags")),
-        constant: parse_optional_node.context(winnow::error::StrContext::Label("FindPatternNode.constant")),
-        left: parse_node.context(winnow::error::StrContext::Label("FindPatternNode.left")),
-        requireds: length_repeat(parse_varuint, parse_node).context(winnow::error::StrContext::Label("FindPatternNode.requireds")),
-        right: parse_node.context(winnow::error::StrContext::Label("FindPatternNode.right")),
-        opening_loc: parse_optional_location.context(winnow::error::StrContext::Label("FindPatternNode.opening_loc")),
-        closing_loc: parse_optional_location.context(winnow::error::StrContext::Label("FindPatternNode.closing_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![FindPatternNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("FindPatternNode.flags")),
+            constant: parse_optional_node
+                .context(winnow::error::StrContext::Label("FindPatternNode.constant")),
+            left: parse_node.context(winnow::error::StrContext::Label("FindPatternNode.left")),
+            requireds: length_repeat(parse_varuint, parse_node).context(
+                winnow::error::StrContext::Label("FindPatternNode.requireds")
+            ),
+            right: parse_node.context(winnow::error::StrContext::Label("FindPatternNode.right")),
+            opening_loc: parse_optional_location.context(winnow::error::StrContext::Label(
+                "FindPatternNode.opening_loc"
+            )),
+            closing_loc: parse_optional_location.context(winnow::error::StrContext::Label(
+                "FindPatternNode.closing_loc"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 52
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `..` or `...` operators to create flip flops.
+
+    baz if foo .. bar
+           ^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct FlipFlopNode {
     pub flags: enumflags2::BitFlags<RangeFlags>,
-    left: Option<NodeRef>,
-    right: Option<NodeRef>,
-    operator_loc: Location,
+    pub left: Option<NodeRef>,
+    pub right: Option<NodeRef>,
+    pub operator_loc: Location,
 }
 impl FlipFlopNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -1550,10 +3125,18 @@ impl FlipFlopNode {
     }
 }
 
-// 53
-#[derive(Debug, Clone)]
+/**
+Represents a floating point number literal.
+
+    1.0
+    ^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct FloatNode {
-    value: f64,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    /**
+    The value of the floating point number as a Float.    */
+    pub value: f64,
 }
 impl FloatNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -1561,24 +3144,76 @@ impl FloatNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![FloatNode{
-            _: zero_flags.context(winnow::error::StrContext::Label("FloatNode.flags")),
+        winnow::combinator::seq![FloatNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("FloatNode.flags")),
             value: parse_double.context(winnow::error::StrContext::Label("FloatNode.value")),
         }]
         .parse_next(input)
     }
 }
 
-// 54
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `for` keyword.
+
+    for i in a end
+    ^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct ForNode {
-    index: NodeRef,
-    collection: NodeRef,
-    statements: Option<NodeRef>,
-    for_keyword_loc: Location,
-    in_keyword_loc: Location,
-    do_keyword_loc: Option<Location>,
-    end_keyword_loc: Location,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    /**
+    The index expression for `for` loops.
+
+        for i in a end
+            ^
+    */
+    pub index: NodeRef,
+    /**
+    The collection to iterate over.
+
+        for i in a end
+                 ^
+    */
+    pub collection: NodeRef,
+    /**
+    Represents the body of statements to execute for each iteration of the loop.
+
+        for i in a
+          foo(i)
+          ^^^^^^
+        end
+    */
+    pub statements: Option<NodeRef>,
+    /**
+    The location of the `for` keyword.
+
+        for i in a end
+        ^^^
+    */
+    pub for_keyword_loc: Location,
+    /**
+    The location of the `in` keyword.
+
+        for i in a end
+              ^^
+    */
+    pub in_keyword_loc: Location,
+    /**
+    The location of the `do` keyword, if present.
+
+        for i in a do end
+                   ^^
+    */
+    pub do_keyword_loc: Option<Location>,
+    /**
+    The location of the `end` keyword.
+
+        for i in a end
+                   ^^^
+    */
+    pub end_keyword_loc: Location,
 }
 impl ForNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -1586,59 +3221,94 @@ impl ForNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![ForNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("ForNode.flags")),
-        index: parse_node.context(winnow::error::StrContext::Label("ForNode.index")),
-        collection: parse_node.context(winnow::error::StrContext::Label("ForNode.collection")),
-        statements: parse_optional_node.context(winnow::error::StrContext::Label("ForNode.statements")),
-        for_keyword_loc: parse_location.context(winnow::error::StrContext::Label("ForNode.for_keyword_loc")),
-        in_keyword_loc: parse_location.context(winnow::error::StrContext::Label("ForNode.in_keyword_loc")),
-        do_keyword_loc: parse_optional_location.context(winnow::error::StrContext::Label("ForNode.do_keyword_loc")),
-        end_keyword_loc: parse_location.context(winnow::error::StrContext::Label("ForNode.end_keyword_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![ForNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("ForNode.flags")),
+            index: parse_node.context(winnow::error::StrContext::Label("ForNode.index")),
+            collection: parse_node.context(winnow::error::StrContext::Label("ForNode.collection")),
+            statements: parse_optional_node
+                .context(winnow::error::StrContext::Label("ForNode.statements")),
+            for_keyword_loc: parse_location
+                .context(winnow::error::StrContext::Label("ForNode.for_keyword_loc")),
+            in_keyword_loc: parse_location
+                .context(winnow::error::StrContext::Label("ForNode.in_keyword_loc")),
+            do_keyword_loc: parse_optional_location
+                .context(winnow::error::StrContext::Label("ForNode.do_keyword_loc")),
+            end_keyword_loc: parse_location
+                .context(winnow::error::StrContext::Label("ForNode.end_keyword_loc")),
+        }]
+        .parse_next(input)
     }
 }
 
-// 55
-#[derive(Debug, Clone)]
-pub struct ForwardingArgumentsNode {}
+/**
+Represents forwarding all arguments to this method to another method.
+
+    def foo(...)
+      bar(...)
+          ^^^
+    end
+*/
+#[derive(Debug, Clone, PartialEq)]
+pub struct ForwardingArgumentsNode {
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+}
 impl ForwardingArgumentsNode {
     pub fn into_node_kind(self) -> NodeKind {
         NodeKind::ForwardingArgumentsNode(self)
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        zero_flags
-            .context(winnow::error::StrContext::Label(
-                "ForwardingArgumentsNode.flags",
-            ))
-            .value(Self {})
-            .parse_next(input)
+        winnow::combinator::seq![ForwardingArgumentsNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "ForwardingArgumentsNode.flags"
+                )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 56
-#[derive(Debug, Clone)]
-pub struct ForwardingParameterNode {}
+/**
+Represents the use of the forwarding parameter in a method, block, or lambda declaration.
+
+    def foo(...)
+            ^^^
+    end
+*/
+#[derive(Debug, Clone, PartialEq)]
+pub struct ForwardingParameterNode {
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+}
 impl ForwardingParameterNode {
     pub fn into_node_kind(self) -> NodeKind {
         NodeKind::ForwardingParameterNode(self)
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        zero_flags
-            .context(winnow::error::StrContext::Label(
-                "ForwardingParameterNode.flags",
-            ))
-            .value(Self {})
-            .parse_next(input)
+        winnow::combinator::seq![ForwardingParameterNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "ForwardingParameterNode.flags"
+                )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 57
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `super` keyword without parentheses or arguments.
+
+    super
+    ^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct ForwardingSuperNode {
-    block: Option<NodeRef>,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub block: Option<NodeRef>,
 }
 impl ForwardingSuperNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -1646,20 +3316,33 @@ impl ForwardingSuperNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![ForwardingSuperNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("ForwardingSuperNode.flags")),
-        block: parse_optional_node.context(winnow::error::StrContext::Label("ForwardingSuperNode.block")),
-    }].parse_next(input)
+        winnow::combinator::seq![ForwardingSuperNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "ForwardingSuperNode.flags"
+                )),
+            block: parse_optional_node.context(winnow::error::StrContext::Label(
+                "ForwardingSuperNode.block"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 58
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `&&=` operator for assignment to a global variable.
+
+    $target &&= value
+    ^^^^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct GlobalVariableAndWriteNode {
-    name: ConstantRef,
-    name_loc: Location,
-    operator_loc: Location,
-    value: NodeRef,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub name: ConstantRef,
+    pub name_loc: Location,
+    pub operator_loc: Location,
+    pub value: NodeRef,
 }
 impl GlobalVariableAndWriteNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -1667,24 +3350,43 @@ impl GlobalVariableAndWriteNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![GlobalVariableAndWriteNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("GlobalVariableAndWriteNode.flags")),
-        name: parse_constant.context(winnow::error::StrContext::Label("GlobalVariableAndWriteNode.name")),
-        name_loc: parse_location.context(winnow::error::StrContext::Label("GlobalVariableAndWriteNode.name_loc")),
-        operator_loc: parse_location.context(winnow::error::StrContext::Label("GlobalVariableAndWriteNode.operator_loc")),
-        value: parse_node.context(winnow::error::StrContext::Label("GlobalVariableAndWriteNode.value")),
-    }].parse_next(input)
+        winnow::combinator::seq![GlobalVariableAndWriteNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "GlobalVariableAndWriteNode.flags"
+                )),
+            name: parse_constant.context(winnow::error::StrContext::Label(
+                "GlobalVariableAndWriteNode.name"
+            )),
+            name_loc: parse_location.context(winnow::error::StrContext::Label(
+                "GlobalVariableAndWriteNode.name_loc"
+            )),
+            operator_loc: parse_location.context(winnow::error::StrContext::Label(
+                "GlobalVariableAndWriteNode.operator_loc"
+            )),
+            value: parse_node.context(winnow::error::StrContext::Label(
+                "GlobalVariableAndWriteNode.value"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 59
-#[derive(Debug, Clone)]
+/**
+Represents assigning to a global variable using an operator that isn't `=`.
+
+    $target += value
+    ^^^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct GlobalVariableOperatorWriteNode {
-    name: ConstantRef,
-    name_loc: Location,
-    binary_operator_loc: Location,
-    value: NodeRef,
-    binary_operator: ConstantRef,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub name: ConstantRef,
+    pub name_loc: Location,
+    pub binary_operator_loc: Location,
+    pub value: NodeRef,
+    pub binary_operator: ConstantRef,
 }
 impl GlobalVariableOperatorWriteNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -1692,24 +3394,45 @@ impl GlobalVariableOperatorWriteNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![GlobalVariableOperatorWriteNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("GlobalVariableOperatorWriteNode.flags")),
-        name: parse_constant.context(winnow::error::StrContext::Label("GlobalVariableOperatorWriteNode.name")),
-        name_loc: parse_location.context(winnow::error::StrContext::Label("GlobalVariableOperatorWriteNode.name_loc")),
-        binary_operator_loc: parse_location.context(winnow::error::StrContext::Label("GlobalVariableOperatorWriteNode.binary_operator_loc")),
-        value: parse_node.context(winnow::error::StrContext::Label("GlobalVariableOperatorWriteNode.value")),
-        binary_operator: parse_constant.context(winnow::error::StrContext::Label("GlobalVariableOperatorWriteNode.binary_operator")),
-    }].parse_next(input)
+        winnow::combinator::seq![GlobalVariableOperatorWriteNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "GlobalVariableOperatorWriteNode.flags"
+                )),
+            name: parse_constant.context(winnow::error::StrContext::Label(
+                "GlobalVariableOperatorWriteNode.name"
+            )),
+            name_loc: parse_location.context(winnow::error::StrContext::Label(
+                "GlobalVariableOperatorWriteNode.name_loc"
+            )),
+            binary_operator_loc: parse_location.context(winnow::error::StrContext::Label(
+                "GlobalVariableOperatorWriteNode.binary_operator_loc"
+            )),
+            value: parse_node.context(winnow::error::StrContext::Label(
+                "GlobalVariableOperatorWriteNode.value"
+            )),
+            binary_operator: parse_constant.context(winnow::error::StrContext::Label(
+                "GlobalVariableOperatorWriteNode.binary_operator"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 60
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `||=` operator for assignment to a global variable.
+
+    $target ||= value
+    ^^^^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct GlobalVariableOrWriteNode {
-    name: ConstantRef,
-    name_loc: Location,
-    operator_loc: Location,
-    value: NodeRef,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub name: ConstantRef,
+    pub name_loc: Location,
+    pub operator_loc: Location,
+    pub value: NodeRef,
 }
 impl GlobalVariableOrWriteNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -1717,20 +3440,46 @@ impl GlobalVariableOrWriteNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![GlobalVariableOrWriteNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("GlobalVariableOrWriteNode.flags")),
-        name: parse_constant.context(winnow::error::StrContext::Label("GlobalVariableOrWriteNode.name")),
-        name_loc: parse_location.context(winnow::error::StrContext::Label("GlobalVariableOrWriteNode.name_loc")),
-        operator_loc: parse_location.context(winnow::error::StrContext::Label("GlobalVariableOrWriteNode.operator_loc")),
-        value: parse_node.context(winnow::error::StrContext::Label("GlobalVariableOrWriteNode.value")),
-    }].parse_next(input)
+        winnow::combinator::seq![GlobalVariableOrWriteNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "GlobalVariableOrWriteNode.flags"
+                )),
+            name: parse_constant.context(winnow::error::StrContext::Label(
+                "GlobalVariableOrWriteNode.name"
+            )),
+            name_loc: parse_location.context(winnow::error::StrContext::Label(
+                "GlobalVariableOrWriteNode.name_loc"
+            )),
+            operator_loc: parse_location.context(winnow::error::StrContext::Label(
+                "GlobalVariableOrWriteNode.operator_loc"
+            )),
+            value: parse_node.context(winnow::error::StrContext::Label(
+                "GlobalVariableOrWriteNode.value"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 61
-#[derive(Debug, Clone)]
+/**
+Represents referencing a global variable.
+
+    $foo
+    ^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct GlobalVariableReadNode {
-    name: ConstantRef,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    /**
+    The name of the global variable, which is a `$` followed by an [identifier](https://github.com/ruby/prism/blob/main/docs/parsing_rules.md#identifier). Alternatively, it can be one of the special global variables designated by a symbol.
+
+        $foo   # name `:$foo`
+
+        $_Test # name `:$_Test`
+    */
+    pub name: ConstantRef,
 }
 impl GlobalVariableReadNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -1738,17 +3487,30 @@ impl GlobalVariableReadNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![GlobalVariableReadNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("GlobalVariableReadNode.flags")),
-        name: parse_constant.context(winnow::error::StrContext::Label("GlobalVariableReadNode.name")),
-    }].parse_next(input)
+        winnow::combinator::seq![GlobalVariableReadNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "GlobalVariableReadNode.flags"
+                )),
+            name: parse_constant.context(winnow::error::StrContext::Label(
+                "GlobalVariableReadNode.name"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 62
-#[derive(Debug, Clone)]
+/**
+Represents writing to a global variable in a context that doesn't have an explicit value.
+
+    $foo, $bar = baz
+    ^^^^  ^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct GlobalVariableTargetNode {
-    name: ConstantRef,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub name: ConstantRef,
 }
 impl GlobalVariableTargetNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -1756,20 +3518,61 @@ impl GlobalVariableTargetNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![GlobalVariableTargetNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("GlobalVariableTargetNode.flags")),
-        name: parse_constant.context(winnow::error::StrContext::Label("GlobalVariableTargetNode.name")),
-    }].parse_next(input)
+        winnow::combinator::seq![GlobalVariableTargetNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "GlobalVariableTargetNode.flags"
+                )),
+            name: parse_constant.context(winnow::error::StrContext::Label(
+                "GlobalVariableTargetNode.name"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 63
-#[derive(Debug, Clone)]
+/**
+Represents writing to a global variable.
+
+    $foo = 1
+    ^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct GlobalVariableWriteNode {
-    name: ConstantRef,
-    name_loc: Location,
-    value: NodeRef,
-    operator_loc: Location,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    /**
+    The name of the global variable, which is a `$` followed by an [identifier](https://github.com/ruby/prism/blob/main/docs/parsing_rules.md#identifier). Alternatively, it can be one of the special global variables designated by a symbol.
+
+        $foo = :bar  # name `:$foo`
+
+        $_Test = 123 # name `:$_Test`
+    */
+    pub name: ConstantRef,
+    /**
+    The location of the global variable's name.
+
+        $foo = :bar
+        ^^^^
+    */
+    pub name_loc: Location,
+    /**
+    The value to write to the global variable. It can be any [non-void expression](https://github.com/ruby/prism/blob/main/docs/parsing_rules.md#non-void-expression).
+
+        $foo = :bar
+               ^^^^
+
+        $-xyz = 123
+                ^^^
+    */
+    pub value: NodeRef,
+    /**
+    The location of the `=` operator.
+
+        $foo = :bar
+             ^
+    */
+    pub operator_loc: Location,
 }
 impl GlobalVariableWriteNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -1777,22 +3580,62 @@ impl GlobalVariableWriteNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![GlobalVariableWriteNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("GlobalVariableWriteNode.flags")),
-        name: parse_constant.context(winnow::error::StrContext::Label("GlobalVariableWriteNode.name")),
-        name_loc: parse_location.context(winnow::error::StrContext::Label("GlobalVariableWriteNode.name_loc")),
-        value: parse_node.context(winnow::error::StrContext::Label("GlobalVariableWriteNode.value")),
-        operator_loc: parse_location.context(winnow::error::StrContext::Label("GlobalVariableWriteNode.operator_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![GlobalVariableWriteNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "GlobalVariableWriteNode.flags"
+                )),
+            name: parse_constant.context(winnow::error::StrContext::Label(
+                "GlobalVariableWriteNode.name"
+            )),
+            name_loc: parse_location.context(winnow::error::StrContext::Label(
+                "GlobalVariableWriteNode.name_loc"
+            )),
+            value: parse_node.context(winnow::error::StrContext::Label(
+                "GlobalVariableWriteNode.value"
+            )),
+            operator_loc: parse_location.context(winnow::error::StrContext::Label(
+                "GlobalVariableWriteNode.operator_loc"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 64
-#[derive(Debug, Clone)]
+/**
+Represents a hash literal.
+
+    { a => b }
+    ^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct HashNode {
-    opening_loc: Location,
-    elements: Vec<NodeRef>,
-    closing_loc: Location,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    /**
+    The location of the opening brace.
+
+        { a => b }
+        ^
+    */
+    pub opening_loc: Location,
+    /**
+    The elements of the hash. These can be either `AssocNode`s or `AssocSplatNode`s.
+
+        { a: b }
+          ^^^^
+
+        { **foo }
+          ^^^^^
+    */
+    pub elements: Vec<NodeRef>,
+    /**
+    The location of the closing brace.
+
+        { a => b }
+                 ^
+    */
+    pub closing_loc: Location,
 }
 impl HashNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -1800,23 +3643,38 @@ impl HashNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![HashNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("HashNode.flags")),
-        opening_loc: parse_location.context(winnow::error::StrContext::Label("HashNode.opening_loc")),
-        elements: length_repeat(parse_varuint, parse_node).context(winnow::error::StrContext::Label("HashNode.elements")),
-        closing_loc: parse_location.context(winnow::error::StrContext::Label("HashNode.closing_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![HashNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("HashNode.flags")),
+            opening_loc: parse_location
+                .context(winnow::error::StrContext::Label("HashNode.opening_loc")),
+            elements: length_repeat(parse_varuint, parse_node)
+                .context(winnow::error::StrContext::Label("HashNode.elements")),
+            closing_loc: parse_location
+                .context(winnow::error::StrContext::Label("HashNode.closing_loc")),
+        }]
+        .parse_next(input)
     }
 }
 
-// 65
-#[derive(Debug, Clone)]
+/**
+Represents a hash pattern in pattern matching.
+
+    foo => { a: 1, b: 2 }
+           ^^^^^^^^^^^^^^
+
+    foo => { a: 1, b: 2, **c }
+           ^^^^^^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct HashPatternNode {
-    constant: Option<NodeRef>,
-    elements: Vec<NodeRef>,
-    rest: Option<NodeRef>,
-    opening_loc: Option<Location>,
-    closing_loc: Option<Location>,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub constant: Option<NodeRef>,
+    pub elements: Vec<NodeRef>,
+    pub rest: Option<NodeRef>,
+    pub opening_loc: Option<Location>,
+    pub closing_loc: Option<Location>,
 }
 impl HashPatternNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -1824,26 +3682,112 @@ impl HashPatternNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![HashPatternNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("HashPatternNode.flags")),
-        constant: parse_optional_node.context(winnow::error::StrContext::Label("HashPatternNode.constant")),
-        elements: length_repeat(parse_varuint, parse_node).context(winnow::error::StrContext::Label("HashPatternNode.elements")),
-        rest: parse_optional_node.context(winnow::error::StrContext::Label("HashPatternNode.rest")),
-        opening_loc: parse_optional_location.context(winnow::error::StrContext::Label("HashPatternNode.opening_loc")),
-        closing_loc: parse_optional_location.context(winnow::error::StrContext::Label("HashPatternNode.closing_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![HashPatternNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("HashPatternNode.flags")),
+            constant: parse_optional_node
+                .context(winnow::error::StrContext::Label("HashPatternNode.constant")),
+            elements: length_repeat(parse_varuint, parse_node)
+                .context(winnow::error::StrContext::Label("HashPatternNode.elements")),
+            rest: parse_optional_node
+                .context(winnow::error::StrContext::Label("HashPatternNode.rest")),
+            opening_loc: parse_optional_location.context(winnow::error::StrContext::Label(
+                "HashPatternNode.opening_loc"
+            )),
+            closing_loc: parse_optional_location.context(winnow::error::StrContext::Label(
+                "HashPatternNode.closing_loc"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 66
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `if` keyword, either in the block form or the modifier form, or a ternary expression.
+
+    bar if foo
+    ^^^^^^^^^^
+
+    if foo then bar end
+    ^^^^^^^^^^^^^^^^^^^
+
+    foo ? bar : baz
+    ^^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct IfNode {
-    if_keyword_loc: Option<Location>,
-    predicate: NodeRef,
-    then_keyword_loc: Option<Location>,
-    statements: Option<NodeRef>,
-    subsequent: Option<NodeRef>,
-    end_keyword_loc: Option<Location>,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    /**
+    The location of the `if` keyword if present.
+
+        bar if foo
+            ^^
+
+    The `if_keyword_loc` field will be `nil` when the `IfNode` represents a ternary expression.
+    */
+    pub if_keyword_loc: Option<Location>,
+    /**
+    The node for the condition the `IfNode` is testing.
+
+        if foo
+           ^^^
+          bar
+        end
+
+        bar if foo
+               ^^^
+
+        foo ? bar : baz
+        ^^^
+    */
+    pub predicate: NodeRef,
+    /**
+    The location of the `then` keyword (if present) or the `?` in a ternary expression, `nil` otherwise.
+
+        if foo then bar end
+               ^^^^
+
+        a ? b : c
+          ^
+    */
+    pub then_keyword_loc: Option<Location>,
+    /**
+    Represents the body of statements that will be executed when the predicate is evaluated as truthy. Will be `nil` when no body is provided.
+
+        if foo
+          bar
+          ^^^
+          baz
+          ^^^
+        end
+    */
+    pub statements: Option<NodeRef>,
+    /**
+    Represents an `ElseNode` or an `IfNode` when there is an `else` or an `elsif` in the `if` statement.
+
+        if foo
+          bar
+        elsif baz
+        ^^^^^^^^^
+          qux
+          ^^^
+        end
+        ^^^
+
+        if foo then bar else baz end
+                        ^^^^^^^^^^^^
+    */
+    pub subsequent: Option<NodeRef>,
+    /**
+    The location of the `end` keyword if present, `nil` otherwise.
+
+        if foo
+          bar
+        end
+        ^^^
+    */
+    pub end_keyword_loc: Option<Location>,
 }
 impl IfNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -1851,22 +3795,36 @@ impl IfNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![IfNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("IfNode.flags")),
-        if_keyword_loc: parse_optional_location.context(winnow::error::StrContext::Label("IfNode.if_keyword_loc")),
-        predicate: parse_node.context(winnow::error::StrContext::Label("IfNode.predicate")),
-        then_keyword_loc: parse_optional_location.context(winnow::error::StrContext::Label("IfNode.then_keyword_loc")),
-        statements: parse_optional_node.context(winnow::error::StrContext::Label("IfNode.statements")),
-        subsequent: parse_optional_node.context(winnow::error::StrContext::Label("IfNode.subsequent")),
-        end_keyword_loc: parse_optional_location.context(winnow::error::StrContext::Label("IfNode.end_keyword_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![IfNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("IfNode.flags")),
+            if_keyword_loc: parse_optional_location
+                .context(winnow::error::StrContext::Label("IfNode.if_keyword_loc")),
+            predicate: parse_node.context(winnow::error::StrContext::Label("IfNode.predicate")),
+            then_keyword_loc: parse_optional_location
+                .context(winnow::error::StrContext::Label("IfNode.then_keyword_loc")),
+            statements: parse_optional_node
+                .context(winnow::error::StrContext::Label("IfNode.statements")),
+            subsequent: parse_optional_node
+                .context(winnow::error::StrContext::Label("IfNode.subsequent")),
+            end_keyword_loc: parse_optional_location
+                .context(winnow::error::StrContext::Label("IfNode.end_keyword_loc")),
+        }]
+        .parse_next(input)
     }
 }
 
-// 67
-#[derive(Debug, Clone)]
+/**
+Represents an imaginary number literal.
+
+    1.0i
+    ^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct ImaginaryNode {
-    numeric: NodeRef,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub numeric: NodeRef,
 }
 impl ImaginaryNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -1874,18 +3832,32 @@ impl ImaginaryNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![ImaginaryNode{
-            _: zero_flags.context(winnow::error::StrContext::Label("ImaginaryNode.flags")),
+        winnow::combinator::seq![ImaginaryNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("ImaginaryNode.flags")),
             numeric: parse_node.context(winnow::error::StrContext::Label("ImaginaryNode.numeric")),
         }]
         .parse_next(input)
     }
 }
 
-// 68
-#[derive(Debug, Clone)]
+/**
+Represents a node that is implicitly being added to the tree but doesn't correspond directly to a node in the source.
+
+    { foo: }
+      ^^^^
+
+    { Foo: }
+      ^^^^
+
+    foo in { bar: }
+             ^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct ImplicitNode {
-    value: NodeRef,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub value: NodeRef,
 }
 impl ImplicitNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -1893,37 +3865,63 @@ impl ImplicitNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![ImplicitNode{
-            _: zero_flags.context(winnow::error::StrContext::Label("ImplicitNode.flags")),
+        winnow::combinator::seq![ImplicitNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("ImplicitNode.flags")),
             value: parse_node.context(winnow::error::StrContext::Label("ImplicitNode.value")),
         }]
         .parse_next(input)
     }
 }
 
-// 69
-#[derive(Debug, Clone)]
-pub struct ImplicitRestNode {}
+/**
+Represents using a trailing comma to indicate an implicit rest parameter.
+
+    foo { |bar,| }
+              ^
+
+    foo in [bar,]
+               ^
+
+    for foo, in bar do end
+           ^
+
+    foo, = bar
+       ^
+*/
+#[derive(Debug, Clone, PartialEq)]
+pub struct ImplicitRestNode {
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+}
 impl ImplicitRestNode {
     pub fn into_node_kind(self) -> NodeKind {
         NodeKind::ImplicitRestNode(self)
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        zero_flags
-            .context(winnow::error::StrContext::Label("ImplicitRestNode.flags"))
-            .value(Self {})
-            .parse_next(input)
+        winnow::combinator::seq![ImplicitRestNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("ImplicitRestNode.flags")),
+        }]
+        .parse_next(input)
     }
 }
 
-// 70
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `in` keyword in a case statement.
+
+    case a; in b then c end
+            ^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct InNode {
-    pattern: NodeRef,
-    statements: Option<NodeRef>,
-    in_loc: Location,
-    then_loc: Option<Location>,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub pattern: NodeRef,
+    pub statements: Option<NodeRef>,
+    pub in_loc: Location,
+    pub then_loc: Option<Location>,
 }
 impl InNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -1931,28 +3929,38 @@ impl InNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![InNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("InNode.flags")),
-        pattern: parse_node.context(winnow::error::StrContext::Label("InNode.pattern")),
-        statements: parse_optional_node.context(winnow::error::StrContext::Label("InNode.statements")),
-        in_loc: parse_location.context(winnow::error::StrContext::Label("InNode.in_loc")),
-        then_loc: parse_optional_location.context(winnow::error::StrContext::Label("InNode.then_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![InNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("InNode.flags")),
+            pattern: parse_node.context(winnow::error::StrContext::Label("InNode.pattern")),
+            statements: parse_optional_node
+                .context(winnow::error::StrContext::Label("InNode.statements")),
+            in_loc: parse_location.context(winnow::error::StrContext::Label("InNode.in_loc")),
+            then_loc: parse_optional_location
+                .context(winnow::error::StrContext::Label("InNode.then_loc")),
+        }]
+        .parse_next(input)
     }
 }
 
-// 71
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `&&=` operator on a call to the `[]` method.
+
+    foo.bar[baz] &&= value
+    ^^^^^^^^^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct IndexAndWriteNode {
     pub flags: enumflags2::BitFlags<CallNodeFlags>,
-    receiver: Option<NodeRef>,
-    call_operator_loc: Option<Location>,
-    opening_loc: Location,
-    arguments: Option<NodeRef>,
-    closing_loc: Location,
-    block: Option<NodeRef>,
-    operator_loc: Location,
-    value: NodeRef,
+    pub receiver: Option<NodeRef>,
+    pub call_operator_loc: Option<Location>,
+    pub opening_loc: Location,
+    pub arguments: Option<NodeRef>,
+    pub closing_loc: Location,
+    pub block: Option<NodeRef>,
+    pub operator_loc: Location,
+    pub value: NodeRef,
 }
 impl IndexAndWriteNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -1990,19 +3998,24 @@ impl IndexAndWriteNode {
     }
 }
 
-// 72
-#[derive(Debug, Clone)]
+/**
+Represents the use of an assignment operator on a call to `[]`.
+
+    foo.bar[baz] += value
+    ^^^^^^^^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct IndexOperatorWriteNode {
     pub flags: enumflags2::BitFlags<CallNodeFlags>,
-    receiver: Option<NodeRef>,
-    call_operator_loc: Option<Location>,
-    opening_loc: Location,
-    arguments: Option<NodeRef>,
-    closing_loc: Location,
-    block: Option<NodeRef>,
-    binary_operator: ConstantRef,
-    binary_operator_loc: Location,
-    value: NodeRef,
+    pub receiver: Option<NodeRef>,
+    pub call_operator_loc: Option<Location>,
+    pub opening_loc: Location,
+    pub arguments: Option<NodeRef>,
+    pub closing_loc: Location,
+    pub block: Option<NodeRef>,
+    pub binary_operator: ConstantRef,
+    pub binary_operator_loc: Location,
+    pub value: NodeRef,
 }
 impl IndexOperatorWriteNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -2048,18 +4061,23 @@ impl IndexOperatorWriteNode {
     }
 }
 
-// 73
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `||=` operator on a call to `[]`.
+
+    foo.bar[baz] ||= value
+    ^^^^^^^^^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct IndexOrWriteNode {
     pub flags: enumflags2::BitFlags<CallNodeFlags>,
-    receiver: Option<NodeRef>,
-    call_operator_loc: Option<Location>,
-    opening_loc: Location,
-    arguments: Option<NodeRef>,
-    closing_loc: Location,
-    block: Option<NodeRef>,
-    operator_loc: Location,
-    value: NodeRef,
+    pub receiver: Option<NodeRef>,
+    pub call_operator_loc: Option<Location>,
+    pub opening_loc: Location,
+    pub arguments: Option<NodeRef>,
+    pub closing_loc: Location,
+    pub block: Option<NodeRef>,
+    pub operator_loc: Location,
+    pub value: NodeRef,
 }
 impl IndexOrWriteNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -2097,15 +4115,28 @@ impl IndexOrWriteNode {
     }
 }
 
-// 74
-#[derive(Debug, Clone)]
+/**
+Represents assigning to an index.
+
+    foo[bar], = 1
+    ^^^^^^^^
+
+    begin
+    rescue => foo[bar]
+              ^^^^^^^^
+    end
+
+    for foo[bar] in baz do end
+        ^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct IndexTargetNode {
     pub flags: enumflags2::BitFlags<CallNodeFlags>,
-    receiver: NodeRef,
-    opening_loc: Location,
-    arguments: Option<NodeRef>,
-    closing_loc: Location,
-    block: Option<NodeRef>,
+    pub receiver: NodeRef,
+    pub opening_loc: Location,
+    pub arguments: Option<NodeRef>,
+    pub closing_loc: Location,
+    pub block: Option<NodeRef>,
 }
 impl IndexTargetNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -2135,13 +4166,19 @@ impl IndexTargetNode {
     }
 }
 
-// 75
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `&&=` operator for assignment to an instance variable.
+
+    @target &&= value
+    ^^^^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct InstanceVariableAndWriteNode {
-    name: ConstantRef,
-    name_loc: Location,
-    operator_loc: Location,
-    value: NodeRef,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub name: ConstantRef,
+    pub name_loc: Location,
+    pub operator_loc: Location,
+    pub value: NodeRef,
 }
 impl InstanceVariableAndWriteNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -2149,24 +4186,43 @@ impl InstanceVariableAndWriteNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![InstanceVariableAndWriteNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("InstanceVariableAndWriteNode.flags")),
-        name: parse_constant.context(winnow::error::StrContext::Label("InstanceVariableAndWriteNode.name")),
-        name_loc: parse_location.context(winnow::error::StrContext::Label("InstanceVariableAndWriteNode.name_loc")),
-        operator_loc: parse_location.context(winnow::error::StrContext::Label("InstanceVariableAndWriteNode.operator_loc")),
-        value: parse_node.context(winnow::error::StrContext::Label("InstanceVariableAndWriteNode.value")),
-    }].parse_next(input)
+        winnow::combinator::seq![InstanceVariableAndWriteNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "InstanceVariableAndWriteNode.flags"
+                )),
+            name: parse_constant.context(winnow::error::StrContext::Label(
+                "InstanceVariableAndWriteNode.name"
+            )),
+            name_loc: parse_location.context(winnow::error::StrContext::Label(
+                "InstanceVariableAndWriteNode.name_loc"
+            )),
+            operator_loc: parse_location.context(winnow::error::StrContext::Label(
+                "InstanceVariableAndWriteNode.operator_loc"
+            )),
+            value: parse_node.context(winnow::error::StrContext::Label(
+                "InstanceVariableAndWriteNode.value"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 76
-#[derive(Debug, Clone)]
+/**
+Represents assigning to an instance variable using an operator that isn't `=`.
+
+    @target += value
+    ^^^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct InstanceVariableOperatorWriteNode {
-    name: ConstantRef,
-    name_loc: Location,
-    binary_operator_loc: Location,
-    value: NodeRef,
-    binary_operator: ConstantRef,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub name: ConstantRef,
+    pub name_loc: Location,
+    pub binary_operator_loc: Location,
+    pub value: NodeRef,
+    pub binary_operator: ConstantRef,
 }
 impl InstanceVariableOperatorWriteNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -2174,24 +4230,45 @@ impl InstanceVariableOperatorWriteNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![InstanceVariableOperatorWriteNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("InstanceVariableOperatorWriteNode.flags")),
-        name: parse_constant.context(winnow::error::StrContext::Label("InstanceVariableOperatorWriteNode.name")),
-        name_loc: parse_location.context(winnow::error::StrContext::Label("InstanceVariableOperatorWriteNode.name_loc")),
-        binary_operator_loc: parse_location.context(winnow::error::StrContext::Label("InstanceVariableOperatorWriteNode.binary_operator_loc")),
-        value: parse_node.context(winnow::error::StrContext::Label("InstanceVariableOperatorWriteNode.value")),
-        binary_operator: parse_constant.context(winnow::error::StrContext::Label("InstanceVariableOperatorWriteNode.binary_operator")),
-    }].parse_next(input)
+        winnow::combinator::seq![InstanceVariableOperatorWriteNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "InstanceVariableOperatorWriteNode.flags"
+                )),
+            name: parse_constant.context(winnow::error::StrContext::Label(
+                "InstanceVariableOperatorWriteNode.name"
+            )),
+            name_loc: parse_location.context(winnow::error::StrContext::Label(
+                "InstanceVariableOperatorWriteNode.name_loc"
+            )),
+            binary_operator_loc: parse_location.context(winnow::error::StrContext::Label(
+                "InstanceVariableOperatorWriteNode.binary_operator_loc"
+            )),
+            value: parse_node.context(winnow::error::StrContext::Label(
+                "InstanceVariableOperatorWriteNode.value"
+            )),
+            binary_operator: parse_constant.context(winnow::error::StrContext::Label(
+                "InstanceVariableOperatorWriteNode.binary_operator"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 77
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `||=` operator for assignment to an instance variable.
+
+    @target ||= value
+    ^^^^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct InstanceVariableOrWriteNode {
-    name: ConstantRef,
-    name_loc: Location,
-    operator_loc: Location,
-    value: NodeRef,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub name: ConstantRef,
+    pub name_loc: Location,
+    pub operator_loc: Location,
+    pub value: NodeRef,
 }
 impl InstanceVariableOrWriteNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -2199,20 +4276,46 @@ impl InstanceVariableOrWriteNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![InstanceVariableOrWriteNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("InstanceVariableOrWriteNode.flags")),
-        name: parse_constant.context(winnow::error::StrContext::Label("InstanceVariableOrWriteNode.name")),
-        name_loc: parse_location.context(winnow::error::StrContext::Label("InstanceVariableOrWriteNode.name_loc")),
-        operator_loc: parse_location.context(winnow::error::StrContext::Label("InstanceVariableOrWriteNode.operator_loc")),
-        value: parse_node.context(winnow::error::StrContext::Label("InstanceVariableOrWriteNode.value")),
-    }].parse_next(input)
+        winnow::combinator::seq![InstanceVariableOrWriteNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "InstanceVariableOrWriteNode.flags"
+                )),
+            name: parse_constant.context(winnow::error::StrContext::Label(
+                "InstanceVariableOrWriteNode.name"
+            )),
+            name_loc: parse_location.context(winnow::error::StrContext::Label(
+                "InstanceVariableOrWriteNode.name_loc"
+            )),
+            operator_loc: parse_location.context(winnow::error::StrContext::Label(
+                "InstanceVariableOrWriteNode.operator_loc"
+            )),
+            value: parse_node.context(winnow::error::StrContext::Label(
+                "InstanceVariableOrWriteNode.value"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 78
-#[derive(Debug, Clone)]
+/**
+Represents referencing an instance variable.
+
+    @foo
+    ^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct InstanceVariableReadNode {
-    name: ConstantRef,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    /**
+    The name of the instance variable, which is a `@` followed by an [identifier](https://github.com/ruby/prism/blob/main/docs/parsing_rules.md#identifiers).
+
+        @x     # name `:@x`
+
+        @_test # name `:@_test`
+    */
+    pub name: ConstantRef,
 }
 impl InstanceVariableReadNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -2220,17 +4323,30 @@ impl InstanceVariableReadNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![InstanceVariableReadNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("InstanceVariableReadNode.flags")),
-        name: parse_constant.context(winnow::error::StrContext::Label("InstanceVariableReadNode.name")),
-    }].parse_next(input)
+        winnow::combinator::seq![InstanceVariableReadNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "InstanceVariableReadNode.flags"
+                )),
+            name: parse_constant.context(winnow::error::StrContext::Label(
+                "InstanceVariableReadNode.name"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 79
-#[derive(Debug, Clone)]
+/**
+Represents writing to an instance variable in a context that doesn't have an explicit value.
+
+    @foo, @bar = baz
+    ^^^^  ^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct InstanceVariableTargetNode {
-    name: ConstantRef,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub name: ConstantRef,
 }
 impl InstanceVariableTargetNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -2238,20 +4354,61 @@ impl InstanceVariableTargetNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![InstanceVariableTargetNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("InstanceVariableTargetNode.flags")),
-        name: parse_constant.context(winnow::error::StrContext::Label("InstanceVariableTargetNode.name")),
-    }].parse_next(input)
+        winnow::combinator::seq![InstanceVariableTargetNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "InstanceVariableTargetNode.flags"
+                )),
+            name: parse_constant.context(winnow::error::StrContext::Label(
+                "InstanceVariableTargetNode.name"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 80
-#[derive(Debug, Clone)]
+/**
+Represents writing to an instance variable.
+
+    @foo = 1
+    ^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct InstanceVariableWriteNode {
-    name: ConstantRef,
-    name_loc: Location,
-    value: NodeRef,
-    operator_loc: Location,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    /**
+    The name of the instance variable, which is a `@` followed by an [identifier](https://github.com/ruby/prism/blob/main/docs/parsing_rules.md#identifiers).
+
+        @x = :y       # name `:@x`
+
+        @_foo = "bar" # name `@_foo`
+    */
+    pub name: ConstantRef,
+    /**
+    The location of the variable name.
+
+        @_x = 1
+        ^^^
+    */
+    pub name_loc: Location,
+    /**
+    The value to write to the instance variable. It can be any [non-void expression](https://github.com/ruby/prism/blob/main/docs/parsing_rules.md#non-void-expression).
+
+        @foo = :bar
+               ^^^^
+
+        @_x = 1234
+              ^^^^
+    */
+    pub value: NodeRef,
+    /**
+    The location of the `=` operator.
+
+        @x = y
+           ^
+    */
+    pub operator_loc: Location,
 }
 impl InstanceVariableWriteNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -2259,21 +4416,41 @@ impl InstanceVariableWriteNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![InstanceVariableWriteNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("InstanceVariableWriteNode.flags")),
-        name: parse_constant.context(winnow::error::StrContext::Label("InstanceVariableWriteNode.name")),
-        name_loc: parse_location.context(winnow::error::StrContext::Label("InstanceVariableWriteNode.name_loc")),
-        value: parse_node.context(winnow::error::StrContext::Label("InstanceVariableWriteNode.value")),
-        operator_loc: parse_location.context(winnow::error::StrContext::Label("InstanceVariableWriteNode.operator_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![InstanceVariableWriteNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "InstanceVariableWriteNode.flags"
+                )),
+            name: parse_constant.context(winnow::error::StrContext::Label(
+                "InstanceVariableWriteNode.name"
+            )),
+            name_loc: parse_location.context(winnow::error::StrContext::Label(
+                "InstanceVariableWriteNode.name_loc"
+            )),
+            value: parse_node.context(winnow::error::StrContext::Label(
+                "InstanceVariableWriteNode.value"
+            )),
+            operator_loc: parse_location.context(winnow::error::StrContext::Label(
+                "InstanceVariableWriteNode.operator_loc"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 81
-#[derive(Debug, Clone)]
+/**
+Represents an integer number literal.
+
+    1
+    ^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct IntegerNode {
     pub flags: enumflags2::BitFlags<IntegerBaseFlags>,
-    value: Integer,
+    /**
+    The value of the integer literal as a number.    */
+    pub value: Integer,
 }
 impl IntegerNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -2291,13 +4468,18 @@ impl IntegerNode {
     }
 }
 
-// 82
-#[derive(Debug, Clone)]
+/**
+Represents a regular expression literal that contains interpolation that is being used in the predicate of a conditional to implicitly match against the last line read by an IO object.
+
+    if /foo #{bar} baz/ then end
+       ^^^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct InterpolatedMatchLastLineNode {
     pub flags: enumflags2::BitFlags<RegularExpressionFlags>,
-    opening_loc: Location,
-    parts: Vec<NodeRef>,
-    closing_loc: Location,
+    pub opening_loc: Location,
+    pub parts: Vec<NodeRef>,
+    pub closing_loc: Location,
 }
 impl InterpolatedMatchLastLineNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -2325,13 +4507,18 @@ impl InterpolatedMatchLastLineNode {
     }
 }
 
-// 83
-#[derive(Debug, Clone)]
+/**
+Represents a regular expression literal that contains interpolation.
+
+    /foo #{bar} baz/
+    ^^^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct InterpolatedRegularExpressionNode {
     pub flags: enumflags2::BitFlags<RegularExpressionFlags>,
-    opening_loc: Location,
-    parts: Vec<NodeRef>,
-    closing_loc: Location,
+    pub opening_loc: Location,
+    pub parts: Vec<NodeRef>,
+    pub closing_loc: Location,
 }
 impl InterpolatedRegularExpressionNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -2359,13 +4546,18 @@ impl InterpolatedRegularExpressionNode {
     }
 }
 
-// 84
-#[derive(Debug, Clone)]
+/**
+Represents a string literal that contains interpolation.
+
+    "foo #{bar} baz"
+    ^^^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct InterpolatedStringNode {
     pub flags: enumflags2::BitFlags<InterpolatedStringNodeFlags>,
-    opening_loc: Option<Location>,
-    parts: Vec<NodeRef>,
-    closing_loc: Option<Location>,
+    pub opening_loc: Option<Location>,
+    pub parts: Vec<NodeRef>,
+    pub closing_loc: Option<Location>,
 }
 impl InterpolatedStringNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -2393,12 +4585,18 @@ impl InterpolatedStringNode {
     }
 }
 
-// 85
-#[derive(Debug, Clone)]
+/**
+Represents a symbol literal that contains interpolation.
+
+    :"foo #{bar} baz"
+    ^^^^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct InterpolatedSymbolNode {
-    opening_loc: Option<Location>,
-    parts: Vec<NodeRef>,
-    closing_loc: Option<Location>,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub opening_loc: Option<Location>,
+    pub parts: Vec<NodeRef>,
+    pub closing_loc: Option<Location>,
 }
 impl InterpolatedSymbolNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -2406,21 +4604,38 @@ impl InterpolatedSymbolNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![InterpolatedSymbolNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("InterpolatedSymbolNode.flags")),
-        opening_loc: parse_optional_location.context(winnow::error::StrContext::Label("InterpolatedSymbolNode.opening_loc")),
-        parts: length_repeat(parse_varuint, parse_node).context(winnow::error::StrContext::Label("InterpolatedSymbolNode.parts")),
-        closing_loc: parse_optional_location.context(winnow::error::StrContext::Label("InterpolatedSymbolNode.closing_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![InterpolatedSymbolNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "InterpolatedSymbolNode.flags"
+                )),
+            opening_loc: parse_optional_location.context(winnow::error::StrContext::Label(
+                "InterpolatedSymbolNode.opening_loc"
+            )),
+            parts: length_repeat(parse_varuint, parse_node).context(
+                winnow::error::StrContext::Label("InterpolatedSymbolNode.parts")
+            ),
+            closing_loc: parse_optional_location.context(winnow::error::StrContext::Label(
+                "InterpolatedSymbolNode.closing_loc"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 86
-#[derive(Debug, Clone)]
+/**
+Represents an xstring literal that contains interpolation.
+
+    `foo #{bar} baz`
+    ^^^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct InterpolatedXStringNode {
-    opening_loc: Location,
-    parts: Vec<NodeRef>,
-    closing_loc: Location,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub opening_loc: Location,
+    pub parts: Vec<NodeRef>,
+    pub closing_loc: Location,
 }
 impl InterpolatedXStringNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -2428,54 +4643,88 @@ impl InterpolatedXStringNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![InterpolatedXStringNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("InterpolatedXStringNode.flags")),
-        opening_loc: parse_location.context(winnow::error::StrContext::Label("InterpolatedXStringNode.opening_loc")),
-        parts: length_repeat(parse_varuint, parse_node).context(winnow::error::StrContext::Label("InterpolatedXStringNode.parts")),
-        closing_loc: parse_location.context(winnow::error::StrContext::Label("InterpolatedXStringNode.closing_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![InterpolatedXStringNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "InterpolatedXStringNode.flags"
+                )),
+            opening_loc: parse_location.context(winnow::error::StrContext::Label(
+                "InterpolatedXStringNode.opening_loc"
+            )),
+            parts: length_repeat(parse_varuint, parse_node).context(
+                winnow::error::StrContext::Label("InterpolatedXStringNode.parts")
+            ),
+            closing_loc: parse_location.context(winnow::error::StrContext::Label(
+                "InterpolatedXStringNode.closing_loc"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 87
-#[derive(Debug, Clone)]
-pub struct ItLocalVariableReadNode {}
+/**
+Represents reading from the implicit `it` local variable.
+
+    -> { it }
+         ^^
+*/
+#[derive(Debug, Clone, PartialEq)]
+pub struct ItLocalVariableReadNode {
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+}
 impl ItLocalVariableReadNode {
     pub fn into_node_kind(self) -> NodeKind {
         NodeKind::ItLocalVariableReadNode(self)
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        zero_flags
-            .context(winnow::error::StrContext::Label(
-                "ItLocalVariableReadNode.flags",
-            ))
-            .value(Self {})
-            .parse_next(input)
+        winnow::combinator::seq![ItLocalVariableReadNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "ItLocalVariableReadNode.flags"
+                )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 88
-#[derive(Debug, Clone)]
-pub struct ItParametersNode {}
+/**
+Represents an implicit set of parameters through the use of the `it` keyword within a block or lambda.
+
+    -> { it + it }
+    ^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
+pub struct ItParametersNode {
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+}
 impl ItParametersNode {
     pub fn into_node_kind(self) -> NodeKind {
         NodeKind::ItParametersNode(self)
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        zero_flags
-            .context(winnow::error::StrContext::Label("ItParametersNode.flags"))
-            .value(Self {})
-            .parse_next(input)
+        winnow::combinator::seq![ItParametersNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("ItParametersNode.flags")),
+        }]
+        .parse_next(input)
     }
 }
 
-// 89
-#[derive(Debug, Clone)]
+/**
+Represents a hash literal without opening and closing braces.
+
+    foo(a: b)
+        ^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct KeywordHashNode {
     pub flags: enumflags2::BitFlags<KeywordHashNodeFlags>,
-    elements: Vec<NodeRef>,
+    pub elements: Vec<NodeRef>,
 }
 impl KeywordHashNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -2494,13 +4743,19 @@ impl KeywordHashNode {
     }
 }
 
-// 90
-#[derive(Debug, Clone)]
+/**
+Represents a keyword rest parameter to a method, block, or lambda definition.
+
+    def a(**b)
+          ^^^
+    end
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct KeywordRestParameterNode {
     pub flags: enumflags2::BitFlags<ParameterFlags>,
-    name: Option<ConstantRef>,
-    name_loc: Option<Location>,
-    operator_loc: Location,
+    pub name: Option<ConstantRef>,
+    pub name_loc: Option<Location>,
+    pub operator_loc: Location,
 }
 impl KeywordRestParameterNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -2528,15 +4783,21 @@ impl KeywordRestParameterNode {
     }
 }
 
-// 91
-#[derive(Debug, Clone)]
+/**
+Represents using a lambda literal (not the lambda method call).
+
+    ->(value) { value * 2 }
+    ^^^^^^^^^^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct LambdaNode {
-    locals: Vec<ConstantRef>,
-    operator_loc: Location,
-    opening_loc: Location,
-    closing_loc: Location,
-    parameters: Option<NodeRef>,
-    body: Option<NodeRef>,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub locals: Vec<ConstantRef>,
+    pub operator_loc: Location,
+    pub opening_loc: Location,
+    pub closing_loc: Location,
+    pub parameters: Option<NodeRef>,
+    pub body: Option<NodeRef>,
 }
 impl LambdaNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -2544,26 +4805,40 @@ impl LambdaNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![LambdaNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("LambdaNode.flags")),
-        locals: length_repeat(parse_varuint, parse_constant).context(winnow::error::StrContext::Label("LambdaNode.locals")),
-        operator_loc: parse_location.context(winnow::error::StrContext::Label("LambdaNode.operator_loc")),
-        opening_loc: parse_location.context(winnow::error::StrContext::Label("LambdaNode.opening_loc")),
-        closing_loc: parse_location.context(winnow::error::StrContext::Label("LambdaNode.closing_loc")),
-        parameters: parse_optional_node.context(winnow::error::StrContext::Label("LambdaNode.parameters")),
-        body: parse_optional_node.context(winnow::error::StrContext::Label("LambdaNode.body")),
-    }].parse_next(input)
+        winnow::combinator::seq![LambdaNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("LambdaNode.flags")),
+            locals: length_repeat(parse_varuint, parse_constant)
+                .context(winnow::error::StrContext::Label("LambdaNode.locals")),
+            operator_loc: parse_location
+                .context(winnow::error::StrContext::Label("LambdaNode.operator_loc")),
+            opening_loc: parse_location
+                .context(winnow::error::StrContext::Label("LambdaNode.opening_loc")),
+            closing_loc: parse_location
+                .context(winnow::error::StrContext::Label("LambdaNode.closing_loc")),
+            parameters: parse_optional_node
+                .context(winnow::error::StrContext::Label("LambdaNode.parameters")),
+            body: parse_optional_node.context(winnow::error::StrContext::Label("LambdaNode.body")),
+        }]
+        .parse_next(input)
     }
 }
 
-// 92
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `&&=` operator for assignment to a local variable.
+
+    target &&= value
+    ^^^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct LocalVariableAndWriteNode {
-    name_loc: Location,
-    operator_loc: Location,
-    value: NodeRef,
-    name: ConstantRef,
-    depth: u32,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub name_loc: Location,
+    pub operator_loc: Location,
+    pub value: NodeRef,
+    pub name: ConstantRef,
+    pub depth: u32,
 }
 impl LocalVariableAndWriteNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -2571,26 +4846,47 @@ impl LocalVariableAndWriteNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![LocalVariableAndWriteNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("LocalVariableAndWriteNode.flags")),
-        name_loc: parse_location.context(winnow::error::StrContext::Label("LocalVariableAndWriteNode.name_loc")),
-        operator_loc: parse_location.context(winnow::error::StrContext::Label("LocalVariableAndWriteNode.operator_loc")),
-        value: parse_node.context(winnow::error::StrContext::Label("LocalVariableAndWriteNode.value")),
-        name: parse_constant.context(winnow::error::StrContext::Label("LocalVariableAndWriteNode.name")),
-        depth: parse_varuint.context(winnow::error::StrContext::Label("LocalVariableAndWriteNode.depth")),
-    }].parse_next(input)
+        winnow::combinator::seq![LocalVariableAndWriteNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "LocalVariableAndWriteNode.flags"
+                )),
+            name_loc: parse_location.context(winnow::error::StrContext::Label(
+                "LocalVariableAndWriteNode.name_loc"
+            )),
+            operator_loc: parse_location.context(winnow::error::StrContext::Label(
+                "LocalVariableAndWriteNode.operator_loc"
+            )),
+            value: parse_node.context(winnow::error::StrContext::Label(
+                "LocalVariableAndWriteNode.value"
+            )),
+            name: parse_constant.context(winnow::error::StrContext::Label(
+                "LocalVariableAndWriteNode.name"
+            )),
+            depth: parse_varuint.context(winnow::error::StrContext::Label(
+                "LocalVariableAndWriteNode.depth"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 93
-#[derive(Debug, Clone)]
+/**
+Represents assigning to a local variable using an operator that isn't `=`.
+
+    target += value
+    ^^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct LocalVariableOperatorWriteNode {
-    name_loc: Location,
-    binary_operator_loc: Location,
-    value: NodeRef,
-    name: ConstantRef,
-    binary_operator: ConstantRef,
-    depth: u32,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub name_loc: Location,
+    pub binary_operator_loc: Location,
+    pub value: NodeRef,
+    pub name: ConstantRef,
+    pub binary_operator: ConstantRef,
+    pub depth: u32,
 }
 impl LocalVariableOperatorWriteNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -2598,26 +4894,49 @@ impl LocalVariableOperatorWriteNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![LocalVariableOperatorWriteNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("LocalVariableOperatorWriteNode.flags")),
-        name_loc: parse_location.context(winnow::error::StrContext::Label("LocalVariableOperatorWriteNode.name_loc")),
-        binary_operator_loc: parse_location.context(winnow::error::StrContext::Label("LocalVariableOperatorWriteNode.binary_operator_loc")),
-        value: parse_node.context(winnow::error::StrContext::Label("LocalVariableOperatorWriteNode.value")),
-        name: parse_constant.context(winnow::error::StrContext::Label("LocalVariableOperatorWriteNode.name")),
-        binary_operator: parse_constant.context(winnow::error::StrContext::Label("LocalVariableOperatorWriteNode.binary_operator")),
-        depth: parse_varuint.context(winnow::error::StrContext::Label("LocalVariableOperatorWriteNode.depth")),
-    }].parse_next(input)
+        winnow::combinator::seq![LocalVariableOperatorWriteNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "LocalVariableOperatorWriteNode.flags"
+                )),
+            name_loc: parse_location.context(winnow::error::StrContext::Label(
+                "LocalVariableOperatorWriteNode.name_loc"
+            )),
+            binary_operator_loc: parse_location.context(winnow::error::StrContext::Label(
+                "LocalVariableOperatorWriteNode.binary_operator_loc"
+            )),
+            value: parse_node.context(winnow::error::StrContext::Label(
+                "LocalVariableOperatorWriteNode.value"
+            )),
+            name: parse_constant.context(winnow::error::StrContext::Label(
+                "LocalVariableOperatorWriteNode.name"
+            )),
+            binary_operator: parse_constant.context(winnow::error::StrContext::Label(
+                "LocalVariableOperatorWriteNode.binary_operator"
+            )),
+            depth: parse_varuint.context(winnow::error::StrContext::Label(
+                "LocalVariableOperatorWriteNode.depth"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 94
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `||=` operator for assignment to a local variable.
+
+    target ||= value
+    ^^^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct LocalVariableOrWriteNode {
-    name_loc: Location,
-    operator_loc: Location,
-    value: NodeRef,
-    name: ConstantRef,
-    depth: u32,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub name_loc: Location,
+    pub operator_loc: Location,
+    pub value: NodeRef,
+    pub name: ConstantRef,
+    pub depth: u32,
 }
 impl LocalVariableOrWriteNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -2625,22 +4944,63 @@ impl LocalVariableOrWriteNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![LocalVariableOrWriteNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("LocalVariableOrWriteNode.flags")),
-        name_loc: parse_location.context(winnow::error::StrContext::Label("LocalVariableOrWriteNode.name_loc")),
-        operator_loc: parse_location.context(winnow::error::StrContext::Label("LocalVariableOrWriteNode.operator_loc")),
-        value: parse_node.context(winnow::error::StrContext::Label("LocalVariableOrWriteNode.value")),
-        name: parse_constant.context(winnow::error::StrContext::Label("LocalVariableOrWriteNode.name")),
-        depth: parse_varuint.context(winnow::error::StrContext::Label("LocalVariableOrWriteNode.depth")),
-    }].parse_next(input)
+        winnow::combinator::seq![LocalVariableOrWriteNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "LocalVariableOrWriteNode.flags"
+                )),
+            name_loc: parse_location.context(winnow::error::StrContext::Label(
+                "LocalVariableOrWriteNode.name_loc"
+            )),
+            operator_loc: parse_location.context(winnow::error::StrContext::Label(
+                "LocalVariableOrWriteNode.operator_loc"
+            )),
+            value: parse_node.context(winnow::error::StrContext::Label(
+                "LocalVariableOrWriteNode.value"
+            )),
+            name: parse_constant.context(winnow::error::StrContext::Label(
+                "LocalVariableOrWriteNode.name"
+            )),
+            depth: parse_varuint.context(winnow::error::StrContext::Label(
+                "LocalVariableOrWriteNode.depth"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 95
-#[derive(Debug, Clone)]
+/**
+Represents reading a local variable. Note that this requires that a local variable of the same name has already been written to in the same scope, otherwise it is parsed as a method call.
+
+    foo
+    ^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct LocalVariableReadNode {
-    name: ConstantRef,
-    depth: u32,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    /**
+    The name of the local variable, which is an [identifier](https://github.com/ruby/prism/blob/main/docs/parsing_rules.md#identifiers).
+
+        x      # name `:x`
+
+        _Test  # name `:_Test`
+
+    Note that this can also be an underscore followed by a number for the default block parameters.
+
+        _1     # name `:_1`
+    */
+    pub name: ConstantRef,
+    /**
+    The number of visible scopes that should be searched to find the origin of this local variable.
+
+        foo = 1; foo # depth 0
+
+        bar = 2; tap { bar } # depth 1
+
+    The specific rules for calculating the depth may differ from individual Ruby implementations, as they are not specified by the language. For more information, see [the Prism documentation](https://github.com/ruby/prism/blob/main/docs/local_variable_depth.md).
+    */
+    pub depth: u32,
 }
 impl LocalVariableReadNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -2648,19 +5008,34 @@ impl LocalVariableReadNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![LocalVariableReadNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("LocalVariableReadNode.flags")),
-        name: parse_constant.context(winnow::error::StrContext::Label("LocalVariableReadNode.name")),
-        depth: parse_varuint.context(winnow::error::StrContext::Label("LocalVariableReadNode.depth")),
-    }].parse_next(input)
+        winnow::combinator::seq![LocalVariableReadNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "LocalVariableReadNode.flags"
+                )),
+            name: parse_constant.context(winnow::error::StrContext::Label(
+                "LocalVariableReadNode.name"
+            )),
+            depth: parse_varuint.context(winnow::error::StrContext::Label(
+                "LocalVariableReadNode.depth"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 96
-#[derive(Debug, Clone)]
+/**
+Represents writing to a local variable in a context that doesn't have an explicit value.
+
+    foo, bar = baz
+    ^^^  ^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct LocalVariableTargetNode {
-    name: ConstantRef,
-    depth: u32,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub name: ConstantRef,
+    pub depth: u32,
 }
 impl LocalVariableTargetNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -2668,22 +5043,78 @@ impl LocalVariableTargetNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![LocalVariableTargetNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("LocalVariableTargetNode.flags")),
-        name: parse_constant.context(winnow::error::StrContext::Label("LocalVariableTargetNode.name")),
-        depth: parse_varuint.context(winnow::error::StrContext::Label("LocalVariableTargetNode.depth")),
-    }].parse_next(input)
+        winnow::combinator::seq![LocalVariableTargetNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "LocalVariableTargetNode.flags"
+                )),
+            name: parse_constant.context(winnow::error::StrContext::Label(
+                "LocalVariableTargetNode.name"
+            )),
+            depth: parse_varuint.context(winnow::error::StrContext::Label(
+                "LocalVariableTargetNode.depth"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 97
-#[derive(Debug, Clone)]
+/**
+Represents writing to a local variable.
+
+    foo = 1
+    ^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct LocalVariableWriteNode {
-    name: ConstantRef,
-    depth: u32,
-    name_loc: Location,
-    value: NodeRef,
-    operator_loc: Location,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    /**
+    The name of the local variable, which is an [identifier](https://github.com/ruby/prism/blob/main/docs/parsing_rules.md#identifiers).
+
+        foo = :bar # name `:foo`
+
+        abc = 123  # name `:abc`
+    */
+    pub name: ConstantRef,
+    /**
+    The number of semantic scopes we have to traverse to find the declaration of this variable.
+
+        foo = 1         # depth 0
+
+        tap { foo = 1 } # depth 1
+
+    The specific rules for calculating the depth may differ from individual Ruby implementations, as they are not specified by the language. For more information, see [the Prism documentation](https://github.com/ruby/prism/blob/main/docs/local_variable_depth.md).
+    */
+    pub depth: u32,
+    /**
+    The location of the variable name.
+
+        foo = :bar
+        ^^^
+    */
+    pub name_loc: Location,
+    /**
+    The value to write to the local variable. It can be any [non-void expression](https://github.com/ruby/prism/blob/main/docs/parsing_rules.md#non-void-expression).
+
+        foo = :bar
+              ^^^^
+
+        abc = 1234
+              ^^^^
+
+    Note that since the name of a local variable is known before the value is parsed, it is valid for a local variable to appear within the value of its own write.
+
+        foo = foo
+    */
+    pub value: NodeRef,
+    /**
+    The location of the `=` operator.
+
+        x = :y
+          ^
+    */
+    pub operator_loc: Location,
 }
 impl LocalVariableWriteNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -2691,25 +5122,45 @@ impl LocalVariableWriteNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![LocalVariableWriteNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("LocalVariableWriteNode.flags")),
-        name: parse_constant.context(winnow::error::StrContext::Label("LocalVariableWriteNode.name")),
-        depth: parse_varuint.context(winnow::error::StrContext::Label("LocalVariableWriteNode.depth")),
-        name_loc: parse_location.context(winnow::error::StrContext::Label("LocalVariableWriteNode.name_loc")),
-        value: parse_node.context(winnow::error::StrContext::Label("LocalVariableWriteNode.value")),
-        operator_loc: parse_location.context(winnow::error::StrContext::Label("LocalVariableWriteNode.operator_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![LocalVariableWriteNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "LocalVariableWriteNode.flags"
+                )),
+            name: parse_constant.context(winnow::error::StrContext::Label(
+                "LocalVariableWriteNode.name"
+            )),
+            depth: parse_varuint.context(winnow::error::StrContext::Label(
+                "LocalVariableWriteNode.depth"
+            )),
+            name_loc: parse_location.context(winnow::error::StrContext::Label(
+                "LocalVariableWriteNode.name_loc"
+            )),
+            value: parse_node.context(winnow::error::StrContext::Label(
+                "LocalVariableWriteNode.value"
+            )),
+            operator_loc: parse_location.context(winnow::error::StrContext::Label(
+                "LocalVariableWriteNode.operator_loc"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 98
-#[derive(Debug, Clone)]
+/**
+Represents a regular expression literal used in the predicate of a conditional to implicitly match against the last line read by an IO object.
+
+    if /foo/i then end
+       ^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct MatchLastLineNode {
     pub flags: enumflags2::BitFlags<RegularExpressionFlags>,
-    opening_loc: Location,
-    content_loc: Location,
-    closing_loc: Location,
-    unescaped: String,
+    pub opening_loc: Location,
+    pub content_loc: Location,
+    pub closing_loc: Location,
+    pub unescaped: StringField,
 }
 impl MatchLastLineNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -2738,12 +5189,18 @@ impl MatchLastLineNode {
     }
 }
 
-// 99
-#[derive(Debug, Clone)]
+/**
+Represents the use of the modifier `in` operator.
+
+    foo in bar
+    ^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct MatchPredicateNode {
-    value: NodeRef,
-    pattern: NodeRef,
-    operator_loc: Location,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub value: NodeRef,
+    pub pattern: NodeRef,
+    pub operator_loc: Location,
 }
 impl MatchPredicateNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -2751,21 +5208,34 @@ impl MatchPredicateNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![MatchPredicateNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("MatchPredicateNode.flags")),
-        value: parse_node.context(winnow::error::StrContext::Label("MatchPredicateNode.value")),
-        pattern: parse_node.context(winnow::error::StrContext::Label("MatchPredicateNode.pattern")),
-        operator_loc: parse_location.context(winnow::error::StrContext::Label("MatchPredicateNode.operator_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![MatchPredicateNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("MatchPredicateNode.flags")),
+            value: parse_node.context(winnow::error::StrContext::Label("MatchPredicateNode.value")),
+            pattern: parse_node.context(winnow::error::StrContext::Label(
+                "MatchPredicateNode.pattern"
+            )),
+            operator_loc: parse_location.context(winnow::error::StrContext::Label(
+                "MatchPredicateNode.operator_loc"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 100
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `=>` operator.
+
+    foo => bar
+    ^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct MatchRequiredNode {
-    value: NodeRef,
-    pattern: NodeRef,
-    operator_loc: Location,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub value: NodeRef,
+    pub pattern: NodeRef,
+    pub operator_loc: Location,
 }
 impl MatchRequiredNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -2773,20 +5243,33 @@ impl MatchRequiredNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![MatchRequiredNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("MatchRequiredNode.flags")),
-        value: parse_node.context(winnow::error::StrContext::Label("MatchRequiredNode.value")),
-        pattern: parse_node.context(winnow::error::StrContext::Label("MatchRequiredNode.pattern")),
-        operator_loc: parse_location.context(winnow::error::StrContext::Label("MatchRequiredNode.operator_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![MatchRequiredNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("MatchRequiredNode.flags")),
+            value: parse_node.context(winnow::error::StrContext::Label("MatchRequiredNode.value")),
+            pattern: parse_node.context(winnow::error::StrContext::Label(
+                "MatchRequiredNode.pattern"
+            )),
+            operator_loc: parse_location.context(winnow::error::StrContext::Label(
+                "MatchRequiredNode.operator_loc"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 101
-#[derive(Debug, Clone)]
+/**
+Represents writing local variables using a regular expression match with named capture groups.
+
+    /(?<foo>bar)/ =~ baz
+    ^^^^^^^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct MatchWriteNode {
-    call: NodeRef,
-    targets: Vec<NodeRef>,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub call: NodeRef,
+    pub targets: Vec<NodeRef>,
 }
 impl MatchWriteNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -2794,33 +5277,49 @@ impl MatchWriteNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![MatchWriteNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("MatchWriteNode.flags")),
-        call: parse_node.context(winnow::error::StrContext::Label("MatchWriteNode.call")),
-        targets: length_repeat(parse_varuint, parse_node).context(winnow::error::StrContext::Label("MatchWriteNode.targets")),
-    }].parse_next(input)
+        winnow::combinator::seq![MatchWriteNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("MatchWriteNode.flags")),
+            call: parse_node.context(winnow::error::StrContext::Label("MatchWriteNode.call")),
+            targets: length_repeat(parse_varuint, parse_node)
+                .context(winnow::error::StrContext::Label("MatchWriteNode.targets")),
+        }]
+        .parse_next(input)
     }
 }
 
-// 102
-#[derive(Debug, Clone)]
-pub struct MissingNode {}
+/**
+Represents a node that is missing from the source and results in a syntax error.
+*/
+#[derive(Debug, Clone, PartialEq)]
+pub struct MissingNode {
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+}
 impl MissingNode {
     pub fn into_node_kind(self) -> NodeKind {
         NodeKind::MissingNode(self)
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        zero_flags
-            .context(winnow::error::StrContext::Label("MissingNode.flags"))
-            .value(Self {})
-            .parse_next(input)
+        winnow::combinator::seq![MissingNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("MissingNode.flags")),
+        }]
+        .parse_next(input)
     }
 }
 
-// 103
-#[derive(Debug, Clone)]
+/**
+Represents a module declaration involving the `module` keyword.
+
+    module Foo end
+    ^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct ModuleNode {
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
     pub locals: Vec<ConstantRef>,
     pub module_keyword_loc: Location,
     pub constant_path: NodeRef,
@@ -2834,26 +5333,91 @@ impl ModuleNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![ModuleNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("ModuleNode.flags")),
-        locals: length_repeat(parse_varuint, parse_constant).context(winnow::error::StrContext::Label("ModuleNode.locals")),
-        module_keyword_loc: parse_location.context(winnow::error::StrContext::Label("ModuleNode.module_keyword_loc")),
-        constant_path: parse_node.context(winnow::error::StrContext::Label("ModuleNode.constant_path")),
-        body: parse_optional_node.context(winnow::error::StrContext::Label("ModuleNode.body")),
-        end_keyword_loc: parse_location.context(winnow::error::StrContext::Label("ModuleNode.end_keyword_loc")),
-        name: parse_constant.context(winnow::error::StrContext::Label("ModuleNode.name")),
-    }].parse_next(input)
+        winnow::combinator::seq![ModuleNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("ModuleNode.flags")),
+            locals: length_repeat(parse_varuint, parse_constant)
+                .context(winnow::error::StrContext::Label("ModuleNode.locals")),
+            module_keyword_loc: parse_location.context(winnow::error::StrContext::Label(
+                "ModuleNode.module_keyword_loc"
+            )),
+            constant_path: parse_node
+                .context(winnow::error::StrContext::Label("ModuleNode.constant_path")),
+            body: parse_optional_node.context(winnow::error::StrContext::Label("ModuleNode.body")),
+            end_keyword_loc: parse_location.context(winnow::error::StrContext::Label(
+                "ModuleNode.end_keyword_loc"
+            )),
+            name: parse_constant.context(winnow::error::StrContext::Label("ModuleNode.name")),
+        }]
+        .parse_next(input)
     }
 }
 
-// 104
-#[derive(Debug, Clone)]
+/**
+Represents a multi-target expression.
+
+    a, (b, c) = 1, 2, 3
+       ^^^^^^
+
+This can be a part of `MultiWriteNode` as above, or the target of a `for` loop
+
+    for a, b in [[1, 2], [3, 4]]
+        ^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct MultiTargetNode {
-    lefts: Vec<NodeRef>,
-    rest: Option<NodeRef>,
-    rights: Vec<NodeRef>,
-    lparen_loc: Option<Location>,
-    rparen_loc: Option<Location>,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    /**
+    Represents the targets expressions before a splat node.
+
+        a, (b, c, *) = 1, 2, 3, 4, 5
+            ^^^^
+
+    The splat node can be absent, in that case all target expressions are in the left field.
+
+        a, (b, c) = 1, 2, 3, 4, 5
+            ^^^^
+    */
+    pub lefts: Vec<NodeRef>,
+    /**
+    Represents a splat node in the target expression.
+
+        a, (b, *c) = 1, 2, 3, 4
+               ^^
+
+    The variable can be empty, this results in a `SplatNode` with a `nil` expression field.
+
+        a, (b, *) = 1, 2, 3, 4
+               ^
+
+    If the `*` is omitted, this field will contain an `ImplicitRestNode`
+
+        a, (b,) = 1, 2, 3, 4
+             ^
+    */
+    pub rest: Option<NodeRef>,
+    /**
+    Represents the targets expressions after a splat node.
+
+        a, (*, b, c) = 1, 2, 3, 4, 5
+               ^^^^
+    */
+    pub rights: Vec<NodeRef>,
+    /**
+    The location of the opening parenthesis.
+
+        a, (b, c) = 1, 2, 3
+           ^
+    */
+    pub lparen_loc: Option<Location>,
+    /**
+    The location of the closing parenthesis.
+
+        a, (b, c) = 1, 2, 3
+                ^
+    */
+    pub rparen_loc: Option<Location>,
 }
 impl MultiTargetNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -2861,27 +5425,100 @@ impl MultiTargetNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![MultiTargetNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("MultiTargetNode.flags")),
-        lefts: length_repeat(parse_varuint, parse_node).context(winnow::error::StrContext::Label("MultiTargetNode.lefts")),
-        rest: parse_optional_node.context(winnow::error::StrContext::Label("MultiTargetNode.rest")),
-        rights: length_repeat(parse_varuint, parse_node).context(winnow::error::StrContext::Label("MultiTargetNode.rights")),
-        lparen_loc: parse_optional_location.context(winnow::error::StrContext::Label("MultiTargetNode.lparen_loc")),
-        rparen_loc: parse_optional_location.context(winnow::error::StrContext::Label("MultiTargetNode.rparen_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![MultiTargetNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("MultiTargetNode.flags")),
+            lefts: length_repeat(parse_varuint, parse_node)
+                .context(winnow::error::StrContext::Label("MultiTargetNode.lefts")),
+            rest: parse_optional_node
+                .context(winnow::error::StrContext::Label("MultiTargetNode.rest")),
+            rights: length_repeat(parse_varuint, parse_node)
+                .context(winnow::error::StrContext::Label("MultiTargetNode.rights")),
+            lparen_loc: parse_optional_location.context(winnow::error::StrContext::Label(
+                "MultiTargetNode.lparen_loc"
+            )),
+            rparen_loc: parse_optional_location.context(winnow::error::StrContext::Label(
+                "MultiTargetNode.rparen_loc"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 105
-#[derive(Debug, Clone)]
+/**
+Represents a write to a multi-target expression.
+
+    a, b, c = 1, 2, 3
+    ^^^^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct MultiWriteNode {
-    lefts: Vec<NodeRef>,
-    rest: Option<NodeRef>,
-    rights: Vec<NodeRef>,
-    lparen_loc: Option<Location>,
-    rparen_loc: Option<Location>,
-    operator_loc: Location,
-    value: NodeRef,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    /**
+    Represents the targets expressions before a splat node.
+
+        a, b, * = 1, 2, 3, 4, 5
+        ^^^^
+
+    The splat node can be absent, in that case all target expressions are in the left field.
+
+        a, b, c = 1, 2, 3, 4, 5
+        ^^^^^^^
+    */
+    pub lefts: Vec<NodeRef>,
+    /**
+    Represents a splat node in the target expression.
+
+        a, b, *c = 1, 2, 3, 4
+              ^^
+
+    The variable can be empty, this results in a `SplatNode` with a `nil` expression field.
+
+        a, b, * = 1, 2, 3, 4
+              ^
+
+    If the `*` is omitted, this field will contain an `ImplicitRestNode`
+
+        a, b, = 1, 2, 3, 4
+            ^
+    */
+    pub rest: Option<NodeRef>,
+    /**
+    Represents the targets expressions after a splat node.
+
+        a, *, b, c = 1, 2, 3, 4, 5
+              ^^^^
+    */
+    pub rights: Vec<NodeRef>,
+    /**
+    The location of the opening parenthesis.
+
+        (a, b, c) = 1, 2, 3
+        ^
+    */
+    pub lparen_loc: Option<Location>,
+    /**
+    The location of the closing parenthesis.
+
+        (a, b, c) = 1, 2, 3
+                ^
+    */
+    pub rparen_loc: Option<Location>,
+    /**
+    The location of the operator.
+
+        a, b, c = 1, 2, 3
+                ^
+    */
+    pub operator_loc: Location,
+    /**
+    The value to write to the targets. It can be any [non-void expression](https://github.com/ruby/prism/blob/main/docs/parsing_rules.md#non-void-expression).
+
+        a, b, c = 1, 2, 3
+                  ^^^^^^^
+    */
+    pub value: NodeRef,
 }
 impl MultiWriteNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -2889,24 +5526,42 @@ impl MultiWriteNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![MultiWriteNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("MultiWriteNode.flags")),
-        lefts: length_repeat(parse_varuint, parse_node).context(winnow::error::StrContext::Label("MultiWriteNode.lefts")),
-        rest: parse_optional_node.context(winnow::error::StrContext::Label("MultiWriteNode.rest")),
-        rights: length_repeat(parse_varuint, parse_node).context(winnow::error::StrContext::Label("MultiWriteNode.rights")),
-        lparen_loc: parse_optional_location.context(winnow::error::StrContext::Label("MultiWriteNode.lparen_loc")),
-        rparen_loc: parse_optional_location.context(winnow::error::StrContext::Label("MultiWriteNode.rparen_loc")),
-        operator_loc: parse_location.context(winnow::error::StrContext::Label("MultiWriteNode.operator_loc")),
-        value: parse_node.context(winnow::error::StrContext::Label("MultiWriteNode.value")),
-    }].parse_next(input)
+        winnow::combinator::seq![MultiWriteNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("MultiWriteNode.flags")),
+            lefts: length_repeat(parse_varuint, parse_node)
+                .context(winnow::error::StrContext::Label("MultiWriteNode.lefts")),
+            rest: parse_optional_node
+                .context(winnow::error::StrContext::Label("MultiWriteNode.rest")),
+            rights: length_repeat(parse_varuint, parse_node)
+                .context(winnow::error::StrContext::Label("MultiWriteNode.rights")),
+            lparen_loc: parse_optional_location.context(winnow::error::StrContext::Label(
+                "MultiWriteNode.lparen_loc"
+            )),
+            rparen_loc: parse_optional_location.context(winnow::error::StrContext::Label(
+                "MultiWriteNode.rparen_loc"
+            )),
+            operator_loc: parse_location.context(winnow::error::StrContext::Label(
+                "MultiWriteNode.operator_loc"
+            )),
+            value: parse_node.context(winnow::error::StrContext::Label("MultiWriteNode.value")),
+        }]
+        .parse_next(input)
     }
 }
 
-// 106
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `next` keyword.
+
+    next 1
+    ^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct NextNode {
-    arguments: Option<NodeRef>,
-    keyword_loc: Location,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub arguments: Option<NodeRef>,
+    pub keyword_loc: Location,
 }
 impl NextNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -2914,35 +5569,56 @@ impl NextNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![NextNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("NextNode.flags")),
-        arguments: parse_optional_node.context(winnow::error::StrContext::Label("NextNode.arguments")),
-        keyword_loc: parse_location.context(winnow::error::StrContext::Label("NextNode.keyword_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![NextNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("NextNode.flags")),
+            arguments: parse_optional_node
+                .context(winnow::error::StrContext::Label("NextNode.arguments")),
+            keyword_loc: parse_location
+                .context(winnow::error::StrContext::Label("NextNode.keyword_loc")),
+        }]
+        .parse_next(input)
     }
 }
 
-// 107
-#[derive(Debug, Clone)]
-pub struct NilNode {}
+/**
+Represents the use of the `nil` keyword.
+
+    nil
+    ^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
+pub struct NilNode {
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+}
 impl NilNode {
     pub fn into_node_kind(self) -> NodeKind {
         NodeKind::NilNode(self)
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        zero_flags
-            .context(winnow::error::StrContext::Label("NilNode.flags"))
-            .value(Self {})
-            .parse_next(input)
+        winnow::combinator::seq![NilNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("NilNode.flags")),
+        }]
+        .parse_next(input)
     }
 }
 
-// 108
-#[derive(Debug, Clone)]
+/**
+Represents the use of `**nil` inside method arguments.
+
+    def a(**nil)
+          ^^^^^
+    end
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct NoKeywordsParameterNode {
-    operator_loc: Location,
-    keyword_loc: Location,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub operator_loc: Location,
+    pub keyword_loc: Location,
 }
 impl NoKeywordsParameterNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -2950,18 +5626,33 @@ impl NoKeywordsParameterNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![NoKeywordsParameterNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("NoKeywordsParameterNode.flags")),
-        operator_loc: parse_location.context(winnow::error::StrContext::Label("NoKeywordsParameterNode.operator_loc")),
-        keyword_loc: parse_location.context(winnow::error::StrContext::Label("NoKeywordsParameterNode.keyword_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![NoKeywordsParameterNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "NoKeywordsParameterNode.flags"
+                )),
+            operator_loc: parse_location.context(winnow::error::StrContext::Label(
+                "NoKeywordsParameterNode.operator_loc"
+            )),
+            keyword_loc: parse_location.context(winnow::error::StrContext::Label(
+                "NoKeywordsParameterNode.keyword_loc"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 109
-#[derive(Debug, Clone)]
+/**
+Represents an implicit set of parameters through the use of numbered parameters within a block or lambda.
+
+    -> { _1 + _2 }
+    ^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct NumberedParametersNode {
-    maximum: u8,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub maximum: u8,
 }
 impl NumberedParametersNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -2969,17 +5660,39 @@ impl NumberedParametersNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![NumberedParametersNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("NumberedParametersNode.flags")),
-        maximum: winnow::binary::u8.context(winnow::error::StrContext::Label("NumberedParametersNode.maximum")),
-    }].parse_next(input)
+        winnow::combinator::seq![NumberedParametersNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "NumberedParametersNode.flags"
+                )),
+            maximum: winnow::binary::u8.context(winnow::error::StrContext::Label(
+                "NumberedParametersNode.maximum"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 110
-#[derive(Debug, Clone)]
+/**
+Represents reading a numbered reference to a capture in the previous match.
+
+    $1
+    ^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct NumberedReferenceReadNode {
-    number: u32,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    /**
+    The (1-indexed, from the left) number of the capture group. Numbered references that are too large result in this value being `0`.
+
+        $1          # number `1`
+
+        $5432       # number `5432`
+
+        $4294967296 # number `0`
+    */
+    pub number: u32,
 }
 impl NumberedReferenceReadNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -2987,20 +5700,33 @@ impl NumberedReferenceReadNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![NumberedReferenceReadNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("NumberedReferenceReadNode.flags")),
-        number: parse_varuint.context(winnow::error::StrContext::Label("NumberedReferenceReadNode.number")),
-    }].parse_next(input)
+        winnow::combinator::seq![NumberedReferenceReadNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "NumberedReferenceReadNode.flags"
+                )),
+            number: parse_varuint.context(winnow::error::StrContext::Label(
+                "NumberedReferenceReadNode.number"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 111
-#[derive(Debug, Clone)]
+/**
+Represents an optional keyword parameter to a method, block, or lambda definition.
+
+    def a(b: 1)
+          ^^^^
+    end
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct OptionalKeywordParameterNode {
     pub flags: enumflags2::BitFlags<ParameterFlags>,
-    name: ConstantRef,
-    name_loc: Location,
-    value: NodeRef,
+    pub name: ConstantRef,
+    pub name_loc: Location,
+    pub value: NodeRef,
 }
 impl OptionalKeywordParameterNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -3028,14 +5754,20 @@ impl OptionalKeywordParameterNode {
     }
 }
 
-// 112
-#[derive(Debug, Clone)]
+/**
+Represents an optional parameter to a method, block, or lambda definition.
+
+    def a(b = 1)
+          ^^^^^
+    end
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct OptionalParameterNode {
     pub flags: enumflags2::BitFlags<ParameterFlags>,
-    name: ConstantRef,
-    name_loc: Location,
-    operator_loc: Location,
-    value: NodeRef,
+    pub name: ConstantRef,
+    pub name_loc: Location,
+    pub operator_loc: Location,
+    pub value: NodeRef,
 }
 impl OptionalParameterNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -3066,12 +5798,42 @@ impl OptionalParameterNode {
     }
 }
 
-// 113
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `||` operator or the `or` keyword.
+
+    left or right
+    ^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct OrNode {
-    left: NodeRef,
-    right: NodeRef,
-    operator_loc: Location,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    /**
+    Represents the left side of the expression. It can be any [non-void expression](https://github.com/ruby/prism/blob/main/docs/parsing_rules.md#non-void-expression).
+
+        left or right
+        ^^^^
+
+        1 || 2
+        ^
+    */
+    pub left: NodeRef,
+    /**
+    Represents the right side of the expression.
+
+        left || right
+                ^^^^^
+
+        1 or 2
+             ^
+    */
+    pub right: NodeRef,
+    /**
+    The location of the `or` keyword or the `||` operator.
+
+        left or right
+             ^^
+    */
+    pub operator_loc: Location,
 }
 impl OrNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -3079,25 +5841,36 @@ impl OrNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![OrNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("OrNode.flags")),
-        left: parse_node.context(winnow::error::StrContext::Label("OrNode.left")),
-        right: parse_node.context(winnow::error::StrContext::Label("OrNode.right")),
-        operator_loc: parse_location.context(winnow::error::StrContext::Label("OrNode.operator_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![OrNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("OrNode.flags")),
+            left: parse_node.context(winnow::error::StrContext::Label("OrNode.left")),
+            right: parse_node.context(winnow::error::StrContext::Label("OrNode.right")),
+            operator_loc: parse_location
+                .context(winnow::error::StrContext::Label("OrNode.operator_loc")),
+        }]
+        .parse_next(input)
     }
 }
 
-// 114
-#[derive(Debug, Clone)]
+/**
+Represents the list of parameters on a method, block, or lambda definition.
+
+    def a(b, c, d)
+          ^^^^^^^
+    end
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct ParametersNode {
-    requireds: Vec<NodeRef>,
-    optionals: Vec<NodeRef>,
-    rest: Option<NodeRef>,
-    posts: Vec<NodeRef>,
-    keywords: Vec<NodeRef>,
-    keyword_rest: Option<NodeRef>,
-    block: Option<NodeRef>,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub requireds: Vec<NodeRef>,
+    pub optionals: Vec<NodeRef>,
+    pub rest: Option<NodeRef>,
+    pub posts: Vec<NodeRef>,
+    pub keywords: Vec<NodeRef>,
+    pub keyword_rest: Option<NodeRef>,
+    pub block: Option<NodeRef>,
 }
 impl ParametersNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -3105,25 +5878,42 @@ impl ParametersNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![ParametersNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("ParametersNode.flags")),
-        requireds: length_repeat(parse_varuint, parse_node).context(winnow::error::StrContext::Label("ParametersNode.requireds")),
-        optionals: length_repeat(parse_varuint, parse_node).context(winnow::error::StrContext::Label("ParametersNode.optionals")),
-        rest: parse_optional_node.context(winnow::error::StrContext::Label("ParametersNode.rest")),
-        posts: length_repeat(parse_varuint, parse_node).context(winnow::error::StrContext::Label("ParametersNode.posts")),
-        keywords: length_repeat(parse_varuint, parse_node).context(winnow::error::StrContext::Label("ParametersNode.keywords")),
-        keyword_rest: parse_optional_node.context(winnow::error::StrContext::Label("ParametersNode.keyword_rest")),
-        block: parse_optional_node.context(winnow::error::StrContext::Label("ParametersNode.block")),
-    }].parse_next(input)
+        winnow::combinator::seq![ParametersNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("ParametersNode.flags")),
+            requireds: length_repeat(parse_varuint, parse_node)
+                .context(winnow::error::StrContext::Label("ParametersNode.requireds")),
+            optionals: length_repeat(parse_varuint, parse_node)
+                .context(winnow::error::StrContext::Label("ParametersNode.optionals")),
+            rest: parse_optional_node
+                .context(winnow::error::StrContext::Label("ParametersNode.rest")),
+            posts: length_repeat(parse_varuint, parse_node)
+                .context(winnow::error::StrContext::Label("ParametersNode.posts")),
+            keywords: length_repeat(parse_varuint, parse_node)
+                .context(winnow::error::StrContext::Label("ParametersNode.keywords")),
+            keyword_rest: parse_optional_node.context(winnow::error::StrContext::Label(
+                "ParametersNode.keyword_rest"
+            )),
+            block: parse_optional_node
+                .context(winnow::error::StrContext::Label("ParametersNode.block")),
+        }]
+        .parse_next(input)
     }
 }
 
-// 115
-#[derive(Debug, Clone)]
+/**
+Represents a parenthesized expression
+
+    (10 + 34)
+    ^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct ParenthesesNode {
-    body: Option<NodeRef>,
-    opening_loc: Location,
-    closing_loc: Location,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub body: Option<NodeRef>,
+    pub opening_loc: Location,
+    pub closing_loc: Location,
 }
 impl ParenthesesNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -3131,22 +5921,36 @@ impl ParenthesesNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![ParenthesesNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("ParenthesesNode.flags")),
-        body: parse_optional_node.context(winnow::error::StrContext::Label("ParenthesesNode.body")),
-        opening_loc: parse_location.context(winnow::error::StrContext::Label("ParenthesesNode.opening_loc")),
-        closing_loc: parse_location.context(winnow::error::StrContext::Label("ParenthesesNode.closing_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![ParenthesesNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("ParenthesesNode.flags")),
+            body: parse_optional_node
+                .context(winnow::error::StrContext::Label("ParenthesesNode.body")),
+            opening_loc: parse_location.context(winnow::error::StrContext::Label(
+                "ParenthesesNode.opening_loc"
+            )),
+            closing_loc: parse_location.context(winnow::error::StrContext::Label(
+                "ParenthesesNode.closing_loc"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 116
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `^` operator for pinning an expression in a pattern matching expression.
+
+    foo in ^(bar)
+           ^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct PinnedExpressionNode {
-    expression: NodeRef,
-    operator_loc: Location,
-    lparen_loc: Location,
-    rparen_loc: Location,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub expression: NodeRef,
+    pub operator_loc: Location,
+    pub lparen_loc: Location,
+    pub rparen_loc: Location,
 }
 impl PinnedExpressionNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -3154,21 +5958,40 @@ impl PinnedExpressionNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![PinnedExpressionNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("PinnedExpressionNode.flags")),
-        expression: parse_node.context(winnow::error::StrContext::Label("PinnedExpressionNode.expression")),
-        operator_loc: parse_location.context(winnow::error::StrContext::Label("PinnedExpressionNode.operator_loc")),
-        lparen_loc: parse_location.context(winnow::error::StrContext::Label("PinnedExpressionNode.lparen_loc")),
-        rparen_loc: parse_location.context(winnow::error::StrContext::Label("PinnedExpressionNode.rparen_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![PinnedExpressionNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label(
+                    "PinnedExpressionNode.flags"
+                )),
+            expression: parse_node.context(winnow::error::StrContext::Label(
+                "PinnedExpressionNode.expression"
+            )),
+            operator_loc: parse_location.context(winnow::error::StrContext::Label(
+                "PinnedExpressionNode.operator_loc"
+            )),
+            lparen_loc: parse_location.context(winnow::error::StrContext::Label(
+                "PinnedExpressionNode.lparen_loc"
+            )),
+            rparen_loc: parse_location.context(winnow::error::StrContext::Label(
+                "PinnedExpressionNode.rparen_loc"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 117
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `^` operator for pinning a variable in a pattern matching expression.
+
+    foo in ^bar
+           ^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct PinnedVariableNode {
-    variable: NodeRef,
-    operator_loc: Location,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub variable: NodeRef,
+    pub operator_loc: Location,
 }
 impl PinnedVariableNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -3176,21 +5999,34 @@ impl PinnedVariableNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![PinnedVariableNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("PinnedVariableNode.flags")),
-        variable: parse_node.context(winnow::error::StrContext::Label("PinnedVariableNode.variable")),
-        operator_loc: parse_location.context(winnow::error::StrContext::Label("PinnedVariableNode.operator_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![PinnedVariableNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("PinnedVariableNode.flags")),
+            variable: parse_node.context(winnow::error::StrContext::Label(
+                "PinnedVariableNode.variable"
+            )),
+            operator_loc: parse_location.context(winnow::error::StrContext::Label(
+                "PinnedVariableNode.operator_loc"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 118
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `END` keyword.
+
+    END { foo }
+    ^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct PostExecutionNode {
-    statements: Option<NodeRef>,
-    keyword_loc: Location,
-    opening_loc: Location,
-    closing_loc: Location,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub statements: Option<NodeRef>,
+    pub keyword_loc: Location,
+    pub opening_loc: Location,
+    pub closing_loc: Location,
 }
 impl PostExecutionNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -3198,23 +6034,40 @@ impl PostExecutionNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![PostExecutionNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("PostExecutionNode.flags")),
-        statements: parse_optional_node.context(winnow::error::StrContext::Label("PostExecutionNode.statements")),
-        keyword_loc: parse_location.context(winnow::error::StrContext::Label("PostExecutionNode.keyword_loc")),
-        opening_loc: parse_location.context(winnow::error::StrContext::Label("PostExecutionNode.opening_loc")),
-        closing_loc: parse_location.context(winnow::error::StrContext::Label("PostExecutionNode.closing_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![PostExecutionNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("PostExecutionNode.flags")),
+            statements: parse_optional_node.context(winnow::error::StrContext::Label(
+                "PostExecutionNode.statements"
+            )),
+            keyword_loc: parse_location.context(winnow::error::StrContext::Label(
+                "PostExecutionNode.keyword_loc"
+            )),
+            opening_loc: parse_location.context(winnow::error::StrContext::Label(
+                "PostExecutionNode.opening_loc"
+            )),
+            closing_loc: parse_location.context(winnow::error::StrContext::Label(
+                "PostExecutionNode.closing_loc"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 119
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `BEGIN` keyword.
+
+    BEGIN { foo }
+    ^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct PreExecutionNode {
-    statements: Option<NodeRef>,
-    keyword_loc: Location,
-    opening_loc: Location,
-    closing_loc: Location,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub statements: Option<NodeRef>,
+    pub keyword_loc: Location,
+    pub opening_loc: Location,
+    pub closing_loc: Location,
 }
 impl PreExecutionNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -3222,19 +6075,32 @@ impl PreExecutionNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![PreExecutionNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("PreExecutionNode.flags")),
-        statements: parse_optional_node.context(winnow::error::StrContext::Label("PreExecutionNode.statements")),
-        keyword_loc: parse_location.context(winnow::error::StrContext::Label("PreExecutionNode.keyword_loc")),
-        opening_loc: parse_location.context(winnow::error::StrContext::Label("PreExecutionNode.opening_loc")),
-        closing_loc: parse_location.context(winnow::error::StrContext::Label("PreExecutionNode.closing_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![PreExecutionNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("PreExecutionNode.flags")),
+            statements: parse_optional_node.context(winnow::error::StrContext::Label(
+                "PreExecutionNode.statements"
+            )),
+            keyword_loc: parse_location.context(winnow::error::StrContext::Label(
+                "PreExecutionNode.keyword_loc"
+            )),
+            opening_loc: parse_location.context(winnow::error::StrContext::Label(
+                "PreExecutionNode.opening_loc"
+            )),
+            closing_loc: parse_location.context(winnow::error::StrContext::Label(
+                "PreExecutionNode.closing_loc"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 120
-#[derive(Debug, Clone)]
+/**
+The top level node of any parse tree.  */
+#[derive(Debug, Clone, PartialEq)]
 pub struct ProgramNode {
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
     pub locals: Vec<ConstantRef>,
     pub statements: NodeRef,
 }
@@ -3244,21 +6110,56 @@ impl ProgramNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![ProgramNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("ProgramNode.flags")),
-        locals: length_repeat(parse_varuint, parse_constant).context(winnow::error::StrContext::Label("ProgramNode.locals")),
-        statements: parse_node.context(winnow::error::StrContext::Label("ProgramNode.statements")),
-    }].parse_next(input)
+        winnow::combinator::seq![ProgramNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("ProgramNode.flags")),
+            locals: length_repeat(parse_varuint, parse_constant)
+                .context(winnow::error::StrContext::Label("ProgramNode.locals")),
+            statements: parse_node
+                .context(winnow::error::StrContext::Label("ProgramNode.statements")),
+        }]
+        .parse_next(input)
     }
 }
 
-// 121
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `..` or `...` operators.
+
+    1..2
+    ^^^^
+
+    c if a =~ /left/ ... b =~ /right/
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct RangeNode {
     pub flags: enumflags2::BitFlags<RangeFlags>,
-    left: Option<NodeRef>,
-    right: Option<NodeRef>,
-    operator_loc: Location,
+    /**
+    The left-hand side of the range, if present. It can be either `nil` or any [non-void expression](https://github.com/ruby/prism/blob/main/docs/parsing_rules.md#non-void-expression).
+
+        1...
+        ^
+
+        hello...goodbye
+        ^^^^^
+    */
+    pub left: Option<NodeRef>,
+    /**
+    The right-hand side of the range, if present. It can be either `nil` or any [non-void expression](https://github.com/ruby/prism/blob/main/docs/parsing_rules.md#non-void-expression).
+
+        ..5
+          ^
+
+        1...foo
+            ^^^
+    If neither right-hand or left-hand side was included, this will be a MissingNode.
+    */
+    pub right: Option<NodeRef>,
+    /**
+    The location of the `..` or `...` operator.
+    */
+    pub operator_loc: Location,
 }
 impl RangeNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -3279,12 +6180,27 @@ impl RangeNode {
     }
 }
 
-// 122
-#[derive(Debug, Clone)]
+/**
+Represents a rational number literal.
+
+    1.0r
+    ^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct RationalNode {
     pub flags: enumflags2::BitFlags<IntegerBaseFlags>,
-    numerator: Integer,
-    denominator: Integer,
+    /**
+    The numerator of the rational number.
+
+        1.5r # numerator 3
+    */
+    pub numerator: Integer,
+    /**
+    The denominator of the rational number.
+
+        1.5r # denominator 2
+    */
+    pub denominator: Integer,
 }
 impl RationalNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -3305,30 +6221,44 @@ impl RationalNode {
     }
 }
 
-// 123
-#[derive(Debug, Clone)]
-pub struct RedoNode {}
+/**
+Represents the use of the `redo` keyword.
+
+    redo
+    ^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
+pub struct RedoNode {
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+}
 impl RedoNode {
     pub fn into_node_kind(self) -> NodeKind {
         NodeKind::RedoNode(self)
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        zero_flags
-            .context(winnow::error::StrContext::Label("RedoNode.flags"))
-            .value(Self {})
-            .parse_next(input)
+        winnow::combinator::seq![RedoNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("RedoNode.flags")),
+        }]
+        .parse_next(input)
     }
 }
 
-// 124
-#[derive(Debug, Clone)]
+/**
+Represents a regular expression literal with no interpolation.
+
+    /foo/i
+    ^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct RegularExpressionNode {
     pub flags: enumflags2::BitFlags<RegularExpressionFlags>,
-    opening_loc: Location,
-    content_loc: Location,
-    closing_loc: Location,
-    unescaped: String,
+    pub opening_loc: Location,
+    pub content_loc: Location,
+    pub closing_loc: Location,
+    pub unescaped: StringField,
 }
 impl RegularExpressionNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -3359,12 +6289,18 @@ impl RegularExpressionNode {
     }
 }
 
-// 125
-#[derive(Debug, Clone)]
+/**
+Represents a required keyword parameter to a method, block, or lambda definition.
+
+    def a(b: )
+          ^^
+    end
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct RequiredKeywordParameterNode {
     pub flags: enumflags2::BitFlags<ParameterFlags>,
-    name: ConstantRef,
-    name_loc: Location,
+    pub name: ConstantRef,
+    pub name_loc: Location,
 }
 impl RequiredKeywordParameterNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -3389,11 +6325,17 @@ impl RequiredKeywordParameterNode {
     }
 }
 
-// 126
-#[derive(Debug, Clone)]
+/**
+Represents a required parameter to a method, block, or lambda definition.
+
+    def a(b)
+          ^
+    end
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct RequiredParameterNode {
     pub flags: enumflags2::BitFlags<ParameterFlags>,
-    name: ConstantRef,
+    pub name: ConstantRef,
 }
 impl RequiredParameterNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -3415,12 +6357,18 @@ impl RequiredParameterNode {
     }
 }
 
-// 127
-#[derive(Debug, Clone)]
+/**
+Represents an expression modified with a rescue.
+
+    foo rescue nil
+    ^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct RescueModifierNode {
-    expression: NodeRef,
-    keyword_loc: Location,
-    rescue_expression: NodeRef,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub expression: NodeRef,
+    pub keyword_loc: Location,
+    pub rescue_expression: NodeRef,
 }
 impl RescueModifierNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -3428,25 +6376,45 @@ impl RescueModifierNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![RescueModifierNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("RescueModifierNode.flags")),
-        expression: parse_node.context(winnow::error::StrContext::Label("RescueModifierNode.expression")),
-        keyword_loc: parse_location.context(winnow::error::StrContext::Label("RescueModifierNode.keyword_loc")),
-        rescue_expression: parse_node.context(winnow::error::StrContext::Label("RescueModifierNode.rescue_expression")),
-    }].parse_next(input)
+        winnow::combinator::seq![RescueModifierNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("RescueModifierNode.flags")),
+            expression: parse_node.context(winnow::error::StrContext::Label(
+                "RescueModifierNode.expression"
+            )),
+            keyword_loc: parse_location.context(winnow::error::StrContext::Label(
+                "RescueModifierNode.keyword_loc"
+            )),
+            rescue_expression: parse_node.context(winnow::error::StrContext::Label(
+                "RescueModifierNode.rescue_expression"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 128
-#[derive(Debug, Clone)]
+/**
+Represents a rescue statement.
+
+    begin
+    rescue Foo, *splat, Bar => ex
+      foo
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    end
+
+`Foo, *splat, Bar` are in the `exceptions` field. `ex` is in the `reference` field.
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct RescueNode {
-    keyword_loc: Location,
-    exceptions: Vec<NodeRef>,
-    operator_loc: Option<Location>,
-    reference: Option<NodeRef>,
-    then_keyword_loc: Option<Location>,
-    statements: Option<NodeRef>,
-    subsequent: Option<NodeRef>,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub keyword_loc: Location,
+    pub exceptions: Vec<NodeRef>,
+    pub operator_loc: Option<Location>,
+    pub reference: Option<NodeRef>,
+    pub then_keyword_loc: Option<Location>,
+    pub statements: Option<NodeRef>,
+    pub subsequent: Option<NodeRef>,
 }
 impl RescueNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -3454,26 +6422,43 @@ impl RescueNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![RescueNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("RescueNode.flags")),
-        keyword_loc: parse_location.context(winnow::error::StrContext::Label("RescueNode.keyword_loc")),
-        exceptions: length_repeat(parse_varuint, parse_node).context(winnow::error::StrContext::Label("RescueNode.exceptions")),
-        operator_loc: parse_optional_location.context(winnow::error::StrContext::Label("RescueNode.operator_loc")),
-        reference: parse_optional_node.context(winnow::error::StrContext::Label("RescueNode.reference")),
-        then_keyword_loc: parse_optional_location.context(winnow::error::StrContext::Label("RescueNode.then_keyword_loc")),
-        statements: parse_optional_node.context(winnow::error::StrContext::Label("RescueNode.statements")),
-        subsequent: parse_optional_node.context(winnow::error::StrContext::Label("RescueNode.subsequent")),
-    }].parse_next(input)
+        winnow::combinator::seq![RescueNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("RescueNode.flags")),
+            keyword_loc: parse_location
+                .context(winnow::error::StrContext::Label("RescueNode.keyword_loc")),
+            exceptions: length_repeat(parse_varuint, parse_node)
+                .context(winnow::error::StrContext::Label("RescueNode.exceptions")),
+            operator_loc: parse_optional_location
+                .context(winnow::error::StrContext::Label("RescueNode.operator_loc")),
+            reference: parse_optional_node
+                .context(winnow::error::StrContext::Label("RescueNode.reference")),
+            then_keyword_loc: parse_optional_location.context(winnow::error::StrContext::Label(
+                "RescueNode.then_keyword_loc"
+            )),
+            statements: parse_optional_node
+                .context(winnow::error::StrContext::Label("RescueNode.statements")),
+            subsequent: parse_optional_node
+                .context(winnow::error::StrContext::Label("RescueNode.subsequent")),
+        }]
+        .parse_next(input)
     }
 }
 
-// 129
-#[derive(Debug, Clone)]
+/**
+Represents a rest parameter to a method, block, or lambda definition.
+
+    def a(*b)
+          ^^
+    end
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct RestParameterNode {
     pub flags: enumflags2::BitFlags<ParameterFlags>,
-    name: Option<ConstantRef>,
-    name_loc: Option<Location>,
-    operator_loc: Location,
+    pub name: Option<ConstantRef>,
+    pub name_loc: Option<Location>,
+    pub operator_loc: Location,
 }
 impl RestParameterNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -3498,27 +6483,42 @@ impl RestParameterNode {
     }
 }
 
-// 130
-#[derive(Debug, Clone)]
-pub struct RetryNode {}
+/**
+Represents the use of the `retry` keyword.
+
+    retry
+    ^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
+pub struct RetryNode {
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+}
 impl RetryNode {
     pub fn into_node_kind(self) -> NodeKind {
         NodeKind::RetryNode(self)
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        zero_flags
-            .context(winnow::error::StrContext::Label("RetryNode.flags"))
-            .value(Self {})
-            .parse_next(input)
+        winnow::combinator::seq![RetryNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("RetryNode.flags")),
+        }]
+        .parse_next(input)
     }
 }
 
-// 131
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `return` keyword.
+
+    return 1
+    ^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct ReturnNode {
-    keyword_loc: Location,
-    arguments: Option<NodeRef>,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub keyword_loc: Location,
+    pub arguments: Option<NodeRef>,
 }
 impl ReturnNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -3526,35 +6526,57 @@ impl ReturnNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![ReturnNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("ReturnNode.flags")),
-        keyword_loc: parse_location.context(winnow::error::StrContext::Label("ReturnNode.keyword_loc")),
-        arguments: parse_optional_node.context(winnow::error::StrContext::Label("ReturnNode.arguments")),
-    }].parse_next(input)
+        winnow::combinator::seq![ReturnNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("ReturnNode.flags")),
+            keyword_loc: parse_location
+                .context(winnow::error::StrContext::Label("ReturnNode.keyword_loc")),
+            arguments: parse_optional_node
+                .context(winnow::error::StrContext::Label("ReturnNode.arguments")),
+        }]
+        .parse_next(input)
     }
 }
 
-// 132
-#[derive(Debug, Clone)]
-pub struct SelfNode {}
+/**
+Represents the `self` keyword.
+
+    self
+    ^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
+pub struct SelfNode {
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+}
 impl SelfNode {
     pub fn into_node_kind(self) -> NodeKind {
         NodeKind::SelfNode(self)
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        zero_flags
-            .context(winnow::error::StrContext::Label("SelfNode.flags"))
-            .value(Self {})
-            .parse_next(input)
+        winnow::combinator::seq![SelfNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("SelfNode.flags")),
+        }]
+        .parse_next(input)
     }
 }
 
-// 133
-#[derive(Debug, Clone)]
+/**
+This node wraps a constant write to indicate that when the value is written, it should have its shareability state modified.
+
+    # shareable_constant_value: literal
+    C = { a: 1 }
+    ^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct ShareableConstantNode {
     pub flags: enumflags2::BitFlags<ShareableConstantNodeFlags>,
-    write: NodeRef,
+    /**
+    The constant write that should be modified with the shareability state.    */
+    pub write: NodeRef,
 }
 impl ShareableConstantNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -3576,15 +6598,21 @@ impl ShareableConstantNode {
     }
 }
 
-// 134
-#[derive(Debug, Clone)]
+/**
+Represents a singleton class declaration involving the `class` keyword.
+
+    class << self end
+    ^^^^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct SingletonClassNode {
-    locals: Vec<ConstantRef>,
-    class_keyword_loc: Location,
-    operator_loc: Location,
-    expression: NodeRef,
-    body: Option<NodeRef>,
-    end_keyword_loc: Location,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub locals: Vec<ConstantRef>,
+    pub class_keyword_loc: Location,
+    pub operator_loc: Location,
+    pub expression: NodeRef,
+    pub body: Option<NodeRef>,
+    pub end_keyword_loc: Location,
 }
 impl SingletonClassNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -3592,39 +6620,69 @@ impl SingletonClassNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![SingletonClassNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("SingletonClassNode.flags")),
-        locals: length_repeat(parse_varuint, parse_constant).context(winnow::error::StrContext::Label("SingletonClassNode.locals")),
-        class_keyword_loc: parse_location.context(winnow::error::StrContext::Label("SingletonClassNode.class_keyword_loc")),
-        operator_loc: parse_location.context(winnow::error::StrContext::Label("SingletonClassNode.operator_loc")),
-        expression: parse_node.context(winnow::error::StrContext::Label("SingletonClassNode.expression")),
-        body: parse_optional_node.context(winnow::error::StrContext::Label("SingletonClassNode.body")),
-        end_keyword_loc: parse_location.context(winnow::error::StrContext::Label("SingletonClassNode.end_keyword_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![SingletonClassNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("SingletonClassNode.flags")),
+            locals: length_repeat(parse_varuint, parse_constant).context(
+                winnow::error::StrContext::Label("SingletonClassNode.locals")
+            ),
+            class_keyword_loc: parse_location.context(winnow::error::StrContext::Label(
+                "SingletonClassNode.class_keyword_loc"
+            )),
+            operator_loc: parse_location.context(winnow::error::StrContext::Label(
+                "SingletonClassNode.operator_loc"
+            )),
+            expression: parse_node.context(winnow::error::StrContext::Label(
+                "SingletonClassNode.expression"
+            )),
+            body: parse_optional_node
+                .context(winnow::error::StrContext::Label("SingletonClassNode.body")),
+            end_keyword_loc: parse_location.context(winnow::error::StrContext::Label(
+                "SingletonClassNode.end_keyword_loc"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 135
-#[derive(Debug, Clone)]
-pub struct SourceEncodingNode {}
+/**
+Represents the use of the `__ENCODING__` keyword.
+
+    __ENCODING__
+    ^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
+pub struct SourceEncodingNode {
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+}
 impl SourceEncodingNode {
     pub fn into_node_kind(self) -> NodeKind {
         NodeKind::SourceEncodingNode(self)
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        zero_flags
-            .context(winnow::error::StrContext::Label("SourceEncodingNode.flags"))
-            .value(Self {})
-            .parse_next(input)
+        winnow::combinator::seq![SourceEncodingNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("SourceEncodingNode.flags")),
+        }]
+        .parse_next(input)
     }
 }
 
-// 136
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `__FILE__` keyword.
+
+    __FILE__
+    ^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct SourceFileNode {
     pub flags: enumflags2::BitFlags<StringFlags>,
-    filepath: String,
+    /**
+    Represents the file path being parsed. This corresponds directly to the `filepath` option given to the various `Prism::parse*` APIs.    */
+    pub filepath: StringField,
 }
 impl SourceFileNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -3643,27 +6701,42 @@ impl SourceFileNode {
     }
 }
 
-// 137
-#[derive(Debug, Clone)]
-pub struct SourceLineNode {}
+/**
+Represents the use of the `__LINE__` keyword.
+
+    __LINE__
+    ^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
+pub struct SourceLineNode {
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+}
 impl SourceLineNode {
     pub fn into_node_kind(self) -> NodeKind {
         NodeKind::SourceLineNode(self)
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        zero_flags
-            .context(winnow::error::StrContext::Label("SourceLineNode.flags"))
-            .value(Self {})
-            .parse_next(input)
+        winnow::combinator::seq![SourceLineNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("SourceLineNode.flags")),
+        }]
+        .parse_next(input)
     }
 }
 
-// 138
-#[derive(Debug, Clone)]
+/**
+Represents the use of the splat operator.
+
+    [*a]
+     ^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct SplatNode {
-    operator_loc: Location,
-    expression: Option<NodeRef>,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub operator_loc: Location,
+    pub expression: Option<NodeRef>,
 }
 impl SplatNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -3671,17 +6744,28 @@ impl SplatNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![SplatNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("SplatNode.flags")),
-        operator_loc: parse_location.context(winnow::error::StrContext::Label("SplatNode.operator_loc")),
-        expression: parse_optional_node.context(winnow::error::StrContext::Label("SplatNode.expression")),
-    }].parse_next(input)
+        winnow::combinator::seq![SplatNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("SplatNode.flags")),
+            operator_loc: parse_location
+                .context(winnow::error::StrContext::Label("SplatNode.operator_loc")),
+            expression: parse_optional_node
+                .context(winnow::error::StrContext::Label("SplatNode.expression")),
+        }]
+        .parse_next(input)
     }
 }
 
-// 139
-#[derive(Debug, Clone)]
+/**
+Represents a set of statements contained within some scope.
+
+    foo; bar; baz
+    ^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct StatementsNode {
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
     pub body: Vec<NodeRef>,
 }
 impl StatementsNode {
@@ -3690,21 +6774,36 @@ impl StatementsNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![StatementsNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("StatementsNode.flags")),
-        body: length_repeat(parse_varuint, parse_node).context(winnow::error::StrContext::Label("StatementsNode.body")),
-    }].parse_next(input)
+        winnow::combinator::seq![StatementsNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("StatementsNode.flags")),
+            body: length_repeat(parse_varuint, parse_node)
+                .context(winnow::error::StrContext::Label("StatementsNode.body")),
+        }]
+        .parse_next(input)
     }
 }
 
-// 140
-#[derive(Debug, Clone)]
+/**
+Represents a string literal, a string contained within a `%w` list, or plain string content within an interpolated string.
+
+    "foo"
+    ^^^^^
+
+    %w[foo]
+       ^^^
+
+    "foo #{bar} baz"
+     ^^^^      ^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct StringNode {
     pub flags: enumflags2::BitFlags<StringFlags>,
-    opening_loc: Option<Location>,
-    content_loc: Location,
-    closing_loc: Option<Location>,
-    unescaped: String,
+    pub opening_loc: Option<Location>,
+    pub content_loc: Location,
+    pub closing_loc: Option<Location>,
+    pub unescaped: StringField,
 }
 impl StringNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -3729,14 +6828,23 @@ impl StringNode {
     }
 }
 
-// 141
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `super` keyword with parentheses or arguments.
+
+    super()
+    ^^^^^^^
+
+    super foo, bar
+    ^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct SuperNode {
-    keyword_loc: Location,
-    lparen_loc: Option<Location>,
-    arguments: Option<NodeRef>,
-    rparen_loc: Option<Location>,
-    block: Option<NodeRef>,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub keyword_loc: Location,
+    pub lparen_loc: Option<Location>,
+    pub arguments: Option<NodeRef>,
+    pub rparen_loc: Option<Location>,
+    pub block: Option<NodeRef>,
 }
 impl SuperNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -3744,25 +6852,40 @@ impl SuperNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![SuperNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("SuperNode.flags")),
-        keyword_loc: parse_location.context(winnow::error::StrContext::Label("SuperNode.keyword_loc")),
-        lparen_loc: parse_optional_location.context(winnow::error::StrContext::Label("SuperNode.lparen_loc")),
-        arguments: parse_optional_node.context(winnow::error::StrContext::Label("SuperNode.arguments")),
-        rparen_loc: parse_optional_location.context(winnow::error::StrContext::Label("SuperNode.rparen_loc")),
-        block: parse_optional_node.context(winnow::error::StrContext::Label("SuperNode.block")),
-    }].parse_next(input)
+        winnow::combinator::seq![SuperNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("SuperNode.flags")),
+            keyword_loc: parse_location
+                .context(winnow::error::StrContext::Label("SuperNode.keyword_loc")),
+            lparen_loc: parse_optional_location
+                .context(winnow::error::StrContext::Label("SuperNode.lparen_loc")),
+            arguments: parse_optional_node
+                .context(winnow::error::StrContext::Label("SuperNode.arguments")),
+            rparen_loc: parse_optional_location
+                .context(winnow::error::StrContext::Label("SuperNode.rparen_loc")),
+            block: parse_optional_node.context(winnow::error::StrContext::Label("SuperNode.block")),
+        }]
+        .parse_next(input)
     }
 }
 
-// 142
-#[derive(Debug, Clone)]
+/**
+Represents a symbol literal or a symbol contained within a `%i` list.
+
+    :foo
+    ^^^^
+
+    %i[foo]
+       ^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct SymbolNode {
     pub flags: enumflags2::BitFlags<SymbolFlags>,
-    opening_loc: Option<Location>,
-    value_loc: Option<Location>,
-    closing_loc: Option<Location>,
-    unescaped: String,
+    pub opening_loc: Option<Location>,
+    pub value_loc: Option<Location>,
+    pub closing_loc: Option<Location>,
+    pub unescaped: StringField,
 }
 impl SymbolNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -3787,27 +6910,42 @@ impl SymbolNode {
     }
 }
 
-// 143
-#[derive(Debug, Clone)]
-pub struct TrueNode {}
+/**
+Represents the use of the literal `true` keyword.
+
+    true
+    ^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
+pub struct TrueNode {
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+}
 impl TrueNode {
     pub fn into_node_kind(self) -> NodeKind {
         NodeKind::TrueNode(self)
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        zero_flags
-            .context(winnow::error::StrContext::Label("TrueNode.flags"))
-            .value(Self {})
-            .parse_next(input)
+        winnow::combinator::seq![TrueNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("TrueNode.flags")),
+        }]
+        .parse_next(input)
     }
 }
 
-// 144
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `undef` keyword.
+
+    undef :foo, :bar, :baz
+    ^^^^^^^^^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct UndefNode {
-    names: Vec<NodeRef>,
-    keyword_loc: Location,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub names: Vec<NodeRef>,
+    pub keyword_loc: Location,
 }
 impl UndefNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -3815,23 +6953,80 @@ impl UndefNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![UndefNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("UndefNode.flags")),
-        names: length_repeat(parse_varuint, parse_node).context(winnow::error::StrContext::Label("UndefNode.names")),
-        keyword_loc: parse_location.context(winnow::error::StrContext::Label("UndefNode.keyword_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![UndefNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("UndefNode.flags")),
+            names: length_repeat(parse_varuint, parse_node)
+                .context(winnow::error::StrContext::Label("UndefNode.names")),
+            keyword_loc: parse_location
+                .context(winnow::error::StrContext::Label("UndefNode.keyword_loc")),
+        }]
+        .parse_next(input)
     }
 }
 
-// 145
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `unless` keyword, either in the block form or the modifier form.
+
+    bar unless foo
+    ^^^^^^^^^^^^^^
+
+    unless foo then bar end
+    ^^^^^^^^^^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct UnlessNode {
-    keyword_loc: Location,
-    predicate: NodeRef,
-    then_keyword_loc: Option<Location>,
-    statements: Option<NodeRef>,
-    else_clause: Option<NodeRef>,
-    end_keyword_loc: Option<Location>,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    /**
+    The location of the `unless` keyword.
+
+        unless cond then bar end
+        ^^^^^^
+
+        bar unless cond
+            ^^^^^^
+    */
+    pub keyword_loc: Location,
+    /**
+    The condition to be evaluated for the unless expression. It can be any [non-void expression](https://github.com/ruby/prism/blob/main/docs/parsing_rules.md#non-void-expression).
+
+        unless cond then bar end
+               ^^^^
+
+        bar unless cond
+                   ^^^^
+    */
+    pub predicate: NodeRef,
+    /**
+    The location of the `then` keyword, if present.
+
+        unless cond then bar end
+                    ^^^^
+    */
+    pub then_keyword_loc: Option<Location>,
+    /**
+    The body of statements that will executed if the unless condition is
+    falsey. Will be `nil` if no body is provided.
+
+        unless cond then bar end
+                         ^^^
+    */
+    pub statements: Option<NodeRef>,
+    /**
+    The else clause of the unless expression, if present.
+
+        unless cond then bar else baz end
+                             ^^^^^^^^
+    */
+    pub else_clause: Option<NodeRef>,
+    /**
+    The location of the `end` keyword, if present.
+
+        unless cond then bar end
+                             ^^^
+    */
+    pub end_keyword_loc: Option<Location>,
 }
 impl UnlessNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -3839,27 +7034,45 @@ impl UnlessNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![UnlessNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("UnlessNode.flags")),
-        keyword_loc: parse_location.context(winnow::error::StrContext::Label("UnlessNode.keyword_loc")),
-        predicate: parse_node.context(winnow::error::StrContext::Label("UnlessNode.predicate")),
-        then_keyword_loc: parse_optional_location.context(winnow::error::StrContext::Label("UnlessNode.then_keyword_loc")),
-        statements: parse_optional_node.context(winnow::error::StrContext::Label("UnlessNode.statements")),
-        else_clause: parse_optional_node.context(winnow::error::StrContext::Label("UnlessNode.else_clause")),
-        end_keyword_loc: parse_optional_location.context(winnow::error::StrContext::Label("UnlessNode.end_keyword_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![UnlessNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("UnlessNode.flags")),
+            keyword_loc: parse_location
+                .context(winnow::error::StrContext::Label("UnlessNode.keyword_loc")),
+            predicate: parse_node.context(winnow::error::StrContext::Label("UnlessNode.predicate")),
+            then_keyword_loc: parse_optional_location.context(winnow::error::StrContext::Label(
+                "UnlessNode.then_keyword_loc"
+            )),
+            statements: parse_optional_node
+                .context(winnow::error::StrContext::Label("UnlessNode.statements")),
+            else_clause: parse_optional_node
+                .context(winnow::error::StrContext::Label("UnlessNode.else_clause")),
+            end_keyword_loc: parse_optional_location.context(winnow::error::StrContext::Label(
+                "UnlessNode.end_keyword_loc"
+            )),
+        }]
+        .parse_next(input)
     }
 }
 
-// 146
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `until` keyword, either in the block form or the modifier form.
+
+    bar until foo
+    ^^^^^^^^^^^^^
+
+    until foo do bar end
+    ^^^^^^^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct UntilNode {
     pub flags: enumflags2::BitFlags<LoopFlags>,
-    keyword_loc: Location,
-    do_keyword_loc: Option<Location>,
-    closing_loc: Option<Location>,
-    predicate: NodeRef,
-    statements: Option<NodeRef>,
+    pub keyword_loc: Location,
+    pub do_keyword_loc: Option<Location>,
+    pub closing_loc: Option<Location>,
+    pub predicate: NodeRef,
+    pub statements: Option<NodeRef>,
 }
 impl UntilNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -3885,13 +7098,21 @@ impl UntilNode {
     }
 }
 
-// 147
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `when` keyword within a case statement.
+
+    case true
+    when true
+    ^^^^^^^^^
+    end
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct WhenNode {
-    keyword_loc: Location,
-    conditions: Vec<NodeRef>,
-    then_keyword_loc: Option<Location>,
-    statements: Option<NodeRef>,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub keyword_loc: Location,
+    pub conditions: Vec<NodeRef>,
+    pub then_keyword_loc: Option<Location>,
+    pub statements: Option<NodeRef>,
 }
 impl WhenNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -3899,25 +7120,41 @@ impl WhenNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![WhenNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("WhenNode.flags")),
-        keyword_loc: parse_location.context(winnow::error::StrContext::Label("WhenNode.keyword_loc")),
-        conditions: length_repeat(parse_varuint, parse_node).context(winnow::error::StrContext::Label("WhenNode.conditions")),
-        then_keyword_loc: parse_optional_location.context(winnow::error::StrContext::Label("WhenNode.then_keyword_loc")),
-        statements: parse_optional_node.context(winnow::error::StrContext::Label("WhenNode.statements")),
-    }].parse_next(input)
+        winnow::combinator::seq![WhenNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("WhenNode.flags")),
+            keyword_loc: parse_location
+                .context(winnow::error::StrContext::Label("WhenNode.keyword_loc")),
+            conditions: length_repeat(parse_varuint, parse_node)
+                .context(winnow::error::StrContext::Label("WhenNode.conditions")),
+            then_keyword_loc: parse_optional_location.context(winnow::error::StrContext::Label(
+                "WhenNode.then_keyword_loc"
+            )),
+            statements: parse_optional_node
+                .context(winnow::error::StrContext::Label("WhenNode.statements")),
+        }]
+        .parse_next(input)
     }
 }
 
-// 148
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `while` keyword, either in the block form or the modifier form.
+
+    bar while foo
+    ^^^^^^^^^^^^^
+
+    while foo do bar end
+    ^^^^^^^^^^^^^^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct WhileNode {
     pub flags: enumflags2::BitFlags<LoopFlags>,
-    keyword_loc: Location,
-    do_keyword_loc: Option<Location>,
-    closing_loc: Option<Location>,
-    predicate: NodeRef,
-    statements: Option<NodeRef>,
+    pub keyword_loc: Location,
+    pub do_keyword_loc: Option<Location>,
+    pub closing_loc: Option<Location>,
+    pub predicate: NodeRef,
+    pub statements: Option<NodeRef>,
 }
 impl WhileNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -3943,14 +7180,19 @@ impl WhileNode {
     }
 }
 
-// 149
-#[derive(Debug, Clone)]
+/**
+Represents an xstring literal with no interpolation.
+
+    `foo`
+    ^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct XStringNode {
     pub flags: enumflags2::BitFlags<EncodingFlags>,
-    opening_loc: Location,
-    content_loc: Location,
-    closing_loc: Location,
-    unescaped: String,
+    pub opening_loc: Location,
+    pub content_loc: Location,
+    pub closing_loc: Location,
+    pub unescaped: StringField,
 }
 impl XStringNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -3975,13 +7217,19 @@ impl XStringNode {
     }
 }
 
-// 150
-#[derive(Debug, Clone)]
+/**
+Represents the use of the `yield` keyword.
+
+    yield 1
+    ^^^^^^^
+*/
+#[derive(Debug, Clone, PartialEq)]
 pub struct YieldNode {
-    keyword_loc: Location,
-    lparen_loc: Option<Location>,
-    arguments: Option<NodeRef>,
-    rparen_loc: Option<Location>,
+    pub flags: enumflags2::BitFlags<DefaultNodeFlags>,
+    pub keyword_loc: Location,
+    pub lparen_loc: Option<Location>,
+    pub arguments: Option<NodeRef>,
+    pub rparen_loc: Option<Location>,
 }
 impl YieldNode {
     pub fn into_node_kind(self) -> NodeKind {
@@ -3989,17 +7237,24 @@ impl YieldNode {
     }
     pub fn parser(input: &mut Stream) -> winnow::ModalResult<Self> {
         use winnow::Parser;
-        winnow::combinator::seq![YieldNode{
-        _: zero_flags.context(winnow::error::StrContext::Label("YieldNode.flags")),
-        keyword_loc: parse_location.context(winnow::error::StrContext::Label("YieldNode.keyword_loc")),
-        lparen_loc: parse_optional_location.context(winnow::error::StrContext::Label("YieldNode.lparen_loc")),
-        arguments: parse_optional_node.context(winnow::error::StrContext::Label("YieldNode.arguments")),
-        rparen_loc: parse_optional_location.context(winnow::error::StrContext::Label("YieldNode.rparen_loc")),
-    }].parse_next(input)
+        winnow::combinator::seq![YieldNode {
+            flags: parse_varuint
+                .map(DefaultNodeFlags::from_bits_truncate)
+                .context(winnow::error::StrContext::Label("YieldNode.flags")),
+            keyword_loc: parse_location
+                .context(winnow::error::StrContext::Label("YieldNode.keyword_loc")),
+            lparen_loc: parse_optional_location
+                .context(winnow::error::StrContext::Label("YieldNode.lparen_loc")),
+            arguments: parse_optional_node
+                .context(winnow::error::StrContext::Label("YieldNode.arguments")),
+            rparen_loc: parse_optional_location
+                .context(winnow::error::StrContext::Label("YieldNode.rparen_loc")),
+        }]
+        .parse_next(input)
     }
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq)]
 pub enum NodeKind {
     AliasGlobalVariableNode(AliasGlobalVariableNode),
     AliasMethodNode(AliasMethodNode),

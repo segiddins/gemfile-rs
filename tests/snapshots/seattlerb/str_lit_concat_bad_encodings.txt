@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "\"\\xE3\\xD3\\x8B\\xE3\\x83\\xBC\\x83\\xE3\\x83\\xE3\\x82\\xB3\\xA3\\x82\\x99\" \\\n        \"\\xE3\\x83\\xB3\\xE3\\x83\\x8F\\xE3\\x82\\x9A\\xC3\\xBD;foo@bar.com\"\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -35,8 +35,8 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b110,
-                        flags: FORCED_BINARY_ENCODING | FROZEN,
+                        bits: 0b10110,
+                        flags: STATIC_LITERAL | FORCED_UTF8_ENCODING | FROZEN,
                     },
                     opening_loc: Some(
                         Location { start: 0, length: 1 },
@@ -45,7 +45,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 61, length: 1 },
                     ),
-                    unescaped: "�Ӌー��コ���",
+                    unescaped: Owned("�Ӌー��コ���"),
                 },
             ),
         },
@@ -55,8 +55,8 @@ Program {
             node_kind: StringNode(
                 StringNode {
                     flags: BitFlags<StringFlags> {
-                        bits: 0b110,
-                        flags: FORCED_BINARY_ENCODING | FROZEN,
+                        bits: 0b10110,
+                        flags: STATIC_LITERAL | FORCED_UTF8_ENCODING | FROZEN,
                     },
                     opening_loc: Some(
                         Location { start: 73, length: 1 },
@@ -65,7 +65,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 130, length: 1 },
                     ),
-                    unescaped: "ンハ\u{309a}ý;foo@bar.com",
+                    unescaped: Owned("ンハ\u{309a}ý;foo@bar.com"),
                 },
             ),
         },
@@ -76,7 +76,7 @@ Program {
                 InterpolatedStringNode {
                     flags: BitFlags<InterpolatedStringNodeFlags> {
                         bits: 0b11,
-                        flags: FROZEN | MUTABLE,
+                        flags: NEWLINE | STATIC_LITERAL,
                     },
                     opening_loc: None,
                     parts: [
@@ -92,6 +92,9 @@ Program {
             location: Location { start: 0, length: 131 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(2),
                     ],
@@ -103,6 +106,9 @@ Program {
             location: Location { start: 0, length: 131 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(3),
                 },

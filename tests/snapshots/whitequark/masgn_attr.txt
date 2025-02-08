@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "self.A, foo = foo\n\nself.a, self[1, 2] = foo\n\nself::a, foo = foo\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -29,7 +29,11 @@ Program {
             identifier: 2,
             location: Location { start: 0, length: 4 },
             node_kind: SelfNode(
-                SelfNode,
+                SelfNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
+                },
             ),
         },
         Node {
@@ -38,7 +42,8 @@ Program {
             node_kind: CallTargetNode(
                 CallTargetNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b0,
+                        bits: 0b100000,
+                        flags: IGNORE_VISIBILITY,
                     },
                     receiver: NodeRef(0),
                     call_operator_loc: Location { start: 4, length: 1 },
@@ -52,6 +57,9 @@ Program {
             location: Location { start: 8, length: 3 },
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(3),
                     depth: 0,
                 },
@@ -62,6 +70,9 @@ Program {
             location: Location { start: 14, length: 3 },
             node_kind: LocalVariableReadNode(
                 LocalVariableReadNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(3),
                     depth: 0,
                 },
@@ -72,6 +83,10 @@ Program {
             location: Location { start: 0, length: 17 },
             node_kind: MultiWriteNode(
                 MultiWriteNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     lefts: [
                         NodeRef(1),
                         NodeRef(2),
@@ -89,7 +104,11 @@ Program {
             identifier: 10,
             location: Location { start: 19, length: 4 },
             node_kind: SelfNode(
-                SelfNode,
+                SelfNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
+                },
             ),
         },
         Node {
@@ -98,7 +117,8 @@ Program {
             node_kind: CallTargetNode(
                 CallTargetNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b0,
+                        bits: 0b100000,
+                        flags: IGNORE_VISIBILITY,
                     },
                     receiver: NodeRef(5),
                     call_operator_loc: Location { start: 23, length: 1 },
@@ -111,7 +131,11 @@ Program {
             identifier: 14,
             location: Location { start: 27, length: 4 },
             node_kind: SelfNode(
-                SelfNode,
+                SelfNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
+                },
             ),
         },
         Node {
@@ -121,7 +145,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -139,7 +163,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -171,7 +195,8 @@ Program {
             node_kind: IndexTargetNode(
                 IndexTargetNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b0,
+                        bits: 0b110000,
+                        flags: ATTRIBUTE_WRITE | IGNORE_VISIBILITY,
                     },
                     receiver: NodeRef(7),
                     opening_loc: Location { start: 31, length: 1 },
@@ -188,6 +213,9 @@ Program {
             location: Location { start: 40, length: 3 },
             node_kind: LocalVariableReadNode(
                 LocalVariableReadNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(3),
                     depth: 0,
                 },
@@ -198,6 +226,10 @@ Program {
             location: Location { start: 19, length: 24 },
             node_kind: MultiWriteNode(
                 MultiWriteNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     lefts: [
                         NodeRef(6),
                         NodeRef(11),
@@ -215,7 +247,11 @@ Program {
             identifier: 22,
             location: Location { start: 45, length: 4 },
             node_kind: SelfNode(
-                SelfNode,
+                SelfNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
+                },
             ),
         },
         Node {
@@ -224,7 +260,8 @@ Program {
             node_kind: CallTargetNode(
                 CallTargetNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b0,
+                        bits: 0b100000,
+                        flags: IGNORE_VISIBILITY,
                     },
                     receiver: NodeRef(14),
                     call_operator_loc: Location { start: 49, length: 2 },
@@ -238,6 +275,9 @@ Program {
             location: Location { start: 54, length: 3 },
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(3),
                     depth: 0,
                 },
@@ -248,6 +288,9 @@ Program {
             location: Location { start: 60, length: 3 },
             node_kind: LocalVariableReadNode(
                 LocalVariableReadNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(3),
                     depth: 0,
                 },
@@ -258,6 +301,10 @@ Program {
             location: Location { start: 45, length: 18 },
             node_kind: MultiWriteNode(
                 MultiWriteNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     lefts: [
                         NodeRef(15),
                         NodeRef(16),
@@ -276,6 +323,9 @@ Program {
             location: Location { start: 0, length: 63 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(4),
                         NodeRef(13),
@@ -289,6 +339,9 @@ Program {
             location: Location { start: 0, length: 63 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [
                         ConstantRef(3),
                     ],
@@ -302,8 +355,8 @@ Program {
         Shared(0, 2),
         Owned(8, 3),
         Owned(24, 1),
-        Shared(0, 2),
-        Shared(0, 2),
+        Shared(2, 2),
+        Shared(4, 2),
     ],
     content_pool: [
         65,

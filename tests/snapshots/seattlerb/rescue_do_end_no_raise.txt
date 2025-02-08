@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "tap do\n  :begin\nrescue\n  :rescue\nelse\n  :else\nensure\n  :ensure\nend\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -35,8 +35,8 @@ Program {
             node_kind: SymbolNode(
                 SymbolNode {
                     flags: BitFlags<SymbolFlags> {
-                        bits: 0b11,
-                        flags: FORCED_UTF8_ENCODING | FORCED_BINARY_ENCODING,
+                        bits: 0b10011,
+                        flags: NEWLINE | STATIC_LITERAL | FORCED_US_ASCII_ENCODING,
                     },
                     opening_loc: Some(
                         Location { start: 9, length: 1 },
@@ -45,7 +45,7 @@ Program {
                         Location { start: 10, length: 5 },
                     ),
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(10, 5),
                 },
             ),
         },
@@ -54,6 +54,9 @@ Program {
             location: Location { start: 9, length: 6 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(0),
                     ],
@@ -66,8 +69,8 @@ Program {
             node_kind: SymbolNode(
                 SymbolNode {
                     flags: BitFlags<SymbolFlags> {
-                        bits: 0b11,
-                        flags: FORCED_UTF8_ENCODING | FORCED_BINARY_ENCODING,
+                        bits: 0b10011,
+                        flags: NEWLINE | STATIC_LITERAL | FORCED_US_ASCII_ENCODING,
                     },
                     opening_loc: Some(
                         Location { start: 25, length: 1 },
@@ -76,7 +79,7 @@ Program {
                         Location { start: 26, length: 6 },
                     ),
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(26, 6),
                 },
             ),
         },
@@ -85,6 +88,9 @@ Program {
             location: Location { start: 25, length: 7 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(2),
                     ],
@@ -96,6 +102,9 @@ Program {
             location: Location { start: 16, length: 16 },
             node_kind: RescueNode(
                 RescueNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     keyword_loc: Location { start: 16, length: 6 },
                     exceptions: [],
                     operator_loc: None,
@@ -114,8 +123,8 @@ Program {
             node_kind: SymbolNode(
                 SymbolNode {
                     flags: BitFlags<SymbolFlags> {
-                        bits: 0b11,
-                        flags: FORCED_UTF8_ENCODING | FORCED_BINARY_ENCODING,
+                        bits: 0b10011,
+                        flags: NEWLINE | STATIC_LITERAL | FORCED_US_ASCII_ENCODING,
                     },
                     opening_loc: Some(
                         Location { start: 40, length: 1 },
@@ -124,7 +133,7 @@ Program {
                         Location { start: 41, length: 4 },
                     ),
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(41, 4),
                 },
             ),
         },
@@ -133,6 +142,9 @@ Program {
             location: Location { start: 40, length: 5 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(5),
                     ],
@@ -144,6 +156,9 @@ Program {
             location: Location { start: 33, length: 19 },
             node_kind: ElseNode(
                 ElseNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     else_keyword_loc: Location { start: 33, length: 4 },
                     statements: Some(
                         NodeRef(6),
@@ -160,8 +175,8 @@ Program {
             node_kind: SymbolNode(
                 SymbolNode {
                     flags: BitFlags<SymbolFlags> {
-                        bits: 0b11,
-                        flags: FORCED_UTF8_ENCODING | FORCED_BINARY_ENCODING,
+                        bits: 0b10011,
+                        flags: NEWLINE | STATIC_LITERAL | FORCED_US_ASCII_ENCODING,
                     },
                     opening_loc: Some(
                         Location { start: 55, length: 1 },
@@ -170,7 +185,7 @@ Program {
                         Location { start: 56, length: 6 },
                     ),
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(56, 6),
                 },
             ),
         },
@@ -179,6 +194,9 @@ Program {
             location: Location { start: 55, length: 7 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(8),
                     ],
@@ -190,6 +208,9 @@ Program {
             location: Location { start: 46, length: 20 },
             node_kind: EnsureNode(
                 EnsureNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     ensure_keyword_loc: Location { start: 46, length: 6 },
                     statements: Some(
                         NodeRef(9),
@@ -203,6 +224,9 @@ Program {
             location: Location { start: 4, length: 62 },
             node_kind: BeginNode(
                 BeginNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     begin_keyword_loc: None,
                     statements: Some(
                         NodeRef(1),
@@ -227,6 +251,9 @@ Program {
             location: Location { start: 4, length: 62 },
             node_kind: BlockNode(
                 BlockNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     parameters: None,
                     body: Some(
@@ -243,8 +270,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1,
-                        flags: SAFE_NAVIGATION,
+                        bits: 0b100001,
+                        flags: NEWLINE | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -266,6 +293,9 @@ Program {
             location: Location { start: 0, length: 66 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(13),
                     ],
@@ -277,6 +307,9 @@ Program {
             location: Location { start: 0, length: 66 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(14),
                 },

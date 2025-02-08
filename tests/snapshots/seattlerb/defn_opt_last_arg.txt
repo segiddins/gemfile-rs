@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "def m arg = false\nend\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -26,7 +26,12 @@ Program {
             identifier: 3,
             location: Location { start: 12, length: 5 },
             node_kind: FalseNode(
-                FalseNode,
+                FalseNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b10,
+                        flags: STATIC_LITERAL,
+                    },
+                },
             ),
         },
         Node {
@@ -49,6 +54,9 @@ Program {
             location: Location { start: 6, length: 11 },
             node_kind: ParametersNode(
                 ParametersNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     requireds: [],
                     optionals: [
                         NodeRef(1),
@@ -66,6 +74,10 @@ Program {
             location: Location { start: 0, length: 21 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(2),
                     name_loc: Location { start: 4, length: 1 },
                     receiver: None,
@@ -92,6 +104,9 @@ Program {
             location: Location { start: 0, length: 21 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(3),
                     ],
@@ -103,6 +118,9 @@ Program {
             location: Location { start: 0, length: 21 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(4),
                 },

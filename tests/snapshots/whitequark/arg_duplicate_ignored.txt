@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "def foo(_, _); end\n\ndef foo(_a, _a); end\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -41,7 +41,8 @@ Program {
             node_kind: RequiredParameterNode(
                 RequiredParameterNode {
                     flags: BitFlags<ParameterFlags> {
-                        bits: 0b0,
+                        bits: 0b100,
+                        flags: REPEATED_PARAMETER,
                     },
                     name: ConstantRef(1),
                 },
@@ -52,6 +53,9 @@ Program {
             location: Location { start: 8, length: 4 },
             node_kind: ParametersNode(
                 ParametersNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     requireds: [
                         NodeRef(0),
                         NodeRef(1),
@@ -70,6 +74,10 @@ Program {
             location: Location { start: 0, length: 18 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(2),
                     name_loc: Location { start: 4, length: 3 },
                     receiver: None,
@@ -113,7 +121,8 @@ Program {
             node_kind: RequiredParameterNode(
                 RequiredParameterNode {
                     flags: BitFlags<ParameterFlags> {
-                        bits: 0b0,
+                        bits: 0b100,
+                        flags: REPEATED_PARAMETER,
                     },
                     name: ConstantRef(3),
                 },
@@ -124,6 +133,9 @@ Program {
             location: Location { start: 28, length: 6 },
             node_kind: ParametersNode(
                 ParametersNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     requireds: [
                         NodeRef(4),
                         NodeRef(5),
@@ -142,6 +154,10 @@ Program {
             location: Location { start: 20, length: 20 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(2),
                     name_loc: Location { start: 24, length: 3 },
                     receiver: None,
@@ -172,6 +188,9 @@ Program {
             location: Location { start: 0, length: 40 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(3),
                         NodeRef(7),
@@ -184,6 +203,9 @@ Program {
             location: Location { start: 0, length: 40 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(8),
                 },

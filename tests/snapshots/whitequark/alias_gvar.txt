@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "alias $a $+\n\nalias $a $b\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -28,6 +28,9 @@ Program {
             location: Location { start: 6, length: 2 },
             node_kind: GlobalVariableReadNode(
                 GlobalVariableReadNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(1),
                 },
             ),
@@ -37,6 +40,9 @@ Program {
             location: Location { start: 9, length: 2 },
             node_kind: BackReferenceReadNode(
                 BackReferenceReadNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(2),
                 },
             ),
@@ -46,6 +52,10 @@ Program {
             location: Location { start: 0, length: 11 },
             node_kind: AliasGlobalVariableNode(
                 AliasGlobalVariableNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     new_name: NodeRef(0),
                     old_name: NodeRef(1),
                     keyword_loc: Location { start: 0, length: 5 },
@@ -57,6 +67,9 @@ Program {
             location: Location { start: 19, length: 2 },
             node_kind: GlobalVariableReadNode(
                 GlobalVariableReadNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(1),
                 },
             ),
@@ -66,6 +79,9 @@ Program {
             location: Location { start: 22, length: 2 },
             node_kind: GlobalVariableReadNode(
                 GlobalVariableReadNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(3),
                 },
             ),
@@ -75,6 +91,10 @@ Program {
             location: Location { start: 13, length: 11 },
             node_kind: AliasGlobalVariableNode(
                 AliasGlobalVariableNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     new_name: NodeRef(3),
                     old_name: NodeRef(4),
                     keyword_loc: Location { start: 13, length: 5 },
@@ -86,6 +106,9 @@ Program {
             location: Location { start: 0, length: 24 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(2),
                         NodeRef(5),
@@ -98,6 +121,9 @@ Program {
             location: Location { start: 0, length: 24 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(6),
                 },

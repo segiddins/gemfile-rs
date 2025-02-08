@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "__ENCODING__\n__FILE__\n__LINE__\n__dir__\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -47,7 +47,12 @@ Program {
             identifier: 2,
             location: Location { start: 0, length: 12 },
             node_kind: SourceEncodingNode(
-                SourceEncodingNode,
+                SourceEncodingNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b11,
+                        flags: NEWLINE | STATIC_LITERAL,
+                    },
+                },
             ),
         },
         Node {
@@ -57,9 +62,9 @@ Program {
                 SourceFileNode {
                     flags: BitFlags<StringFlags> {
                         bits: 0b1,
-                        flags: FORCED_UTF8_ENCODING,
+                        flags: NEWLINE,
                     },
-                    filepath: "",
+                    filepath: Owned(""),
                 },
             ),
         },
@@ -67,7 +72,12 @@ Program {
             identifier: 4,
             location: Location { start: 22, length: 8 },
             node_kind: SourceLineNode(
-                SourceLineNode,
+                SourceLineNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b11,
+                        flags: NEWLINE | STATIC_LITERAL,
+                    },
+                },
             ),
         },
         Node {
@@ -76,8 +86,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1001,
-                        flags: SAFE_NAVIGATION | IGNORE_VISIBILITY,
+                        bits: 0b101001,
+                        flags: NEWLINE | VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -97,6 +107,9 @@ Program {
             location: Location { start: 0, length: 38 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(0),
                         NodeRef(1),
@@ -111,6 +124,9 @@ Program {
             location: Location { start: 0, length: 38 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(4),
                 },

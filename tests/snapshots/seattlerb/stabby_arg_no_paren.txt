@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "->a{}\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -38,6 +38,9 @@ Program {
             location: Location { start: 2, length: 1 },
             node_kind: ParametersNode(
                 ParametersNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     requireds: [
                         NodeRef(0),
                     ],
@@ -55,6 +58,9 @@ Program {
             location: Location { start: 2, length: 1 },
             node_kind: BlockParametersNode(
                 BlockParametersNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     parameters: Some(
                         NodeRef(1),
                     ),
@@ -69,6 +75,10 @@ Program {
             location: Location { start: 0, length: 5 },
             node_kind: LambdaNode(
                 LambdaNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     locals: [
                         ConstantRef(1),
                     ],
@@ -87,6 +97,9 @@ Program {
             location: Location { start: 0, length: 5 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(3),
                     ],
@@ -98,6 +111,9 @@ Program {
             location: Location { start: 0, length: 5 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(4),
                 },

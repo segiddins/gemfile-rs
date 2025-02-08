@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "[\"\\c#{1}\"]\n\n/\\c#{1}/\n\n\"\\c#{1}\"\n\n<<~HERE\n   \\c#{1}\nHERE\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -63,7 +63,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 8, length: 1 },
                     ),
-                    unescaped: "\u{3}{1}",
+                    unescaped: Owned("\u{3}{1}"),
                 },
             ),
         },
@@ -74,7 +74,7 @@ Program {
                 ArrayNode {
                     flags: BitFlags<ArrayNodeFlags> {
                         bits: 0b1,
-                        flags: CONTAINS_SPLAT,
+                        flags: NEWLINE,
                     },
                     elements: [
                         NodeRef(0),
@@ -94,13 +94,13 @@ Program {
             node_kind: RegularExpressionNode(
                 RegularExpressionNode {
                     flags: BitFlags<RegularExpressionFlags> {
-                        bits: 0b11,
-                        flags: IGNORE_CASE | EXTENDED,
+                        bits: 0b1000000000011,
+                        flags: NEWLINE | STATIC_LITERAL | FORCED_US_ASCII_ENCODING,
                     },
                     opening_loc: Location { start: 12, length: 1 },
                     content_loc: Location { start: 13, length: 6 },
                     closing_loc: Location { start: 19, length: 1 },
-                    unescaped: "\\x03{1}",
+                    unescaped: Owned("\\x03{1}"),
                 },
             ),
         },
@@ -111,7 +111,7 @@ Program {
                 StringNode {
                     flags: BitFlags<StringFlags> {
                         bits: 0b1,
-                        flags: FORCED_UTF8_ENCODING,
+                        flags: NEWLINE,
                     },
                     opening_loc: Some(
                         Location { start: 22, length: 1 },
@@ -120,7 +120,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 29, length: 1 },
                     ),
-                    unescaped: "\u{3}{1}",
+                    unescaped: Owned("\u{3}{1}"),
                 },
             ),
         },
@@ -131,7 +131,7 @@ Program {
                 StringNode {
                     flags: BitFlags<StringFlags> {
                         bits: 0b1,
-                        flags: FORCED_UTF8_ENCODING,
+                        flags: NEWLINE,
                     },
                     opening_loc: Some(
                         Location { start: 32, length: 7 },
@@ -140,7 +140,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 50, length: 5 },
                     ),
-                    unescaped: "\u{3}{1}\n",
+                    unescaped: Owned("\u{3}{1}\n"),
                 },
             ),
         },
@@ -149,6 +149,9 @@ Program {
             location: Location { start: 0, length: 39 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(1),
                         NodeRef(2),
@@ -163,6 +166,9 @@ Program {
             location: Location { start: 0, length: 39 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(5),
                 },

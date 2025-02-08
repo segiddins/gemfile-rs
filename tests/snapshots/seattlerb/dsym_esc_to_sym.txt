@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: ":\"Variet\\303\\240\"\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -35,7 +35,7 @@ Program {
                 SymbolNode {
                     flags: BitFlags<SymbolFlags> {
                         bits: 0b111,
-                        flags: FORCED_UTF8_ENCODING | FORCED_BINARY_ENCODING | FORCED_US_ASCII_ENCODING,
+                        flags: NEWLINE | STATIC_LITERAL | FORCED_UTF8_ENCODING,
                     },
                     opening_loc: Some(
                         Location { start: 0, length: 2 },
@@ -46,7 +46,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 16, length: 1 },
                     ),
-                    unescaped: "Varietà",
+                    unescaped: Owned("Varietà"),
                 },
             ),
         },
@@ -55,6 +55,9 @@ Program {
             location: Location { start: 0, length: 17 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(0),
                     ],
@@ -66,6 +69,9 @@ Program {
             location: Location { start: 0, length: 17 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(1),
                 },

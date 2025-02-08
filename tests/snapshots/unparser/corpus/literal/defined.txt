@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "defined?(@foo)\ndefined?(Foo)\ndefined?(((a, b) = [1, 2]))\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -59,6 +59,9 @@ Program {
             location: Location { start: 9, length: 4 },
             node_kind: InstanceVariableReadNode(
                 InstanceVariableReadNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(1),
                 },
             ),
@@ -68,6 +71,10 @@ Program {
             location: Location { start: 0, length: 14 },
             node_kind: DefinedNode(
                 DefinedNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     lparen_loc: Some(
                         Location { start: 8, length: 1 },
                     ),
@@ -84,6 +91,9 @@ Program {
             location: Location { start: 24, length: 3 },
             node_kind: ConstantReadNode(
                 ConstantReadNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(2),
                 },
             ),
@@ -93,6 +103,10 @@ Program {
             location: Location { start: 15, length: 13 },
             node_kind: DefinedNode(
                 DefinedNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     lparen_loc: Some(
                         Location { start: 23, length: 1 },
                     ),
@@ -109,6 +123,9 @@ Program {
             location: Location { start: 40, length: 1 },
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(3),
                     depth: 0,
                 },
@@ -119,6 +136,9 @@ Program {
             location: Location { start: 43, length: 1 },
             node_kind: LocalVariableTargetNode(
                 LocalVariableTargetNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(4),
                     depth: 0,
                 },
@@ -131,7 +151,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -149,7 +169,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -166,7 +186,8 @@ Program {
             node_kind: ArrayNode(
                 ArrayNode {
                     flags: BitFlags<ArrayNodeFlags> {
-                        bits: 0b0,
+                        bits: 0b10,
+                        flags: STATIC_LITERAL,
                     },
                     elements: [
                         NodeRef(6),
@@ -186,6 +207,10 @@ Program {
             location: Location { start: 39, length: 15 },
             node_kind: MultiWriteNode(
                 MultiWriteNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     lefts: [
                         NodeRef(4),
                         NodeRef(5),
@@ -208,6 +233,9 @@ Program {
             location: Location { start: 39, length: 15 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(9),
                     ],
@@ -219,6 +247,9 @@ Program {
             location: Location { start: 38, length: 17 },
             node_kind: ParenthesesNode(
                 ParenthesesNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: Some(
                         NodeRef(10),
                     ),
@@ -232,6 +263,10 @@ Program {
             location: Location { start: 29, length: 27 },
             node_kind: DefinedNode(
                 DefinedNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     lparen_loc: Some(
                         Location { start: 37, length: 1 },
                     ),
@@ -248,6 +283,9 @@ Program {
             location: Location { start: 0, length: 56 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(1),
                         NodeRef(3),
@@ -261,6 +299,9 @@ Program {
             location: Location { start: 0, length: 56 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [
                         ConstantRef(3),
                         ConstantRef(4),

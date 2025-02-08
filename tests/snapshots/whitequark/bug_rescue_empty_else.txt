@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "begin; rescue LoadError; else; end\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -26,6 +26,9 @@ Program {
             location: Location { start: 14, length: 9 },
             node_kind: ConstantReadNode(
                 ConstantReadNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name: ConstantRef(1),
                 },
             ),
@@ -35,6 +38,9 @@ Program {
             location: Location { start: 7, length: 16 },
             node_kind: RescueNode(
                 RescueNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     keyword_loc: Location { start: 7, length: 6 },
                     exceptions: [
                         NodeRef(0),
@@ -52,6 +58,9 @@ Program {
             location: Location { start: 25, length: 9 },
             node_kind: ElseNode(
                 ElseNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     else_keyword_loc: Location { start: 25, length: 4 },
                     statements: None,
                     end_keyword_loc: Some(
@@ -65,6 +74,10 @@ Program {
             location: Location { start: 0, length: 34 },
             node_kind: BeginNode(
                 BeginNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     begin_keyword_loc: Some(
                         Location { start: 0, length: 5 },
                     ),
@@ -87,6 +100,9 @@ Program {
             location: Location { start: 0, length: 34 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(3),
                     ],
@@ -98,6 +114,9 @@ Program {
             location: Location { start: 0, length: 34 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(4),
                 },

@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "%w[foo bar]\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -32,7 +32,7 @@ Program {
                     opening_loc: None,
                     content_loc: Location { start: 3, length: 3 },
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(3, 3),
                 },
             ),
         },
@@ -47,7 +47,7 @@ Program {
                     opening_loc: None,
                     content_loc: Location { start: 7, length: 3 },
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(7, 3),
                 },
             ),
         },
@@ -58,7 +58,7 @@ Program {
                 ArrayNode {
                     flags: BitFlags<ArrayNodeFlags> {
                         bits: 0b1,
-                        flags: CONTAINS_SPLAT,
+                        flags: NEWLINE,
                     },
                     elements: [
                         NodeRef(0),
@@ -78,6 +78,9 @@ Program {
             location: Location { start: 0, length: 11 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(2),
                     ],
@@ -89,6 +92,9 @@ Program {
             location: Location { start: 0, length: 11 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(3),
                 },

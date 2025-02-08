@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "%w(\na\nb\n)\n1\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -43,7 +43,7 @@ Program {
                     opening_loc: None,
                     content_loc: Location { start: 4, length: 1 },
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(4, 1),
                 },
             ),
         },
@@ -58,7 +58,7 @@ Program {
                     opening_loc: None,
                     content_loc: Location { start: 6, length: 1 },
                     closing_loc: None,
-                    unescaped: "",
+                    unescaped: Shared(6, 1),
                 },
             ),
         },
@@ -69,7 +69,7 @@ Program {
                 ArrayNode {
                     flags: BitFlags<ArrayNodeFlags> {
                         bits: 0b1,
-                        flags: CONTAINS_SPLAT,
+                        flags: NEWLINE,
                     },
                     elements: [
                         NodeRef(0),
@@ -91,7 +91,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1011,
-                        flags: BINARY | DECIMAL | HEXADECIMAL,
+                        flags: NEWLINE | STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -107,6 +107,9 @@ Program {
             location: Location { start: 0, length: 11 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(2),
                         NodeRef(3),
@@ -119,6 +122,9 @@ Program {
             location: Location { start: 0, length: 11 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(4),
                 },

@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "def call(interp, *, args) end\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -64,6 +64,9 @@ Program {
             location: Location { start: 9, length: 15 },
             node_kind: ParametersNode(
                 ParametersNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     requireds: [
                         NodeRef(0),
                     ],
@@ -85,6 +88,10 @@ Program {
             location: Location { start: 0, length: 29 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(3),
                     name_loc: Location { start: 4, length: 4 },
                     receiver: None,
@@ -116,6 +123,9 @@ Program {
             location: Location { start: 0, length: 29 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(4),
                     ],
@@ -127,6 +137,9 @@ Program {
             location: Location { start: 0, length: 29 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(5),
                 },

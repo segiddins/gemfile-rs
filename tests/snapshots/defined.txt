@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "defined? 1 and defined? 2\n\ndefined?(x %= 2)\n\ndefined?(foo and bar)\n\ndefined? 1\n\ndefined?(\"foo\"\n)\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -62,7 +62,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -78,6 +78,9 @@ Program {
             location: Location { start: 0, length: 10 },
             node_kind: DefinedNode(
                 DefinedNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     lparen_loc: None,
                     value: NodeRef(0),
                     rparen_loc: None,
@@ -92,7 +95,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -108,6 +111,9 @@ Program {
             location: Location { start: 15, length: 10 },
             node_kind: DefinedNode(
                 DefinedNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     lparen_loc: None,
                     value: NodeRef(2),
                     rparen_loc: None,
@@ -120,6 +126,10 @@ Program {
             location: Location { start: 0, length: 25 },
             node_kind: AndNode(
                 AndNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     left: NodeRef(1),
                     right: NodeRef(3),
                     operator_loc: Location { start: 11, length: 3 },
@@ -133,7 +143,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -149,6 +159,9 @@ Program {
             location: Location { start: 36, length: 6 },
             node_kind: LocalVariableOperatorWriteNode(
                 LocalVariableOperatorWriteNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     name_loc: Location { start: 36, length: 1 },
                     binary_operator_loc: Location { start: 38, length: 2 },
                     value: NodeRef(5),
@@ -163,6 +176,10 @@ Program {
             location: Location { start: 27, length: 16 },
             node_kind: DefinedNode(
                 DefinedNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     lparen_loc: Some(
                         Location { start: 35, length: 1 },
                     ),
@@ -180,8 +197,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -202,8 +219,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -223,6 +240,9 @@ Program {
             location: Location { start: 54, length: 11 },
             node_kind: AndNode(
                 AndNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     left: NodeRef(8),
                     right: NodeRef(9),
                     operator_loc: Location { start: 58, length: 3 },
@@ -234,6 +254,10 @@ Program {
             location: Location { start: 45, length: 21 },
             node_kind: DefinedNode(
                 DefinedNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     lparen_loc: Some(
                         Location { start: 53, length: 1 },
                     ),
@@ -252,7 +276,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -268,6 +292,10 @@ Program {
             location: Location { start: 68, length: 10 },
             node_kind: DefinedNode(
                 DefinedNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     lparen_loc: None,
                     value: NodeRef(12),
                     rparen_loc: None,
@@ -290,7 +318,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 93, length: 1 },
                     ),
-                    unescaped: "",
+                    unescaped: Shared(90, 3),
                 },
             ),
         },
@@ -299,6 +327,10 @@ Program {
             location: Location { start: 80, length: 16 },
             node_kind: DefinedNode(
                 DefinedNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     lparen_loc: Some(
                         Location { start: 88, length: 1 },
                     ),
@@ -315,6 +347,9 @@ Program {
             location: Location { start: 0, length: 96 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(4),
                         NodeRef(7),
@@ -330,6 +365,9 @@ Program {
             location: Location { start: 0, length: 96 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [
                         ConstantRef(1),
                     ],

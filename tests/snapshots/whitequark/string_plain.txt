@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "%q(foobar)\n\n'foobar'\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -43,7 +43,7 @@ Program {
                 StringNode {
                     flags: BitFlags<StringFlags> {
                         bits: 0b1,
-                        flags: FORCED_UTF8_ENCODING,
+                        flags: NEWLINE,
                     },
                     opening_loc: Some(
                         Location { start: 0, length: 3 },
@@ -52,7 +52,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 9, length: 1 },
                     ),
-                    unescaped: "",
+                    unescaped: Shared(3, 6),
                 },
             ),
         },
@@ -63,7 +63,7 @@ Program {
                 StringNode {
                     flags: BitFlags<StringFlags> {
                         bits: 0b1,
-                        flags: FORCED_UTF8_ENCODING,
+                        flags: NEWLINE,
                     },
                     opening_loc: Some(
                         Location { start: 12, length: 1 },
@@ -72,7 +72,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 19, length: 1 },
                     ),
-                    unescaped: "",
+                    unescaped: Shared(13, 6),
                 },
             ),
         },
@@ -81,6 +81,9 @@ Program {
             location: Location { start: 0, length: 20 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(0),
                         NodeRef(1),
@@ -93,6 +96,9 @@ Program {
             location: Location { start: 0, length: 20 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(2),
                 },

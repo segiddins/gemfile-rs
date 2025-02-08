@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "true and\nnot false and\ntrue\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -27,14 +27,24 @@ Program {
             identifier: 2,
             location: Location { start: 0, length: 4 },
             node_kind: TrueNode(
-                TrueNode,
+                TrueNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b10,
+                        flags: STATIC_LITERAL,
+                    },
+                },
             ),
         },
         Node {
             identifier: 3,
             location: Location { start: 13, length: 5 },
             node_kind: FalseNode(
-                FalseNode,
+                FalseNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b10,
+                        flags: STATIC_LITERAL,
+                    },
+                },
             ),
         },
         Node {
@@ -65,6 +75,9 @@ Program {
             location: Location { start: 0, length: 18 },
             node_kind: AndNode(
                 AndNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     left: NodeRef(0),
                     right: NodeRef(2),
                     operator_loc: Location { start: 5, length: 3 },
@@ -75,7 +88,12 @@ Program {
             identifier: 6,
             location: Location { start: 23, length: 4 },
             node_kind: TrueNode(
-                TrueNode,
+                TrueNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b10,
+                        flags: STATIC_LITERAL,
+                    },
+                },
             ),
         },
         Node {
@@ -83,6 +101,10 @@ Program {
             location: Location { start: 0, length: 27 },
             node_kind: AndNode(
                 AndNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     left: NodeRef(3),
                     right: NodeRef(4),
                     operator_loc: Location { start: 19, length: 3 },
@@ -94,6 +116,9 @@ Program {
             location: Location { start: 0, length: 27 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(5),
                     ],
@@ -105,6 +130,9 @@ Program {
             location: Location { start: 0, length: 27 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(6),
                 },

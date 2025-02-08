@@ -1,5 +1,7 @@
+use std::borrow::Cow;
 use std::fmt::{self, Debug};
 use std::io;
+use std::path::Display;
 
 use winnow::{
     binary::{self, length_repeat, length_take, u32, u8, Endianness},
@@ -21,6 +23,14 @@ pub struct Program {
     nodes: Vec<Node>,
     constants: Vec<Constant>,
     pub content_pool: Vec<u8>,
+}
+
+#[enumflags2::bitflags]
+#[repr(u32)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum DefaultNodeFlags {
+    NEWLINE = 1,
+    STATIC_LITERAL = 2,
 }
 
 #[derive(Debug, Clone)]
@@ -170,6 +180,16 @@ impl Program {
             (offset as u32 - self.header.newline_offsets[left as usize - 1]),
         )
     }
+
+    pub fn string<'b>(&'_ self, string: &'b StringField) -> Cow<'b, String> {
+        match string {
+            StringField::Shared(offset, length) => Cow::Owned({
+                // TODO: escape ruby chars like # before @
+                self.source[*offset as usize..(offset + length) as usize].to_string()
+            }),
+            StringField::Owned(s) => Cow::Owned(s.escape_default().to_string()),
+        }
+    }
 }
 
 pub(super) type Stream<'i> = winnow::Stateful<&'i Bytes, State>;
@@ -183,7 +203,7 @@ struct Comment {
 #[derive(Debug)]
 struct MagicComment {}
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, PartialEq, Eq)]
 pub struct Location {
     pub start: u32,
     pub length: u32,
@@ -243,10 +263,29 @@ struct Error {
     level: u8,
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Integer {
     is_negative: bool,
     words: Vec<u32>,
+}
+
+impl fmt::Display for Integer {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        if self.is_negative {
+            write!(f, "-")?;
+        }
+
+        match self.words.len() {
+            0 => write!(f, "0"),
+            1 => write!(f, "{}", self.words[0]),
+            2 => write!(
+                f,
+                "{}",
+                ((self.words[0] as u64) << 32 | self.words[1] as u64)
+            ),
+            _ => write!(f, "0x{:x?}", self.words),
+        }
+    }
 }
 
 #[derive(Debug)]
@@ -257,7 +296,7 @@ struct Warning {
     level: u8,
 }
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, PartialEq, Eq)]
 pub struct NodeRef(u32);
 
 impl Debug for NodeRef {
@@ -266,12 +305,31 @@ impl Debug for NodeRef {
     }
 }
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, PartialEq, Eq)]
 pub struct ConstantRef(u32);
 
 impl Debug for ConstantRef {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "ConstantRef({})", self.0)
+    }
+}
+
+#[derive(Clone, PartialEq, Eq)]
+pub enum StringField {
+    Shared(u32, u32),
+    Owned(String),
+}
+
+impl Debug for StringField {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            StringField::Shared(offset, length) => {
+                write!(f, "Shared({}, {})", offset, length)
+            }
+            StringField::Owned(s) => {
+                write!(f, "Owned({:?})", s)
+            }
+        }
     }
 }
 
@@ -300,10 +358,10 @@ pub(super) fn parse_string(input: &mut Stream) -> ModalResult<String> {
         .parse_next(input)
 }
 
-pub(super) fn parse_string_field(input: &mut Stream) -> ModalResult<String> {
+pub(super) fn parse_string_field(input: &mut Stream) -> ModalResult<StringField> {
     winnow::combinator::dispatch!( winnow::token::any;
-      1 => (parse_varuint, parse_varuint).value("".to_string()), //
-      2 => parse_string,
+      1 => (parse_varuint, parse_varuint).map(|(o, l)| StringField::Shared(o, l)), //
+      2 => parse_string.map(|s| StringField::Owned(s)),
       _ => fail,
     )
     .parse_next(input)
@@ -483,7 +541,7 @@ fn parse_content(input: &mut Stream) -> ModalResult<Constant> {
             if offset & (1 << 31) == 0 {
                 Constant::Owned(offset, length)
             } else {
-                Constant::Shared(offset & (1 >> 31), length)
+                Constant::Shared(offset ^ (1 << 31), length)
             }
         })
         .parse_next(input)
@@ -540,8 +598,19 @@ fn parse_program(input: &mut Stream) -> ModalResult<Program> {
     .parse_next(input)?;
 
     program.nodes = input.state.nodes.clone();
-    program.constants =
-        repeat(program.header.content_pool_size as usize, parse_content).parse_next(input)?;
+    program.constants = repeat(
+        program.header.content_pool_size as usize,
+        parse_content.map(|c| match c {
+            Constant::Owned(_, _) => c,
+            Constant::Shared(offset, length) => Constant::Shared(
+                offset
+                    - program.header.content_pool_offset
+                    - (8 * program.header.content_pool_size),
+                length,
+            ),
+        }),
+    )
+    .parse_next(input)?;
     program.content_pool = take_until(0.., b'\0')
         .map(|s: &[u8]| s.to_vec())
         .parse_next(input)?;
@@ -575,7 +644,7 @@ fn input(bytes: &[u8]) -> Stream {
     let input = Bytes::new(bytes);
     let state = State::default();
     let mut stream = winnow::Stateful { input, state };
-    stream.complete();
+    let _ = stream.complete();
     stream
 }
 
@@ -651,6 +720,9 @@ fn test_parse_empty() {
                         location: Location { start: 0, length: 0 },
                         node_kind: StatementsNode(
                             StatementsNode {
+                                flags: BitFlags<DefaultNodeFlags> {
+                                    bits: 0b0,
+                                },
                                 body: [],
                             },
                         ),
@@ -660,6 +732,9 @@ fn test_parse_empty() {
                         location: Location { start: 0, length: 0 },
                         node_kind: ProgramNode(
                             ProgramNode {
+                                flags: BitFlags<DefaultNodeFlags> {
+                                    bits: 0b0,
+                                },
                                 locals: [],
                                 statements: NodeRef(0),
                             },
@@ -699,7 +774,7 @@ gem "prism", "1.3.0"
     expect_test::expect![[r#"
         Ok(
             Program {
-                source: "",
+                source: "_ = \"foo\"\n_ = \"\\nbar\\t\"\n\"\\u{1F600}\"\n\nsource \"https://rubygems.org\"\n\ngem \"prism\", \"1.3.0\"\n    ",
                 header: Header {
                     prism_major: 1,
                     prism_minor: 3,
@@ -749,7 +824,7 @@ gem "prism", "1.3.0"
                                 closing_loc: Some(
                                     Location { start: 8, length: 1 },
                                 ),
-                                unescaped: "",
+                                unescaped: Shared(5, 3),
                             },
                         ),
                     },
@@ -758,6 +833,10 @@ gem "prism", "1.3.0"
                         location: Location { start: 0, length: 9 },
                         node_kind: LocalVariableWriteNode(
                             LocalVariableWriteNode {
+                                flags: BitFlags<DefaultNodeFlags> {
+                                    bits: 0b1,
+                                    flags: NEWLINE,
+                                },
                                 name: ConstantRef(1),
                                 depth: 0,
                                 name_loc: Location { start: 0, length: 1 },
@@ -781,7 +860,7 @@ gem "prism", "1.3.0"
                                 closing_loc: Some(
                                     Location { start: 22, length: 1 },
                                 ),
-                                unescaped: "\nbar\t",
+                                unescaped: Owned("\nbar\t"),
                             },
                         ),
                     },
@@ -790,6 +869,10 @@ gem "prism", "1.3.0"
                         location: Location { start: 10, length: 13 },
                         node_kind: LocalVariableWriteNode(
                             LocalVariableWriteNode {
+                                flags: BitFlags<DefaultNodeFlags> {
+                                    bits: 0b1,
+                                    flags: NEWLINE,
+                                },
                                 name: ConstantRef(1),
                                 depth: 0,
                                 name_loc: Location { start: 10, length: 1 },
@@ -805,7 +888,7 @@ gem "prism", "1.3.0"
                             StringNode {
                                 flags: BitFlags<StringFlags> {
                                     bits: 0b101,
-                                    flags: FORCED_UTF8_ENCODING | FROZEN,
+                                    flags: NEWLINE | FORCED_UTF8_ENCODING,
                                 },
                                 opening_loc: Some(
                                     Location { start: 24, length: 1 },
@@ -814,7 +897,7 @@ gem "prism", "1.3.0"
                                 closing_loc: Some(
                                     Location { start: 34, length: 1 },
                                 ),
-                                unescaped: "😀",
+                                unescaped: Owned("😀"),
                             },
                         ),
                     },
@@ -833,7 +916,7 @@ gem "prism", "1.3.0"
                                 closing_loc: Some(
                                     Location { start: 65, length: 1 },
                                 ),
-                                unescaped: "",
+                                unescaped: Shared(45, 20),
                             },
                         ),
                     },
@@ -857,8 +940,8 @@ gem "prism", "1.3.0"
                         node_kind: CallNode(
                             CallNode {
                                 flags: BitFlags<CallNodeFlags> {
-                                    bits: 0b1,
-                                    flags: SAFE_NAVIGATION,
+                                    bits: 0b100001,
+                                    flags: NEWLINE | IGNORE_VISIBILITY,
                                 },
                                 receiver: None,
                                 call_operator_loc: None,
@@ -890,7 +973,7 @@ gem "prism", "1.3.0"
                                 closing_loc: Some(
                                     Location { start: 78, length: 1 },
                                 ),
-                                unescaped: "",
+                                unescaped: Shared(73, 5),
                             },
                         ),
                     },
@@ -909,7 +992,7 @@ gem "prism", "1.3.0"
                                 closing_loc: Some(
                                     Location { start: 87, length: 1 },
                                 ),
-                                unescaped: "",
+                                unescaped: Shared(82, 5),
                             },
                         ),
                     },
@@ -934,8 +1017,8 @@ gem "prism", "1.3.0"
                         node_kind: CallNode(
                             CallNode {
                                 flags: BitFlags<CallNodeFlags> {
-                                    bits: 0b1,
-                                    flags: SAFE_NAVIGATION,
+                                    bits: 0b100001,
+                                    flags: NEWLINE | IGNORE_VISIBILITY,
                                 },
                                 receiver: None,
                                 call_operator_loc: None,
@@ -957,6 +1040,9 @@ gem "prism", "1.3.0"
                         location: Location { start: 0, length: 88 },
                         node_kind: StatementsNode(
                             StatementsNode {
+                                flags: BitFlags<DefaultNodeFlags> {
+                                    bits: 0b0,
+                                },
                                 body: [
                                     NodeRef(1),
                                     NodeRef(3),
@@ -972,6 +1058,9 @@ gem "prism", "1.3.0"
                         location: Location { start: 0, length: 88 },
                         node_kind: ProgramNode(
                             ProgramNode {
+                                flags: BitFlags<DefaultNodeFlags> {
+                                    bits: 0b0,
+                                },
                                 locals: [
                                     ConstantRef(1),
                                 ],
@@ -1017,7 +1106,7 @@ def f(*); rescue => a[1, *]; end
     expect_test::expect![[r#"
         Ok(
             Program {
-                source: "",
+                source: "def f(*); a[*]; end\n\ndef f(*); a[1, *]; end\n\ndef f(*); a[*] = 1; end\n\ndef f(*); a[1, *] = 1; end\n\ndef f(*); a[*] += 1; end\n\ndef f(*); a[1, *] &&= 1; end\n\ndef f(*); rescue => a[*]; end\n\ndef f(*); rescue => a[1, *]; end\n",
                 header: Header {
                     prism_major: 1,
                     prism_minor: 3,
@@ -1072,6 +1161,9 @@ def f(*); rescue => a[1, *]; end
                         location: Location { start: 6, length: 1 },
                         node_kind: ParametersNode(
                             ParametersNode {
+                                flags: BitFlags<DefaultNodeFlags> {
+                                    bits: 0b0,
+                                },
                                 requireds: [],
                                 optionals: [],
                                 rest: Some(
@@ -1090,8 +1182,8 @@ def f(*); rescue => a[1, *]; end
                         node_kind: CallNode(
                             CallNode {
                                 flags: BitFlags<CallNodeFlags> {
-                                    bits: 0b1000,
-                                    flags: IGNORE_VISIBILITY,
+                                    bits: 0b101000,
+                                    flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                                 },
                                 receiver: None,
                                 call_operator_loc: None,
@@ -1111,6 +1203,9 @@ def f(*); rescue => a[1, *]; end
                         location: Location { start: 12, length: 1 },
                         node_kind: SplatNode(
                             SplatNode {
+                                flags: BitFlags<DefaultNodeFlags> {
+                                    bits: 0b0,
+                                },
                                 operator_loc: Location { start: 12, length: 1 },
                                 expression: None,
                             },
@@ -1122,7 +1217,8 @@ def f(*); rescue => a[1, *]; end
                         node_kind: ArgumentsNode(
                             ArgumentsNode {
                                 flags: BitFlags<ArgumentsNodeFlags> {
-                                    bits: 0b0,
+                                    bits: 0b100000,
+                                    flags: CONTAINS_SPLAT,
                                 },
                                 arguments: [
                                     NodeRef(3),
@@ -1137,7 +1233,7 @@ def f(*); rescue => a[1, *]; end
                             CallNode {
                                 flags: BitFlags<CallNodeFlags> {
                                     bits: 0b1,
-                                    flags: SAFE_NAVIGATION,
+                                    flags: NEWLINE,
                                 },
                                 receiver: Some(
                                     NodeRef(2),
@@ -1165,6 +1261,9 @@ def f(*); rescue => a[1, *]; end
                         location: Location { start: 10, length: 4 },
                         node_kind: StatementsNode(
                             StatementsNode {
+                                flags: BitFlags<DefaultNodeFlags> {
+                                    bits: 0b0,
+                                },
                                 body: [
                                     NodeRef(5),
                                 ],
@@ -1176,6 +1275,10 @@ def f(*); rescue => a[1, *]; end
                         location: Location { start: 0, length: 19 },
                         node_kind: DefNode(
                             DefNode {
+                                flags: BitFlags<DefaultNodeFlags> {
+                                    bits: 0b1,
+                                    flags: NEWLINE,
+                                },
                                 name: ConstantRef(3),
                                 name_loc: Location { start: 4, length: 1 },
                                 receiver: None,
@@ -1220,6 +1323,9 @@ def f(*); rescue => a[1, *]; end
                         location: Location { start: 27, length: 1 },
                         node_kind: ParametersNode(
                             ParametersNode {
+                                flags: BitFlags<DefaultNodeFlags> {
+                                    bits: 0b0,
+                                },
                                 requireds: [],
                                 optionals: [],
                                 rest: Some(
@@ -1238,8 +1344,8 @@ def f(*); rescue => a[1, *]; end
                         node_kind: CallNode(
                             CallNode {
                                 flags: BitFlags<CallNodeFlags> {
-                                    bits: 0b1000,
-                                    flags: IGNORE_VISIBILITY,
+                                    bits: 0b101000,
+                                    flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                                 },
                                 receiver: None,
                                 call_operator_loc: None,
@@ -1261,7 +1367,7 @@ def f(*); rescue => a[1, *]; end
                             IntegerNode {
                                 flags: BitFlags<IntegerBaseFlags> {
                                     bits: 0b1010,
-                                    flags: DECIMAL | HEXADECIMAL,
+                                    flags: STATIC_LITERAL | DECIMAL,
                                 },
                                 value: Integer {
                                     is_negative: false,
@@ -1277,6 +1383,9 @@ def f(*); rescue => a[1, *]; end
                         location: Location { start: 36, length: 1 },
                         node_kind: SplatNode(
                             SplatNode {
+                                flags: BitFlags<DefaultNodeFlags> {
+                                    bits: 0b0,
+                                },
                                 operator_loc: Location { start: 36, length: 1 },
                                 expression: None,
                             },
@@ -1288,7 +1397,8 @@ def f(*); rescue => a[1, *]; end
                         node_kind: ArgumentsNode(
                             ArgumentsNode {
                                 flags: BitFlags<ArgumentsNodeFlags> {
-                                    bits: 0b0,
+                                    bits: 0b100000,
+                                    flags: CONTAINS_SPLAT,
                                 },
                                 arguments: [
                                     NodeRef(11),
@@ -1304,7 +1414,7 @@ def f(*); rescue => a[1, *]; end
                             CallNode {
                                 flags: BitFlags<CallNodeFlags> {
                                     bits: 0b1,
-                                    flags: SAFE_NAVIGATION,
+                                    flags: NEWLINE,
                                 },
                                 receiver: Some(
                                     NodeRef(10),
@@ -1332,6 +1442,9 @@ def f(*); rescue => a[1, *]; end
                         location: Location { start: 31, length: 7 },
                         node_kind: StatementsNode(
                             StatementsNode {
+                                flags: BitFlags<DefaultNodeFlags> {
+                                    bits: 0b0,
+                                },
                                 body: [
                                     NodeRef(14),
                                 ],
@@ -1343,6 +1456,10 @@ def f(*); rescue => a[1, *]; end
                         location: Location { start: 21, length: 22 },
                         node_kind: DefNode(
                             DefNode {
+                                flags: BitFlags<DefaultNodeFlags> {
+                                    bits: 0b1,
+                                    flags: NEWLINE,
+                                },
                                 name: ConstantRef(3),
                                 name_loc: Location { start: 25, length: 1 },
                                 receiver: None,
@@ -1387,6 +1504,9 @@ def f(*); rescue => a[1, *]; end
                         location: Location { start: 51, length: 1 },
                         node_kind: ParametersNode(
                             ParametersNode {
+                                flags: BitFlags<DefaultNodeFlags> {
+                                    bits: 0b0,
+                                },
                                 requireds: [],
                                 optionals: [],
                                 rest: Some(
@@ -1405,8 +1525,8 @@ def f(*); rescue => a[1, *]; end
                         node_kind: CallNode(
                             CallNode {
                                 flags: BitFlags<CallNodeFlags> {
-                                    bits: 0b1000,
-                                    flags: IGNORE_VISIBILITY,
+                                    bits: 0b101000,
+                                    flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                                 },
                                 receiver: None,
                                 call_operator_loc: None,
@@ -1426,6 +1546,9 @@ def f(*); rescue => a[1, *]; end
                         location: Location { start: 57, length: 1 },
                         node_kind: SplatNode(
                             SplatNode {
+                                flags: BitFlags<DefaultNodeFlags> {
+                                    bits: 0b0,
+                                },
                                 operator_loc: Location { start: 57, length: 1 },
                                 expression: None,
                             },
@@ -1438,7 +1561,7 @@ def f(*); rescue => a[1, *]; end
                             IntegerNode {
                                 flags: BitFlags<IntegerBaseFlags> {
                                     bits: 0b1010,
-                                    flags: DECIMAL | HEXADECIMAL,
+                                    flags: STATIC_LITERAL | DECIMAL,
                                 },
                                 value: Integer {
                                     is_negative: false,
@@ -1455,7 +1578,8 @@ def f(*); rescue => a[1, *]; end
                         node_kind: ArgumentsNode(
                             ArgumentsNode {
                                 flags: BitFlags<ArgumentsNodeFlags> {
-                                    bits: 0b0,
+                                    bits: 0b100000,
+                                    flags: CONTAINS_SPLAT,
                                 },
                                 arguments: [
                                     NodeRef(20),
@@ -1470,8 +1594,8 @@ def f(*); rescue => a[1, *]; end
                         node_kind: CallNode(
                             CallNode {
                                 flags: BitFlags<CallNodeFlags> {
-                                    bits: 0b1,
-                                    flags: SAFE_NAVIGATION,
+                                    bits: 0b10001,
+                                    flags: NEWLINE | ATTRIBUTE_WRITE,
                                 },
                                 receiver: Some(
                                     NodeRef(19),
@@ -1499,6 +1623,9 @@ def f(*); rescue => a[1, *]; end
                         location: Location { start: 55, length: 8 },
                         node_kind: StatementsNode(
                             StatementsNode {
+                                flags: BitFlags<DefaultNodeFlags> {
+                                    bits: 0b0,
+                                },
                                 body: [
                                     NodeRef(23),
                                 ],
@@ -1510,6 +1637,10 @@ def f(*); rescue => a[1, *]; end
                         location: Location { start: 45, length: 23 },
                         node_kind: DefNode(
                             DefNode {
+                                flags: BitFlags<DefaultNodeFlags> {
+                                    bits: 0b1,
+                                    flags: NEWLINE,
+                                },
                                 name: ConstantRef(3),
                                 name_loc: Location { start: 49, length: 1 },
                                 receiver: None,
@@ -1554,6 +1685,9 @@ def f(*); rescue => a[1, *]; end
                         location: Location { start: 76, length: 1 },
                         node_kind: ParametersNode(
                             ParametersNode {
+                                flags: BitFlags<DefaultNodeFlags> {
+                                    bits: 0b0,
+                                },
                                 requireds: [],
                                 optionals: [],
                                 rest: Some(
@@ -1572,8 +1706,8 @@ def f(*); rescue => a[1, *]; end
                         node_kind: CallNode(
                             CallNode {
                                 flags: BitFlags<CallNodeFlags> {
-                                    bits: 0b1000,
-                                    flags: IGNORE_VISIBILITY,
+                                    bits: 0b101000,
+                                    flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                                 },
                                 receiver: None,
                                 call_operator_loc: None,
@@ -1595,7 +1729,7 @@ def f(*); rescue => a[1, *]; end
                             IntegerNode {
                                 flags: BitFlags<IntegerBaseFlags> {
                                     bits: 0b1010,
-                                    flags: DECIMAL | HEXADECIMAL,
+                                    flags: STATIC_LITERAL | DECIMAL,
                                 },
                                 value: Integer {
                                     is_negative: false,
@@ -1611,6 +1745,9 @@ def f(*); rescue => a[1, *]; end
                         location: Location { start: 85, length: 1 },
                         node_kind: SplatNode(
                             SplatNode {
+                                flags: BitFlags<DefaultNodeFlags> {
+                                    bits: 0b0,
+                                },
                                 operator_loc: Location { start: 85, length: 1 },
                                 expression: None,
                             },
@@ -1623,7 +1760,7 @@ def f(*); rescue => a[1, *]; end
                             IntegerNode {
                                 flags: BitFlags<IntegerBaseFlags> {
                                     bits: 0b1010,
-                                    flags: DECIMAL | HEXADECIMAL,
+                                    flags: STATIC_LITERAL | DECIMAL,
                                 },
                                 value: Integer {
                                     is_negative: false,
@@ -1640,7 +1777,8 @@ def f(*); rescue => a[1, *]; end
                         node_kind: ArgumentsNode(
                             ArgumentsNode {
                                 flags: BitFlags<ArgumentsNodeFlags> {
-                                    bits: 0b0,
+                                    bits: 0b100000,
+                                    flags: CONTAINS_SPLAT,
                                 },
                                 arguments: [
                                     NodeRef(29),
@@ -1656,8 +1794,8 @@ def f(*); rescue => a[1, *]; end
                         node_kind: CallNode(
                             CallNode {
                                 flags: BitFlags<CallNodeFlags> {
-                                    bits: 0b1,
-                                    flags: SAFE_NAVIGATION,
+                                    bits: 0b10001,
+                                    flags: NEWLINE | ATTRIBUTE_WRITE,
                                 },
                                 receiver: Some(
                                     NodeRef(28),
@@ -1685,6 +1823,9 @@ def f(*); rescue => a[1, *]; end
                         location: Location { start: 80, length: 11 },
                         node_kind: StatementsNode(
                             StatementsNode {
+                                flags: BitFlags<DefaultNodeFlags> {
+                                    bits: 0b0,
+                                },
                                 body: [
                                     NodeRef(33),
                                 ],
@@ -1696,6 +1837,10 @@ def f(*); rescue => a[1, *]; end
                         location: Location { start: 70, length: 26 },
                         node_kind: DefNode(
                             DefNode {
+                                flags: BitFlags<DefaultNodeFlags> {
+                                    bits: 0b1,
+                                    flags: NEWLINE,
+                                },
                                 name: ConstantRef(3),
                                 name_loc: Location { start: 74, length: 1 },
                                 receiver: None,
@@ -1740,6 +1885,9 @@ def f(*); rescue => a[1, *]; end
                         location: Location { start: 104, length: 1 },
                         node_kind: ParametersNode(
                             ParametersNode {
+                                flags: BitFlags<DefaultNodeFlags> {
+                                    bits: 0b0,
+                                },
                                 requireds: [],
                                 optionals: [],
                                 rest: Some(
@@ -1758,8 +1906,8 @@ def f(*); rescue => a[1, *]; end
                         node_kind: CallNode(
                             CallNode {
                                 flags: BitFlags<CallNodeFlags> {
-                                    bits: 0b1000,
-                                    flags: IGNORE_VISIBILITY,
+                                    bits: 0b101000,
+                                    flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                                 },
                                 receiver: None,
                                 call_operator_loc: None,
@@ -1779,6 +1927,9 @@ def f(*); rescue => a[1, *]; end
                         location: Location { start: 110, length: 1 },
                         node_kind: SplatNode(
                             SplatNode {
+                                flags: BitFlags<DefaultNodeFlags> {
+                                    bits: 0b0,
+                                },
                                 operator_loc: Location { start: 110, length: 1 },
                                 expression: None,
                             },
@@ -1790,7 +1941,8 @@ def f(*); rescue => a[1, *]; end
                         node_kind: ArgumentsNode(
                             ArgumentsNode {
                                 flags: BitFlags<ArgumentsNodeFlags> {
-                                    bits: 0b0,
+                                    bits: 0b100000,
+                                    flags: CONTAINS_SPLAT,
                                 },
                                 arguments: [
                                     NodeRef(39),
@@ -1805,7 +1957,7 @@ def f(*); rescue => a[1, *]; end
                             IntegerNode {
                                 flags: BitFlags<IntegerBaseFlags> {
                                     bits: 0b1010,
-                                    flags: DECIMAL | HEXADECIMAL,
+                                    flags: STATIC_LITERAL | DECIMAL,
                                 },
                                 value: Integer {
                                     is_negative: false,
@@ -1823,7 +1975,7 @@ def f(*); rescue => a[1, *]; end
                             IndexOperatorWriteNode {
                                 flags: BitFlags<CallNodeFlags> {
                                     bits: 0b1,
-                                    flags: SAFE_NAVIGATION,
+                                    flags: NEWLINE,
                                 },
                                 receiver: Some(
                                     NodeRef(38),
@@ -1846,6 +1998,9 @@ def f(*); rescue => a[1, *]; end
                         location: Location { start: 108, length: 9 },
                         node_kind: StatementsNode(
                             StatementsNode {
+                                flags: BitFlags<DefaultNodeFlags> {
+                                    bits: 0b0,
+                                },
                                 body: [
                                     NodeRef(42),
                                 ],
@@ -1857,6 +2012,10 @@ def f(*); rescue => a[1, *]; end
                         location: Location { start: 98, length: 24 },
                         node_kind: DefNode(
                             DefNode {
+                                flags: BitFlags<DefaultNodeFlags> {
+                                    bits: 0b1,
+                                    flags: NEWLINE,
+                                },
                                 name: ConstantRef(3),
                                 name_loc: Location { start: 102, length: 1 },
                                 receiver: None,
@@ -1901,6 +2060,9 @@ def f(*); rescue => a[1, *]; end
                         location: Location { start: 130, length: 1 },
                         node_kind: ParametersNode(
                             ParametersNode {
+                                flags: BitFlags<DefaultNodeFlags> {
+                                    bits: 0b0,
+                                },
                                 requireds: [],
                                 optionals: [],
                                 rest: Some(
@@ -1919,8 +2081,8 @@ def f(*); rescue => a[1, *]; end
                         node_kind: CallNode(
                             CallNode {
                                 flags: BitFlags<CallNodeFlags> {
-                                    bits: 0b1000,
-                                    flags: IGNORE_VISIBILITY,
+                                    bits: 0b101000,
+                                    flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                                 },
                                 receiver: None,
                                 call_operator_loc: None,
@@ -1942,7 +2104,7 @@ def f(*); rescue => a[1, *]; end
                             IntegerNode {
                                 flags: BitFlags<IntegerBaseFlags> {
                                     bits: 0b1010,
-                                    flags: DECIMAL | HEXADECIMAL,
+                                    flags: STATIC_LITERAL | DECIMAL,
                                 },
                                 value: Integer {
                                     is_negative: false,
@@ -1958,6 +2120,9 @@ def f(*); rescue => a[1, *]; end
                         location: Location { start: 139, length: 1 },
                         node_kind: SplatNode(
                             SplatNode {
+                                flags: BitFlags<DefaultNodeFlags> {
+                                    bits: 0b0,
+                                },
                                 operator_loc: Location { start: 139, length: 1 },
                                 expression: None,
                             },
@@ -1969,7 +2134,8 @@ def f(*); rescue => a[1, *]; end
                         node_kind: ArgumentsNode(
                             ArgumentsNode {
                                 flags: BitFlags<ArgumentsNodeFlags> {
-                                    bits: 0b0,
+                                    bits: 0b100000,
+                                    flags: CONTAINS_SPLAT,
                                 },
                                 arguments: [
                                     NodeRef(48),
@@ -1985,7 +2151,7 @@ def f(*); rescue => a[1, *]; end
                             IntegerNode {
                                 flags: BitFlags<IntegerBaseFlags> {
                                     bits: 0b1010,
-                                    flags: DECIMAL | HEXADECIMAL,
+                                    flags: STATIC_LITERAL | DECIMAL,
                                 },
                                 value: Integer {
                                     is_negative: false,
@@ -2003,7 +2169,7 @@ def f(*); rescue => a[1, *]; end
                             IndexAndWriteNode {
                                 flags: BitFlags<CallNodeFlags> {
                                     bits: 0b1,
-                                    flags: SAFE_NAVIGATION,
+                                    flags: NEWLINE,
                                 },
                                 receiver: Some(
                                     NodeRef(47),
@@ -2025,6 +2191,9 @@ def f(*); rescue => a[1, *]; end
                         location: Location { start: 134, length: 13 },
                         node_kind: StatementsNode(
                             StatementsNode {
+                                flags: BitFlags<DefaultNodeFlags> {
+                                    bits: 0b0,
+                                },
                                 body: [
                                     NodeRef(52),
                                 ],
@@ -2036,6 +2205,10 @@ def f(*); rescue => a[1, *]; end
                         location: Location { start: 124, length: 28 },
                         node_kind: DefNode(
                             DefNode {
+                                flags: BitFlags<DefaultNodeFlags> {
+                                    bits: 0b1,
+                                    flags: NEWLINE,
+                                },
                                 name: ConstantRef(3),
                                 name_loc: Location { start: 128, length: 1 },
                                 receiver: None,
@@ -2080,6 +2253,9 @@ def f(*); rescue => a[1, *]; end
                         location: Location { start: 160, length: 1 },
                         node_kind: ParametersNode(
                             ParametersNode {
+                                flags: BitFlags<DefaultNodeFlags> {
+                                    bits: 0b0,
+                                },
                                 requireds: [],
                                 optionals: [],
                                 rest: Some(
@@ -2098,8 +2274,8 @@ def f(*); rescue => a[1, *]; end
                         node_kind: CallNode(
                             CallNode {
                                 flags: BitFlags<CallNodeFlags> {
-                                    bits: 0b1000,
-                                    flags: IGNORE_VISIBILITY,
+                                    bits: 0b101000,
+                                    flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                                 },
                                 receiver: None,
                                 call_operator_loc: None,
@@ -2119,6 +2295,9 @@ def f(*); rescue => a[1, *]; end
                         location: Location { start: 176, length: 1 },
                         node_kind: SplatNode(
                             SplatNode {
+                                flags: BitFlags<DefaultNodeFlags> {
+                                    bits: 0b0,
+                                },
                                 operator_loc: Location { start: 176, length: 1 },
                                 expression: None,
                             },
@@ -2130,7 +2309,8 @@ def f(*); rescue => a[1, *]; end
                         node_kind: ArgumentsNode(
                             ArgumentsNode {
                                 flags: BitFlags<ArgumentsNodeFlags> {
-                                    bits: 0b0,
+                                    bits: 0b100000,
+                                    flags: CONTAINS_SPLAT,
                                 },
                                 arguments: [
                                     NodeRef(58),
@@ -2144,7 +2324,8 @@ def f(*); rescue => a[1, *]; end
                         node_kind: IndexTargetNode(
                             IndexTargetNode {
                                 flags: BitFlags<CallNodeFlags> {
-                                    bits: 0b0,
+                                    bits: 0b10000,
+                                    flags: ATTRIBUTE_WRITE,
                                 },
                                 receiver: NodeRef(57),
                                 opening_loc: Location { start: 175, length: 1 },
@@ -2161,6 +2342,9 @@ def f(*); rescue => a[1, *]; end
                         location: Location { start: 164, length: 14 },
                         node_kind: RescueNode(
                             RescueNode {
+                                flags: BitFlags<DefaultNodeFlags> {
+                                    bits: 0b0,
+                                },
                                 keyword_loc: Location { start: 164, length: 6 },
                                 exceptions: [],
                                 operator_loc: Some(
@@ -2180,6 +2364,9 @@ def f(*); rescue => a[1, *]; end
                         location: Location { start: 154, length: 29 },
                         node_kind: BeginNode(
                             BeginNode {
+                                flags: BitFlags<DefaultNodeFlags> {
+                                    bits: 0b0,
+                                },
                                 begin_keyword_loc: None,
                                 statements: None,
                                 rescue_clause: Some(
@@ -2198,6 +2385,10 @@ def f(*); rescue => a[1, *]; end
                         location: Location { start: 154, length: 29 },
                         node_kind: DefNode(
                             DefNode {
+                                flags: BitFlags<DefaultNodeFlags> {
+                                    bits: 0b1,
+                                    flags: NEWLINE,
+                                },
                                 name: ConstantRef(3),
                                 name_loc: Location { start: 158, length: 1 },
                                 receiver: None,
@@ -2242,6 +2433,9 @@ def f(*); rescue => a[1, *]; end
                         location: Location { start: 191, length: 1 },
                         node_kind: ParametersNode(
                             ParametersNode {
+                                flags: BitFlags<DefaultNodeFlags> {
+                                    bits: 0b0,
+                                },
                                 requireds: [],
                                 optionals: [],
                                 rest: Some(
@@ -2260,8 +2454,8 @@ def f(*); rescue => a[1, *]; end
                         node_kind: CallNode(
                             CallNode {
                                 flags: BitFlags<CallNodeFlags> {
-                                    bits: 0b1000,
-                                    flags: IGNORE_VISIBILITY,
+                                    bits: 0b101000,
+                                    flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                                 },
                                 receiver: None,
                                 call_operator_loc: None,
@@ -2283,7 +2477,7 @@ def f(*); rescue => a[1, *]; end
                             IntegerNode {
                                 flags: BitFlags<IntegerBaseFlags> {
                                     bits: 0b1010,
-                                    flags: DECIMAL | HEXADECIMAL,
+                                    flags: STATIC_LITERAL | DECIMAL,
                                 },
                                 value: Integer {
                                     is_negative: false,
@@ -2299,6 +2493,9 @@ def f(*); rescue => a[1, *]; end
                         location: Location { start: 210, length: 1 },
                         node_kind: SplatNode(
                             SplatNode {
+                                flags: BitFlags<DefaultNodeFlags> {
+                                    bits: 0b0,
+                                },
                                 operator_loc: Location { start: 210, length: 1 },
                                 expression: None,
                             },
@@ -2310,7 +2507,8 @@ def f(*); rescue => a[1, *]; end
                         node_kind: ArgumentsNode(
                             ArgumentsNode {
                                 flags: BitFlags<ArgumentsNodeFlags> {
-                                    bits: 0b0,
+                                    bits: 0b100000,
+                                    flags: CONTAINS_SPLAT,
                                 },
                                 arguments: [
                                     NodeRef(67),
@@ -2325,7 +2523,8 @@ def f(*); rescue => a[1, *]; end
                         node_kind: IndexTargetNode(
                             IndexTargetNode {
                                 flags: BitFlags<CallNodeFlags> {
-                                    bits: 0b0,
+                                    bits: 0b10000,
+                                    flags: ATTRIBUTE_WRITE,
                                 },
                                 receiver: NodeRef(66),
                                 opening_loc: Location { start: 206, length: 1 },
@@ -2342,6 +2541,9 @@ def f(*); rescue => a[1, *]; end
                         location: Location { start: 195, length: 17 },
                         node_kind: RescueNode(
                             RescueNode {
+                                flags: BitFlags<DefaultNodeFlags> {
+                                    bits: 0b0,
+                                },
                                 keyword_loc: Location { start: 195, length: 6 },
                                 exceptions: [],
                                 operator_loc: Some(
@@ -2361,6 +2563,9 @@ def f(*); rescue => a[1, *]; end
                         location: Location { start: 185, length: 32 },
                         node_kind: BeginNode(
                             BeginNode {
+                                flags: BitFlags<DefaultNodeFlags> {
+                                    bits: 0b0,
+                                },
                                 begin_keyword_loc: None,
                                 statements: None,
                                 rescue_clause: Some(
@@ -2379,6 +2584,10 @@ def f(*); rescue => a[1, *]; end
                         location: Location { start: 185, length: 32 },
                         node_kind: DefNode(
                             DefNode {
+                                flags: BitFlags<DefaultNodeFlags> {
+                                    bits: 0b1,
+                                    flags: NEWLINE,
+                                },
                                 name: ConstantRef(3),
                                 name_loc: Location { start: 189, length: 1 },
                                 receiver: None,
@@ -2409,6 +2618,9 @@ def f(*); rescue => a[1, *]; end
                         location: Location { start: 0, length: 217 },
                         node_kind: StatementsNode(
                             StatementsNode {
+                                flags: BitFlags<DefaultNodeFlags> {
+                                    bits: 0b0,
+                                },
                                 body: [
                                     NodeRef(7),
                                     NodeRef(16),
@@ -2427,6 +2639,9 @@ def f(*); rescue => a[1, *]; end
                         location: Location { start: 0, length: 217 },
                         node_kind: ProgramNode(
                             ProgramNode {
+                                flags: BitFlags<DefaultNodeFlags> {
+                                    bits: 0b0,
+                                },
                                 locals: [],
                                 statements: NodeRef(74),
                             },
@@ -2435,7 +2650,7 @@ def f(*); rescue => a[1, *]; end
                 ],
                 constants: [
                     Owned(10, 1),
-                    Shared(0, 2),
+                    Shared(3, 2),
                     Owned(4, 1),
                     Shared(0, 3),
                     Owned(113, 1),

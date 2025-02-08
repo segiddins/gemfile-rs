@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "@@foo\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -33,6 +33,10 @@ Program {
             location: Location { start: 0, length: 5 },
             node_kind: ClassVariableReadNode(
                 ClassVariableReadNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(1),
                 },
             ),
@@ -42,6 +46,9 @@ Program {
             location: Location { start: 0, length: 5 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(0),
                     ],
@@ -53,6 +60,9 @@ Program {
             location: Location { start: 0, length: 5 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(1),
                 },

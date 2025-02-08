@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "x do\n  it\nend\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -27,14 +27,23 @@ Program {
             identifier: 5,
             location: Location { start: 2, length: 11 },
             node_kind: ItParametersNode(
-                ItParametersNode,
+                ItParametersNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
+                },
             ),
         },
         Node {
             identifier: 4,
             location: Location { start: 7, length: 2 },
             node_kind: ItLocalVariableReadNode(
-                ItLocalVariableReadNode,
+                ItLocalVariableReadNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
+                },
             ),
         },
         Node {
@@ -42,6 +51,9 @@ Program {
             location: Location { start: 7, length: 2 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(1),
                     ],
@@ -53,6 +65,9 @@ Program {
             location: Location { start: 2, length: 11 },
             node_kind: BlockNode(
                 BlockNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     parameters: Some(
                         NodeRef(0),
@@ -71,8 +86,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1,
-                        flags: SAFE_NAVIGATION,
+                        bits: 0b100001,
+                        flags: NEWLINE | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -94,6 +109,9 @@ Program {
             location: Location { start: 0, length: 13 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(4),
                     ],
@@ -105,6 +123,9 @@ Program {
             location: Location { start: 0, length: 13 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(5),
                 },

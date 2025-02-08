@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "def foo(a, _)\nend\n\ndef foo(a, _, _)\nend\n\ndef foo(a, _, _, _b)\nend\n\ndef foo(a, _, _, _b, _b)\nend\n\ndef foo(a, (b, *_c, d), (e, *_c, f))\nend\n\ndef foo(_a, _a, b, c)\nend\n\ndef foo((a, *_b, c), (d, *_b, e))\nend\n\ndef foo(_a = 1, _a = 2)\nend\n\ndef foo(_a:, _a:)\nend\n\ndef foo(_a: 1, _a: 2)\nend\n\ndef foo(_a, **_a)\nend\n\ndef foo(_a, &_a)\nend\n\ndef foo(_a, *_a)\nend\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -87,6 +87,9 @@ Program {
             location: Location { start: 8, length: 4 },
             node_kind: ParametersNode(
                 ParametersNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     requireds: [
                         NodeRef(0),
                         NodeRef(1),
@@ -105,6 +108,10 @@ Program {
             location: Location { start: 0, length: 17 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(3),
                     name_loc: Location { start: 4, length: 3 },
                     receiver: None,
@@ -161,7 +168,8 @@ Program {
             node_kind: RequiredParameterNode(
                 RequiredParameterNode {
                     flags: BitFlags<ParameterFlags> {
-                        bits: 0b0,
+                        bits: 0b100,
+                        flags: REPEATED_PARAMETER,
                     },
                     name: ConstantRef(2),
                 },
@@ -172,6 +180,9 @@ Program {
             location: Location { start: 27, length: 7 },
             node_kind: ParametersNode(
                 ParametersNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     requireds: [
                         NodeRef(4),
                         NodeRef(5),
@@ -191,6 +202,10 @@ Program {
             location: Location { start: 19, length: 20 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(3),
                     name_loc: Location { start: 23, length: 3 },
                     receiver: None,
@@ -247,7 +262,8 @@ Program {
             node_kind: RequiredParameterNode(
                 RequiredParameterNode {
                     flags: BitFlags<ParameterFlags> {
-                        bits: 0b0,
+                        bits: 0b100,
+                        flags: REPEATED_PARAMETER,
                     },
                     name: ConstantRef(2),
                 },
@@ -270,6 +286,9 @@ Program {
             location: Location { start: 49, length: 11 },
             node_kind: ParametersNode(
                 ParametersNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     requireds: [
                         NodeRef(9),
                         NodeRef(10),
@@ -290,6 +309,10 @@ Program {
             location: Location { start: 41, length: 24 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(3),
                     name_loc: Location { start: 45, length: 3 },
                     receiver: None,
@@ -347,7 +370,8 @@ Program {
             node_kind: RequiredParameterNode(
                 RequiredParameterNode {
                     flags: BitFlags<ParameterFlags> {
-                        bits: 0b0,
+                        bits: 0b100,
+                        flags: REPEATED_PARAMETER,
                     },
                     name: ConstantRef(2),
                 },
@@ -371,7 +395,8 @@ Program {
             node_kind: RequiredParameterNode(
                 RequiredParameterNode {
                     flags: BitFlags<ParameterFlags> {
-                        bits: 0b0,
+                        bits: 0b100,
+                        flags: REPEATED_PARAMETER,
                     },
                     name: ConstantRef(4),
                 },
@@ -382,6 +407,9 @@ Program {
             location: Location { start: 75, length: 15 },
             node_kind: ParametersNode(
                 ParametersNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     requireds: [
                         NodeRef(15),
                         NodeRef(16),
@@ -403,6 +431,10 @@ Program {
             location: Location { start: 67, length: 28 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(3),
                     name_loc: Location { start: 71, length: 3 },
                     receiver: None,
@@ -471,6 +503,9 @@ Program {
             location: Location { start: 112, length: 3 },
             node_kind: SplatNode(
                 SplatNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     operator_loc: Location { start: 112, length: 1 },
                     expression: Some(
                         NodeRef(24),
@@ -495,6 +530,9 @@ Program {
             location: Location { start: 108, length: 11 },
             node_kind: MultiTargetNode(
                 MultiTargetNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     lefts: [
                         NodeRef(23),
                     ],
@@ -531,7 +569,8 @@ Program {
             node_kind: RequiredParameterNode(
                 RequiredParameterNode {
                     flags: BitFlags<ParameterFlags> {
-                        bits: 0b0,
+                        bits: 0b100,
+                        flags: REPEATED_PARAMETER,
                     },
                     name: ConstantRef(6),
                 },
@@ -542,6 +581,9 @@ Program {
             location: Location { start: 125, length: 3 },
             node_kind: SplatNode(
                 SplatNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     operator_loc: Location { start: 125, length: 1 },
                     expression: Some(
                         NodeRef(29),
@@ -566,6 +608,9 @@ Program {
             location: Location { start: 121, length: 11 },
             node_kind: MultiTargetNode(
                 MultiTargetNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     lefts: [
                         NodeRef(28),
                     ],
@@ -589,6 +634,9 @@ Program {
             location: Location { start: 105, length: 27 },
             node_kind: ParametersNode(
                 ParametersNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     requireds: [
                         NodeRef(22),
                         NodeRef(27),
@@ -608,6 +656,10 @@ Program {
             location: Location { start: 97, length: 40 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(3),
                     name_loc: Location { start: 101, length: 3 },
                     receiver: None,
@@ -656,7 +708,8 @@ Program {
             node_kind: RequiredParameterNode(
                 RequiredParameterNode {
                     flags: BitFlags<ParameterFlags> {
-                        bits: 0b0,
+                        bits: 0b100,
+                        flags: REPEATED_PARAMETER,
                     },
                     name: ConstantRef(10),
                 },
@@ -691,6 +744,9 @@ Program {
             location: Location { start: 147, length: 12 },
             node_kind: ParametersNode(
                 ParametersNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     requireds: [
                         NodeRef(35),
                         NodeRef(36),
@@ -711,6 +767,10 @@ Program {
             location: Location { start: 139, length: 25 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(3),
                     name_loc: Location { start: 143, length: 3 },
                     receiver: None,
@@ -767,6 +827,9 @@ Program {
             location: Location { start: 178, length: 3 },
             node_kind: SplatNode(
                 SplatNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     operator_loc: Location { start: 178, length: 1 },
                     expression: Some(
                         NodeRef(42),
@@ -791,6 +854,9 @@ Program {
             location: Location { start: 174, length: 11 },
             node_kind: MultiTargetNode(
                 MultiTargetNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     lefts: [
                         NodeRef(41),
                     ],
@@ -827,7 +893,8 @@ Program {
             node_kind: RequiredParameterNode(
                 RequiredParameterNode {
                     flags: BitFlags<ParameterFlags> {
-                        bits: 0b0,
+                        bits: 0b100,
+                        flags: REPEATED_PARAMETER,
                     },
                     name: ConstantRef(4),
                 },
@@ -838,6 +905,9 @@ Program {
             location: Location { start: 191, length: 3 },
             node_kind: SplatNode(
                 SplatNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     operator_loc: Location { start: 191, length: 1 },
                     expression: Some(
                         NodeRef(47),
@@ -862,6 +932,9 @@ Program {
             location: Location { start: 187, length: 11 },
             node_kind: MultiTargetNode(
                 MultiTargetNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     lefts: [
                         NodeRef(46),
                     ],
@@ -885,6 +958,9 @@ Program {
             location: Location { start: 174, length: 24 },
             node_kind: ParametersNode(
                 ParametersNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     requireds: [
                         NodeRef(45),
                         NodeRef(50),
@@ -903,6 +979,10 @@ Program {
             location: Location { start: 166, length: 37 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(3),
                     name_loc: Location { start: 170, length: 3 },
                     receiver: None,
@@ -939,7 +1019,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -972,7 +1052,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -989,7 +1069,8 @@ Program {
             node_kind: OptionalParameterNode(
                 OptionalParameterNode {
                     flags: BitFlags<ParameterFlags> {
-                        bits: 0b0,
+                        bits: 0b100,
+                        flags: REPEATED_PARAMETER,
                     },
                     name: ConstantRef(10),
                     name_loc: Location { start: 221, length: 2 },
@@ -1003,6 +1084,9 @@ Program {
             location: Location { start: 213, length: 14 },
             node_kind: ParametersNode(
                 ParametersNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     requireds: [],
                     optionals: [
                         NodeRef(54),
@@ -1021,6 +1105,10 @@ Program {
             location: Location { start: 205, length: 27 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(3),
                     name_loc: Location { start: 209, length: 3 },
                     receiver: None,
@@ -1065,7 +1153,8 @@ Program {
             node_kind: RequiredKeywordParameterNode(
                 RequiredKeywordParameterNode {
                     flags: BitFlags<ParameterFlags> {
-                        bits: 0b0,
+                        bits: 0b100,
+                        flags: REPEATED_PARAMETER,
                     },
                     name: ConstantRef(10),
                     name_loc: Location { start: 247, length: 3 },
@@ -1077,6 +1166,9 @@ Program {
             location: Location { start: 242, length: 8 },
             node_kind: ParametersNode(
                 ParametersNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     requireds: [],
                     optionals: [],
                     rest: None,
@@ -1095,6 +1187,10 @@ Program {
             location: Location { start: 234, length: 21 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(3),
                     name_loc: Location { start: 238, length: 3 },
                     receiver: None,
@@ -1127,7 +1223,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -1159,7 +1255,7 @@ Program {
                 IntegerNode {
                     flags: BitFlags<IntegerBaseFlags> {
                         bits: 0b1010,
-                        flags: DECIMAL | HEXADECIMAL,
+                        flags: STATIC_LITERAL | DECIMAL,
                     },
                     value: Integer {
                         is_negative: false,
@@ -1176,7 +1272,8 @@ Program {
             node_kind: OptionalKeywordParameterNode(
                 OptionalKeywordParameterNode {
                     flags: BitFlags<ParameterFlags> {
-                        bits: 0b0,
+                        bits: 0b100,
+                        flags: REPEATED_PARAMETER,
                     },
                     name: ConstantRef(10),
                     name_loc: Location { start: 272, length: 3 },
@@ -1189,6 +1286,9 @@ Program {
             location: Location { start: 265, length: 12 },
             node_kind: ParametersNode(
                 ParametersNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     requireds: [],
                     optionals: [],
                     rest: None,
@@ -1207,6 +1307,10 @@ Program {
             location: Location { start: 257, length: 25 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(3),
                     name_loc: Location { start: 261, length: 3 },
                     receiver: None,
@@ -1250,7 +1354,8 @@ Program {
             node_kind: KeywordRestParameterNode(
                 KeywordRestParameterNode {
                     flags: BitFlags<ParameterFlags> {
-                        bits: 0b0,
+                        bits: 0b100,
+                        flags: REPEATED_PARAMETER,
                     },
                     name: Some(
                         ConstantRef(10),
@@ -1267,6 +1372,9 @@ Program {
             location: Location { start: 292, length: 8 },
             node_kind: ParametersNode(
                 ParametersNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     requireds: [
                         NodeRef(69),
                     ],
@@ -1286,6 +1394,10 @@ Program {
             location: Location { start: 284, length: 21 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(3),
                     name_loc: Location { start: 288, length: 3 },
                     receiver: None,
@@ -1329,7 +1441,8 @@ Program {
             node_kind: BlockParameterNode(
                 BlockParameterNode {
                     flags: BitFlags<ParameterFlags> {
-                        bits: 0b0,
+                        bits: 0b100,
+                        flags: REPEATED_PARAMETER,
                     },
                     name: Some(
                         ConstantRef(10),
@@ -1346,6 +1459,9 @@ Program {
             location: Location { start: 315, length: 7 },
             node_kind: ParametersNode(
                 ParametersNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     requireds: [
                         NodeRef(73),
                     ],
@@ -1365,6 +1481,10 @@ Program {
             location: Location { start: 307, length: 20 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(3),
                     name_loc: Location { start: 311, length: 3 },
                     receiver: None,
@@ -1408,7 +1528,8 @@ Program {
             node_kind: RestParameterNode(
                 RestParameterNode {
                     flags: BitFlags<ParameterFlags> {
-                        bits: 0b0,
+                        bits: 0b100,
+                        flags: REPEATED_PARAMETER,
                     },
                     name: Some(
                         ConstantRef(10),
@@ -1425,6 +1546,9 @@ Program {
             location: Location { start: 337, length: 7 },
             node_kind: ParametersNode(
                 ParametersNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     requireds: [
                         NodeRef(77),
                     ],
@@ -1444,6 +1568,10 @@ Program {
             location: Location { start: 329, length: 20 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(3),
                     name_loc: Location { start: 333, length: 3 },
                     receiver: None,
@@ -1474,6 +1602,9 @@ Program {
             location: Location { start: 0, length: 349 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(3),
                         NodeRef(8),
@@ -1497,6 +1628,9 @@ Program {
             location: Location { start: 0, length: 349 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(81),
                 },

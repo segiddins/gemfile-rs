@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "def !\nend\n\ndef !=\nend\n\ndef !~\nend\n\ndef %\nend\n\ndef self.+\nend\n\ndef &\nend\n\ndef *\nend\n\ndef **\nend\n\n%|abc|\n\ndef + **b\nend\n\ndef +()\nend\n\ndef + b\nend\n\ndef self.+\nend\n\ndef +\nend\n\ndef +@\nend\n\ndef -\nend\n\ndef a.-;end\n\ndef -@\nend\n\ndef /\nend\n\ndef <\nend\n\ndef <<\nend\n\ndef <=\nend\n\ndef <=>\nend\n\ndef ==\nend\n\ndef ===\nend\n\ndef =~\nend\n\ndef >\nend\n\ndef >=\nend\n\ndef >>\nend\n\ndef []\nend\n\ndef []=\nend\n\ndef ^\nend\n\ndef `\nend\n\ndef self.`\nend\n\ndef |\nend\n\ndef ~\nend\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -137,6 +137,10 @@ Program {
             location: Location { start: 0, length: 9 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(1),
                     name_loc: Location { start: 4, length: 1 },
                     receiver: None,
@@ -159,6 +163,10 @@ Program {
             location: Location { start: 11, length: 10 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(2),
                     name_loc: Location { start: 15, length: 2 },
                     receiver: None,
@@ -181,6 +189,10 @@ Program {
             location: Location { start: 23, length: 10 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(3),
                     name_loc: Location { start: 27, length: 2 },
                     receiver: None,
@@ -203,6 +215,10 @@ Program {
             location: Location { start: 35, length: 9 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(4),
                     name_loc: Location { start: 39, length: 1 },
                     receiver: None,
@@ -224,7 +240,11 @@ Program {
             identifier: 6,
             location: Location { start: 50, length: 4 },
             node_kind: SelfNode(
-                SelfNode,
+                SelfNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
+                },
             ),
         },
         Node {
@@ -232,6 +252,10 @@ Program {
             location: Location { start: 46, length: 14 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(5),
                     name_loc: Location { start: 55, length: 1 },
                     receiver: Some(
@@ -258,6 +282,10 @@ Program {
             location: Location { start: 62, length: 9 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(6),
                     name_loc: Location { start: 66, length: 1 },
                     receiver: None,
@@ -280,6 +308,10 @@ Program {
             location: Location { start: 73, length: 9 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(7),
                     name_loc: Location { start: 77, length: 1 },
                     receiver: None,
@@ -302,6 +334,10 @@ Program {
             location: Location { start: 84, length: 10 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(8),
                     name_loc: Location { start: 88, length: 2 },
                     receiver: None,
@@ -326,7 +362,7 @@ Program {
                 StringNode {
                     flags: BitFlags<StringFlags> {
                         bits: 0b1,
-                        flags: FORCED_UTF8_ENCODING,
+                        flags: NEWLINE,
                     },
                     opening_loc: Some(
                         Location { start: 96, length: 2 },
@@ -335,7 +371,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 101, length: 1 },
                     ),
-                    unescaped: "",
+                    unescaped: Shared(98, 3),
                 },
             ),
         },
@@ -362,6 +398,9 @@ Program {
             location: Location { start: 110, length: 3 },
             node_kind: ParametersNode(
                 ParametersNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     requireds: [],
                     optionals: [],
                     rest: None,
@@ -379,6 +418,10 @@ Program {
             location: Location { start: 104, length: 13 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(5),
                     name_loc: Location { start: 108, length: 1 },
                     receiver: None,
@@ -405,6 +448,10 @@ Program {
             location: Location { start: 119, length: 11 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(5),
                     name_loc: Location { start: 123, length: 1 },
                     receiver: None,
@@ -443,6 +490,9 @@ Program {
             location: Location { start: 138, length: 1 },
             node_kind: ParametersNode(
                 ParametersNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     requireds: [
                         NodeRef(14),
                     ],
@@ -460,6 +510,10 @@ Program {
             location: Location { start: 132, length: 11 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(5),
                     name_loc: Location { start: 136, length: 1 },
                     receiver: None,
@@ -485,7 +539,11 @@ Program {
             identifier: 19,
             location: Location { start: 149, length: 4 },
             node_kind: SelfNode(
-                SelfNode,
+                SelfNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
+                },
             ),
         },
         Node {
@@ -493,6 +551,10 @@ Program {
             location: Location { start: 145, length: 14 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(5),
                     name_loc: Location { start: 154, length: 1 },
                     receiver: Some(
@@ -519,6 +581,10 @@ Program {
             location: Location { start: 161, length: 9 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(5),
                     name_loc: Location { start: 165, length: 1 },
                     receiver: None,
@@ -541,6 +607,10 @@ Program {
             location: Location { start: 172, length: 10 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(10),
                     name_loc: Location { start: 176, length: 2 },
                     receiver: None,
@@ -563,6 +633,10 @@ Program {
             location: Location { start: 184, length: 9 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(11),
                     name_loc: Location { start: 188, length: 1 },
                     receiver: None,
@@ -586,8 +660,8 @@ Program {
             node_kind: CallNode(
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
-                        bits: 0b1000,
-                        flags: IGNORE_VISIBILITY,
+                        bits: 0b101000,
+                        flags: VARIABLE_CALL | IGNORE_VISIBILITY,
                     },
                     receiver: None,
                     call_operator_loc: None,
@@ -607,6 +681,10 @@ Program {
             location: Location { start: 195, length: 11 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(11),
                     name_loc: Location { start: 201, length: 1 },
                     receiver: Some(
@@ -633,6 +711,10 @@ Program {
             location: Location { start: 208, length: 10 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(13),
                     name_loc: Location { start: 212, length: 2 },
                     receiver: None,
@@ -655,6 +737,10 @@ Program {
             location: Location { start: 220, length: 9 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(14),
                     name_loc: Location { start: 224, length: 1 },
                     receiver: None,
@@ -677,6 +763,10 @@ Program {
             location: Location { start: 231, length: 9 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(15),
                     name_loc: Location { start: 235, length: 1 },
                     receiver: None,
@@ -699,6 +789,10 @@ Program {
             location: Location { start: 242, length: 10 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(16),
                     name_loc: Location { start: 246, length: 2 },
                     receiver: None,
@@ -721,6 +815,10 @@ Program {
             location: Location { start: 254, length: 10 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(17),
                     name_loc: Location { start: 258, length: 2 },
                     receiver: None,
@@ -743,6 +841,10 @@ Program {
             location: Location { start: 266, length: 11 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(18),
                     name_loc: Location { start: 270, length: 3 },
                     receiver: None,
@@ -765,6 +867,10 @@ Program {
             location: Location { start: 279, length: 10 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(19),
                     name_loc: Location { start: 283, length: 2 },
                     receiver: None,
@@ -787,6 +893,10 @@ Program {
             location: Location { start: 291, length: 11 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(20),
                     name_loc: Location { start: 295, length: 3 },
                     receiver: None,
@@ -809,6 +919,10 @@ Program {
             location: Location { start: 304, length: 10 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(21),
                     name_loc: Location { start: 308, length: 2 },
                     receiver: None,
@@ -831,6 +945,10 @@ Program {
             location: Location { start: 316, length: 9 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(22),
                     name_loc: Location { start: 320, length: 1 },
                     receiver: None,
@@ -853,6 +971,10 @@ Program {
             location: Location { start: 327, length: 10 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(23),
                     name_loc: Location { start: 331, length: 2 },
                     receiver: None,
@@ -875,6 +997,10 @@ Program {
             location: Location { start: 339, length: 10 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(24),
                     name_loc: Location { start: 343, length: 2 },
                     receiver: None,
@@ -897,6 +1023,10 @@ Program {
             location: Location { start: 351, length: 10 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(25),
                     name_loc: Location { start: 355, length: 2 },
                     receiver: None,
@@ -919,6 +1049,10 @@ Program {
             location: Location { start: 363, length: 11 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(26),
                     name_loc: Location { start: 367, length: 3 },
                     receiver: None,
@@ -941,6 +1075,10 @@ Program {
             location: Location { start: 376, length: 9 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(27),
                     name_loc: Location { start: 380, length: 1 },
                     receiver: None,
@@ -963,6 +1101,10 @@ Program {
             location: Location { start: 387, length: 9 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(28),
                     name_loc: Location { start: 391, length: 1 },
                     receiver: None,
@@ -984,7 +1126,11 @@ Program {
             identifier: 42,
             location: Location { start: 402, length: 4 },
             node_kind: SelfNode(
-                SelfNode,
+                SelfNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
+                },
             ),
         },
         Node {
@@ -992,6 +1138,10 @@ Program {
             location: Location { start: 398, length: 14 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(28),
                     name_loc: Location { start: 407, length: 1 },
                     receiver: Some(
@@ -1018,6 +1168,10 @@ Program {
             location: Location { start: 414, length: 9 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(29),
                     name_loc: Location { start: 418, length: 1 },
                     receiver: None,
@@ -1040,6 +1194,10 @@ Program {
             location: Location { start: 425, length: 9 },
             node_kind: DefNode(
                 DefNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(30),
                     name_loc: Location { start: 429, length: 1 },
                     receiver: None,
@@ -1062,6 +1220,9 @@ Program {
             location: Location { start: 0, length: 434 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(0),
                         NodeRef(1),
@@ -1108,6 +1269,9 @@ Program {
             location: Location { start: 0, length: 434 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(44),
                 },

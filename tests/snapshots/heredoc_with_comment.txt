@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "<<-TARGET.chomp # the heredoc end token doesn't always precede the comment\r\n  content makes for an obvious error\r\nTARGET",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -42,7 +42,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 114, length: 6 },
                     ),
-                    unescaped: "  content makes for an obvious error\n",
+                    unescaped: Owned("  content makes for an obvious error\n"),
                 },
             ),
         },
@@ -53,7 +53,7 @@ Program {
                 CallNode {
                     flags: BitFlags<CallNodeFlags> {
                         bits: 0b1,
-                        flags: SAFE_NAVIGATION,
+                        flags: NEWLINE,
                     },
                     receiver: Some(
                         NodeRef(0),
@@ -77,6 +77,9 @@ Program {
             location: Location { start: 0, length: 15 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(1),
                     ],
@@ -88,6 +91,9 @@ Program {
             location: Location { start: 0, length: 15 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [],
                     statements: NodeRef(2),
                 },

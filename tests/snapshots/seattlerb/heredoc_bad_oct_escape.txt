@@ -1,5 +1,5 @@
 Program {
-    source: "",
+    source: "s = <<-EOS\na\\247b\ncöd\nEOS\n\n",
     header: Header {
         prism_major: 1,
         prism_minor: 3,
@@ -39,7 +39,7 @@ Program {
                 StringNode {
                     flags: BitFlags<StringFlags> {
                         bits: 0b100,
-                        flags: FROZEN,
+                        flags: FORCED_UTF8_ENCODING,
                     },
                     opening_loc: Some(
                         Location { start: 4, length: 6 },
@@ -48,7 +48,7 @@ Program {
                     closing_loc: Some(
                         Location { start: 23, length: 4 },
                     ),
-                    unescaped: "a�b\ncöd\n",
+                    unescaped: Owned("a�b\ncöd\n"),
                 },
             ),
         },
@@ -57,6 +57,10 @@ Program {
             location: Location { start: 0, length: 10 },
             node_kind: LocalVariableWriteNode(
                 LocalVariableWriteNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b1,
+                        flags: NEWLINE,
+                    },
                     name: ConstantRef(1),
                     depth: 0,
                     name_loc: Location { start: 0, length: 1 },
@@ -70,6 +74,9 @@ Program {
             location: Location { start: 0, length: 10 },
             node_kind: StatementsNode(
                 StatementsNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     body: [
                         NodeRef(1),
                     ],
@@ -81,6 +88,9 @@ Program {
             location: Location { start: 0, length: 10 },
             node_kind: ProgramNode(
                 ProgramNode {
+                    flags: BitFlags<DefaultNodeFlags> {
+                        bits: 0b0,
+                    },
                     locals: [
                         ConstantRef(1),
                     ],
