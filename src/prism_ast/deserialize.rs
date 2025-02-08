@@ -167,7 +167,7 @@ impl Program {
 
         (
             (left as i32) + start_line - 1,
-            (offset as u32 - self.header.newline_offsets[left as usize - 1]) as u32,
+            (offset as u32 - self.header.newline_offsets[left as usize - 1]),
         )
     }
 }
@@ -575,7 +575,7 @@ fn input(bytes: &[u8]) -> Stream {
     let input = Bytes::new(bytes);
     let state = State::default();
     let mut stream = winnow::Stateful { input, state };
-    let _ = stream.complete();
+    stream.complete();
     stream
 }
 

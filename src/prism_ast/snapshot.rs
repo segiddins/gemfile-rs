@@ -1,4 +1,3 @@
-use std::fmt::format;
 use std::fmt::Debug;
 
 use enumflags2::BitFlag;
@@ -74,12 +73,7 @@ impl<'a> Pretty<'a, pretty::RcAllocator> for Field<'a, Location> {
                 self.hardline.clone(),
             ))
             .append(RcDoc::text(" = \""))
-            .append(
-                self.program
-                    .source(&self.value)
-                    .escape_default()
-                    .to_string(),
-            )
+            .append(self.program.source(self.value).escape_default().to_string())
             .append("\"")
             .pretty(allocator)
     }
@@ -297,15 +291,15 @@ impl Snapshot for ModuleNode {
         hardline: RcDoc<'a, ()>,
     ) -> pretty::RcDoc<'a, ()> {
         RcDoc::text("├── flags: ")
-            .append(RcDoc::text(format!("{}", "∅")))
+            .append("∅")
             .append(hardline.clone())
-            .append(RcDoc::text("├── locals: "))
+            .append("├── locals: ")
             .append(RcDoc::text(format!("{:?}", self.locals)))
             .append(Field::new(
                 "module_keyword_loc",
                 false,
                 &self.module_keyword_loc,
-                &program,
+                program,
                 hardline.clone(),
             ))
             .append(RcDoc::text("├── constant_path:"))
@@ -319,7 +313,7 @@ impl Snapshot for ModuleNode {
                 "end_keyword_loc",
                 false,
                 &self.end_keyword_loc,
-                &program,
+                program,
                 hardline.clone(),
             ))
             .append(RcDoc::text("└── name: "))
