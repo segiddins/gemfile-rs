@@ -140,16 +140,6 @@ impl Program {
         self.node(&self.root)
     }
 
-    pub fn snapshot(&self) -> String {
-        format!(
-            "{:?}",
-            super::generated::NodeSnapshot {
-                program: self,
-                node: self.root
-            }
-        )
-    }
-
     pub fn source(&self, location: &Location) -> &str {
         &self.source[location.start as usize..(location.start + location.length) as usize]
     }
@@ -747,14 +737,6 @@ fn test_parse_empty() {
         )
     "#]]
     .assert_debug_eq(&program);
-
-    expect_test::expect![[r#"
-        @ ProgramNode (location: (1,0)-(1,0))
-        ├── locals: []
-        └── statements:
-            @ StatementsNode (location: (1,0)-(1,0))
-            └── body: (length: 0)"#]]
-    .assert_eq(program.unwrap().snapshot().trim_end());
 }
 
 #[test]
