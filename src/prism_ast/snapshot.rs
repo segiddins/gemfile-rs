@@ -18,86 +18,6 @@ trait Snapshot {
     ) -> pretty::RcDoc<'a, ()>;
 }
 
-#[derive(Debug, derive_new::new)]
-struct Field<'a, T> {
-    name: &'static str,
-    last: bool,
-    value: &'a T,
-    program: &'a Program,
-    hardline: RcDoc<'a, ()>,
-}
-
-impl<'a, T> Field<'a, T> {
-    fn snapshot_prefix(&'_ self, space: bool) -> RcDoc<'a, ()> {
-        self.hardline
-            .clone()
-            .append(if self.last {
-                "└── "
-            } else {
-                "├── "
-            })
-            .append(self.name)
-            .append(if space { ": " } else { ":" })
-    }
-}
-
-impl<'a> Field<'a, &'static str> {
-    fn empty_flag(program: &'a Program, hardline: RcDoc<'a, ()>) -> Field<'a, &'static str> {
-        Field {
-            name: "flags",
-            last: false,
-            value: &"∅",
-            program,
-            hardline,
-        }
-    }
-}
-
-impl<'a> Pretty<'a, pretty::RcAllocator> for Field<'a, Location> {
-    fn pretty(
-        self,
-        allocator: &'a pretty::RcAllocator,
-    ) -> pretty::DocBuilder<'a, pretty::RcAllocator, ()> {
-        self.snapshot_prefix(true)
-            .append(Snapshot::snapshot(
-                self.value,
-                self.program,
-                self.hardline.clone(),
-            ))
-            .append(RcDoc::text(" = \""))
-            .append(self.program.source(self.value).escape_default().to_string())
-            .append("\"")
-            .pretty(allocator)
-    }
-}
-
-impl<'a> Pretty<'a, pretty::RcAllocator> for Field<'a, Vec<NodeRef>> {
-    fn pretty(
-        self,
-        allocator: &'a pretty::RcAllocator,
-    ) -> pretty::DocBuilder<'a, pretty::RcAllocator, ()> {
-        let hardline = self
-            .hardline
-            .clone()
-            .append(if self.last { "    " } else { "│   " });
-        self.snapshot_prefix(true)
-            .append(format!("(length: {})", self.value.len()))
-            .append(self.value.snapshot(self.program, hardline))
-            .pretty(allocator)
-    }
-}
-
-impl<'a> Pretty<'a, pretty::RcAllocator> for Field<'a, &'static str> {
-    fn pretty(
-        self,
-        allocator: &'a pretty::RcAllocator,
-    ) -> pretty::DocBuilder<'a, pretty::RcAllocator, ()> {
-        self.snapshot_prefix(true)
-            .append(self.value.to_string())
-            .pretty(allocator)
-    }
-}
-
 impl Snapshot for Location {
     fn snapshot<'a>(
         &'a self,
@@ -208,6 +128,74 @@ impl Snapshot for Vec<NodeRef> {
                 .append(last.snapshot(program, hardline.append("    "))),
         );
         doc
+    }
+}
+
+#[derive(Debug, derive_new::new)]
+struct Field<'a, T> {
+    name: &'static str,
+    last: bool,
+    value: &'a T,
+    program: &'a Program,
+    hardline: RcDoc<'a, ()>,
+}
+
+impl<'a, T> Field<'a, T> {
+    fn snapshot_prefix(&'_ self, space: bool) -> RcDoc<'a, ()> {
+        self.hardline
+            .clone()
+            .append(if self.last {
+                "└── "
+            } else {
+                "├── "
+            })
+            .append(self.name)
+            .append(if space { ": " } else { ":" })
+    }
+}
+
+impl<'a> Pretty<'a, pretty::RcAllocator> for Field<'a, Location> {
+    fn pretty(
+        self,
+        allocator: &'a pretty::RcAllocator,
+    ) -> pretty::DocBuilder<'a, pretty::RcAllocator, ()> {
+        self.snapshot_prefix(true)
+            .append(Snapshot::snapshot(
+                self.value,
+                self.program,
+                self.hardline.clone(),
+            ))
+            .append(RcDoc::text(" = \""))
+            .append(self.program.source(self.value).escape_default().to_string())
+            .append("\"")
+            .pretty(allocator)
+    }
+}
+
+impl<'a> Pretty<'a, pretty::RcAllocator> for Field<'a, Vec<NodeRef>> {
+    fn pretty(
+        self,
+        allocator: &'a pretty::RcAllocator,
+    ) -> pretty::DocBuilder<'a, pretty::RcAllocator, ()> {
+        let hardline = self
+            .hardline
+            .clone()
+            .append(if self.last { "    " } else { "│   " });
+        self.snapshot_prefix(true)
+            .append(format!("(length: {})", self.value.len()))
+            .append(self.value.snapshot(self.program, hardline))
+            .pretty(allocator)
+    }
+}
+
+impl<'a> Pretty<'a, pretty::RcAllocator> for Field<'a, &'static str> {
+    fn pretty(
+        self,
+        allocator: &'a pretty::RcAllocator,
+    ) -> pretty::DocBuilder<'a, pretty::RcAllocator, ()> {
+        self.snapshot_prefix(true)
+            .append(self.value.to_string())
+            .pretty(allocator)
     }
 }
 
