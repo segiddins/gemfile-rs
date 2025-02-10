@@ -1,4 +1,3 @@
-use std::borrow::Cow;
 use std::fmt::{self, Debug};
 use std::io;
 
@@ -120,7 +119,7 @@ impl Program {
                 // TODO: escape ruby chars like # before @
                 self.source[*offset as usize..(offset + length) as usize].to_string()
             }
-            StringField::Owned(s) => s.escape_default().to_string(),
+            StringField::Owned(s) => s.to_string(),
         }
     }
 }
@@ -199,25 +198,21 @@ struct Error {
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Integer {
     is_negative: bool,
+    // least significant word first
     words: Vec<u32>,
 }
 
 impl fmt::Display for Integer {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        if self.words.is_empty() || self.words.len() == 1 && self.words[0] == 0 {
+            return write!(f, "0");
+        }
+
         if self.is_negative {
             write!(f, "-")?;
         }
 
-        match self.words.len() {
-            0 => write!(f, "0"),
-            1 => write!(f, "{}", self.words[0]),
-            2 => write!(
-                f,
-                "{}",
-                ((self.words[0] as u64) << 32 | self.words[1] as u64)
-            ),
-            _ => write!(f, "0x{:x?}", self.words),
-        }
+        fmt::Display::fmt(&num_bigint::BigUint::from_slice(&self.words), f)
     }
 }
 

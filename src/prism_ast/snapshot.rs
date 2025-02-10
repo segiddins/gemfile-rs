@@ -1,5 +1,6 @@
 use core::fmt;
 use std::fmt::Debug;
+use std::str::Chars;
 
 use enumflags2::BitFlag;
 use enumflags2::BitFlags;
@@ -106,13 +107,6 @@ impl Snapshot for Vec<NodeRef> {
         let Some((last, head)) = self.split_last() else {
             return doc;
         };
-        // self.hardline
-        //     .clone()
-        //     .append(if self.last {
-        //         "└── "
-        //     } else {
-        //         "├── "
-        //     })
         for n in head.iter() {
             doc = doc.append(
                 hardline
@@ -166,7 +160,7 @@ impl<'a> Pretty<'a, pretty::RcAllocator> for Field<'a, Location> {
                 self.hardline.clone(),
             ))
             .append(RcDoc::text(" = \""))
-            .append(self.program.source(self.value).escape_default().to_string())
+            .append(escape_ruby(self.program.source(self.value)))
             .append("\"")
             .pretty(allocator)
     }
@@ -282,15 +276,54 @@ impl<'a> Pretty<'a, RcAllocator> for Field<'a, u32> {
 impl<'a> Pretty<'a, RcAllocator> for Field<'a, f64> {
     fn pretty(self, allocator: &'a RcAllocator) -> DocBuilder<'a, RcAllocator, ()> {
         self.snapshot_prefix(true)
-            .append(format!("{:?}", self.value))
+            .append(match self.value {
+                f if f.is_nan() => "NaN".to_string(),
+                f if f.is_infinite() && f.is_sign_positive() => "Infinity".to_string(),
+                f if f.is_infinite() && f.is_sign_negative() => "-Infinity".to_string(),
+                f => format!("{:?}", f),
+            })
             .pretty(allocator)
     }
 }
+
+fn escape_ruby(s: &str) -> String {
+    let mut result = String::new();
+    let mut iter = s.chars().into_iter().peekable();
+    loop {
+        let Some(c) = iter.next() else { break };
+        match c {
+            '\n' => result.push_str("\\n"),
+            '\r' => result.push_str("\\r"),
+            '\t' => result.push_str("\\t"),
+            '\0' => result.push_str("\\u0000"),
+            '\\' => result.push_str("\\\\"),
+            '"' => result.push_str("\\\""),
+            '\x07' => result.push_str("\\a"),
+            '\x0b' => result.push_str("\\v"),
+            '\x0c' => result.push_str("\\f"),
+            '#' if match iter.peek() {
+                Some('{') => true,
+                Some('@') => true,
+                Some('$') => true,
+                _ => false,
+            } =>
+            {
+                result.push_str("\\#")
+            }
+            '\0'..'\x20' => result.push_str(&format!("\\u{:04x}", c as u32)),
+            '\x20'..='\x7E' => result.push(c),
+            _ if !c.is_control() => result.push(c),
+            _ => result.push_str(&format!("\\u{:04x}", c as u32)),
+        };
+    }
+    result
+}
+
 impl<'a> Pretty<'a, RcAllocator> for Field<'a, StringField> {
     fn pretty(self, allocator: &'a RcAllocator) -> DocBuilder<'a, RcAllocator, ()> {
         self.snapshot_prefix(true)
             .append("\"")
-            .append(self.program.string(self.value))
+            .append(escape_ruby(&self.program.string(self.value)))
             .append("\"")
             .pretty(allocator)
     }
